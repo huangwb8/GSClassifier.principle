@@ -3,10 +3,11 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">A Minimal Book Example</a></li>
+        <li><a href="./">GSClassifier</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    download: ["pdf", "epub"]
+        <li><a href="https://blognas.hwb0307.com/" target="blank">My blog</a></li>
+    download: ["pdf"]
+# , "epub"
 
 bookdown::pdf_book:
   includes:
@@ -15,4 +16,4 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 
-bookdown::epub_book: default
+# bookdown::epub_book: default

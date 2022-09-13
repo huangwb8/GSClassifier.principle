@@ -5,6 +5,9 @@ delete_merged_file: true
 #     chapter_name: "Chapter "
 new_session: yes
 
+# Github Pages
+output_dir: "docs"
+
 rmd_files:
   [
     "index.Rmd",

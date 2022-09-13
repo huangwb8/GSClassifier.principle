@@ -13,10 +13,14 @@
 
 The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
-<div class="figure" style="text-align: center">
-<img src="./fig/flowchart.png" alt="The flow chart of GSClassifier" width="90%" />
-<p class="caption">(\#fig:flowchart)The flow chart of GSClassifier</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
+
+}
+
+\caption{The flow chart of GSClassifier}(\#fig:flowchart)
+\end{figure}
 
 
 ## Data Processing
@@ -131,7 +135,7 @@ Have a look at the matrix:
 Heatmap(t(scale(t(expr))), name = "Z-score")
 ```
 
-<img src="Flowchart_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 ### Genes with large rank differences
 

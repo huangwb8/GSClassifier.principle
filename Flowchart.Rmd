@@ -1,10 +1,10 @@
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = FALSE, results = 'hold', comment='#')
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE, results = 'hold', comment='#')
 ```
 
-# Principle
+# The Principle of GSClassifier
 
 
 ## Introduction
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = FALSE, results = 
 
 ## Flowchart
 
-The flowchart of `GSClassifier` is showed in Figure \@ref(fig:flowchart).
+The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
 ```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics(rep("./fig/flowchart.png", 1))
@@ -22,13 +22,13 @@ knitr::include_graphics(rep("./fig/flowchart.png", 1))
 
 ## Data Processing
 
-For each dataset, the RNA expression matrix would be normalized (we called `Raw Matrix` in the flowchart) internally so that the expression data of the samples in the dataset were comparable. 
+For each dataset, the RNA expression matrix would be normalized (we called **Raw Matrix** in the flowchart) internally so that the expression data of the samples in the dataset were comparable. 
 
-Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to `Subtype Vector` in the flowchart, via hierarchical clustering analysis.
+Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to **Subtype Vector** in the flowchart, via hierarchical clustering analysis.
 
 ## Top scoring pairs (TSP) matrix
 
-With `subtype vectors` and `Raw Matrix`, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
+With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
 
 ```{r eval=FALSE}
 trainDataProc(
@@ -48,11 +48,10 @@ trainDataProc(
 
 The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring of gene pairs**, and **gene set pairs**.
 
-Here, we would use some simulated data to introduce how TSP matrix calculated.
 
 ### Simulated Dataset
 
-Load packages:
+Here, we would use some simulated data to introduce how TSP matrix calculated. First, load packages:
 
 ```{r}
 
@@ -83,19 +82,16 @@ for(i in packages_needed){p_load(char=i)}
 We simulated a dataset:
 
 ```{r, warning=FALSE}
-
 # Geneset
 geneSet <- list(
   Set1 = paste('Gene',1:3,sep = ''),
   Set2 = paste('Gene',4:6,sep = '')
 )
 
-
 # RNA expression
 x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
 expr <- as.matrix(x[,-1])
 rownames(expr) <- as.character(as.matrix(x[,1])); rm(x)
-
 
 # Parameters
 breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
@@ -109,17 +105,22 @@ cat('RNA expression:', '\n')
 print(expr)
 
 ```
+
 Have a look at the matrix:
 
 ```{r}
 Heatmap(t(scale(t(expr))), name = "Z-score")
 ```
 
-### Binned expression
+### Genes with large rank differences
+
+First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
+
+Take data of **Sample1** as an example:
 
 ```{r}
 
-# Data of one sample
+# Data of Sample1
 
 x <- expr[,1]
 
@@ -141,9 +142,10 @@ cat('Raw expression:', '\n');print(as.numeric(x))
 cat('\n')
 cat('Binned expression:', '\n'); print(xbin)
 ```
-For example, `0.10` is the minimun of the raw expression vector, so its binned expression is `1`. Similarly, the binned expression of maximum `0.53` is `4`.  
 
-We calculated binned expression via function `breakBin` in `GSClassifier`:
+For example, **0.10** is the minimun of the raw expression vector, so its binned expression is **1**. Similarly, the binned expression of maximum **0.53** is **4**.  
+
+Generally, we calculated binned expression via function **breakBin** of **GSClassifier**:
 
 ```{r}
 expr_binned <- apply(
@@ -154,13 +156,11 @@ rownames(expr_binned) <- rownames(expr)
 print(expr_binned)
 ```
 
-### Genes with large rank differences
+In this simulated dataset, **Gene7** is a gene whose expression is always the lowest across all samples. In other words, the rank of **Gene7** is stable or invariable across samples so that it's not robust for identification of differentail subtypes. 
 
-In this simulated dataset, `Gene7` is a gene whose expression is always the lowest across all samples. In other words, the rank of `Gene7` is stable or invariable across samples so that it's not robust for identification of differentail subtypes. 
+Except binned expression, we also calculated gene-pair scores later. Due to the number of gene-pair is $C_{2 \atop n}$, the removement of genes like **Gene7** before modeling could really reduce the complexibility of the model and save computing resources. In all, genes like **Gene7** could be dropped out in the following analysis.
 
-Except binned expression, we also calculated gene-pair scores later. Due to the number of gene-pair is $C_{2 \atop n}$, the removement of genes like `Gene7` before modeling could really reduce the complexibility of the model and save computing resources. In all, genes like `Gene7` could be dropped out in the following analysis.
-
-First, We use `base::rank`to return the sample ranks of the values in a vector:
+First, We use **base::rank** to return the sample ranks of the values in a vector:
 
 ```{r}
 expr_binned_rank <- apply(
@@ -170,22 +170,27 @@ expr_binned_rank <- apply(
 )
 print(expr_binned_rank)
 ```
-`na.last = TRUE` means that missing values in the data are put last.
 
-Then, get rank differences of each gene based on specified subtype distribution (`Ybin`):
+**na.last = TRUE** means that missing values in the data are put last.
+
+Then, get rank differences of each gene based on specified subtype distribution (**Ybin**):
 
 ```{r}
 testRes <- sapply(
   1:nrow(expr_binned_rank), 
-  function(gi) testFun(as.numeric(expr_binned_rank[gi,]), Ybin)
+  function(gi){
+    GSClassifier:::testFun(
+      as.numeric(expr_binned_rank[gi,]), 
+      Ybin)
+  }
 )
 names(testRes) <- rownames(expr_binned_rank)
 print(testRes)
 ```
 
-`Gene7` is the one with the lowest absolute value (0) of rank diffrence.
+**Gene7** is the one with the lowest absolute value (0) of rank diffrence.
 
-In `GSClassifier`, we use `ptail` to select differential genes based on rank diffrences. **Less `ptail` is, less gene kept**. Here, we just set `ptail=0.4`:
+In **GSClassifier**, we use **ptail** to select differential genes based on rank diffrences. **Less ptail is, less gene kept**. Here, we just set **ptail=0.4**:
 
 ```{r}
 
@@ -203,11 +208,12 @@ gene_bigRank <- names(testRes)[idx]
 cat('Index of target genes: ','\n');print(idx); cat('\n')
 cat('Target genes:','\n');print(gene_bigRank); cat('\n')
 ```
-Hence, `Gene7` was filtered and excluded in the following analysis. In practice, both `ptail` and `breakVec` are hyperparameters in modeling.
+
+Hence, **Gene7** was filtered and excluded in the following analysis. In practice, both **ptail** and **breakVec** are hyperparameters in modeling.
 
 ### Pair scores of top genes
 
-In GSClassifier, we use function `makeGenePairs` to calculate s
+In GSClassifier, we use function **makeGenePairs** to calculate s
 
 ```{r}
 gene_bigRank_pairs <- GSClassifier:::makeGenePairs(
@@ -215,11 +221,12 @@ gene_bigRank_pairs <- GSClassifier:::makeGenePairs(
   expr[gene_bigRank,])
 print(gene_bigRank_pairs)
 ```
-Take `Gene1:Gene4` of `Sample1` as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1; if the difference is ≤0, the pair score is 0 instead.
+
+Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0.
 
 ### Gene set difference score
 
-In GSClassifier, we use function `makeSetData` to calculate gene set difference score:
+In GSClassifier, we use function **makeSetData** to calculate gene set difference score:
 
 ```{r}
 geneset_interaction <- GSClassifier:::makeSetData(expr,geneSet)

@@ -1,11 +1,14 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
+  12pt,
 ]{book}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
+\usepackage{setspace}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -101,14 +104,23 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+
+% English
 \usepackage{booktabs}
-\usepackage{listings} %代码块
-\lstset{
-  breaklines=true
+\usepackage{amsthm,mathrsfs}
+\usepackage{longtable}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
 }
-% \usepackage{fontspec}
-% \setmainfont{Arial}
-% \usepackage{amsthm}
+\makeatother
+
+% 中文
+% \usepackage{ctex}
+% \usepackage{amsthm,mathrsfs}
+% \usepackage{booktabs}
+% \usepackage{longtable}
 % \makeatletter
 % \def\thm@space@setup{%
 %   \thm@preskip=8pt plus 2pt minus 4pt
@@ -126,22 +138,28 @@
 \hypersetup{
   pdftitle={The Principle of R Package GSClassifier},
   pdfauthor={Weibin Huang},
-  hidelinks,
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-13}
+\date{2022-09-14}
 
 \begin{document}
 \maketitle
 
 {
+\hypersetup{linkcolor=}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\hypertarget{principle}{%
-\chapter{Principle}\label{principle}}
+\setstretch{1.5}
+\hypertarget{the-principle-of-gsclassifier}{%
+\chapter{The Principle of GSClassifier}\label{the-principle-of-gsclassifier}}
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -151,7 +169,7 @@
 \hypertarget{flowchart}{%
 \section{Flowchart}\label{flowchart}}
 
-The flowchart of \texttt{GSClassifier} is showed in Figure \ref{fig:flowchart}.
+The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 
 \begin{figure}
 
@@ -165,14 +183,14 @@ The flowchart of \texttt{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 \hypertarget{data-processing}{%
 \section{Data Processing}\label{data-processing}}
 
-For each dataset, the RNA expression matrix would be normalized (we called \texttt{Raw\ Matrix} in the flowchart) internally so that the expression data of the samples in the dataset were comparable.
+For each dataset, the RNA expression matrix would be normalized (we called \textbf{Raw Matrix} in the flowchart) internally so that the expression data of the samples in the dataset were comparable.
 
-Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to \texttt{Subtype\ Vector} in the flowchart, via hierarchical clustering analysis.
+Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to \textbf{Subtype Vector} in the flowchart, via hierarchical clustering analysis.
 
 \hypertarget{top-scoring-pairs-tsp-matrix}{%
 \section{Top scoring pairs (TSP) matrix}\label{top-scoring-pairs-tsp-matrix}}
 
-With \texttt{subtype\ vectors} and \texttt{Raw\ Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
+With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -194,15 +212,14 @@ With \texttt{subtype\ vectors} and \texttt{Raw\ Matrix}, the TSP matrix for a sp
 
 The TSP matrix consists of 3 parts: \textbf{binned expression matrix}, \textbf{top scoring of gene pairs}, and \textbf{gene set pairs}.
 
-Here, we would use some simulated data to introduce how TSP matrix calculated.
-
 \hypertarget{simulated-dataset}{%
 \subsection{Simulated Dataset}\label{simulated-dataset}}
 
-Load packages:
+Here, we would use some simulated data to introduce how TSP matrix calculated. First, load packages:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+
 \CommentTok{\# Install "devtools" package}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
   \FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
@@ -237,21 +254,11 @@ We simulated a dataset:
   \AttributeTok{Set2 =} \FunctionTok{paste}\NormalTok{(}\StringTok{\textquotesingle{}Gene\textquotesingle{}}\NormalTok{,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{,}\AttributeTok{sep =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{)}
 \NormalTok{)}
 
-
 \CommentTok{\# RNA expression}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{\textquotesingle{}./data/simulated{-}data.xlsx\textquotesingle{}}\NormalTok{, }\AttributeTok{sheet =} \StringTok{\textquotesingle{}RNA\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-New names:
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\CommentTok{\# New names:}
 \NormalTok{expr }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(x[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
 \FunctionTok{rownames}\NormalTok{(expr) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(x[,}\DecValTok{1}\NormalTok{])); }\FunctionTok{rm}\NormalTok{(x)}
-
 
 \CommentTok{\# Parameters}
 \NormalTok{breakVec }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
@@ -263,28 +270,25 @@ New names:
 \FunctionTok{print}\NormalTok{(geneSet)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}RNA expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{print}\NormalTok{(expr)}
+\CommentTok{\# }
+\CommentTok{\#  Gene sets: }
+\CommentTok{\# $Set1}
+\CommentTok{\# [1] "Gene1" "Gene2" "Gene3"}
+\CommentTok{\# }
+\CommentTok{\# $Set2}
+\CommentTok{\# [1] "Gene4" "Gene5" "Gene6"}
+\CommentTok{\# }
+\CommentTok{\# RNA expression: }
+\CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# Gene1    0.51    0.52    0.60    0.21    0.30    0.40}
+\CommentTok{\# Gene2    0.52    0.54    0.58    0.22    0.31    0.35}
+\CommentTok{\# Gene3    0.53    0.60    0.61    0.23    0.29    0.30}
+\CommentTok{\# Gene4    0.21    0.30    0.40    0.51    0.52    0.60}
+\CommentTok{\# Gene5    0.22    0.31    0.35    0.52    0.54    0.58}
+\CommentTok{\# Gene6    0.23    0.29    0.30    0.53    0.60    0.61}
+\CommentTok{\# Gene7    0.10    0.12    0.09    0.11    0.12    0.14}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-
- Gene sets: 
-$Set1
-[1] "Gene1" "Gene2" "Gene3"
-
-$Set2
-[1] "Gene4" "Gene5" "Gene6"
-
-RNA expression: 
-      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-Gene1    0.51    0.52    0.60    0.21    0.30    0.40
-Gene2    0.52    0.54    0.58    0.22    0.31    0.35
-Gene3    0.53    0.60    0.61    0.23    0.29    0.30
-Gene4    0.21    0.30    0.40    0.51    0.52    0.60
-Gene5    0.22    0.31    0.35    0.52    0.54    0.58
-Gene6    0.23    0.29    0.30    0.53    0.60    0.61
-Gene7    0.10    0.12    0.09    0.11    0.12    0.14
-\end{verbatim}
 
 Have a look at the matrix:
 
@@ -296,12 +300,17 @@ Have a look at the matrix:
 
 \includegraphics{Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf}
 
-\hypertarget{binned-expression}{%
-\subsection{Binned expression}\label{binned-expression}}
+\hypertarget{genes-with-large-rank-differences}{%
+\subsection{Genes with large rank differences}\label{genes-with-large-rank-differences}}
+
+First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
+
+Take data of \textbf{Sample1} as an example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Data of one sample}
+
+\CommentTok{\# Data of Sample1}
 
 \NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ expr[,}\DecValTok{1}\NormalTok{]}
 
@@ -322,24 +331,21 @@ Have a look at the matrix:
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Raw expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(x))}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Binned expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{); }\FunctionTok{print}\NormalTok{(xbin)}
+\CommentTok{\# Quantiles: }
+\CommentTok{\#    0\%   25\%   50\%   75\%  100\% }
+\CommentTok{\# 0.100 0.215 0.230 0.515 0.530 }
+\CommentTok{\# }
+\CommentTok{\# Raw expression: }
+\CommentTok{\# [1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10}
+\CommentTok{\# }
+\CommentTok{\# Binned expression: }
+\CommentTok{\# [1] 3 4 4 1 2 2 1}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-Quantiles: 
-   0%   25%   50%   75%  100% 
-0.100 0.215 0.230 0.515 0.530 
+For example, \textbf{0.10} is the minimun of the raw expression vector, so its binned expression is \textbf{1}. Similarly, the binned expression of maximum \textbf{0.53} is \textbf{4}.
 
-Raw expression: 
-[1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10
-
-Binned expression: 
-[1] 3 4 4 1 2 2 1
-\end{verbatim}
-
-For example, \texttt{0.10} is the minimun of the raw expression vector, so its binned expression is \texttt{1}. Similarly, the binned expression of maximum \texttt{0.53} is \texttt{4}.
-
-We calculated binned expression via function \texttt{breakBin} in \texttt{GSClassifier}:
+Generally, we calculated binned expression via function \textbf{breakBin} of \textbf{GSClassifier}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -349,28 +355,22 @@ We calculated binned expression via function \texttt{breakBin} in \texttt{GSClas
 \NormalTok{  breakVec)}
 \FunctionTok{rownames}\NormalTok{(expr\_binned) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(expr)}
 \FunctionTok{print}\NormalTok{(expr\_binned)}
+\CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# Gene1       3       3       4       1       2       2}
+\CommentTok{\# Gene2       4       4       3       2       2       2}
+\CommentTok{\# Gene3       4       4       4       2       1       1}
+\CommentTok{\# Gene4       1       2       2       3       3       4}
+\CommentTok{\# Gene5       2       2       2       4       4       3}
+\CommentTok{\# Gene6       2       1       1       4       4       4}
+\CommentTok{\# Gene7       1       1       1       1       1       1}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-Gene1       3       3       4       1       2       2
-Gene2       4       4       3       2       2       2
-Gene3       4       4       4       2       1       1
-Gene4       1       2       2       3       3       4
-Gene5       2       2       2       4       4       3
-Gene6       2       1       1       4       4       4
-Gene7       1       1       1       1       1       1
-\end{verbatim}
+In this simulated dataset, \textbf{Gene7} is a gene whose expression is always the lowest across all samples. In other words, the rank of \textbf{Gene7} is stable or invariable across samples so that it's not robust for identification of differentail subtypes.
 
-\hypertarget{genes-with-large-rank-differences}{%
-\subsection{Genes with large rank differences}\label{genes-with-large-rank-differences}}
+Except binned expression, we also calculated gene-pair scores later. Due to the number of gene-pair is \(C_{2 \atop n}\), the removement of genes like \textbf{Gene7} before modeling could really reduce the complexibility of the model and save computing resources. In all, genes like \textbf{Gene7} could be dropped out in the following analysis.
 
-In this simulated dataset, \texttt{Gene7} is a gene whose expression is always the lowest across all samples. In other words, the rank of \texttt{Gene7} is stable or invariable across samples so that it's not robust for identification of differentail subtypes.
-
-Except binned expression, we also calculated gene-pair scores later. Due to the number of gene-pair is \(C_{2 \atop n}\), the removement of genes like \texttt{Gene7} before modeling could really reduce the complexibility of the model and save computing resources. In all, genes like \texttt{Gene7} could be dropped out in the following analysis.
-
-First, We use \texttt{base::rank}to return the sample ranks of the values in a vector:
+First, We use \textbf{base::rank} to return the sample ranks of the values in a vector:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -380,46 +380,45 @@ First, We use \texttt{base::rank}to return the sample ranks of the values in a v
   \ControlFlowTok{function}\NormalTok{(x)}\FunctionTok{rank}\NormalTok{(x, }\AttributeTok{na.last =} \ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{)}
 \FunctionTok{print}\NormalTok{(expr\_binned\_rank)}
+\CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# Gene1     5.0     5.0     6.5     1.5     3.5     3.5}
+\CommentTok{\# Gene2     6.5     6.5     5.0     3.5     3.5     3.5}
+\CommentTok{\# Gene3     6.5     6.5     6.5     3.5     1.5     1.5}
+\CommentTok{\# Gene4     1.5     3.5     3.5     5.0     5.0     6.5}
+\CommentTok{\# Gene5     3.5     3.5     3.5     6.5     6.5     5.0}
+\CommentTok{\# Gene6     3.5     1.5     1.5     6.5     6.5     6.5}
+\CommentTok{\# Gene7     1.5     1.5     1.5     1.5     1.5     1.5}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-Gene1     5.0     5.0     6.5     1.5     3.5     3.5
-Gene2     6.5     6.5     5.0     3.5     3.5     3.5
-Gene3     6.5     6.5     6.5     3.5     1.5     1.5
-Gene4     1.5     3.5     3.5     5.0     5.0     6.5
-Gene5     3.5     3.5     3.5     6.5     6.5     5.0
-Gene6     3.5     1.5     1.5     6.5     6.5     6.5
-Gene7     1.5     1.5     1.5     1.5     1.5     1.5
-\end{verbatim}
+\textbf{na.last = TRUE} means that missing values in the data are put last.
 
-\texttt{na.last\ =\ TRUE} means that missing values in the data are put last.
-
-Then, get rank differences of each gene based on specified subtype distribution (\texttt{Ybin}):
+Then, get rank differences of each gene based on specified subtype distribution (\textbf{Ybin}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{testRes }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}
   \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(expr\_binned\_rank), }
-  \ControlFlowTok{function}\NormalTok{(gi) }\FunctionTok{testFun}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(expr\_binned\_rank[gi,]), Ybin)}
+  \ControlFlowTok{function}\NormalTok{(gi)\{}
+\NormalTok{    GSClassifier}\SpecialCharTok{:::}\FunctionTok{testFun}\NormalTok{(}
+      \FunctionTok{as.numeric}\NormalTok{(expr\_binned\_rank[gi,]), }
+\NormalTok{      Ybin)}
+\NormalTok{  \}}
 \NormalTok{)}
 \FunctionTok{names}\NormalTok{(testRes) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(expr\_binned\_rank)}
 \FunctionTok{print}\NormalTok{(testRes)}
+\CommentTok{\#     Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 }
+\CommentTok{\# {-}2.666667 {-}2.500000 {-}4.333333  2.666667  2.500000  4.333333  0.000000}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-    Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
--2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000 
-\end{verbatim}
+\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence.
 
-\texttt{Gene7} is the one with the lowest absolute value (0) of rank diffrence.
-
-In \texttt{GSClassifier}, we use \texttt{ptail} to select differential genes based on rank diffrences. \textbf{Less \texttt{ptail} is, less gene kept}. Here, we just set \texttt{ptail=0.4}:
+In \textbf{GSClassifier}, we use \textbf{ptail} to select differential genes based on rank diffrences. \textbf{Less ptail is, less gene kept}. Here, we just set \textbf{ptail=0.4}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+
 \CommentTok{\# ptail is a numeber ranging (0,0.5].}
 \NormalTok{ptail }\OtherTok{=} \FloatTok{0.4}
 
@@ -433,24 +432,21 @@ In \texttt{GSClassifier}, we use \texttt{ptail} to select differential genes bas
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Index of target genes: \textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(idx); }\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Target genes:\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(gene\_bigRank); }\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Index of target genes:  }
+\CommentTok{\# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 }
+\CommentTok{\#     1     2     3     4     5     6 }
+\CommentTok{\# }
+\CommentTok{\# Target genes: }
+\CommentTok{\# [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-Index of target genes:  
-Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
-    1     2     3     4     5     6 
-
-Target genes: 
-[1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
-\end{verbatim}
-
-Hence, \texttt{Gene7} was filtered and excluded in the following analysis. In practice, both \texttt{ptail} and \texttt{breakVec} are hyperparameters in modeling.
+Hence, \textbf{Gene7} was filtered and excluded in the following analysis. In practice, both \textbf{ptail} and \textbf{breakVec} are hyperparameters in modeling.
 
 \hypertarget{pair-scores-of-top-genes}{%
 \subsection{Pair scores of top genes}\label{pair-scores-of-top-genes}}
 
-In GSClassifier, we use function \texttt{makeGenePairs} to calculate s
+In GSClassifier, we use function \textbf{makeGenePairs} to calculate s
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -458,46 +454,41 @@ In GSClassifier, we use function \texttt{makeGenePairs} to calculate s
 \NormalTok{  gene\_bigRank, }
 \NormalTok{  expr[gene\_bigRank,])}
 \FunctionTok{print}\NormalTok{(gene\_bigRank\_pairs)}
+\CommentTok{\#             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# Gene1:Gene2       0       0       1       0       0       1}
+\CommentTok{\# Gene1:Gene3       0       0       0       0       1       1}
+\CommentTok{\# Gene1:Gene4       1       1       1       0       0       0}
+\CommentTok{\# Gene1:Gene5       1       1       1       0       0       0}
+\CommentTok{\# Gene1:Gene6       1       1       1       0       0       0}
+\CommentTok{\# Gene2:Gene3       0       0       0       0       1       1}
+\CommentTok{\# Gene2:Gene4       1       1       1       0       0       0}
+\CommentTok{\# Gene2:Gene5       1       1       1       0       0       0}
+\CommentTok{\# Gene2:Gene6       1       1       1       0       0       0}
+\CommentTok{\# Gene3:Gene4       1       1       1       0       0       0}
+\CommentTok{\# Gene3:Gene5       1       1       1       0       0       0}
+\CommentTok{\# Gene3:Gene6       1       1       1       0       0       0}
+\CommentTok{\# Gene4:Gene5       0       0       1       0       0       1}
+\CommentTok{\# Gene4:Gene6       0       1       1       0       0       0}
+\CommentTok{\# Gene5:Gene6       0       1       1       0       0       0}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-            Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-Gene1:Gene2       0       0       1       0       0       1
-Gene1:Gene3       0       0       0       0       1       1
-Gene1:Gene4       1       1       1       0       0       0
-Gene1:Gene5       1       1       1       0       0       0
-Gene1:Gene6       1       1       1       0       0       0
-Gene2:Gene3       0       0       0       0       1       1
-Gene2:Gene4       1       1       1       0       0       0
-Gene2:Gene5       1       1       1       0       0       0
-Gene2:Gene6       1       1       1       0       0       0
-Gene3:Gene4       1       1       1       0       0       0
-Gene3:Gene5       1       1       1       0       0       0
-Gene3:Gene6       1       1       1       0       0       0
-Gene4:Gene5       0       0       1       0       0       1
-Gene4:Gene6       0       1       1       0       0       0
-Gene5:Gene6       0       1       1       0       0       0
-\end{verbatim}
-
-Take \texttt{Gene1:Gene4} of \texttt{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1; if the difference is ≤0, the pair score is 0 instead.
+Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0.
 
 \hypertarget{gene-set-difference-score}{%
 \subsection{Gene set difference score}\label{gene-set-difference-score}}
 
-In GSClassifier, we use function \texttt{makeSetData} to calculate gene set difference score:
+In GSClassifier, we use function \textbf{makeSetData} to calculate gene set difference score:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{geneset\_interaction }\OtherTok{\textless{}{-}}\NormalTok{ GSClassifier}\SpecialCharTok{:::}\FunctionTok{makeSetData}\NormalTok{(expr,geneSet)}
 \FunctionTok{print}\NormalTok{(geneset\_interaction)}
+\CommentTok{\#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# s1s2       1       1       1       0       0       0}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-     Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-s1s2       1       1       1       0       0       0
-\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 

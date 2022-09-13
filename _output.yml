@@ -5,7 +5,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">GSClassifier</a></li>
       after: |
-        <li><a href="https://blognas.hwb0307.com/" target="blank">My blog</a></li>
+        <li><a href="https://blognas.hwb0307.com/" target="blank">Welcome to My Blog!</a></li>
     download: ["pdf", "epub"]
 
 

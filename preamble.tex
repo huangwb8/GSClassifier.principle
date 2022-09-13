@@ -1,11 +1,20 @@
+
+% English
 \usepackage{booktabs}
-\usepackage{listings} %代码块
-\lstset{
-  breaklines=true
+\usepackage{amsthm,mathrsfs}
+\usepackage{longtable}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
 }
-% \usepackage{fontspec}
-% \setmainfont{Arial}
-% \usepackage{amsthm}
+\makeatother
+
+% 中文
+% \usepackage{ctex}
+% \usepackage{amsthm,mathrsfs}
+% \usepackage{booktabs}
+% \usepackage{longtable}
 % \makeatletter
 % \def\thm@space@setup{%
 %   \thm@preskip=8pt plus 2pt minus 4pt

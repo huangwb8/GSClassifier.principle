@@ -33,7 +33,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\usepackage[top=1in,left=0.3in,right=0.3in,bottom=1in]{geometry}
+\usepackage[top=1in,left=1in,right=1in,bottom=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -102,6 +102,12 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
+\usepackage{listings} %代码块
+\lstset{
+  breaklines=true
+}
+% \usepackage{fontspec}
+% \setmainfont{Arial}
 % \usepackage{amsthm}
 % \makeatletter
 % \def\thm@space@setup{%
@@ -131,116 +137,30 @@
 \maketitle
 
 {
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 \tableofcontents
 }
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
+\hypertarget{principle}{%
+\chapter{Principle}\label{principle}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
-
-The \textbf{bookdown} package can be installed from CRAN or Github:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{\# or the development version}
-\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
-
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
-
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
-
-\hypertarget{pre2}{%
-\chapter{Prerequisites2}\label{pre2}}
-
-You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{pre2}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{pre2}.
-
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{index_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}
-
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-You can write citations, too. For example, we are using the \textbf{bookdown} package in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
-
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
 
 \href{https://github.com/huangwb8/GSClassifier}{GSClassifier} is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in \href{https://github.com/huangwb8/GSClassifier/wiki}{Github WiKi}. Here, we propose to introduce the principle of GSClassifier, including flowchart, \textbf{top scoring pairs (TSP)} algorithm, and batch effect control.
 
 \hypertarget{flowchart}{%
-\chapter{Flowchart}\label{flowchart}}
+\section{Flowchart}\label{flowchart}}
 
-Here is the flowchart of \texttt{GSClassifier}:
+The flowchart of \texttt{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"./fig/flowchart.png"}\NormalTok{, }\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+\begin{figure}
 
-\includegraphics[width=46.18in]{./fig/flowchart}
+{\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
+
+}
+
+\caption{The flow chart of GSClassifier}\label{fig:flowchart}
+\end{figure}
 
 \hypertarget{data-processing}{%
 \section{Data Processing}\label{data-processing}}
@@ -276,8 +196,8 @@ The TSP matrix consists of 3 parts: \textbf{binned expression matrix}, \textbf{t
 
 Here, we would use some simulated data to introduce how TSP matrix calculated.
 
-\hypertarget{dataset}{%
-\subsection{Dataset}\label{dataset}}
+\hypertarget{simulated-dataset}{%
+\subsection{Simulated Dataset}\label{simulated-dataset}}
 
 Load packages:
 
@@ -285,15 +205,15 @@ Load packages:
 \begin{Highlighting}[]
 \CommentTok{\# Install "devtools" package}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
-    \FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+  \FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
 
 \CommentTok{\# Install dependencies}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"luckyBase"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
-\NormalTok{    devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/luckyBase"}\NormalTok{)}
+\NormalTok{  devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/luckyBase"}\NormalTok{)}
 
 \CommentTok{\# Install the "GSClassifier" package}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"GSClassifier"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
-\NormalTok{    devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/GSClassifier"}\NormalTok{)}
+\NormalTok{  devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/GSClassifier"}\NormalTok{)}
 
 \CommentTok{\# Install CRAN packages}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"pacman"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))\{}
@@ -319,16 +239,20 @@ We simulated a dataset:
 
 
 \CommentTok{\# RNA expression}
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{\textquotesingle{}./data/simulated{-}data.xlsx\textquotesingle{}}\NormalTok{, }\AttributeTok{sheet =} \StringTok{\textquotesingle{}RNA\textquotesingle{}}\NormalTok{); expr }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(x[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]); }\FunctionTok{rownames}\NormalTok{(expr) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(x[,}\DecValTok{1}\NormalTok{])); }\FunctionTok{rm}\NormalTok{(x)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{\textquotesingle{}./data/simulated{-}data.xlsx\textquotesingle{}}\NormalTok{, }\AttributeTok{sheet =} \StringTok{\textquotesingle{}RNA\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## New names:
+New names:
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{expr }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(x[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
+\FunctionTok{rownames}\NormalTok{(expr) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(x[,}\DecValTok{1}\NormalTok{])); }\FunctionTok{rm}\NormalTok{(x)}
+
+
 \CommentTok{\# Parameters}
 \NormalTok{breakVec }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
 \NormalTok{subtype\_vector }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
@@ -336,53 +260,30 @@ We simulated a dataset:
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Gene sets:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-##  Gene sets:
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{print}\NormalTok{(geneSet)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## $Set1
-## [1] "Gene1" "Gene2" "Gene3"
-## 
-## $Set2
-## [1] "Gene4" "Gene5" "Gene6"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}RNA expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## RNA expression:
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{print}\NormalTok{(expr)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1    0.51    0.52    0.60    0.21    0.30    0.40
-## Gene2    0.52    0.54    0.58    0.22    0.31    0.35
-## Gene3    0.53    0.60    0.61    0.23    0.29    0.30
-## Gene4    0.21    0.30    0.40    0.51    0.52    0.60
-## Gene5    0.22    0.31    0.35    0.52    0.54    0.58
-## Gene6    0.23    0.29    0.30    0.53    0.60    0.61
-## Gene7    0.10    0.12    0.09    0.11    0.12    0.14
+
+ Gene sets: 
+$Set1
+[1] "Gene1" "Gene2" "Gene3"
+
+$Set2
+[1] "Gene4" "Gene5" "Gene6"
+
+RNA expression: 
+      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1    0.51    0.52    0.60    0.21    0.30    0.40
+Gene2    0.52    0.54    0.58    0.22    0.31    0.35
+Gene3    0.53    0.60    0.61    0.23    0.29    0.30
+Gene4    0.21    0.30    0.40    0.51    0.52    0.60
+Gene5    0.22    0.31    0.35    0.52    0.54    0.58
+Gene6    0.23    0.29    0.30    0.53    0.60    0.61
+Gene7    0.10    0.12    0.09    0.11    0.12    0.14
 \end{verbatim}
 
 Have a look at the matrix:
@@ -393,7 +294,7 @@ Have a look at the matrix:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf}
+\includegraphics{Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf}
 
 \hypertarget{binned-expression}{%
 \subsection{Binned expression}\label{binned-expression}}
@@ -405,64 +306,35 @@ Have a look at the matrix:
 \NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ expr[,}\DecValTok{1}\NormalTok{]}
 
 \CommentTok{\# Create quantiles  }
-\NormalTok{brks }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(x), }\AttributeTok{probs=}\NormalTok{breakVec, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{brks }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(x), }
+                 \AttributeTok{probs=}\NormalTok{breakVec, }
+                 \AttributeTok{na.rm =}\NormalTok{ T)}
 
 \CommentTok{\# Get interval orders}
-\NormalTok{xbin }\OtherTok{\textless{}{-}} \FunctionTok{.bincode}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{breaks =}\NormalTok{ brks, }\AttributeTok{include.lowest =}\NormalTok{ T)}
+\NormalTok{xbin }\OtherTok{\textless{}{-}} \FunctionTok{.bincode}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }
+                 \AttributeTok{breaks =}\NormalTok{ brks, }
+                 \AttributeTok{include.lowest =}\NormalTok{ T)}
 \NormalTok{xbin }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(xbin)}
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Quantiles:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{); }\FunctionTok{print}\NormalTok{(brks)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Quantiles:
-\end{verbatim}
-
-\begin{verbatim}
-##    0%   25%   50%   75%  100% 
-## 0.100 0.215 0.230 0.515 0.530
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Raw expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(x))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Raw expression:
-\end{verbatim}
-
-\begin{verbatim}
-## [1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Binned expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{); }\FunctionTok{print}\NormalTok{(xbin)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Binned expression:
-\end{verbatim}
+Quantiles: 
+   0%   25%   50%   75%  100% 
+0.100 0.215 0.230 0.515 0.530 
 
-\begin{verbatim}
-## [1] 3 4 4 1 2 2 1
+Raw expression: 
+[1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10
+
+Binned expression: 
+[1] 3 4 4 1 2 2 1
 \end{verbatim}
 
 For example, \texttt{0.10} is the minimun of the raw expression vector, so its binned expression is \texttt{1}. Similarly, the binned expression of maximum \texttt{0.53} is \texttt{4}.
@@ -471,23 +343,24 @@ We calculated binned expression via function \texttt{breakBin} in \texttt{GSClas
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{expr\_binned }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(expr, }\DecValTok{2}\NormalTok{, }
-\NormalTok{                 GSClassifier}\SpecialCharTok{:::}\NormalTok{breakBin,}
-\NormalTok{                 breakVec)}
+\NormalTok{expr\_binned }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(}
+\NormalTok{  expr, }\DecValTok{2}\NormalTok{, }
+\NormalTok{  GSClassifier}\SpecialCharTok{:::}\NormalTok{breakBin,}
+\NormalTok{  breakVec)}
 \FunctionTok{rownames}\NormalTok{(expr\_binned) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(expr)}
 \FunctionTok{print}\NormalTok{(expr\_binned)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1       3       3       4       1       2       2
-## Gene2       4       4       3       2       2       2
-## Gene3       4       4       4       2       1       1
-## Gene4       1       2       2       3       3       4
-## Gene5       2       2       2       4       4       3
-## Gene6       2       1       1       4       4       4
-## Gene7       1       1       1       1       1       1
+      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1       3       3       4       1       2       2
+Gene2       4       4       3       2       2       2
+Gene3       4       4       4       2       1       1
+Gene4       1       2       2       3       3       4
+Gene5       2       2       2       4       4       3
+Gene6       2       1       1       4       4       4
+Gene7       1       1       1       1       1       1
 \end{verbatim}
 
 \hypertarget{genes-with-large-rank-differences}{%
@@ -511,14 +384,14 @@ First, We use \texttt{base::rank}to return the sample ranks of the values in a v
 \end{Shaded}
 
 \begin{verbatim}
-##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1     5.0     5.0     6.5     1.5     3.5     3.5
-## Gene2     6.5     6.5     5.0     3.5     3.5     3.5
-## Gene3     6.5     6.5     6.5     3.5     1.5     1.5
-## Gene4     1.5     3.5     3.5     5.0     5.0     6.5
-## Gene5     3.5     3.5     3.5     6.5     6.5     5.0
-## Gene6     3.5     1.5     1.5     6.5     6.5     6.5
-## Gene7     1.5     1.5     1.5     1.5     1.5     1.5
+      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1     5.0     5.0     6.5     1.5     3.5     3.5
+Gene2     6.5     6.5     5.0     3.5     3.5     3.5
+Gene3     6.5     6.5     6.5     3.5     1.5     1.5
+Gene4     1.5     3.5     3.5     5.0     5.0     6.5
+Gene5     3.5     3.5     3.5     6.5     6.5     5.0
+Gene6     3.5     1.5     1.5     6.5     6.5     6.5
+Gene7     1.5     1.5     1.5     1.5     1.5     1.5
 \end{verbatim}
 
 \texttt{na.last\ =\ TRUE} means that missing values in the data are put last.
@@ -527,14 +400,18 @@ Then, get rank differences of each gene based on specified subtype distribution 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{testRes }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(expr\_binned\_rank), }\ControlFlowTok{function}\NormalTok{(gi) }\FunctionTok{testFun}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(expr\_binned\_rank[gi,]), Ybin)); }\FunctionTok{names}\NormalTok{(testRes) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(expr\_binned\_rank)}
+\NormalTok{testRes }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}
+  \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(expr\_binned\_rank), }
+  \ControlFlowTok{function}\NormalTok{(gi) }\FunctionTok{testFun}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(expr\_binned\_rank[gi,]), Ybin)}
+\NormalTok{)}
+\FunctionTok{names}\NormalTok{(testRes) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(expr\_binned\_rank)}
 \FunctionTok{print}\NormalTok{(testRes)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##     Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
-## -2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000
+    Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
+-2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000 
 \end{verbatim}
 
 \texttt{Gene7} is the one with the lowest absolute value (0) of rank diffrence.
@@ -547,37 +424,25 @@ In \texttt{GSClassifier}, we use \texttt{ptail} to select differential genes bas
 \NormalTok{ptail }\OtherTok{=} \FloatTok{0.4}
 
 \CommentTok{\# Index of target genes with big rank differences}
-\NormalTok{idx }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{((testRes }\SpecialCharTok{\textless{}} \FunctionTok{quantile}\NormalTok{(testRes, ptail, }\AttributeTok{na.rm =}\NormalTok{ T)) }\SpecialCharTok{|}\NormalTok{ (testRes }\SpecialCharTok{\textgreater{}} \FunctionTok{quantile}\NormalTok{(testRes, }\FloatTok{1.0}\SpecialCharTok{{-}}\NormalTok{ptail, }\AttributeTok{na.rm =}\NormalTok{ T)))}
+\NormalTok{idx }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{((testRes }\SpecialCharTok{\textless{}} \FunctionTok{quantile}\NormalTok{(testRes, ptail, }\AttributeTok{na.rm =}\NormalTok{ T)) }\SpecialCharTok{|} 
+\NormalTok{             (testRes }\SpecialCharTok{\textgreater{}} \FunctionTok{quantile}\NormalTok{(testRes, }\FloatTok{1.0}\SpecialCharTok{{-}}\NormalTok{ptail, }\AttributeTok{na.rm =}\NormalTok{ T)))}
 
 \CommentTok{\# Target genes}
 \NormalTok{gene\_bigRank }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(testRes)[idx]}
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Index of target genes: \textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(idx); }\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Index of target genes:
-\end{verbatim}
-
-\begin{verbatim}
-## Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
-##     1     2     3     4     5     6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Target genes:\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(gene\_bigRank); }\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Target genes:
-\end{verbatim}
+Index of target genes:  
+Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
+    1     2     3     4     5     6 
 
-\begin{verbatim}
-## [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
+Target genes: 
+[1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
 \end{verbatim}
 
 Hence, \texttt{Gene7} was filtered and excluded in the following analysis. In practice, both \texttt{ptail} and \texttt{breakVec} are hyperparameters in modeling.
@@ -589,28 +454,30 @@ In GSClassifier, we use function \texttt{makeGenePairs} to calculate s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gene\_bigRank\_pairs }\OtherTok{\textless{}{-}}\NormalTok{ GSClassifier}\SpecialCharTok{:::}\FunctionTok{makeGenePairs}\NormalTok{(gene\_bigRank, expr[gene\_bigRank,])}
+\NormalTok{gene\_bigRank\_pairs }\OtherTok{\textless{}{-}}\NormalTok{ GSClassifier}\SpecialCharTok{:::}\FunctionTok{makeGenePairs}\NormalTok{(}
+\NormalTok{  gene\_bigRank, }
+\NormalTok{  expr[gene\_bigRank,])}
 \FunctionTok{print}\NormalTok{(gene\_bigRank\_pairs)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1:Gene2       0       0       1       0       0       1
-## Gene1:Gene3       0       0       0       0       1       1
-## Gene1:Gene4       1       1       1       0       0       0
-## Gene1:Gene5       1       1       1       0       0       0
-## Gene1:Gene6       1       1       1       0       0       0
-## Gene2:Gene3       0       0       0       0       1       1
-## Gene2:Gene4       1       1       1       0       0       0
-## Gene2:Gene5       1       1       1       0       0       0
-## Gene2:Gene6       1       1       1       0       0       0
-## Gene3:Gene4       1       1       1       0       0       0
-## Gene3:Gene5       1       1       1       0       0       0
-## Gene3:Gene6       1       1       1       0       0       0
-## Gene4:Gene5       0       0       1       0       0       1
-## Gene4:Gene6       0       1       1       0       0       0
-## Gene5:Gene6       0       1       1       0       0       0
+            Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1:Gene2       0       0       1       0       0       1
+Gene1:Gene3       0       0       0       0       1       1
+Gene1:Gene4       1       1       1       0       0       0
+Gene1:Gene5       1       1       1       0       0       0
+Gene1:Gene6       1       1       1       0       0       0
+Gene2:Gene3       0       0       0       0       1       1
+Gene2:Gene4       1       1       1       0       0       0
+Gene2:Gene5       1       1       1       0       0       0
+Gene2:Gene6       1       1       1       0       0       0
+Gene3:Gene4       1       1       1       0       0       0
+Gene3:Gene5       1       1       1       0       0       0
+Gene3:Gene6       1       1       1       0       0       0
+Gene4:Gene5       0       0       1       0       0       1
+Gene4:Gene6       0       1       1       0       0       0
+Gene5:Gene6       0       1       1       0       0       0
 \end{verbatim}
 
 Take \texttt{Gene1:Gene4} of \texttt{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1; if the difference is ≤0, the pair score is 0 instead.
@@ -628,8 +495,8 @@ In GSClassifier, we use function \texttt{makeSetData} to calculate gene set diff
 \end{Shaded}
 
 \begin{verbatim}
-##      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## s1s2       1       1       1       0       0       0
+     Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+s1s2       1       1       1       0       0       0
 \end{verbatim}
 
   \bibliography{book.bib,packages.bib}

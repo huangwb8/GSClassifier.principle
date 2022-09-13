@@ -1,14 +1,21 @@
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = FALSE, results = 'hold', comment='#')
 ```
 
-# Flowchart
+# Principle
 
-Here is the flowchart of `GSClassifier`:
 
-```{r}
+## Introduction
+
+[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
+
+## Flowchart
+
+The flowchart of `GSClassifier` is showed in Figure \@ref(fig:flowchart).
+
+```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics(rep("./fig/flowchart.png", 1))
 ```
 
@@ -43,7 +50,7 @@ The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring 
 
 Here, we would use some simulated data to introduce how TSP matrix calculated.
 
-### Dataset
+### Simulated Dataset
 
 Load packages:
 
@@ -51,15 +58,15 @@ Load packages:
 
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
-    install.packages("devtools")
+  install.packages("devtools")
 
 # Install dependencies
 if (!requireNamespace("luckyBase", quietly = TRUE))
-    devtools::install_github("huangwb8/luckyBase")
+  devtools::install_github("huangwb8/luckyBase")
 
 # Install the "GSClassifier" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
-    devtools::install_github("huangwb8/GSClassifier")
+  devtools::install_github("huangwb8/GSClassifier")
 
 # Install CRAN packages
 if (!requireNamespace("pacman", quietly = TRUE)){
@@ -75,7 +82,7 @@ for(i in packages_needed){p_load(char=i)}
 
 We simulated a dataset:
 
-```{r}
+```{r, warning=FALSE}
 
 # Geneset
 geneSet <- list(
@@ -85,7 +92,9 @@ geneSet <- list(
 
 
 # RNA expression
-x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA'); expr <- as.matrix(x[,-1]); rownames(expr) <- as.character(as.matrix(x[,1])); rm(x)
+x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
+expr <- as.matrix(x[,-1])
+rownames(expr) <- as.character(as.matrix(x[,1])); rm(x)
 
 
 # Parameters
@@ -115,10 +124,14 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 x <- expr[,1]
 
 # Create quantiles  
-brks <- quantile(as.numeric(x), probs=breakVec, na.rm = T)
+brks <- quantile(as.numeric(x), 
+                 probs=breakVec, 
+                 na.rm = T)
 
 # Get interval orders
-xbin <- .bincode(x = x, breaks = brks, include.lowest = T)
+xbin <- .bincode(x = x, 
+                 breaks = brks, 
+                 include.lowest = T)
 xbin <- as.numeric(xbin)
 
 # Report
@@ -133,9 +146,10 @@ For example, `0.10` is the minimun of the raw expression vector, so its binned e
 We calculated binned expression via function `breakBin` in `GSClassifier`:
 
 ```{r}
-expr_binned <- apply(expr, 2, 
-                 GSClassifier:::breakBin,
-                 breakVec)
+expr_binned <- apply(
+  expr, 2, 
+  GSClassifier:::breakBin,
+  breakVec)
 rownames(expr_binned) <- rownames(expr)
 print(expr_binned)
 ```
@@ -161,7 +175,11 @@ print(expr_binned_rank)
 Then, get rank differences of each gene based on specified subtype distribution (`Ybin`):
 
 ```{r}
-testRes <- sapply(1:nrow(expr_binned_rank), function(gi) testFun(as.numeric(expr_binned_rank[gi,]), Ybin)); names(testRes) <- rownames(expr_binned_rank)
+testRes <- sapply(
+  1:nrow(expr_binned_rank), 
+  function(gi) testFun(as.numeric(expr_binned_rank[gi,]), Ybin)
+)
+names(testRes) <- rownames(expr_binned_rank)
 print(testRes)
 ```
 
@@ -175,7 +193,8 @@ In `GSClassifier`, we use `ptail` to select differential genes based on rank dif
 ptail = 0.4
 
 # Index of target genes with big rank differences
-idx <- which((testRes < quantile(testRes, ptail, na.rm = T)) | (testRes > quantile(testRes, 1.0-ptail, na.rm = T)))
+idx <- which((testRes < quantile(testRes, ptail, na.rm = T)) | 
+             (testRes > quantile(testRes, 1.0-ptail, na.rm = T)))
 
 # Target genes
 gene_bigRank <- names(testRes)[idx]
@@ -191,7 +210,9 @@ Hence, `Gene7` was filtered and excluded in the following analysis. In practice,
 In GSClassifier, we use function `makeGenePairs` to calculate s
 
 ```{r}
-gene_bigRank_pairs <- GSClassifier:::makeGenePairs(gene_bigRank, expr[gene_bigRank,])
+gene_bigRank_pairs <- GSClassifier:::makeGenePairs(
+  gene_bigRank, 
+  expr[gene_bigRank,])
 print(gene_bigRank_pairs)
 ```
 Take `Gene1:Gene4` of `Sample1` as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1; if the difference is ≤0, the pair score is 0 instead.

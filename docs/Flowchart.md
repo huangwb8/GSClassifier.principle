@@ -2,17 +2,25 @@
 
 
 
-# Flowchart
-
-Here is the flowchart of `GSClassifier`:
+# Principle
 
 
-```r
-knitr::include_graphics(rep("./fig/flowchart.png", 1))
-```
+## Introduction
 
+[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
 
-\includegraphics[width=46.18in]{./fig/flowchart} 
+## Flowchart
+
+The flowchart of `GSClassifier` is showed in Figure \@ref(fig:flowchart).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
+
+}
+
+\caption{The flow chart of GSClassifier}(\#fig:flowchart)
+\end{figure}
 
 
 ## Data Processing
@@ -46,7 +54,7 @@ The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring 
 
 Here, we would use some simulated data to introduce how TSP matrix calculated.
 
-### Dataset
+### Simulated Dataset
 
 Load packages:
 
@@ -54,15 +62,15 @@ Load packages:
 ```r
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
-    install.packages("devtools")
+  install.packages("devtools")
 
 # Install dependencies
 if (!requireNamespace("luckyBase", quietly = TRUE))
-    devtools::install_github("huangwb8/luckyBase")
+  devtools::install_github("huangwb8/luckyBase")
 
 # Install the "GSClassifier" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
-    devtools::install_github("huangwb8/GSClassifier")
+  devtools::install_github("huangwb8/GSClassifier")
 
 # Install CRAN packages
 if (!requireNamespace("pacman", quietly = TRUE)){
@@ -87,14 +95,18 @@ geneSet <- list(
 
 
 # RNA expression
-x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA'); expr <- as.matrix(x[,-1]); rownames(expr) <- as.character(as.matrix(x[,1])); rm(x)
+x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
 ```
 
 ```
-## New names:
+New names:
 ```
 
 ```r
+expr <- as.matrix(x[,-1])
+rownames(expr) <- as.character(as.matrix(x[,1])); rm(x)
+
+
 # Parameters
 breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
 subtype_vector = c(1,1,1,2,2,2)
@@ -102,46 +114,29 @@ Ybin = ifelse(subtype_vector == 1, yes = 1, no=0)
 
 # Report
 cat(c('\n', 'Gene sets:', '\n'))
-```
-
-```
-## 
-##  Gene sets:
-```
-
-```r
 print(geneSet)
-```
-
-```
-## $Set1
-## [1] "Gene1" "Gene2" "Gene3"
-## 
-## $Set2
-## [1] "Gene4" "Gene5" "Gene6"
-```
-
-```r
 cat('RNA expression:', '\n')
-```
-
-```
-## RNA expression:
-```
-
-```r
 print(expr)
 ```
 
 ```
-##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1    0.51    0.52    0.60    0.21    0.30    0.40
-## Gene2    0.52    0.54    0.58    0.22    0.31    0.35
-## Gene3    0.53    0.60    0.61    0.23    0.29    0.30
-## Gene4    0.21    0.30    0.40    0.51    0.52    0.60
-## Gene5    0.22    0.31    0.35    0.52    0.54    0.58
-## Gene6    0.23    0.29    0.30    0.53    0.60    0.61
-## Gene7    0.10    0.12    0.09    0.11    0.12    0.14
+
+ Gene sets: 
+$Set1
+[1] "Gene1" "Gene2" "Gene3"
+
+$Set2
+[1] "Gene4" "Gene5" "Gene6"
+
+RNA expression: 
+      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1    0.51    0.52    0.60    0.21    0.30    0.40
+Gene2    0.52    0.54    0.58    0.22    0.31    0.35
+Gene3    0.53    0.60    0.61    0.23    0.29    0.30
+Gene4    0.21    0.30    0.40    0.51    0.52    0.60
+Gene5    0.22    0.31    0.35    0.52    0.54    0.58
+Gene6    0.23    0.29    0.30    0.53    0.60    0.61
+Gene7    0.10    0.12    0.09    0.11    0.12    0.14
 ```
 Have a look at the matrix:
 
@@ -150,7 +145,7 @@ Have a look at the matrix:
 Heatmap(t(scale(t(expr))), name = "Z-score")
 ```
 
-![](Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+![](Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 ### Binned expression
 
@@ -161,55 +156,34 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 x <- expr[,1]
 
 # Create quantiles  
-brks <- quantile(as.numeric(x), probs=breakVec, na.rm = T)
+brks <- quantile(as.numeric(x), 
+                 probs=breakVec, 
+                 na.rm = T)
 
 # Get interval orders
-xbin <- .bincode(x = x, breaks = brks, include.lowest = T)
+xbin <- .bincode(x = x, 
+                 breaks = brks, 
+                 include.lowest = T)
 xbin <- as.numeric(xbin)
 
 # Report
 cat('Quantiles:', '\n'); print(brks)
-```
-
-```
-## Quantiles:
-```
-
-```
-##    0%   25%   50%   75%  100% 
-## 0.100 0.215 0.230 0.515 0.530
-```
-
-```r
 cat('\n')
-```
-
-```r
 cat('Raw expression:', '\n');print(as.numeric(x))
-```
-
-```
-## Raw expression:
-```
-
-```
-## [1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10
-```
-
-```r
 cat('\n')
-```
-
-```r
 cat('Binned expression:', '\n'); print(xbin)
 ```
 
 ```
-## Binned expression:
-```
+Quantiles: 
+   0%   25%   50%   75%  100% 
+0.100 0.215 0.230 0.515 0.530 
 
-```
-## [1] 3 4 4 1 2 2 1
+Raw expression: 
+[1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10
+
+Binned expression: 
+[1] 3 4 4 1 2 2 1
 ```
 For example, `0.10` is the minimun of the raw expression vector, so its binned expression is `1`. Similarly, the binned expression of maximum `0.53` is `4`.  
 
@@ -217,22 +191,23 @@ We calculated binned expression via function `breakBin` in `GSClassifier`:
 
 
 ```r
-expr_binned <- apply(expr, 2, 
-                 GSClassifier:::breakBin,
-                 breakVec)
+expr_binned <- apply(
+  expr, 2, 
+  GSClassifier:::breakBin,
+  breakVec)
 rownames(expr_binned) <- rownames(expr)
 print(expr_binned)
 ```
 
 ```
-##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1       3       3       4       1       2       2
-## Gene2       4       4       3       2       2       2
-## Gene3       4       4       4       2       1       1
-## Gene4       1       2       2       3       3       4
-## Gene5       2       2       2       4       4       3
-## Gene6       2       1       1       4       4       4
-## Gene7       1       1       1       1       1       1
+      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1       3       3       4       1       2       2
+Gene2       4       4       3       2       2       2
+Gene3       4       4       4       2       1       1
+Gene4       1       2       2       3       3       4
+Gene5       2       2       2       4       4       3
+Gene6       2       1       1       4       4       4
+Gene7       1       1       1       1       1       1
 ```
 
 ### Genes with large rank differences
@@ -254,14 +229,14 @@ print(expr_binned_rank)
 ```
 
 ```
-##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1     5.0     5.0     6.5     1.5     3.5     3.5
-## Gene2     6.5     6.5     5.0     3.5     3.5     3.5
-## Gene3     6.5     6.5     6.5     3.5     1.5     1.5
-## Gene4     1.5     3.5     3.5     5.0     5.0     6.5
-## Gene5     3.5     3.5     3.5     6.5     6.5     5.0
-## Gene6     3.5     1.5     1.5     6.5     6.5     6.5
-## Gene7     1.5     1.5     1.5     1.5     1.5     1.5
+      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1     5.0     5.0     6.5     1.5     3.5     3.5
+Gene2     6.5     6.5     5.0     3.5     3.5     3.5
+Gene3     6.5     6.5     6.5     3.5     1.5     1.5
+Gene4     1.5     3.5     3.5     5.0     5.0     6.5
+Gene5     3.5     3.5     3.5     6.5     6.5     5.0
+Gene6     3.5     1.5     1.5     6.5     6.5     6.5
+Gene7     1.5     1.5     1.5     1.5     1.5     1.5
 ```
 `na.last = TRUE` means that missing values in the data are put last.
 
@@ -269,13 +244,17 @@ Then, get rank differences of each gene based on specified subtype distribution 
 
 
 ```r
-testRes <- sapply(1:nrow(expr_binned_rank), function(gi) testFun(as.numeric(expr_binned_rank[gi,]), Ybin)); names(testRes) <- rownames(expr_binned_rank)
+testRes <- sapply(
+  1:nrow(expr_binned_rank), 
+  function(gi) testFun(as.numeric(expr_binned_rank[gi,]), Ybin)
+)
+names(testRes) <- rownames(expr_binned_rank)
 print(testRes)
 ```
 
 ```
-##     Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
-## -2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000
+    Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
+-2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000 
 ```
 
 `Gene7` is the one with the lowest absolute value (0) of rank diffrence.
@@ -288,34 +267,24 @@ In `GSClassifier`, we use `ptail` to select differential genes based on rank dif
 ptail = 0.4
 
 # Index of target genes with big rank differences
-idx <- which((testRes < quantile(testRes, ptail, na.rm = T)) | (testRes > quantile(testRes, 1.0-ptail, na.rm = T)))
+idx <- which((testRes < quantile(testRes, ptail, na.rm = T)) | 
+             (testRes > quantile(testRes, 1.0-ptail, na.rm = T)))
 
 # Target genes
 gene_bigRank <- names(testRes)[idx]
 
 # Report
 cat('Index of target genes: ','\n');print(idx); cat('\n')
-```
-
-```
-## Index of target genes:
-```
-
-```
-## Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
-##     1     2     3     4     5     6
-```
-
-```r
 cat('Target genes:','\n');print(gene_bigRank); cat('\n')
 ```
 
 ```
-## Target genes:
-```
+Index of target genes:  
+Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
+    1     2     3     4     5     6 
 
-```
-## [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
+Target genes: 
+[1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
 ```
 Hence, `Gene7` was filtered and excluded in the following analysis. In practice, both `ptail` and `breakVec` are hyperparameters in modeling.
 
@@ -325,27 +294,29 @@ In GSClassifier, we use function `makeGenePairs` to calculate s
 
 
 ```r
-gene_bigRank_pairs <- GSClassifier:::makeGenePairs(gene_bigRank, expr[gene_bigRank,])
+gene_bigRank_pairs <- GSClassifier:::makeGenePairs(
+  gene_bigRank, 
+  expr[gene_bigRank,])
 print(gene_bigRank_pairs)
 ```
 
 ```
-##             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## Gene1:Gene2       0       0       1       0       0       1
-## Gene1:Gene3       0       0       0       0       1       1
-## Gene1:Gene4       1       1       1       0       0       0
-## Gene1:Gene5       1       1       1       0       0       0
-## Gene1:Gene6       1       1       1       0       0       0
-## Gene2:Gene3       0       0       0       0       1       1
-## Gene2:Gene4       1       1       1       0       0       0
-## Gene2:Gene5       1       1       1       0       0       0
-## Gene2:Gene6       1       1       1       0       0       0
-## Gene3:Gene4       1       1       1       0       0       0
-## Gene3:Gene5       1       1       1       0       0       0
-## Gene3:Gene6       1       1       1       0       0       0
-## Gene4:Gene5       0       0       1       0       0       1
-## Gene4:Gene6       0       1       1       0       0       0
-## Gene5:Gene6       0       1       1       0       0       0
+            Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+Gene1:Gene2       0       0       1       0       0       1
+Gene1:Gene3       0       0       0       0       1       1
+Gene1:Gene4       1       1       1       0       0       0
+Gene1:Gene5       1       1       1       0       0       0
+Gene1:Gene6       1       1       1       0       0       0
+Gene2:Gene3       0       0       0       0       1       1
+Gene2:Gene4       1       1       1       0       0       0
+Gene2:Gene5       1       1       1       0       0       0
+Gene2:Gene6       1       1       1       0       0       0
+Gene3:Gene4       1       1       1       0       0       0
+Gene3:Gene5       1       1       1       0       0       0
+Gene3:Gene6       1       1       1       0       0       0
+Gene4:Gene5       0       0       1       0       0       1
+Gene4:Gene6       0       1       1       0       0       0
+Gene5:Gene6       0       1       1       0       0       0
 ```
 Take `Gene1:Gene4` of `Sample1` as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1; if the difference is ≤0, the pair score is 0 instead.
 
@@ -360,8 +331,8 @@ print(geneset_interaction)
 ```
 
 ```
-##      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-## s1s2       1       1       1       0       0       0
+     Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+s1s2       1       1       1       0       0       0
 ```
 
 

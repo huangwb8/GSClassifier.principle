@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Introduction | The Principle of R Package GSClassifier</title>
-  <meta name="description" content="2 Introduction | The Principle of R Package GSClassifier" />
+  <title>Chapter 3 Introduction | The Principle of R Package GSClassifier</title>
+  <meta name="description" content="The Principle of GSClassifier" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Introduction | The Principle of R Package GSClassifier" />
+  <meta property="og:title" content="Chapter 3 Introduction | The Principle of R Package GSClassifier" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="2 Introduction | The Principle of R Package GSClassifier" />
+  <meta property="og:description" content="The Principle of GSClassifier" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Introduction | The Principle of R Package GSClassifier" />
+  <meta name="twitter:title" content="Chapter 3 Introduction | The Principle of R Package GSClassifier" />
   
-  <meta name="twitter:description" content="2 Introduction | The Principle of R Package GSClassifier" />
+  <meta name="twitter:description" content="The Principle of GSClassifier" />
   
 
 <meta name="author" content="Weibin Huang" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="pre2.html"/>
+<link rel="next" href="flowchart.html"/>
 <script src="libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -135,7 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#prerequisites" id="toc-prerequisites"><span class="toc-section-number">1</span> Prerequisites</a></li>
-<li><a href="intro.html#intro" id="toc-intro"><span class="toc-section-number">2</span> Introduction</a></li>
+<li><a href="pre2.html#pre2" id="toc-pre2"><span class="toc-section-number">2</span> Prerequisites2</a></li>
+<li><a href="intro.html#intro" id="toc-intro"><span class="toc-section-number">3</span> Introduction</a></li>
+<li><a href="flowchart.html#flowchart" id="toc-flowchart"><span class="toc-section-number">4</span> Flowchart</a>
+<ul>
+<li><a href="flowchart.html#data-processing" id="toc-data-processing"><span class="toc-section-number">4.1</span> Data Processing</a></li>
+<li><a href="flowchart.html#top-scoring-pairs-tsp-matrix" id="toc-top-scoring-pairs-tsp-matrix"><span class="toc-section-number">4.2</span> Top scoring pairs (TSP) matrix</a>
+<ul>
+<li><a href="flowchart.html#dataset" id="toc-dataset"><span class="toc-section-number">4.2.1</span> Dataset</a></li>
+<li><a href="flowchart.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">4.2.2</span> Binned expression</a></li>
+<li><a href="flowchart.html#genes-with-large-rank-differences" id="toc-genes-with-large-rank-differences"><span class="toc-section-number">4.2.3</span> Genes with large rank differences</a></li>
+<li><a href="flowchart.html#pair-scores-of-top-genes" id="toc-pair-scores-of-top-genes"><span class="toc-section-number">4.2.4</span> Pair scores of top genes</a></li>
+<li><a href="flowchart.html#gene-set-difference-score" id="toc-gene-set-difference-score"><span class="toc-section-number">4.2.5</span> Gene set difference score</a></li>
+</ul></li>
+</ul></li>
 <li><a href="references.html#references" id="toc-references">References</a></li>
 <li class="divider"></li>
 <li><a href="https://blognas.hwb0307.com/" target="blank">My blog</a></li>
@@ -157,178 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Introduction</h1>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">2</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="#methods"><strong>??</strong></a>.</p>
-<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="intro.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
-<span id="cb2-2"><a href="intro.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="Introduction_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
-<p class="caption">
-Figure 2.1: Here is a nice figure!
-</p>
-</div>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="intro.html#fig:nice-fig">2.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="intro.html#tab:nice-tab">2.1</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb3-2"><a href="intro.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(iris, <span class="dv">20</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb3-3"><a href="intro.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-4"><a href="intro.html#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<table>
-<caption><span id="tab:nice-tab">Table 2.1: </span>Here is a nice table!</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="references.html#ref-R-bookdown" role="doc-biblioref">Xie 2020</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="references.html#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span>.</p>
+<div id="intro" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Introduction</h1>
+<p><a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a> is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in <a href="https://github.com/huangwb8/GSClassifier/wiki">Github WiKi</a>. Here, we propose to introduce the principle of GSClassifier, including flowchart, <strong>top scoring pairs (TSP)</strong> algorithm, and batch effect control.</p>
 
 </div>
             </section>
@@ -336,8 +180,8 @@ Figure 2.1: Here is a nice figure!
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pre2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="flowchart.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -379,7 +223,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["GSClassifier.principle.pdf"],
+"download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
 "toc": {
 "collapse": "subsection"
 }

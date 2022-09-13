@@ -1,8 +1,9 @@
 book_filename: "GSClassifier.principle"
 delete_merged_file: true
-# language:
-#   ui:
-#     chapter_name: "Chapter "
+language:
+  ui:
+    chapter_name: "Chapter "
+
 new_session: yes
 
 # Github Pages
@@ -13,6 +14,8 @@ rmd_files:
     "index.Rmd",
 
     "Introduction.Rmd",
+
+    "Flowchart.Rmd",
 
     "References.Rmd",
   ]

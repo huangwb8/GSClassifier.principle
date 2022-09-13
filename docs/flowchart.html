@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Flowchart | The Principle of R Package GSClassifier</title>
+  <meta name="description" content="The Principle of GSClassifier" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Flowchart | The Principle of R Package GSClassifier" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The Principle of GSClassifier" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Flowchart | The Principle of R Package GSClassifier" />
+  
+  <meta name="twitter:description" content="The Principle of GSClassifier" />
+  
+
+<meta name="author" content="Weibin Huang" />
+
+
+<meta name="date" content="2022-09-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">GSClassifier</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#prerequisites" id="toc-prerequisites"><span class="toc-section-number">1</span> Prerequisites</a></li>
+<li><a href="pre2.html#pre2" id="toc-pre2"><span class="toc-section-number">2</span> Prerequisites2</a></li>
+<li><a href="intro.html#intro" id="toc-intro"><span class="toc-section-number">3</span> Introduction</a></li>
+<li><a href="flowchart.html#flowchart" id="toc-flowchart"><span class="toc-section-number">4</span> Flowchart</a>
+<ul>
+<li><a href="flowchart.html#data-processing" id="toc-data-processing"><span class="toc-section-number">4.1</span> Data Processing</a></li>
+<li><a href="flowchart.html#top-scoring-pairs-tsp-matrix" id="toc-top-scoring-pairs-tsp-matrix"><span class="toc-section-number">4.2</span> Top scoring pairs (TSP) matrix</a>
+<ul>
+<li><a href="flowchart.html#dataset" id="toc-dataset"><span class="toc-section-number">4.2.1</span> Dataset</a></li>
+<li><a href="flowchart.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">4.2.2</span> Binned expression</a></li>
+<li><a href="flowchart.html#genes-with-large-rank-differences" id="toc-genes-with-large-rank-differences"><span class="toc-section-number">4.2.3</span> Genes with large rank differences</a></li>
+<li><a href="flowchart.html#pair-scores-of-top-genes" id="toc-pair-scores-of-top-genes"><span class="toc-section-number">4.2.4</span> Pair scores of top genes</a></li>
+<li><a href="flowchart.html#gene-set-difference-score" id="toc-gene-set-difference-score"><span class="toc-section-number">4.2.5</span> Gene set difference score</a></li>
+</ul></li>
+</ul></li>
+<li><a href="references.html#references" id="toc-references">References</a></li>
+<li class="divider"></li>
+<li><a href="https://blognas.hwb0307.com/" target="blank">My blog</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Principle of R Package GSClassifier</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="flowchart" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Flowchart</h1>
+<p>Here is the flowchart of <code>GSClassifier</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="flowchart.html#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">rep</span>(<span class="st">&quot;./fig/flowchart.png&quot;</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="fig/flowchart.png" width="1662" /></p>
+<div id="data-processing" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Data Processing</h2>
+<p>For each dataset, the RNA expression matrix would be normalized (we called <code>Raw Matrix</code> in the flowchart) internally so that the expression data of the samples in the dataset were comparable.</p>
+<p>Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to <code>Subtype Vector</code> in the flowchart, via hierarchical clustering analysis.</p>
+</div>
+<div id="top-scoring-pairs-tsp-matrix" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Top scoring pairs (TSP) matrix</h2>
+<p>With <code>subtype vectors</code> and <code>Raw Matrix</code>, the TSP matrix for a specified subtypes could be calculated via function <code>GSClassifier::trainDataProc</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="flowchart.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trainDataProc</span>(</span>
+<span id="cb5-2"><a href="flowchart.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  Xmat, Yvec,</span>
+<span id="cb5-3"><a href="flowchart.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-4"><a href="flowchart.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  geneSet, </span>
+<span id="cb5-5"><a href="flowchart.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="flowchart.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtype =</span> <span class="dv">1</span>, </span>
+<span id="cb5-7"><a href="flowchart.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="flowchart.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 0.2 was Used in PAD project</span></span>
+<span id="cb5-9"><a href="flowchart.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ptail =</span> <span class="fl">0.2</span>,</span>
+<span id="cb5-10"><a href="flowchart.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-11"><a href="flowchart.html#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project</span></span>
+<span id="cb5-12"><a href="flowchart.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">breakVec =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb5-13"><a href="flowchart.html#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>The TSP matrix consists of 3 parts: <strong>binned expression matrix</strong>, <strong>top scoring of gene pairs</strong>, and <strong>gene set pairs</strong>.</p>
+<p>Here, we would use some simulated data to introduce how TSP matrix calculated.</p>
+<div id="dataset" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Dataset</h3>
+<p>Load packages:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="flowchart.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install &quot;devtools&quot; package</span></span>
+<span id="cb6-2"><a href="flowchart.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-3"><a href="flowchart.html#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb6-4"><a href="flowchart.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="flowchart.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Install dependencies</span></span>
+<span id="cb6-6"><a href="flowchart.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;luckyBase&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-7"><a href="flowchart.html#cb6-7" aria-hidden="true" tabindex="-1"></a>    devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/luckyBase&quot;</span>)</span>
+<span id="cb6-8"><a href="flowchart.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="flowchart.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the &quot;GSClassifier&quot; package</span></span>
+<span id="cb6-10"><a href="flowchart.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;GSClassifier&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-11"><a href="flowchart.html#cb6-11" aria-hidden="true" tabindex="-1"></a>    devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/GSClassifier&quot;</span>)</span>
+<span id="cb6-12"><a href="flowchart.html#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="flowchart.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Install CRAN packages</span></span>
+<span id="cb6-14"><a href="flowchart.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pacman&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){</span>
+<span id="cb6-15"><a href="flowchart.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb6-16"><a href="flowchart.html#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pacman)</span>
+<span id="cb6-17"><a href="flowchart.html#cb6-17" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb6-18"><a href="flowchart.html#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pacman)</span>
+<span id="cb6-19"><a href="flowchart.html#cb6-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-20"><a href="flowchart.html#cb6-20" aria-hidden="true" tabindex="-1"></a>packages_needed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;readxl&quot;</span>,<span class="st">&quot;ComplexHeatmap&quot;</span>,<span class="st">&quot;GSClassifier&quot;</span>)</span>
+<span id="cb6-21"><a href="flowchart.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> packages_needed){<span class="fu">p_load</span>(<span class="at">char=</span>i)}</span></code></pre></div>
+<p>We simulated a dataset:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="flowchart.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geneset</span></span>
+<span id="cb7-2"><a href="flowchart.html#cb7-2" aria-hidden="true" tabindex="-1"></a>geneSet <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb7-3"><a href="flowchart.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set1 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>),</span>
+<span id="cb7-4"><a href="flowchart.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set2 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb7-5"><a href="flowchart.html#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="flowchart.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="flowchart.html#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="flowchart.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression</span></span>
+<span id="cb7-9"><a href="flowchart.html#cb7-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&#39;./data/simulated-data.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;RNA&#39;</span>); expr <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[,<span class="sc">-</span><span class="dv">1</span>]); <span class="fu">rownames</span>(expr) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">as.matrix</span>(x[,<span class="dv">1</span>])); <span class="fu">rm</span>(x)</span></code></pre></div>
+<pre><code>## New names:</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="flowchart.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb9-2"><a href="flowchart.html#cb9-2" aria-hidden="true" tabindex="-1"></a>breakVec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb9-3"><a href="flowchart.html#cb9-3" aria-hidden="true" tabindex="-1"></a>subtype_vector <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb9-4"><a href="flowchart.html#cb9-4" aria-hidden="true" tabindex="-1"></a>Ybin <span class="ot">=</span> <span class="fu">ifelse</span>(subtype_vector <span class="sc">==</span> <span class="dv">1</span>, <span class="at">yes =</span> <span class="dv">1</span>, <span class="at">no=</span><span class="dv">0</span>)</span>
+<span id="cb9-5"><a href="flowchart.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="flowchart.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb9-7"><a href="flowchart.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">c</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>, <span class="st">&#39;Gene sets:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))</span></code></pre></div>
+<pre><code>## 
+##  Gene sets:</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="flowchart.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geneSet)</span></code></pre></div>
+<pre><code>## $Set1
+## [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot;
+## 
+## $Set2
+## [1] &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="flowchart.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<pre><code>## RNA expression:</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="flowchart.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr)</span></code></pre></div>
+<pre><code>##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+## Gene1    0.51    0.52    0.60    0.21    0.30    0.40
+## Gene2    0.52    0.54    0.58    0.22    0.31    0.35
+## Gene3    0.53    0.60    0.61    0.23    0.29    0.30
+## Gene4    0.21    0.30    0.40    0.51    0.52    0.60
+## Gene5    0.22    0.31    0.35    0.52    0.54    0.58
+## Gene6    0.23    0.29    0.30    0.53    0.60    0.61
+## Gene7    0.10    0.12    0.09    0.11    0.12    0.14</code></pre>
+<p>Have a look at the matrix:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="flowchart.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
+<p><img src="Flowchart_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="binned-expression" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Binned expression</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="flowchart.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data of one sample</span></span>
+<span id="cb18-2"><a href="flowchart.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="flowchart.html#cb18-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> expr[,<span class="dv">1</span>]</span>
+<span id="cb18-4"><a href="flowchart.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="flowchart.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create quantiles  </span></span>
+<span id="cb18-6"><a href="flowchart.html#cb18-6" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">as.numeric</span>(x), <span class="at">probs=</span>breakVec, <span class="at">na.rm =</span> T)</span>
+<span id="cb18-7"><a href="flowchart.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="flowchart.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get interval orders</span></span>
+<span id="cb18-9"><a href="flowchart.html#cb18-9" aria-hidden="true" tabindex="-1"></a>xbin <span class="ot">&lt;-</span> <span class="fu">.bincode</span>(<span class="at">x =</span> x, <span class="at">breaks =</span> brks, <span class="at">include.lowest =</span> T)</span>
+<span id="cb18-10"><a href="flowchart.html#cb18-10" aria-hidden="true" tabindex="-1"></a>xbin <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(xbin)</span>
+<span id="cb18-11"><a href="flowchart.html#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="flowchart.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb18-13"><a href="flowchart.html#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Quantiles:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>); <span class="fu">print</span>(brks)</span></code></pre></div>
+<pre><code>## Quantiles:</code></pre>
+<pre><code>##    0%   25%   50%   75%  100% 
+## 0.100 0.215 0.230 0.515 0.530</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="flowchart.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="flowchart.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Raw expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>);<span class="fu">print</span>(<span class="fu">as.numeric</span>(x))</span></code></pre></div>
+<pre><code>## Raw expression:</code></pre>
+<pre><code>## [1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="flowchart.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="flowchart.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Binned expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>); <span class="fu">print</span>(xbin)</span></code></pre></div>
+<pre><code>## Binned expression:</code></pre>
+<pre><code>## [1] 3 4 4 1 2 2 1</code></pre>
+<p>For example, <code>0.10</code> is the minimun of the raw expression vector, so its binned expression is <code>1</code>. Similarly, the binned expression of maximum <code>0.53</code> is <code>4</code>.</p>
+<p>We calculated binned expression via function <code>breakBin</code> in <code>GSClassifier</code>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="flowchart.html#cb29-1" aria-hidden="true" tabindex="-1"></a>expr_binned <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr, <span class="dv">2</span>, </span>
+<span id="cb29-2"><a href="flowchart.html#cb29-2" aria-hidden="true" tabindex="-1"></a>                 GSClassifier<span class="sc">:::</span>breakBin,</span>
+<span id="cb29-3"><a href="flowchart.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                 breakVec)</span>
+<span id="cb29-4"><a href="flowchart.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expr_binned) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(expr)</span>
+<span id="cb29-5"><a href="flowchart.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr_binned)</span></code></pre></div>
+<pre><code>##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+## Gene1       3       3       4       1       2       2
+## Gene2       4       4       3       2       2       2
+## Gene3       4       4       4       2       1       1
+## Gene4       1       2       2       3       3       4
+## Gene5       2       2       2       4       4       3
+## Gene6       2       1       1       4       4       4
+## Gene7       1       1       1       1       1       1</code></pre>
+</div>
+<div id="genes-with-large-rank-differences" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Genes with large rank differences</h3>
+<p>In this simulated dataset, <code>Gene7</code> is a gene whose expression is always the lowest across all samples. In other words, the rank of <code>Gene7</code> is stable or invariable across samples so that it’s not robust for identification of differentail subtypes.</p>
+<p>Except binned expression, we also calculated gene-pair scores later. Due to the number of gene-pair is <span class="math inline">\(C_{2 \atop n}\)</span>, the removement of genes like <code>Gene7</code> before modeling could really reduce the complexibility of the model and save computing resources. In all, genes like <code>Gene7</code> could be dropped out in the following analysis.</p>
+<p>First, We use <code>base::rank</code>to return the sample ranks of the values in a vector:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="flowchart.html#cb31-1" aria-hidden="true" tabindex="-1"></a>expr_binned_rank <span class="ot">&lt;-</span> <span class="fu">apply</span>(</span>
+<span id="cb31-2"><a href="flowchart.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  expr_binned, </span>
+<span id="cb31-3"><a href="flowchart.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>, </span>
+<span id="cb31-4"><a href="flowchart.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x)<span class="fu">rank</span>(x, <span class="at">na.last =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-5"><a href="flowchart.html#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-6"><a href="flowchart.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr_binned_rank)</span></code></pre></div>
+<pre><code>##       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+## Gene1     5.0     5.0     6.5     1.5     3.5     3.5
+## Gene2     6.5     6.5     5.0     3.5     3.5     3.5
+## Gene3     6.5     6.5     6.5     3.5     1.5     1.5
+## Gene4     1.5     3.5     3.5     5.0     5.0     6.5
+## Gene5     3.5     3.5     3.5     6.5     6.5     5.0
+## Gene6     3.5     1.5     1.5     6.5     6.5     6.5
+## Gene7     1.5     1.5     1.5     1.5     1.5     1.5</code></pre>
+<p><code>na.last = TRUE</code> means that missing values in the data are put last.</p>
+<p>Then, get rank differences of each gene based on specified subtype distribution (<code>Ybin</code>):</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="flowchart.html#cb33-1" aria-hidden="true" tabindex="-1"></a>testRes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(expr_binned_rank), <span class="cf">function</span>(gi) <span class="fu">testFun</span>(<span class="fu">as.numeric</span>(expr_binned_rank[gi,]), Ybin)); <span class="fu">names</span>(testRes) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(expr_binned_rank)</span>
+<span id="cb33-2"><a href="flowchart.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(testRes)</span></code></pre></div>
+<pre><code>##     Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
+## -2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000</code></pre>
+<p><code>Gene7</code> is the one with the lowest absolute value (0) of rank diffrence.</p>
+<p>In <code>GSClassifier</code>, we use <code>ptail</code> to select differential genes based on rank diffrences. <strong>Less <code>ptail</code> is, less gene kept</strong>. Here, we just set <code>ptail=0.4</code>:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="flowchart.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ptail is a numeber ranging (0,0.5].</span></span>
+<span id="cb35-2"><a href="flowchart.html#cb35-2" aria-hidden="true" tabindex="-1"></a>ptail <span class="ot">=</span> <span class="fl">0.4</span></span>
+<span id="cb35-3"><a href="flowchart.html#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="flowchart.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Index of target genes with big rank differences</span></span>
+<span id="cb35-5"><a href="flowchart.html#cb35-5" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">which</span>((testRes <span class="sc">&lt;</span> <span class="fu">quantile</span>(testRes, ptail, <span class="at">na.rm =</span> T)) <span class="sc">|</span> (testRes <span class="sc">&gt;</span> <span class="fu">quantile</span>(testRes, <span class="fl">1.0</span><span class="sc">-</span>ptail, <span class="at">na.rm =</span> T)))</span>
+<span id="cb35-6"><a href="flowchart.html#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="flowchart.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Target genes</span></span>
+<span id="cb35-8"><a href="flowchart.html#cb35-8" aria-hidden="true" tabindex="-1"></a>gene_bigRank <span class="ot">&lt;-</span> <span class="fu">names</span>(testRes)[idx]</span>
+<span id="cb35-9"><a href="flowchart.html#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="flowchart.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb35-11"><a href="flowchart.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Index of target genes: &#39;</span>,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>);<span class="fu">print</span>(idx); <span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<pre><code>## Index of target genes:</code></pre>
+<pre><code>## Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
+##     1     2     3     4     5     6</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="flowchart.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Target genes:&#39;</span>,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>);<span class="fu">print</span>(gene_bigRank); <span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<pre><code>## Target genes:</code></pre>
+<pre><code>## [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot; &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</code></pre>
+<p>Hence, <code>Gene7</code> was filtered and excluded in the following analysis. In practice, both <code>ptail</code> and <code>breakVec</code> are hyperparameters in modeling.</p>
+</div>
+<div id="pair-scores-of-top-genes" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Pair scores of top genes</h3>
+<p>In GSClassifier, we use function <code>makeGenePairs</code> to calculate s</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="flowchart.html#cb41-1" aria-hidden="true" tabindex="-1"></a>gene_bigRank_pairs <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">makeGenePairs</span>(gene_bigRank, expr[gene_bigRank,])</span>
+<span id="cb41-2"><a href="flowchart.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gene_bigRank_pairs)</span></code></pre></div>
+<pre><code>##             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+## Gene1:Gene2       0       0       1       0       0       1
+## Gene1:Gene3       0       0       0       0       1       1
+## Gene1:Gene4       1       1       1       0       0       0
+## Gene1:Gene5       1       1       1       0       0       0
+## Gene1:Gene6       1       1       1       0       0       0
+## Gene2:Gene3       0       0       0       0       1       1
+## Gene2:Gene4       1       1       1       0       0       0
+## Gene2:Gene5       1       1       1       0       0       0
+## Gene2:Gene6       1       1       1       0       0       0
+## Gene3:Gene4       1       1       1       0       0       0
+## Gene3:Gene5       1       1       1       0       0       0
+## Gene3:Gene6       1       1       1       0       0       0
+## Gene4:Gene5       0       0       1       0       0       1
+## Gene4:Gene6       0       1       1       0       0       0
+## Gene5:Gene6       0       1       1       0       0       0</code></pre>
+<p>Take <code>Gene1:Gene4</code> of <code>Sample1</code> as an example. <span class="math inline">\(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 &gt; 0\)</span>, so the pair score is 1; if the difference is ≤0, the pair score is 0 instead.</p>
+</div>
+<div id="gene-set-difference-score" class="section level3" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Gene set difference score</h3>
+<p>In GSClassifier, we use function <code>makeSetData</code> to calculate gene set difference score:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="flowchart.html#cb43-1" aria-hidden="true" tabindex="-1"></a>geneset_interaction <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">makeSetData</span>(expr,geneSet)</span>
+<span id="cb43-2"><a href="flowchart.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geneset_interaction)</span></code></pre></div>
+<pre><code>##      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+## s1s2       1       1       1       0       0       0</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

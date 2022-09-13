@@ -6,8 +6,8 @@ bookdown::gitbook:
         <li><a href="./">GSClassifier</a></li>
       after: |
         <li><a href="https://blognas.hwb0307.com/" target="blank">My blog</a></li>
-    download: ["pdf"]
-# , "epub"
+    download: ["pdf", "epub"]
+
 
 bookdown::pdf_book:
   includes:
@@ -15,5 +15,6 @@ bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
+
 
 # bookdown::epub_book: default

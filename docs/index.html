@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>The Principle of R Package GSClassifier</title>
-  <meta name="description" content="The Principle of R Package GSClassifier" />
+  <meta name="description" content="The Principle of GSClassifier" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="The Principle of R Package GSClassifier" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="The Principle of R Package GSClassifier" />
+  <meta property="og:description" content="The Principle of GSClassifier" />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="The Principle of R Package GSClassifier" />
   
-  <meta name="twitter:description" content="The Principle of R Package GSClassifier" />
+  <meta name="twitter:description" content="The Principle of GSClassifier" />
   
 
 <meta name="author" content="Weibin Huang" />
@@ -32,7 +32,7 @@
   
   
 
-<link rel="next" href="intro.html"/>
+<link rel="next" href="pre2.html"/>
 <script src="libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -135,7 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#prerequisites" id="toc-prerequisites"><span class="toc-section-number">1</span> Prerequisites</a></li>
-<li><a href="intro.html#intro" id="toc-intro"><span class="toc-section-number">2</span> Introduction</a></li>
+<li><a href="pre2.html#pre2" id="toc-pre2"><span class="toc-section-number">2</span> Prerequisites2</a></li>
+<li><a href="intro.html#intro" id="toc-intro"><span class="toc-section-number">3</span> Introduction</a></li>
+<li><a href="flowchart.html#flowchart" id="toc-flowchart"><span class="toc-section-number">4</span> Flowchart</a>
+<ul>
+<li><a href="flowchart.html#data-processing" id="toc-data-processing"><span class="toc-section-number">4.1</span> Data Processing</a></li>
+<li><a href="flowchart.html#top-scoring-pairs-tsp-matrix" id="toc-top-scoring-pairs-tsp-matrix"><span class="toc-section-number">4.2</span> Top scoring pairs (TSP) matrix</a>
+<ul>
+<li><a href="flowchart.html#dataset" id="toc-dataset"><span class="toc-section-number">4.2.1</span> Dataset</a></li>
+<li><a href="flowchart.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">4.2.2</span> Binned expression</a></li>
+<li><a href="flowchart.html#genes-with-large-rank-differences" id="toc-genes-with-large-rank-differences"><span class="toc-section-number">4.2.3</span> Genes with large rank differences</a></li>
+<li><a href="flowchart.html#pair-scores-of-top-genes" id="toc-pair-scores-of-top-genes"><span class="toc-section-number">4.2.4</span> Pair scores of top genes</a></li>
+<li><a href="flowchart.html#gene-set-difference-score" id="toc-gene-set-difference-score"><span class="toc-section-number">4.2.5</span> Gene set difference score</a></li>
+</ul></li>
+</ul></li>
 <li><a href="references.html#references" id="toc-references">References</a></li>
 <li class="divider"></li>
 <li><a href="https://blognas.hwb0307.com/" target="blank">My blog</a></li>
@@ -163,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="date"><em>2022-09-13</em></p>
 </div>
 <div id="prerequisites" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Prerequisites</h1>
+<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
 <p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
 <p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
@@ -171,7 +184,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
 <p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
-
 </div>
             </section>
 
@@ -179,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pre2.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -221,7 +233,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["GSClassifier.principle.pdf"],
+"download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
 "toc": {
 "collapse": "subsection"
 }

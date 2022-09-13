@@ -1,0 +1,16 @@
+book_filename: "GSClassifier.principle"
+delete_merged_file: true
+# language:
+#   ui:
+#     chapter_name: "Chapter "
+new_session: yes
+
+rmd_files:
+  [
+    "index.Rmd",
+
+    "Introduction.Rmd",
+
+    "References.Rmd",
+  ]
+

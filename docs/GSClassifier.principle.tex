@@ -210,7 +210,16 @@ With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a spec
 \end{Highlighting}
 \end{Shaded}
 
-The TSP matrix consists of 3 parts: \textbf{binned expression matrix}, \textbf{top scoring of gene pairs}, and \textbf{gene set pairs}.
+As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{binned expression matrix}, \textbf{top scoring of gene pairs}, and \textbf{gene set pairs}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP}\label{fig:tsp}
+\end{figure}
 
 \hypertarget{simulated-dataset}{%
 \subsection{Simulated Dataset}\label{simulated-dataset}}
@@ -324,11 +333,12 @@ Take data of \textbf{Sample1} as an example:
                  \AttributeTok{breaks =}\NormalTok{ brks, }
                  \AttributeTok{include.lowest =}\NormalTok{ T)}
 \NormalTok{xbin }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(xbin)}
+\FunctionTok{names}\NormalTok{(xbin) }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(x)}
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Quantiles:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{); }\FunctionTok{print}\NormalTok{(brks)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Raw expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(x))}
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Raw expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(x)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Binned expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{); }\FunctionTok{print}\NormalTok{(xbin)}
 \CommentTok{\# Quantiles: }
@@ -336,10 +346,12 @@ Take data of \textbf{Sample1} as an example:
 \CommentTok{\# 0.100 0.215 0.230 0.515 0.530 }
 \CommentTok{\# }
 \CommentTok{\# Raw expression: }
-\CommentTok{\# [1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10}
+\CommentTok{\# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 }
+\CommentTok{\#  0.51  0.52  0.53  0.21  0.22  0.23  0.10 }
 \CommentTok{\# }
 \CommentTok{\# Binned expression: }
-\CommentTok{\# [1] 3 4 4 1 2 2 1}
+\CommentTok{\# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 }
+\CommentTok{\#     3     4     4     1     2     2     1}
 \end{Highlighting}
 \end{Shaded}
 

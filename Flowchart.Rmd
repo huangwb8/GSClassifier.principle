@@ -46,12 +46,16 @@ trainDataProc(
 )
 ```
 
-The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring of gene pairs**, and **gene set pairs**.
+As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**.
 
+```{r echo=FALSE, tsp, fig.cap='The components of TSP', out.width='90%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics(rep("./fig/TSP.png", 1))
+```
+Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
 
 ### Simulated Dataset
 
-Here, we would use some simulated data to introduce how TSP matrix calculated. First, load packages:
+First, load needed packages:
 
 ```{r}
 
@@ -67,13 +71,15 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
 
-# Install CRAN packages
+# Install the "pacman" package
 if (!requireNamespace("pacman", quietly = TRUE)){
   install.packages("pacman")
   library(pacman)
 } else {
   library(pacman)
 }
+
+# Load needed packages
 packages_needed <- c("readxl","ComplexHeatmap","GSClassifier")
 for(i in packages_needed){p_load(char=i)}
 
@@ -134,11 +140,12 @@ xbin <- .bincode(x = x,
                  breaks = brks, 
                  include.lowest = T)
 xbin <- as.numeric(xbin)
+names(xbin) <- names(x)
 
 # Report
 cat('Quantiles:', '\n'); print(brks)
 cat('\n')
-cat('Raw expression:', '\n');print(as.numeric(x))
+cat('Raw expression:', '\n');print(x)
 cat('\n')
 cat('Binned expression:', '\n'); print(xbin)
 ```

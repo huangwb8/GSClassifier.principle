@@ -50,7 +50,16 @@ trainDataProc(
 )
 ```
 
-The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring of gene pairs**, and **gene set pairs**.
+As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring of gene pairs**, and **gene set pairs**.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP}(\#fig:tsp)
+\end{figure}
 
 
 ### Simulated Dataset
@@ -160,11 +169,12 @@ xbin <- .bincode(x = x,
                  breaks = brks, 
                  include.lowest = T)
 xbin <- as.numeric(xbin)
+names(xbin) <- names(x)
 
 # Report
 cat('Quantiles:', '\n'); print(brks)
 cat('\n')
-cat('Raw expression:', '\n');print(as.numeric(x))
+cat('Raw expression:', '\n');print(x)
 cat('\n')
 cat('Binned expression:', '\n'); print(xbin)
 # Quantiles: 
@@ -172,10 +182,12 @@ cat('Binned expression:', '\n'); print(xbin)
 # 0.100 0.215 0.230 0.515 0.530 
 # 
 # Raw expression: 
-# [1] 0.51 0.52 0.53 0.21 0.22 0.23 0.10
+# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 
+#  0.51  0.52  0.53  0.21  0.22  0.23  0.10 
 # 
 # Binned expression: 
-# [1] 3 4 4 1 2 2 1
+# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 
+#     3     4     4     1     2     2     1
 ```
 
 For example, **0.10** is the minimun of the raw expression vector, so its binned expression is **1**. Similarly, the binned expression of maximum **0.53** is **4**.  

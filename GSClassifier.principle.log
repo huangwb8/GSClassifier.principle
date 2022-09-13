@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  14 SEP 2022 06:30
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  14 SEP 2022 07:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1174,40 +1174,60 @@ Chapter 1.
 File: ./fig/flowchart.png Graphic file (type bmp)
 <./fig/flowchart.png>
 [5] [6]
+File: ./fig/TSP.png Graphic file (type bmp)
+<./fig/TSP.png>
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 224.
-[7] [8]
-Underfull \vbox (badness 1320) has occurred while \output is active []
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 233.
+[7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[8]
+Underfull \vbox (badness 10000) detected at line 300
+ []
+
+
+Overfull \vbox (2.44798pt too high) detected at line 300
+ []
 
 [9]
 File: Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf>
-[10]
-Underfull \vbox (badness 2253) has occurred while \output is active []
 
-[11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10]
+Underfull \vbox (badness 10000) detected at line 356
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[11] [12]
 
 Package amsmath Warning: Foreign command \atop;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 371.
+(amsmath)                 on input line 383.
 
-[12] [13] [14]
-No file GSClassifier.principle.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 495.
+[13] [14]
+Underfull \vbox (badness 3713) has occurred while \output is active []
+
 [15]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 495.
+No file GSClassifier.principle.bbl.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 507.
+[16]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 507.
 (./GSClassifier.principle.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 495.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 495.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 507.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 507.
  ) 
 Here is how much of TeX's memory you used:
- 28988 strings out of 492922
- 525752 string characters out of 6130480
- 763298 words of memory out of 5000000
- 32729 multiletter control sequences out of 15000+600000
+ 28993 strings out of 492922
+ 525820 string characters out of 6130480
+ 762345 words of memory out of 5000000
+ 32733 multiletter control sequences out of 15000+600000
  539716 words of font info for 83 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,6n,115p,821b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on GSClassifier.principle.pdf (15 pages).
+Output written on GSClassifier.principle.pdf (16 pages).

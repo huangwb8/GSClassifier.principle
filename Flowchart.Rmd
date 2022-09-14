@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE, results = '
 
 ## Flowchart
 
-The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
+The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 补充一些内容，说明一下图的框架。
 
 ```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics(rep("./fig/flowchart.png", 1))
@@ -26,34 +26,7 @@ For each dataset, the RNA expression matrix would be normalized (we called **Raw
 
 Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to **Subtype Vector** in the flowchart, via hierarchical clustering analysis.
 
-## Top scoring pairs (TSP) matrix
-
-With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
-
-```{r eval=FALSE}
-trainDataProc(
-  Xmat, Yvec,
-  
-  geneSet, 
-
-  subtype = 1, 
-  
-  # 0.2 was Used in PAD project
-  ptail = 0.2,
-  
-  # c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project
-  breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
-)
-```
-
-As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**.
-
-```{r echo=FALSE, tsp, fig.cap='The components of TSP (2 gene sets)', out.width='85%', fig.align='center'}
-knitr::include_graphics(rep("./fig/TSP.png", 1))
-```
-Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
-
-### Simulated Dataset
+## Simulated Dataset
 
 First, load needed packages:
 
@@ -132,7 +105,7 @@ This is an intersting dataset with features as following:
 
 + **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 
-### Missing values
+## Missing values
 
 Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
 
@@ -156,11 +129,38 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
 
+## Top scoring pairs (TSP)
+
+With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
+
+```{r eval=FALSE}
+trainDataProc(
+  Xmat, Yvec,
+  
+  geneSet, 
+
+  subtype = 1, 
+  
+  # 0.2 was Used in PAD project
+  ptail = 0.2,
+  
+  # c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project
+  breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
+)
+```
+
+As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
+
+```{r echo=FALSE, tsp, fig.cap='The components of TSP (2 gene sets)', out.width='85%', fig.align='center'}
+knitr::include_graphics(rep("./fig/TSP.png", 1))
+```
+
+
 ### Binned expression
 
 First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
 
-Take data of **Sample4** as an example:
+Take **Sample4** as an example:
 
 ```{r}
 

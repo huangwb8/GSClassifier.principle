@@ -29,40 +29,7 @@ For each dataset, the RNA expression matrix would be normalized (we called **Raw
 
 Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to **Subtype Vector** in the flowchart, via hierarchical clustering analysis.
 
-## Top scoring pairs (TSP) matrix
-
-With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
-
-
-```r
-trainDataProc(
-  Xmat, Yvec,
-  
-  geneSet, 
-
-  subtype = 1, 
-  
-  # 0.2 was Used in PAD project
-  ptail = 0.2,
-  
-  # c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project
-  breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
-)
-```
-
-As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
-
-}
-
-\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
-\end{figure}
-Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
-
-### Simulated Dataset
+## Simulated Dataset
 
 First, load needed packages:
 
@@ -152,7 +119,7 @@ Heatmap(t(scale(t(expr0))), name = "Z-score")
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
 
 This is an intersting dataset with features as following:
@@ -163,7 +130,7 @@ This is an intersting dataset with features as following:
 
 + **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 
-### Missing values
+## Missing values
 
 Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
 
@@ -208,9 +175,43 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
+
+## Top scoring pairs (TSP) matrix
+
+With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
+
+
+```r
+trainDataProc(
+  Xmat, Yvec,
+  
+  geneSet, 
+
+  subtype = 1, 
+  
+  # 0.2 was Used in PAD project
+  ptail = 0.2,
+  
+  # c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project
+  breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
+)
+```
+
+As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
+\end{figure}
+Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
+
 
 ### Binned expression
 
@@ -319,7 +320,7 @@ print(testRes)
 # -2.666667 -2.500000 -4.333333  3.166667  2.500000  3.833333  0.000000
 ```
 
-**Gene7** is the one with the lowest absolute value (0) of rank diffrence.
+**Gene7** is the one with the lowest absolute value (0) of rank diffrence. By the way, **Gene 1-3** have the same direction (<0), so do **Gene 4-6**, which indicates the basis of gene clustering.
 
 In **GSClassifier**, we use **ptail** to select differential genes based on rank diffrences. **Less ptail is, less gene kept**. Here, we just set **ptail=0.4**:
 
@@ -363,23 +364,11 @@ expr_sub <- expr_feat$Xsub
 gene_bigRank <- expr_feat$Genes
 
 # Report
-cat('Raw xpression:', '\n')
-print(expr[gene_bigRank,])
-cat('\n')
 cat('Raw xpression without NA:', '\n')
 print(expr_sub)
 cat('\n')
 cat('Genes with large rank diff:', '\n')
 print(gene_bigRank)
-# Raw xpression: 
-#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
-# Gene1    0.51    0.52    0.60   0.210   0.300    0.40
-# Gene2    0.52    0.54    0.58   0.220   0.310    0.35
-# Gene3    0.53    0.60    0.61   0.466   0.290    0.30
-# Gene4    0.21    0.30    0.40   0.510   0.520    0.60
-# Gene5    0.22    0.31    0.35   0.520   0.540    0.58
-# Gene6    0.23    0.29    0.30   0.530   0.392    0.61
-# 
 # Raw xpression without NA: 
 #       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
 # Gene1    0.51    0.52    0.60   0.210   0.300    0.40
@@ -419,7 +408,7 @@ print(gene_bigRank_pairs)
 # Gene5:Gene6       0       1       1       0       1       0
 ```
 
-Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0.
+Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between **Sample 1-3** and **Sample 4-6** is obivous, revealing the robustness of gene pair scoring for subtype identification.
 
 ### Set difference
 

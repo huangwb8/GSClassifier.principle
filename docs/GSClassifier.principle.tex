@@ -186,44 +186,8 @@ For each dataset, the RNA expression matrix would be normalized (we called \text
 
 Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to \textbf{Subtype Vector} in the flowchart, via hierarchical clustering analysis.
 
-\hypertarget{top-scoring-pairs-tsp-matrix}{%
-\section{Top scoring pairs (TSP) matrix}\label{top-scoring-pairs-tsp-matrix}}
-
-With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{trainDataProc}\NormalTok{(}
-\NormalTok{  Xmat, Yvec,}
-  
-\NormalTok{  geneSet, }
-
-  \AttributeTok{subtype =} \DecValTok{1}\NormalTok{, }
-  
-  \CommentTok{\# 0.2 was Used in PAD project}
-  \AttributeTok{ptail =} \FloatTok{0.2}\NormalTok{,}
-  
-  \CommentTok{\# c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project}
-  \AttributeTok{breakVec =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
-
-}
-
-\caption{The components of TSP (2 gene sets)}\label{fig:tsp}
-\end{figure}
-
-Next, we would use a simulated dataset to introduce \textbf{how TSP matrix calculated in GSClassifier}.
-
 \hypertarget{simulated-dataset}{%
-\subsection{Simulated Dataset}\label{simulated-dataset}}
+\section{Simulated Dataset}\label{simulated-dataset}}
 
 First, load needed packages:
 
@@ -314,7 +278,7 @@ Look at the matrix via heatmap:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
 This is an intersting dataset with features as following:
 
@@ -328,7 +292,7 @@ This is an intersting dataset with features as following:
 \end{itemize}
 
 \hypertarget{missing-values}{%
-\subsection{Missing values}\label{missing-values}}
+\section{Missing values}\label{missing-values}}
 
 Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
 
@@ -373,9 +337,45 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80\% of datasets were retained so as to minumize the impact from mising value.
+
+\hypertarget{top-scoring-pairs-tsp-matrix}{%
+\section{Top scoring pairs (TSP) matrix}\label{top-scoring-pairs-tsp-matrix}}
+
+With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{trainDataProc}\NormalTok{(}
+\NormalTok{  Xmat, Yvec,}
+  
+\NormalTok{  geneSet, }
+
+  \AttributeTok{subtype =} \DecValTok{1}\NormalTok{, }
+  
+  \CommentTok{\# 0.2 was Used in PAD project}
+  \AttributeTok{ptail =} \FloatTok{0.2}\NormalTok{,}
+  
+  \CommentTok{\# c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project}
+  \AttributeTok{breakVec =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP (2 gene sets)}\label{fig:tsp}
+\end{figure}
+
+Next, we would use a simulated dataset to introduce \textbf{how TSP matrix calculated in GSClassifier}.
 
 \hypertarget{binned-expression}{%
 \subsection{Binned expression}\label{binned-expression}}
@@ -489,7 +489,7 @@ Then, get rank differences of each gene based on specified subtype distribution 
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence.
+\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence. By the way, \textbf{Gene 1-3} have the same direction (\textless0), so do \textbf{Gene 4-6}, which indicates the basis of gene clustering.
 
 In \textbf{GSClassifier}, we use \textbf{ptail} to select differential genes based on rank diffrences. \textbf{Less ptail is, less gene kept}. Here, we just set \textbf{ptail=0.4}:
 
@@ -535,23 +535,11 @@ In GSClassifier, we use a ensemble function \textbf{featureSelection} to select 
 \NormalTok{gene\_bigRank }\OtherTok{\textless{}{-}}\NormalTok{ expr\_feat}\SpecialCharTok{$}\NormalTok{Genes}
 
 \CommentTok{\# Report}
-\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Raw xpression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\FunctionTok{print}\NormalTok{(expr[gene\_bigRank,])}
-\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Raw xpression without NA:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{print}\NormalTok{(expr\_sub)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Genes with large rank diff:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{print}\NormalTok{(gene\_bigRank)}
-\CommentTok{\# Raw xpression: }
-\CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
-\CommentTok{\# Gene1    0.51    0.52    0.60   0.210   0.300    0.40}
-\CommentTok{\# Gene2    0.52    0.54    0.58   0.220   0.310    0.35}
-\CommentTok{\# Gene3    0.53    0.60    0.61   0.466   0.290    0.30}
-\CommentTok{\# Gene4    0.21    0.30    0.40   0.510   0.520    0.60}
-\CommentTok{\# Gene5    0.22    0.31    0.35   0.520   0.540    0.58}
-\CommentTok{\# Gene6    0.23    0.29    0.30   0.530   0.392    0.61}
-\CommentTok{\# }
 \CommentTok{\# Raw xpression without NA: }
 \CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
 \CommentTok{\# Gene1    0.51    0.52    0.60   0.210   0.300    0.40}
@@ -593,7 +581,7 @@ In GSClassifier, we use function \textbf{makeGenePairs} to calculate s
 \end{Highlighting}
 \end{Shaded}
 
-Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0.
+Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between \textbf{Sample 1-3} and \textbf{Sample 4-6} is obivous, revealing the robustness of gene pair scoring for subtype identification.
 
 \hypertarget{set-difference}{%
 \subsection{Set difference}\label{set-difference}}

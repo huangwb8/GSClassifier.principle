@@ -3,6 +3,14 @@
 
 
 
+
+# The Principle of GSClassifier
+
+
+## Introduction
+
+[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
+
 ## Flowchart
 
 The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 

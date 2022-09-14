@@ -18,9 +18,29 @@ linkcolor: "blue"
 description: "The Principle of GSClassifier"
 ---
 
-# The Principle of GSClassifier
 
+`r if (knitr::is_latex_output()) '<!--'` 
 
-## Introduction
+# Welcome {-}
 
-[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
+**The Priciple of GSClassifier** is a book for **GSClassifier** users who want to know the most details.
+
+If you're looking for the PDF edition, you can find it at <a rel="pdf" href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.
+
+## License {-}
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+
+This work, as a whole, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+The code contained in this book is simultaneously available under the [MIT license](https://opensource.org/licenses/MIT); this means that you are free to use it in your own packages, as long as you cite the source.
+
+## Other Projects {-}
+
+You may also be interested in:
+
+* __"[GSClassifier](https://github.com/huangwb8/GSClassifier)"__ A comprehensive classification tool based on pure transcriptomics for precision medicine.
+
+* __"[luckyModel](https://github.com/huangwb8/luckyModel)"__ Model ensemble for third-party lucky series, such GSClassifier.
+
+`r if (knitr::is_latex_output()) '-->'`

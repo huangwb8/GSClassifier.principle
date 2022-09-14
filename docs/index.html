@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>The Principle of R Package GSClassifier</title>
+  <meta name="description" content="The Principle of GSClassifier" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="The Principle of R Package GSClassifier" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The Principle of GSClassifier" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="The Principle of R Package GSClassifier" />
+  
+  <meta name="twitter:description" content="The Principle of GSClassifier" />
+  
+
+<meta name="author" content="Weibin Huang" />
+
+
+<meta name="date" content="2022-09-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">GSClassifier</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#the-principle-of-gsclassifier" id="toc-the-principle-of-gsclassifier"><span class="toc-section-number">1</span> The Principle of GSClassifier</a>
+<ul>
+<li><a href="index.html#introduction" id="toc-introduction"><span class="toc-section-number">1.1</span> Introduction</a></li>
+<li><a href="index.html#flowchart" id="toc-flowchart"><span class="toc-section-number">1.2</span> Flowchart</a>
+<ul>
+<li><a href="index.html#data-processing" id="toc-data-processing"><span class="toc-section-number">1.2.1</span> Data Processing</a></li>
+<li><a href="index.html#model-establishment-and-validation" id="toc-model-establishment-and-validation"><span class="toc-section-number">1.2.2</span> Model Establishment and Validation</a></li>
+<li><a href="index.html#model-application" id="toc-model-application"><span class="toc-section-number">1.2.3</span> Model Application</a></li>
+</ul></li>
+<li><a href="index.html#data-processing-1" id="toc-data-processing-1"><span class="toc-section-number">1.3</span> Data Processing</a></li>
+<li><a href="index.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.4</span> Simulated Dataset</a></li>
+<li><a href="index.html#missing-values" id="toc-missing-values"><span class="toc-section-number">1.5</span> Missing values</a></li>
+<li><a href="index.html#top-scoring-pairs-tsp" id="toc-top-scoring-pairs-tsp"><span class="toc-section-number">1.6</span> Top scoring pairs (TSP)</a>
+<ul>
+<li><a href="index.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.6.1</span> Binned expression</a></li>
+<li><a href="index.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.6.2</span> Pair difference</a></li>
+<li><a href="index.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.6.3</span> Set difference</a></li>
+</ul></li>
+<li><a href="index.html#discussion" id="toc-discussion"><span class="toc-section-number">1.7</span> Discussion</a>
+<ul>
+<li><a href="index.html#model-complexibility" id="toc-model-complexibility"><span class="toc-section-number">1.7.1</span> Model complexibility</a></li>
+<li><a href="index.html#missing-value" id="toc-missing-value"><span class="toc-section-number">1.7.2</span> Missing value</a></li>
+<li><a href="index.html#subtypevector" id="toc-subtypevector"><span class="toc-section-number">1.7.3</span> Subtype vector calling</a></li>
+</ul></li>
+</ul></li>
+<li><a href="references.html#references" id="toc-references">References</a></li>
+<li class="divider"></li>
+<li><a href="https://blognas.hwb0307.com/" target="blank">Welcome to My Blog!</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Principle of R Package GSClassifier</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">The Principle of R Package GSClassifier</h1>
+<p class="author"><em>Weibin Huang</em></p>
+<p class="date"><em>2022-09-14</em></p>
+</div>
+<div id="the-principle-of-gsclassifier" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> The Principle of GSClassifier</h1>
+<div id="introduction" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introduction</h2>
+<p><a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a> is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in <a href="https://github.com/huangwb8/GSClassifier/wiki">Github WiKi</a>. Here, we propose to introduce the principle of GSClassifier, including flowchart, <strong>top scoring pairs (TSP)</strong> algorithm, and batch effect control.</p>
+
+</div>
+<div id="flowchart" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Flowchart</h2>
+<p>The flowchart of <strong>GSClassifier</strong> is showed in Figure <a href="index.html#fig:flowchart">1.1</a>.</p>
+<div id="data-processing" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Data Processing</h3>
+<p>A <strong>subtype vector</strong> should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the <strong>subtype vector</strong> data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (<strong>PIAM<sup>high</sup>PIDG<sup>high</sup></strong>, <strong>PIAM<sup>high</sup>PIDG<sup>low</sup></strong>, <strong>PIAM<sup>low</sup>PIDG<sup>high</sup></strong>, and <strong>PIAM<sup>low</sup>PIDG<sup>low</sup></strong>). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.</p>
+<p>As described in Figure <a href="index.html#fig:flowchart">1.1</a>, we identified <strong>subtype vector</strong> based on independent cohorts instead of a merged matrix with batch-effect control technologies. It’s due to several conflicts with top scoring pairs (TSP) algorithm, the core data for model training and application in <strong>GSClassifier</strong>. More details are discussed in <a href="index.html#subtypevector">1.7.3</a>.</p>
+</div>
+<div id="model-establishment-and-validation" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Model Establishment and Validation</h3>
+<p>How to training</p>
+</div>
+<div id="model-application" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Model Application</h3>
+<p>How to use</p>
+<div class="figure" style="text-align: center"><span id="fig:flowchart"></span>
+<img src="fig/flowchart.png" alt="The flow chart of GSClassifier" width="90%" />
+<p class="caption">
+Figure 1.1: The flow chart of GSClassifier
+</p>
+</div>
+</div>
+</div>
+<div id="data-processing-1" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Data Processing</h2>
+<p>For each dataset, the RNA expression matrix would be normalized (we called <strong>Raw Matrix</strong> in the flowchart) internally so that the expression data of the samples in the dataset were comparable.</p>
+<p>Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to <strong>Subtype Vector</strong> in the flowchart, via hierarchical clustering analysis.</p>
+</div>
+<div id="simulated-dataset" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Simulated Dataset</h2>
+<p>First, load needed packages:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Install &quot;devtools&quot; package</span></span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install dependencies</span></span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;luckyBase&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/luckyBase&quot;</span>)</span>
+<span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="index.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the &quot;GSClassifier&quot; package</span></span>
+<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;GSClassifier&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-12"><a href="index.html#cb1-12" aria-hidden="true" tabindex="-1"></a>  devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/GSClassifier&quot;</span>)</span>
+<span id="cb1-13"><a href="index.html#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="index.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the &quot;pacman&quot; package</span></span>
+<span id="cb1-15"><a href="index.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;pacman&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){</span>
+<span id="cb1-16"><a href="index.html#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb1-17"><a href="index.html#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pacman)</span>
+<span id="cb1-18"><a href="index.html#cb1-18" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-19"><a href="index.html#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pacman)</span>
+<span id="cb1-20"><a href="index.html#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="index.html#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="index.html#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Load needed packages</span></span>
+<span id="cb1-23"><a href="index.html#cb1-23" aria-hidden="true" tabindex="-1"></a>packages_needed <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-24"><a href="index.html#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;readxl&quot;</span>,</span>
+<span id="cb1-25"><a href="index.html#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ComplexHeatmap&quot;</span>,</span>
+<span id="cb1-26"><a href="index.html#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;GSClassifier&quot;</span>,</span>
+<span id="cb1-27"><a href="index.html#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;rpart&quot;</span>,</span>
+<span id="cb1-28"><a href="index.html#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tidyr&quot;</span>)</span>
+<span id="cb1-29"><a href="index.html#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> packages_needed){<span class="fu">p_load</span>(<span class="at">char=</span>i)}</span></code></pre></div>
+<p>We simulated a dataset:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geneset</span></span>
+<span id="cb2-2"><a href="index.html#cb2-2" aria-hidden="true" tabindex="-1"></a>geneSet <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb2-3"><a href="index.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set1 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>),</span>
+<span id="cb2-4"><a href="index.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set2 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb2-5"><a href="index.html#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="index.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="index.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression</span></span>
+<span id="cb2-8"><a href="index.html#cb2-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&#39;./data/simulated-data.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;RNA&#39;</span>)</span>
+<span id="cb2-9"><a href="index.html#cb2-9" aria-hidden="true" tabindex="-1"></a>expr0 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb2-10"><a href="index.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expr0) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">as.matrix</span>(x[,<span class="dv">1</span>])); <span class="fu">rm</span>(x)</span>
+<span id="cb2-11"><a href="index.html#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="index.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtype information</span></span>
+<span id="cb2-13"><a href="index.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># It depends on the application scenarios of GEPs</span></span>
+<span id="cb2-14"><a href="index.html#cb2-14" aria-hidden="true" tabindex="-1"></a>subtype_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-15"><a href="index.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Binned data for subtype 1</span></span>
+<span id="cb2-16"><a href="index.html#cb2-16" aria-hidden="true" tabindex="-1"></a>Ybin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(subtype_vector <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb2-17"><a href="index.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="index.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb2-19"><a href="index.html#cb2-19" aria-hidden="true" tabindex="-1"></a>breakVec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb2-20"><a href="index.html#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="index.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb2-22"><a href="index.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">c</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>, <span class="st">&#39;Gene sets:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))</span>
+<span id="cb2-23"><a href="index.html#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geneSet)</span>
+<span id="cb2-24"><a href="index.html#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb2-25"><a href="index.html#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
+<span id="cb2-26"><a href="index.html#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb2-27"><a href="index.html#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#  Gene sets: </span></span>
+<span id="cb2-28"><a href="index.html#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># $Set1</span></span>
+<span id="cb2-29"><a href="index.html#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot;</span></span>
+<span id="cb2-30"><a href="index.html#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb2-31"><a href="index.html#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># $Set2</span></span>
+<span id="cb2-32"><a href="index.html#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span>
+<span id="cb2-33"><a href="index.html#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb2-34"><a href="index.html#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
+<span id="cb2-35"><a href="index.html#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb2-36"><a href="index.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
+<span id="cb2-37"><a href="index.html#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
+<span id="cb2-38"><a href="index.html#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
+<span id="cb2-39"><a href="index.html#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
+<span id="cb2-40"><a href="index.html#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
+<span id="cb2-41"><a href="index.html#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
+<span id="cb2-42"><a href="index.html#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span></code></pre></div>
+<p>Look at the matrix via heatmap:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr0))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
+<p><img src="Flowchart_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>This is an intersting dataset with features as following:</p>
+<ul>
+<li><p><strong>Distinguished gene sets</strong>: The expression profile between <strong>Gene 1-3</strong> and <strong>Gene 4-6</strong> is obviously different arross samples. Thus, these gene sets might represent different biology meaning.</p></li>
+<li><p><strong>Stable gene</strong>: The expression level and rank of <strong>Gene 7</strong> seemed to be similar across samples. Thus, <strong>Gene 7</strong> might not be a robust marker for subtype modeling. Thus, it could help us to understand how filtering of <strong>GSClassifier</strong> works.</p></li>
+<li><p><strong>Expression heterogeneity &amp; rank homogeneity</strong>: Take <strong>Sample1</strong> and <strong>Sample3</strong> as examples. The expression of <strong>Gene 1-6</strong> in <strong>Sample3</strong> seemed to be higher than those of <strong>Sample1</strong>. However, the expression of <strong>Gene 1-3</strong> is higher than <strong>Gene 4-6</strong> in both <strong>Sample1</strong> and <strong>Sample3</strong>, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.</p></li>
+</ul>
+</div>
+<div id="missing-values" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Missing values</h2>
+<p>Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RPART</span></span>
+<span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">na_fill</span>(expr0, <span class="at">method=</span><span class="st">&quot;anova&quot;</span>, <span class="at">na.action =</span> na.rpart)</span>
+<span id="cb4-3"><a href="index.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="index.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb4-5"><a href="index.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb4-6"><a href="index.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
+<span id="cb4-7"><a href="index.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression without NA value:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb4-9"><a href="index.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr)</span>
+<span id="cb4-10"><a href="index.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
+<span id="cb4-11"><a href="index.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb4-12"><a href="index.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
+<span id="cb4-13"><a href="index.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
+<span id="cb4-14"><a href="index.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
+<span id="cb4-15"><a href="index.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
+<span id="cb4-16"><a href="index.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
+<span id="cb4-17"><a href="index.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
+<span id="cb4-18"><a href="index.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span>
+<span id="cb4-19"><a href="index.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb4-20"><a href="index.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression without NA value: </span></span>
+<span id="cb4-21"><a href="index.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb4-22"><a href="index.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60   0.210   0.300    0.40</span></span>
+<span id="cb4-23"><a href="index.html#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58   0.220   0.310    0.35</span></span>
+<span id="cb4-24"><a href="index.html#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61   0.466   0.290    0.30</span></span>
+<span id="cb4-25"><a href="index.html#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40   0.510   0.520    0.60</span></span>
+<span id="cb4-26"><a href="index.html#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35   0.520   0.540    0.58</span></span>
+<span id="cb4-27"><a href="index.html#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30   0.530   0.392    0.61</span></span>
+<span id="cb4-28"><a href="index.html#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09   0.110   0.120    0.14</span></span></code></pre></div>
+<p>Look at the new matrix via heatmap, where the clustering result is not obviously disturbed by <strong>NA</strong> filling:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
+<p><img src="Flowchart_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.</p>
+</div>
+<div id="top-scoring-pairs-tsp" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Top scoring pairs (TSP)</h2>
+<p>With <strong>subtype vectors</strong> and <strong>Raw Matrix</strong>, the TSP matrix for a specified subtypes could be calculated via function <code>GSClassifier::trainDataProc</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trainDataProc</span>(</span>
+<span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  Xmat, Yvec,</span>
+<span id="cb6-3"><a href="index.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-4"><a href="index.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  geneSet, </span>
+<span id="cb6-5"><a href="index.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="index.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtype =</span> <span class="dv">1</span>, </span>
+<span id="cb6-7"><a href="index.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="index.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 0.2 was Used in PAD project</span></span>
+<span id="cb6-9"><a href="index.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ptail =</span> <span class="fl">0.2</span>,</span>
+<span id="cb6-10"><a href="index.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-11"><a href="index.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project</span></span>
+<span id="cb6-12"><a href="index.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">breakVec =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb6-13"><a href="index.html#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>As show in Figure <a href="index.html#fig:tsp">1.2</a>, The TSP matrix consists of 3 parts: <strong>binned expression</strong>, <strong>pair difference</strong>, and <strong>set difference</strong>. Next, we would use a simulated dataset to introduce <strong>how TSP matrix calculated in GSClassifier</strong>.</p>
+<div class="figure" style="text-align: center"><span id="fig:tsp"></span>
+<img src="fig/TSP.png" alt="The components of TSP (2 gene sets)" width="85%" />
+<p class="caption">
+Figure 1.2: The components of TSP (2 gene sets)
+</p>
+</div>
+<div id="binned-expression" class="section level3" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Binned expression</h3>
+<p>First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.</p>
+<p>Take <strong>Sample4</strong> as an example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="index.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data of Sample4</span></span>
+<span id="cb7-3"><a href="index.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="index.html#cb7-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> expr[,<span class="dv">4</span>]</span>
+<span id="cb7-5"><a href="index.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="index.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create quantiles  </span></span>
+<span id="cb7-7"><a href="index.html#cb7-7" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">as.numeric</span>(x), </span>
+<span id="cb7-8"><a href="index.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">probs=</span>breakVec, </span>
+<span id="cb7-9"><a href="index.html#cb7-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">na.rm =</span> T)</span>
+<span id="cb7-10"><a href="index.html#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="index.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get interval orders</span></span>
+<span id="cb7-12"><a href="index.html#cb7-12" aria-hidden="true" tabindex="-1"></a>xbin <span class="ot">&lt;-</span> <span class="fu">.bincode</span>(<span class="at">x =</span> x, </span>
+<span id="cb7-13"><a href="index.html#cb7-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">breaks =</span> brks, </span>
+<span id="cb7-14"><a href="index.html#cb7-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">include.lowest =</span> T)</span>
+<span id="cb7-15"><a href="index.html#cb7-15" aria-hidden="true" tabindex="-1"></a>xbin <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(xbin)</span>
+<span id="cb7-16"><a href="index.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(xbin) <span class="ot">&lt;-</span> <span class="fu">names</span>(x)</span>
+<span id="cb7-17"><a href="index.html#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="index.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb7-19"><a href="index.html#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Quantiles:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>); <span class="fu">print</span>(brks)</span>
+<span id="cb7-20"><a href="index.html#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb7-21"><a href="index.html#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Raw expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>);<span class="fu">print</span>(x)</span>
+<span id="cb7-22"><a href="index.html#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb7-23"><a href="index.html#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Binned expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>); <span class="fu">print</span>(xbin)</span>
+<span id="cb7-24"><a href="index.html#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantiles: </span></span>
+<span id="cb7-25"><a href="index.html#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#    0%   25%   50%   75%  100% </span></span>
+<span id="cb7-26"><a href="index.html#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.110 0.215 0.466 0.515 0.530 </span></span>
+<span id="cb7-27"><a href="index.html#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-28"><a href="index.html#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw expression: </span></span>
+<span id="cb7-29"><a href="index.html#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 </span></span>
+<span id="cb7-30"><a href="index.html#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.210 0.220 0.466 0.510 0.520 0.530 0.110 </span></span>
+<span id="cb7-31"><a href="index.html#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-32"><a href="index.html#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Binned expression: </span></span>
+<span id="cb7-33"><a href="index.html#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 </span></span>
+<span id="cb7-34"><a href="index.html#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     1     2     2     3     4     4     1</span></span></code></pre></div>
+<p>For example, <strong>0.110</strong> is the minimun of the raw expression vector, so its binned expression is <strong>1</strong>. Similarly, the binned expression of maximum <strong>0.530</strong> is <strong>4</strong>.</p>
+<p>Generally, we calculate binned expression via function <strong>breakBin</strong> of <strong>GSClassifier</strong>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="index.html#cb8-1" aria-hidden="true" tabindex="-1"></a>expr_binned <span class="ot">&lt;-</span> <span class="fu">apply</span>(</span>
+<span id="cb8-2"><a href="index.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  expr, <span class="dv">2</span>, </span>
+<span id="cb8-3"><a href="index.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  GSClassifier<span class="sc">:::</span>breakBin,</span>
+<span id="cb8-4"><a href="index.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  breakVec)</span>
+<span id="cb8-5"><a href="index.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expr_binned) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(expr)</span>
+<span id="cb8-6"><a href="index.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr_binned)</span>
+<span id="cb8-7"><a href="index.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb8-8"><a href="index.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1       3       3       4       1       2       2</span></span>
+<span id="cb8-9"><a href="index.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2       4       4       3       2       2       2</span></span>
+<span id="cb8-10"><a href="index.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3       4       4       4       2       1       1</span></span>
+<span id="cb8-11"><a href="index.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4       1       2       2       3       4       4</span></span>
+<span id="cb8-12"><a href="index.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5       2       2       2       4       4       3</span></span>
+<span id="cb8-13"><a href="index.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6       2       1       1       4       3       4</span></span>
+<span id="cb8-14"><a href="index.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7       1       1       1       1       1       1</span></span></code></pre></div>
+<p>In this simulated dataset, <strong>Gene7</strong> is a gene whose expression is always the lowest across all samples. In other words, the rank of <strong>Gene7</strong> is stable or invariable across samples so that it’s not robust for identification of differentail subtypes.</p>
+<p>Except binned expression, we also calculated pair difference later. Due to the number of gene pair is <span class="math inline">\(C_{2 \atop n}\)</span>, the removement of genes like <strong>Gene7</strong> before modeling could really reduce the complexibility and save computing resources. In all, genes with low rank difference should be dropped out in some extent in <strong>GSClassifier</strong>.</p>
+<p>First, We use <strong>base::rank</strong> to return the sample ranks of the values in a vector:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="index.html#cb9-1" aria-hidden="true" tabindex="-1"></a>expr_binned_rank <span class="ot">&lt;-</span> <span class="fu">apply</span>(</span>
+<span id="cb9-2"><a href="index.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  expr_binned, <span class="dv">2</span>, </span>
+<span id="cb9-3"><a href="index.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x)<span class="fu">rank</span>(x, <span class="at">na.last =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-4"><a href="index.html#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="index.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr_binned_rank)</span>
+<span id="cb9-6"><a href="index.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb9-7"><a href="index.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1     5.0     5.0     6.5     1.5     3.5     3.5</span></span>
+<span id="cb9-8"><a href="index.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2     6.5     6.5     5.0     3.5     3.5     3.5</span></span>
+<span id="cb9-9"><a href="index.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3     6.5     6.5     6.5     3.5     1.5     1.5</span></span>
+<span id="cb9-10"><a href="index.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4     1.5     3.5     3.5     5.0     6.5     6.5</span></span>
+<span id="cb9-11"><a href="index.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5     3.5     3.5     3.5     6.5     6.5     5.0</span></span>
+<span id="cb9-12"><a href="index.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6     3.5     1.5     1.5     6.5     5.0     6.5</span></span>
+<span id="cb9-13"><a href="index.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7     1.5     1.5     1.5     1.5     1.5     1.5</span></span></code></pre></div>
+<p>Then, get weighted average rank difference of each gene based on specified subtype distribution (<strong>Ybin</strong>):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="index.html#cb10-1" aria-hidden="true" tabindex="-1"></a>testRes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
+<span id="cb10-2"><a href="index.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(expr_binned_rank), </span>
+<span id="cb10-3"><a href="index.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(gi){</span>
+<span id="cb10-4"><a href="index.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-5"><a href="index.html#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rank vector of each gene</span></span>
+<span id="cb10-6"><a href="index.html#cb10-6" aria-hidden="true" tabindex="-1"></a>    rankg <span class="ot">=</span> expr_binned_rank[gi,];</span>
+<span id="cb10-7"><a href="index.html#cb10-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-8"><a href="index.html#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Weighted average rank difference of a gene for specified subtype </span></span>
+<span id="cb10-9"><a href="index.html#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Here is subtype 1 vs. others</span></span>
+<span id="cb10-10"><a href="index.html#cb10-10" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">sum</span>(rankg[Ybin <span class="sc">==</span> <span class="dv">0</span>], <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">sum</span>(Ybin <span class="sc">==</span> <span class="dv">0</span>, <span class="at">na.rm =</span> T)) <span class="sc">-</span> </span>
+<span id="cb10-11"><a href="index.html#cb10-11" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">sum</span>(rankg[Ybin <span class="sc">==</span> <span class="dv">1</span>], <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">sum</span>(Ybin <span class="sc">==</span> <span class="dv">1</span>, <span class="at">na.rm =</span> T))</span>
+<span id="cb10-12"><a href="index.html#cb10-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-13"><a href="index.html#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-14"><a href="index.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(testRes) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(expr_binned_rank)</span>
+<span id="cb10-15"><a href="index.html#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(testRes)</span>
+<span id="cb10-16"><a href="index.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 </span></span>
+<span id="cb10-17"><a href="index.html#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># -2.666667 -2.500000 -4.333333  3.166667  2.500000  3.833333  0.000000</span></span></code></pre></div>
+<p><strong>Gene7</strong> is the one with the lowest absolute value (0) of rank diffrence. By the way, <strong>Gene 1-3</strong> have the same direction (&lt;0), so do <strong>Gene 4-6</strong> (&gt;0), which indicates the nature of clustering based on these two gene sets.</p>
+<p>In practice, we use <strong>ptail</strong> to select differential genes based on rank diffrences. <strong>Smaller ptail is, less gene kept</strong>. Here, we just set <strong>ptail=0.4</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="index.html#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="index.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ptail is a numeber ranging (0,0.5].</span></span>
+<span id="cb11-3"><a href="index.html#cb11-3" aria-hidden="true" tabindex="-1"></a>ptail <span class="ot">=</span> <span class="fl">0.4</span></span>
+<span id="cb11-4"><a href="index.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="index.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Index of target genes with big rank differences</span></span>
+<span id="cb11-6"><a href="index.html#cb11-6" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">which</span>((testRes <span class="sc">&lt;</span> <span class="fu">quantile</span>(testRes, ptail, <span class="at">na.rm =</span> T)) <span class="sc">|</span> </span>
+<span id="cb11-7"><a href="index.html#cb11-7" aria-hidden="true" tabindex="-1"></a>             (testRes <span class="sc">&gt;</span> <span class="fu">quantile</span>(testRes, <span class="fl">1.0</span><span class="sc">-</span>ptail, <span class="at">na.rm =</span> T)))</span>
+<span id="cb11-8"><a href="index.html#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="index.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Target genes</span></span>
+<span id="cb11-10"><a href="index.html#cb11-10" aria-hidden="true" tabindex="-1"></a>gene_bigRank <span class="ot">&lt;-</span> <span class="fu">names</span>(testRes)[idx]</span>
+<span id="cb11-11"><a href="index.html#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="index.html#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb11-13"><a href="index.html#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Index of target genes: &#39;</span>,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>);<span class="fu">print</span>(idx); <span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb11-14"><a href="index.html#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Target genes:&#39;</span>,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>);<span class="fu">print</span>(gene_bigRank)</span>
+<span id="cb11-15"><a href="index.html#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Index of target genes:  </span></span>
+<span id="cb11-16"><a href="index.html#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 </span></span>
+<span id="cb11-17"><a href="index.html#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     1     2     3     4     5     6 </span></span>
+<span id="cb11-18"><a href="index.html#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb11-19"><a href="index.html#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Target genes: </span></span>
+<span id="cb11-20"><a href="index.html#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot; &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span></code></pre></div>
+<p>Hence, <strong>Gene7</strong> was filtered and excluded in the following analysis. By the way, both <strong>ptail</strong> and <strong>breakVec</strong> are hyperparameters in GSClassifier modeling.</p>
+</div>
+<div id="pair-difference" class="section level3" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Pair difference</h3>
+<p>In GSClassifier, we use a ensemble function <strong>featureSelection</strong> to select data for pair difference scoring.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="index.html#cb12-1" aria-hidden="true" tabindex="-1"></a>expr_feat <span class="ot">&lt;-</span> <span class="fu">featureSelection</span>(expr, Ybin,</span>
+<span id="cb12-2"><a href="index.html#cb12-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">testRes =</span> testRes,</span>
+<span id="cb12-3"><a href="index.html#cb12-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ptail =</span> <span class="fl">0.4</span>)</span>
+<span id="cb12-4"><a href="index.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="index.html#cb12-5" aria-hidden="true" tabindex="-1"></a>expr_sub <span class="ot">&lt;-</span> expr_feat<span class="sc">$</span>Xsub</span>
+<span id="cb12-6"><a href="index.html#cb12-6" aria-hidden="true" tabindex="-1"></a>gene_bigRank <span class="ot">&lt;-</span> expr_feat<span class="sc">$</span>Genes</span>
+<span id="cb12-7"><a href="index.html#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="index.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb12-9"><a href="index.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Raw xpression without NA:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb12-10"><a href="index.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr_sub)</span>
+<span id="cb12-11"><a href="index.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb12-12"><a href="index.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Genes with large rank diff:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb12-13"><a href="index.html#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gene_bigRank)</span>
+<span id="cb12-14"><a href="index.html#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw xpression without NA: </span></span>
+<span id="cb12-15"><a href="index.html#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb12-16"><a href="index.html#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60   0.210   0.300    0.40</span></span>
+<span id="cb12-17"><a href="index.html#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58   0.220   0.310    0.35</span></span>
+<span id="cb12-18"><a href="index.html#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61   0.466   0.290    0.30</span></span>
+<span id="cb12-19"><a href="index.html#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40   0.510   0.520    0.60</span></span>
+<span id="cb12-20"><a href="index.html#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35   0.520   0.540    0.58</span></span>
+<span id="cb12-21"><a href="index.html#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30   0.530   0.392    0.61</span></span>
+<span id="cb12-22"><a href="index.html#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-23"><a href="index.html#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Genes with large rank diff: </span></span>
+<span id="cb12-24"><a href="index.html#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot; &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span></code></pre></div>
+<p>In GSClassifier, we use function <strong>makeGenePairs</strong> to calculate s</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="index.html#cb13-1" aria-hidden="true" tabindex="-1"></a>gene_bigRank_pairs <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">makeGenePairs</span>(</span>
+<span id="cb13-2"><a href="index.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  gene_bigRank, </span>
+<span id="cb13-3"><a href="index.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  expr[gene_bigRank,])</span>
+<span id="cb13-4"><a href="index.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gene_bigRank_pairs)</span>
+<span id="cb13-5"><a href="index.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb13-6"><a href="index.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene2       0       0       1       0       0       1</span></span>
+<span id="cb13-7"><a href="index.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene3       0       0       0       0       1       1</span></span>
+<span id="cb13-8"><a href="index.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene4       1       1       1       0       0       0</span></span>
+<span id="cb13-9"><a href="index.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene5       1       1       1       0       0       0</span></span>
+<span id="cb13-10"><a href="index.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene6       1       1       1       0       0       0</span></span>
+<span id="cb13-11"><a href="index.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene3       0       0       0       0       1       1</span></span>
+<span id="cb13-12"><a href="index.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene4       1       1       1       0       0       0</span></span>
+<span id="cb13-13"><a href="index.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene5       1       1       1       0       0       0</span></span>
+<span id="cb13-14"><a href="index.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene6       1       1       1       0       0       0</span></span>
+<span id="cb13-15"><a href="index.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3:Gene4       1       1       1       0       0       0</span></span>
+<span id="cb13-16"><a href="index.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3:Gene5       1       1       1       0       0       0</span></span>
+<span id="cb13-17"><a href="index.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3:Gene6       1       1       1       0       0       0</span></span>
+<span id="cb13-18"><a href="index.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4:Gene5       0       0       1       0       0       1</span></span>
+<span id="cb13-19"><a href="index.html#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4:Gene6       0       1       1       0       1       0</span></span>
+<span id="cb13-20"><a href="index.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5:Gene6       0       1       1       0       1       0</span></span></code></pre></div>
+<p>Take <strong>Gene1:Gene4</strong> of <strong>Sample1</strong> as an example. <span class="math inline">\(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 &gt; 0\)</span>, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between <strong>Sample 1-3</strong> and <strong>Sample 4-6</strong> is obivous, revealing the robustness of pair difference for subtype identification.</p>
+</div>
+<div id="set-difference" class="section level3" number="1.6.3">
+<h3><span class="header-section-number">1.6.3</span> Set difference</h3>
+<p>In <strong>GSClassifier</strong>, <strong>Set difference</strong> is defined as a weight average of gene-geneset rank difference.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="index.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No. of gene sets</span></span>
+<span id="cb14-2"><a href="index.html#cb14-2" aria-hidden="true" tabindex="-1"></a>nGS <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb14-3"><a href="index.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="index.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Name of gene set comparision, which is like s1s2, s1s3 and so on.</span></span>
+<span id="cb14-5"><a href="index.html#cb14-5" aria-hidden="true" tabindex="-1"></a>featureNames <span class="ot">&lt;-</span> <span class="st">&#39;s1s2&#39;</span></span>
+<span id="cb14-6"><a href="index.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="index.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene set difference across samples</span></span>
+<span id="cb14-8"><a href="index.html#cb14-8" aria-hidden="true" tabindex="-1"></a>resultList <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb14-9"><a href="index.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(expr_sub)) { <span class="co"># i=1</span></span>
+<span id="cb14-10"><a href="index.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  res0 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="at">length=</span><span class="fu">length</span>(featureNames))</span>
+<span id="cb14-11"><a href="index.html#cb14-11" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-12"><a href="index.html#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j1 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(nGS<span class="dv">-1</span>)) { <span class="co"># j1=1</span></span>
+<span id="cb14-13"><a href="index.html#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j2 <span class="cf">in</span> (j1<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>nGS) { <span class="co"># j2=2</span></span>
+<span id="cb14-14"><a href="index.html#cb14-14" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-15"><a href="index.html#cb14-15" aria-hidden="true" tabindex="-1"></a>      <span class="co"># If j1=1 and j2=2, gene sets s1/s2 would be selected</span></span>
+<span id="cb14-16"><a href="index.html#cb14-16" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-17"><a href="index.html#cb14-17" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Genes of different gene sets</span></span>
+<span id="cb14-18"><a href="index.html#cb14-18" aria-hidden="true" tabindex="-1"></a>      set1 <span class="ot">&lt;-</span> geneSet[[j1]] <span class="co"># &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot;</span></span>
+<span id="cb14-19"><a href="index.html#cb14-19" aria-hidden="true" tabindex="-1"></a>      set2 <span class="ot">&lt;-</span> geneSet[[j2]] <span class="co"># &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span>
+<span id="cb14-20"><a href="index.html#cb14-20" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-21"><a href="index.html#cb14-21" aria-hidden="true" tabindex="-1"></a>      <span class="co"># RNA expression of Genes by different gene sets</span></span>
+<span id="cb14-22"><a href="index.html#cb14-22" aria-hidden="true" tabindex="-1"></a>      vals1 <span class="ot">&lt;-</span> expr_sub[<span class="fu">rownames</span>(expr_sub) <span class="sc">%in%</span> set1,i]</span>
+<span id="cb14-23"><a href="index.html#cb14-23" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Gene1 Gene2 Gene3</span></span>
+<span id="cb14-24"><a href="index.html#cb14-24" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 0.51  0.52  0.53</span></span>
+<span id="cb14-25"><a href="index.html#cb14-25" aria-hidden="true" tabindex="-1"></a>      vals2 <span class="ot">&lt;-</span> expr_sub[<span class="fu">rownames</span>(expr_sub) <span class="sc">%in%</span> set2,i]</span>
+<span id="cb14-26"><a href="index.html#cb14-26" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Gene4 Gene5 Gene6</span></span>
+<span id="cb14-27"><a href="index.html#cb14-27" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 0.21  0.22  0.23</span></span>
+<span id="cb14-28"><a href="index.html#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="index.html#cb14-29" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Differences between one gene and gene sets</span></span>
+<span id="cb14-30"><a href="index.html#cb14-30" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Compare expression of each gene in Set1 with all genes in Set2. </span></span>
+<span id="cb14-31"><a href="index.html#cb14-31" aria-hidden="true" tabindex="-1"></a>      <span class="co"># For example, 0.51&gt;0.21/0.22/0.23, so the value of Gene1:s2 is 3.</span></span>
+<span id="cb14-32"><a href="index.html#cb14-32" aria-hidden="true" tabindex="-1"></a>      res1 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(vals1, <span class="cf">function</span>(v1) <span class="fu">sum</span>(v1 <span class="sc">&gt;</span> vals2, <span class="at">na.rm=</span>T))</span>
+<span id="cb14-33"><a href="index.html#cb14-33" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Gene1:s2   Gene2:s2   Gene3:s2</span></span>
+<span id="cb14-34"><a href="index.html#cb14-34" aria-hidden="true" tabindex="-1"></a>      <span class="co"># 3          3           3</span></span>
+<span id="cb14-35"><a href="index.html#cb14-35" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-36"><a href="index.html#cb14-36" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Weight average of gene-geneset rank difference</span></span>
+<span id="cb14-37"><a href="index.html#cb14-37" aria-hidden="true" tabindex="-1"></a>      res0[idx] <span class="ot">&lt;-</span> <span class="fu">sum</span>(res1, <span class="at">na.rm =</span> T) <span class="sc">/</span> (<span class="fu">length</span>(vals1) <span class="sc">*</span> <span class="fu">length</span>(vals2))</span>
+<span id="cb14-38"><a href="index.html#cb14-38" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-39"><a href="index.html#cb14-39" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Next gene set pair</span></span>
+<span id="cb14-40"><a href="index.html#cb14-40" aria-hidden="true" tabindex="-1"></a>      idx <span class="ot">&lt;-</span> idx <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb14-41"><a href="index.html#cb14-41" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-42"><a href="index.html#cb14-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-43"><a href="index.html#cb14-43" aria-hidden="true" tabindex="-1"></a>  resultList[[i]] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(res0)</span>
+<span id="cb14-44"><a href="index.html#cb14-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-45"><a href="index.html#cb14-45" aria-hidden="true" tabindex="-1"></a>resMat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(cbind, resultList)</span>
+<span id="cb14-46"><a href="index.html#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(resMat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(expr_sub)</span>
+<span id="cb14-47"><a href="index.html#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(resMat) <span class="ot">&lt;-</span> featureNames</span>
+<span id="cb14-48"><a href="index.html#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-49"><a href="index.html#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Report </span></span>
+<span id="cb14-50"><a href="index.html#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Set difference across samples: &#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb14-51"><a href="index.html#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resMat)</span>
+<span id="cb14-52"><a href="index.html#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Set difference across samples:  </span></span>
+<span id="cb14-53"><a href="index.html#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="co">#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb14-54"><a href="index.html#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="co"># s1s2       1       1       1       0       0       0</span></span></code></pre></div>
+<p>In <strong>GSClassifier</strong>, we established <strong>makeSetData</strong> to evaluate set difference across samples:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="index.html#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="index.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene set difference across samples</span></span>
+<span id="cb15-3"><a href="index.html#cb15-3" aria-hidden="true" tabindex="-1"></a>geneset_interaction <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">makeSetData</span>(expr_sub, geneSet)</span>
+<span id="cb15-4"><a href="index.html#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="index.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Report </span></span>
+<span id="cb15-6"><a href="index.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Set difference across samples: &#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb15-7"><a href="index.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resMat)</span>
+<span id="cb15-8"><a href="index.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set difference across samples:  </span></span>
+<span id="cb15-9"><a href="index.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb15-10"><a href="index.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># s1s2       1       1       1       0       0       0</span></span></code></pre></div>
+<p>We have known that the subtype of <strong>Sample 1-3</strong> differs from that of <strong>Sample 4-6</strong>, which revealed the robustness of set difference for subtype indentification.</p>
+<p>As shown in Figure <a href="index.html#fig:tsp">1.2</a>, TSP matrix here should be :</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="index.html#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="index.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># TSP matrix</span></span>
+<span id="cb16-3"><a href="index.html#cb16-3" aria-hidden="true" tabindex="-1"></a>tsp <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb16-4"><a href="index.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-5"><a href="index.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Binned expression</span></span>
+<span id="cb16-6"><a href="index.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  expr_binned[gene_bigRank,],</span>
+<span id="cb16-7"><a href="index.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-8"><a href="index.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pair difference</span></span>
+<span id="cb16-9"><a href="index.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  gene_bigRank_pairs,</span>
+<span id="cb16-10"><a href="index.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-11"><a href="index.html#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set difference</span></span>
+<span id="cb16-12"><a href="index.html#cb16-12" aria-hidden="true" tabindex="-1"></a>  resMat</span>
+<span id="cb16-13"><a href="index.html#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-14"><a href="index.html#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="index.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Report </span></span>
+<span id="cb16-16"><a href="index.html#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;TSP matrix: &#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb16-17"><a href="index.html#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tsp)</span>
+<span id="cb16-18"><a href="index.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># TSP matrix:  </span></span>
+<span id="cb16-19"><a href="index.html#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb16-20"><a href="index.html#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1             3       3       4       1       2       2</span></span>
+<span id="cb16-21"><a href="index.html#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2             4       4       3       2       2       2</span></span>
+<span id="cb16-22"><a href="index.html#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3             4       4       4       2       1       1</span></span>
+<span id="cb16-23"><a href="index.html#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4             1       2       2       3       4       4</span></span>
+<span id="cb16-24"><a href="index.html#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5             2       2       2       4       4       3</span></span>
+<span id="cb16-25"><a href="index.html#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6             2       1       1       4       3       4</span></span>
+<span id="cb16-26"><a href="index.html#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene2       0       0       1       0       0       1</span></span>
+<span id="cb16-27"><a href="index.html#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene3       0       0       0       0       1       1</span></span>
+<span id="cb16-28"><a href="index.html#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene4       1       1       1       0       0       0</span></span>
+<span id="cb16-29"><a href="index.html#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene5       1       1       1       0       0       0</span></span>
+<span id="cb16-30"><a href="index.html#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1:Gene6       1       1       1       0       0       0</span></span>
+<span id="cb16-31"><a href="index.html#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene3       0       0       0       0       1       1</span></span>
+<span id="cb16-32"><a href="index.html#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene4       1       1       1       0       0       0</span></span>
+<span id="cb16-33"><a href="index.html#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene5       1       1       1       0       0       0</span></span>
+<span id="cb16-34"><a href="index.html#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2:Gene6       1       1       1       0       0       0</span></span>
+<span id="cb16-35"><a href="index.html#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3:Gene4       1       1       1       0       0       0</span></span>
+<span id="cb16-36"><a href="index.html#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3:Gene5       1       1       1       0       0       0</span></span>
+<span id="cb16-37"><a href="index.html#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3:Gene6       1       1       1       0       0       0</span></span>
+<span id="cb16-38"><a href="index.html#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4:Gene5       0       0       1       0       0       1</span></span>
+<span id="cb16-39"><a href="index.html#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4:Gene6       0       1       1       0       1       0</span></span>
+<span id="cb16-40"><a href="index.html#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5:Gene6       0       1       1       0       1       0</span></span>
+<span id="cb16-41"><a href="index.html#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co"># s1s2              1       1       1       0       0       0</span></span></code></pre></div>
+</div>
+</div>
+<div id="discussion" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Discussion</h2>
+<div id="model-complexibility" class="section level3" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> Model complexibility</h3>
+<p>Linear growth/exponential growth</p>
+</div>
+<div id="missing-value" class="section level3" number="1.7.2">
+<h3><span class="header-section-number">1.7.2</span> Missing value</h3>
+<p>Talk about strategy in subtypes modeling and calling</p>
+</div>
+<div id="subtypevector" class="section level3" number="1.7.3">
+<h3><span class="header-section-number">1.7.3</span> Subtype vector calling</h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="references.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

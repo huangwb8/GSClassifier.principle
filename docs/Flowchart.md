@@ -2,12 +2,6 @@
 
 
 
-# The Principle of GSClassifier
-
-
-## Introduction
-
-[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
 
 ## Flowchart
 
@@ -30,14 +24,10 @@ How to training
 How to use
 
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
-
-}
-
-\caption{The flow chart of GSClassifier}(\#fig:flowchart)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="./fig/flowchart.png" alt="The flow chart of GSClassifier" width="90%" />
+<p class="caption">(\#fig:flowchart)The flow chart of GSClassifier</p>
+</div>
 
 
 ## Data Processing
@@ -138,9 +128,7 @@ Look at the matrix via heatmap:
 Heatmap(t(scale(t(expr0))), name = "Z-score")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-3-1} \end{center}
+<img src="Flowchart_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 This is an intersting dataset with features as following:
@@ -194,9 +182,7 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 Heatmap(t(scale(t(expr))), name = "Z-score")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
+<img src="Flowchart_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" />
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
 
@@ -223,14 +209,10 @@ trainDataProc(
 
 As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
-
-}
-
-\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="./fig/TSP.png" alt="The components of TSP (2 gene sets)" width="85%" />
+<p class="caption">(\#fig:tsp)The components of TSP (2 gene sets)</p>
+</div>
 
 
 ### Binned expression

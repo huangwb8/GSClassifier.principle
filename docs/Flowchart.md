@@ -50,21 +50,21 @@ trainDataProc(
 )
 ```
 
-As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression matrix**, **top scoring of gene pairs**, and **gene set pairs**.
+As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{./fig/TSP} 
+{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
 
 }
 
-\caption{The components of TSP}(\#fig:tsp)
+\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
 \end{figure}
-
+Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
 
 ### Simulated Dataset
 
-Here, we would use some simulated data to introduce how TSP matrix calculated. First, load packages:
+First, load needed packages:
 
 
 ```r
@@ -81,14 +81,21 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
 
-# Install CRAN packages
+# Install the "pacman" package
 if (!requireNamespace("pacman", quietly = TRUE)){
   install.packages("pacman")
   library(pacman)
 } else {
   library(pacman)
 }
-packages_needed <- c("readxl","ComplexHeatmap","GSClassifier")
+
+# Load needed packages
+packages_needed <- c(
+  "readxl",
+  "ComplexHeatmap",
+  "GSClassifier",
+  "rpart",
+  "tidyr")
 for(i in packages_needed){p_load(char=i)}
 ```
 
@@ -104,9 +111,8 @@ geneSet <- list(
 
 # RNA expression
 x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
-# New names:
-expr <- as.matrix(x[,-1])
-rownames(expr) <- as.character(as.matrix(x[,1])); rm(x)
+expr0 <- as.matrix(x[,-1])
+rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
 # Parameters
 breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
@@ -117,7 +123,7 @@ Ybin = ifelse(subtype_vector == 1, yes = 1, no=0)
 cat(c('\n', 'Gene sets:', '\n'))
 print(geneSet)
 cat('RNA expression:', '\n')
-print(expr)
+print(expr0)
 # 
 #  Gene sets: 
 # $Set1
@@ -130,34 +136,94 @@ print(expr)
 #       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
 # Gene1    0.51    0.52    0.60    0.21    0.30    0.40
 # Gene2    0.52    0.54    0.58    0.22    0.31    0.35
-# Gene3    0.53    0.60    0.61    0.23    0.29    0.30
+# Gene3    0.53    0.60    0.61      NA    0.29    0.30
 # Gene4    0.21    0.30    0.40    0.51    0.52    0.60
 # Gene5    0.22    0.31    0.35    0.52    0.54    0.58
-# Gene6    0.23    0.29    0.30    0.53    0.60    0.61
+# Gene6    0.23    0.29    0.30    0.53      NA    0.61
 # Gene7    0.10    0.12    0.09    0.11    0.12    0.14
 ```
 
-Have a look at the matrix:
+Look at the matrix via heatmap:
+
+
+```r
+Heatmap(t(scale(t(expr0))), name = "Z-score")
+```
+
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+
+This is an intersting dataset with features as following:
+
++ **Distinguished gene sets**: The expression profile between **Gene 1-3** and **Gene 4-6** is obviously different arross samples. Thus, these gene sets might represent different biology meaning.
+
++ **Stable gene**: The expression level and rank of **Gene 7** seemed to be similar across samples. Thus, **Gene 7** might not be a robust marker for subtype modeling. Thus, it could help us to understand how filtering of **GSClassifier** works.
+
++ **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
+
+### Missing values
+
+Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
+
+
+```r
+# RPART
+expr <- GSClassifier:::na_fill(expr0, method="anova", na.action = na.rpart)
+
+# Report
+cat('RNA expression:', '\n')
+print(expr0)
+cat('\n')
+cat('RNA expression without NA value:', '\n')
+print(expr)
+# RNA expression: 
+#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+# Gene1    0.51    0.52    0.60    0.21    0.30    0.40
+# Gene2    0.52    0.54    0.58    0.22    0.31    0.35
+# Gene3    0.53    0.60    0.61      NA    0.29    0.30
+# Gene4    0.21    0.30    0.40    0.51    0.52    0.60
+# Gene5    0.22    0.31    0.35    0.52    0.54    0.58
+# Gene6    0.23    0.29    0.30    0.53      NA    0.61
+# Gene7    0.10    0.12    0.09    0.11    0.12    0.14
+# 
+# RNA expression without NA value: 
+#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+# Gene1    0.51    0.52    0.60   0.210   0.300    0.40
+# Gene2    0.52    0.54    0.58   0.220   0.310    0.35
+# Gene3    0.53    0.60    0.61   0.466   0.290    0.30
+# Gene4    0.21    0.30    0.40   0.510   0.520    0.60
+# Gene5    0.22    0.31    0.35   0.520   0.540    0.58
+# Gene6    0.23    0.29    0.30   0.530   0.392    0.61
+# Gene7    0.10    0.12    0.09   0.110   0.120    0.14
+```
+
+Look at the new matrix via heatmap, where the clustering result is not obviously disturbed by **NA** filling:
 
 
 ```r
 Heatmap(t(scale(t(expr))), name = "Z-score")
 ```
 
-![](Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
-### Genes with large rank differences
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
+
+### Binned expression
 
 First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
 
-Take data of **Sample1** as an example:
+Take data of **Sample4** as an example:
 
 
 ```r
 
-# Data of Sample1
+# Data of Sample4
 
-x <- expr[,1]
+x <- expr[,4]
 
 # Create quantiles  
 brks <- quantile(as.numeric(x), 
@@ -179,20 +245,20 @@ cat('\n')
 cat('Binned expression:', '\n'); print(xbin)
 # Quantiles: 
 #    0%   25%   50%   75%  100% 
-# 0.100 0.215 0.230 0.515 0.530 
+# 0.110 0.215 0.466 0.515 0.530 
 # 
 # Raw expression: 
 # Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 
-#  0.51  0.52  0.53  0.21  0.22  0.23  0.10 
+# 0.210 0.220 0.466 0.510 0.520 0.530 0.110 
 # 
 # Binned expression: 
 # Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 
-#     3     4     4     1     2     2     1
+#     1     2     2     3     4     4     1
 ```
 
-For example, **0.10** is the minimun of the raw expression vector, so its binned expression is **1**. Similarly, the binned expression of maximum **0.53** is **4**.  
+For example, **0.110** is the minimun of the raw expression vector, so its binned expression is **1**. Similarly, the binned expression of maximum **0.530** is **4**.  
 
-Generally, we calculated binned expression via function **breakBin** of **GSClassifier**:
+Generally, we calculate binned expression via function **breakBin** of **GSClassifier**:
 
 
 ```r
@@ -206,23 +272,22 @@ print(expr_binned)
 # Gene1       3       3       4       1       2       2
 # Gene2       4       4       3       2       2       2
 # Gene3       4       4       4       2       1       1
-# Gene4       1       2       2       3       3       4
+# Gene4       1       2       2       3       4       4
 # Gene5       2       2       2       4       4       3
-# Gene6       2       1       1       4       4       4
+# Gene6       2       1       1       4       3       4
 # Gene7       1       1       1       1       1       1
 ```
 
 In this simulated dataset, **Gene7** is a gene whose expression is always the lowest across all samples. In other words, the rank of **Gene7** is stable or invariable across samples so that it's not robust for identification of differentail subtypes. 
 
-Except binned expression, we also calculated gene-pair scores later. Due to the number of gene-pair is $C_{2 \atop n}$, the removement of genes like **Gene7** before modeling could really reduce the complexibility of the model and save computing resources. In all, genes like **Gene7** could be dropped out in the following analysis.
+Except binned expression, we also calculated pair difference later. Due to the number of gene pair is $C_{2 \atop n}$, the removement of genes like **Gene7** before modeling could really reduce the complexibility and save computing resources. In all, genes with low rank difference should be dropped out in some extent in **GSClassifier**.
 
 First, We use **base::rank** to return the sample ranks of the values in a vector:
 
 
 ```r
 expr_binned_rank <- apply(
-  expr_binned, 
-  2, 
+  expr_binned, 2, 
   function(x)rank(x, na.last = TRUE)
 )
 print(expr_binned_rank)
@@ -230,13 +295,11 @@ print(expr_binned_rank)
 # Gene1     5.0     5.0     6.5     1.5     3.5     3.5
 # Gene2     6.5     6.5     5.0     3.5     3.5     3.5
 # Gene3     6.5     6.5     6.5     3.5     1.5     1.5
-# Gene4     1.5     3.5     3.5     5.0     5.0     6.5
+# Gene4     1.5     3.5     3.5     5.0     6.5     6.5
 # Gene5     3.5     3.5     3.5     6.5     6.5     5.0
-# Gene6     3.5     1.5     1.5     6.5     6.5     6.5
+# Gene6     3.5     1.5     1.5     6.5     5.0     6.5
 # Gene7     1.5     1.5     1.5     1.5     1.5     1.5
 ```
-
-**na.last = TRUE** means that missing values in the data are put last.
 
 Then, get rank differences of each gene based on specified subtype distribution (**Ybin**):
 
@@ -253,7 +316,7 @@ testRes <- sapply(
 names(testRes) <- rownames(expr_binned_rank)
 print(testRes)
 #     Gene1     Gene2     Gene3     Gene4     Gene5     Gene6     Gene7 
-# -2.666667 -2.500000 -4.333333  2.666667  2.500000  4.333333  0.000000
+# -2.666667 -2.500000 -4.333333  3.166667  2.500000  3.833333  0.000000
 ```
 
 **Gene7** is the one with the lowest absolute value (0) of rank diffrence.
@@ -284,9 +347,51 @@ cat('Target genes:','\n');print(gene_bigRank); cat('\n')
 # [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
 ```
 
-Hence, **Gene7** was filtered and excluded in the following analysis. In practice, both **ptail** and **breakVec** are hyperparameters in modeling.
+Hence, **Gene7** was filtered and excluded in the following analysis. In practice, both **ptail** and **breakVec** are hyperparameters in GSClassifier modeling.
 
-### Pair scores of top genes
+### Pair difference
+
+In GSClassifier, we use a ensemble function **featureSelection** to select data for pair difference scoring.
+
+
+```r
+expr_feat <- featureSelection(expr, Ybin,
+                              testRes = testRes,
+                              ptail = 0.4)
+
+expr_sub <- expr_feat$Xsub
+gene_bigRank <- expr_feat$Genes
+
+# Report
+cat('Raw xpression:', '\n')
+print(expr[gene_bigRank,])
+cat('\n')
+cat('Raw xpression without NA:', '\n')
+print(expr_sub)
+cat('\n')
+cat('Genes with large rank diff:', '\n')
+print(gene_bigRank)
+# Raw xpression: 
+#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+# Gene1    0.51    0.52    0.60   0.210   0.300    0.40
+# Gene2    0.52    0.54    0.58   0.220   0.310    0.35
+# Gene3    0.53    0.60    0.61   0.466   0.290    0.30
+# Gene4    0.21    0.30    0.40   0.510   0.520    0.60
+# Gene5    0.22    0.31    0.35   0.520   0.540    0.58
+# Gene6    0.23    0.29    0.30   0.530   0.392    0.61
+# 
+# Raw xpression without NA: 
+#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+# Gene1    0.51    0.52    0.60   0.210   0.300    0.40
+# Gene2    0.52    0.54    0.58   0.220   0.310    0.35
+# Gene3    0.53    0.60    0.61   0.466   0.290    0.30
+# Gene4    0.21    0.30    0.40   0.510   0.520    0.60
+# Gene5    0.22    0.31    0.35   0.520   0.540    0.58
+# Gene6    0.23    0.29    0.30   0.530   0.392    0.61
+# 
+# Genes with large rank diff: 
+# [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
+```
 
 In GSClassifier, we use function **makeGenePairs** to calculate s
 
@@ -310,13 +415,13 @@ print(gene_bigRank_pairs)
 # Gene3:Gene5       1       1       1       0       0       0
 # Gene3:Gene6       1       1       1       0       0       0
 # Gene4:Gene5       0       0       1       0       0       1
-# Gene4:Gene6       0       1       1       0       0       0
-# Gene5:Gene6       0       1       1       0       0       0
+# Gene4:Gene6       0       1       1       0       1       0
+# Gene5:Gene6       0       1       1       0       1       0
 ```
 
 Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0.
 
-### Gene set difference score
+### Set difference
 
 In GSClassifier, we use function **makeSetData** to calculate gene set difference score:
 

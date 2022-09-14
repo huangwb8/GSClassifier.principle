@@ -168,7 +168,24 @@
 \hypertarget{flowchart}{%
 \section{Flowchart}\label{flowchart}}
 
-The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}. 补充一些内容，说明一下图的框架。
+The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
+
+\hypertarget{data-processing}{%
+\subsection{Data Processing}\label{data-processing}}
+
+A \textbf{subtype vector} should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the \textbf{subtype vector} data, which depends on the GEPs used and the related biological problems.
+
+For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (PIAM\textsuperscript{high}PIDG\textsuperscript{high}, PIAM\textsuperscript{high}PIDG\textsuperscript{low}, PIAM\textsuperscript{low}PIDG\textsuperscript{high}, and PIAM\textsuperscript{low}PIDG\textsuperscript{low}).
+
+\hypertarget{model-establishment-and-validation}{%
+\subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
+
+How to training
+
+\hypertarget{model-application}{%
+\subsection{Model Application}\label{model-application}}
+
+How to use
 
 \begin{figure}
 
@@ -179,8 +196,8 @@ The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}. 
 \caption{The flow chart of GSClassifier}\label{fig:flowchart}
 \end{figure}
 
-\hypertarget{data-processing}{%
-\section{Data Processing}\label{data-processing}}
+\hypertarget{data-processing-1}{%
+\section{Data Processing}\label{data-processing-1}}
 
 For each dataset, the RNA expression matrix would be normalized (we called \textbf{Raw Matrix} in the flowchart) internally so that the expression data of the samples in the dataset were comparable.
 
@@ -240,10 +257,14 @@ We simulated a dataset:
 \NormalTok{expr0 }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(x[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
 \FunctionTok{rownames}\NormalTok{(expr0) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(x[,}\DecValTok{1}\NormalTok{])); }\FunctionTok{rm}\NormalTok{(x)}
 
+\CommentTok{\# Subtype information}
+\CommentTok{\# It depends on the application scenarios of GEPs}
+\NormalTok{subtype\_vector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\CommentTok{\# Binned data for subtype 1}
+\NormalTok{Ybin }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(subtype\_vector }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
 \CommentTok{\# Parameters}
 \NormalTok{breakVec }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
-\NormalTok{subtype\_vector }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
-\NormalTok{Ybin }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(subtype\_vector }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{yes =} \DecValTok{1}\NormalTok{, }\AttributeTok{no=}\DecValTok{0}\NormalTok{)}
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Gene sets:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{))}
@@ -584,7 +605,7 @@ In GSClassifier, we use function \textbf{makeGenePairs} to calculate s
 \end{Highlighting}
 \end{Shaded}
 
-Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between \textbf{Sample 1-3} and \textbf{Sample 4-6} is obivous, revealing the robustness of gene pair scoring for subtype identification.
+Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between \textbf{Sample 1-3} and \textbf{Sample 4-6} is obivous, revealing the robustness of pair difference for subtype identification.
 
 \hypertarget{set-difference}{%
 \subsection{Set difference}\label{set-difference}}
@@ -622,7 +643,7 @@ In \textbf{GSClassifier}, \textbf{Set difference} is defined as a weight average
       \CommentTok{\# 0.21  0.22  0.23}
 
       \CommentTok{\# Differences between one gene and gene sets}
-      \CommentTok{\# Compare expression level of each gene in Set1 with all genes in Set2. }
+      \CommentTok{\# Compare expression of each gene in Set1 with all genes in Set2. }
       \CommentTok{\# For example, 0.51\textgreater{}0.21/0.22/0.23, so the value of Gene1:s2 is 3.}
 \NormalTok{      res1 }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(vals1, }\ControlFlowTok{function}\NormalTok{(v1) }\FunctionTok{sum}\NormalTok{(v1 }\SpecialCharTok{\textgreater{}}\NormalTok{ vals2, }\AttributeTok{na.rm=}\NormalTok{T))}
       \CommentTok{\# Gene1:s2   Gene2:s2   Gene3:s2}
@@ -669,10 +690,66 @@ In \textbf{GSClassifier}, we established \textbf{makeSetData} to evaluate set di
 
 We have known that the subtype of \textbf{Sample 1-3} differs from that of \textbf{Sample 4-6}, which revealed the robustness of set difference for subtype indentification.
 
+As shown in Figure \ref{fig:tsp}, TSP matrix here should be :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# TSP matrix}
+\NormalTok{tsp }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(}
+  
+  \CommentTok{\# Binned expression}
+\NormalTok{  expr\_binned[gene\_bigRank,],}
+  
+  \CommentTok{\# Pair difference}
+\NormalTok{  gene\_bigRank\_pairs,}
+  
+  \CommentTok{\# Set difference}
+\NormalTok{  resMat}
+\NormalTok{)}
+
+\CommentTok{\# Report }
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}TSP matrix: \textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(tsp)}
+\CommentTok{\# TSP matrix:  }
+\CommentTok{\#             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# Gene1             3       3       4       1       2       2}
+\CommentTok{\# Gene2             4       4       3       2       2       2}
+\CommentTok{\# Gene3             4       4       4       2       1       1}
+\CommentTok{\# Gene4             1       2       2       3       4       4}
+\CommentTok{\# Gene5             2       2       2       4       4       3}
+\CommentTok{\# Gene6             2       1       1       4       3       4}
+\CommentTok{\# Gene1:Gene2       0       0       1       0       0       1}
+\CommentTok{\# Gene1:Gene3       0       0       0       0       1       1}
+\CommentTok{\# Gene1:Gene4       1       1       1       0       0       0}
+\CommentTok{\# Gene1:Gene5       1       1       1       0       0       0}
+\CommentTok{\# Gene1:Gene6       1       1       1       0       0       0}
+\CommentTok{\# Gene2:Gene3       0       0       0       0       1       1}
+\CommentTok{\# Gene2:Gene4       1       1       1       0       0       0}
+\CommentTok{\# Gene2:Gene5       1       1       1       0       0       0}
+\CommentTok{\# Gene2:Gene6       1       1       1       0       0       0}
+\CommentTok{\# Gene3:Gene4       1       1       1       0       0       0}
+\CommentTok{\# Gene3:Gene5       1       1       1       0       0       0}
+\CommentTok{\# Gene3:Gene6       1       1       1       0       0       0}
+\CommentTok{\# Gene4:Gene5       0       0       1       0       0       1}
+\CommentTok{\# Gene4:Gene6       0       1       1       0       1       0}
+\CommentTok{\# Gene5:Gene6       0       1       1       0       1       0}
+\CommentTok{\# s1s2              1       1       1       0       0       0}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{discussion}{%
-\subsection{Discussion}\label{discussion}}
+\section{Discussion}\label{discussion}}
+
+\hypertarget{model-complexibility}{%
+\subsection{Model complexibility}\label{model-complexibility}}
 
 Linear growth/exponential growth
+
+\hypertarget{missing-value}{%
+\subsection{Missing value}\label{missing-value}}
+
+Talk about strategy in subtypes modeling and calling
 
   \bibliography{book.bib,packages.bib}
 

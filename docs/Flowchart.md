@@ -11,7 +11,23 @@
 
 ## Flowchart
 
-The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 补充一些内容，说明一下图的框架。
+The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 
+
+### Data Processing
+
+A **subtype vector** should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the **subtype vector** data, which depends on the GEPs used and the related biological problems. 
+
+For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).
+
+### Model Establishment and Validation
+
+How to training 
+
+
+### Model Application
+
+How to use
+
 
 \begin{figure}
 
@@ -81,10 +97,14 @@ x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
 expr0 <- as.matrix(x[,-1])
 rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
+# Subtype information
+# It depends on the application scenarios of GEPs
+subtype_vector <- c(1, 1, 1, 2, 2, 2)
+# Binned data for subtype 1
+Ybin <- ifelse(subtype_vector == 1, 1, 0)
+
 # Parameters
 breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
-subtype_vector = c(1,1,1,2,2,2)
-Ybin = ifelse(subtype_vector == 1, yes = 1, no=0)
 
 # Report
 cat(c('\n', 'Gene sets:', '\n'))
@@ -412,11 +432,11 @@ print(gene_bigRank_pairs)
 # Gene5:Gene6       0       1       1       0       1       0
 ```
 
-Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between **Sample 1-3** and **Sample 4-6** is obivous, revealing the robustness of gene pair scoring for subtype identification.
+Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between **Sample 1-3** and **Sample 4-6** is obivous, revealing the robustness of pair difference for subtype identification.
 
 ### Set difference
 
-In **GSClassifier**, **Set difference** is defined as a weight average of gene-geneset rank difference. 
+In **GSClassifier**, **Set difference** is defined as a weight average of gene-geneset rank difference.
 
 
 ```r
@@ -449,7 +469,7 @@ for (i in 1:ncol(expr_sub)) { # i=1
       # 0.21  0.22  0.23
 
       # Differences between one gene and gene sets
-      # Compare expression level of each gene in Set1 with all genes in Set2. 
+      # Compare expression of each gene in Set1 with all genes in Set2. 
       # For example, 0.51>0.21/0.22/0.23, so the value of Gene1:s2 is 3.
       res1 <- sapply(vals1, function(v1) sum(v1 > vals2, na.rm=T))
       # Gene1:s2   Gene2:s2   Gene3:s2
@@ -493,10 +513,62 @@ print(resMat)
 ```
 We have known that the subtype of **Sample 1-3** differs from that of **Sample 4-6**, which revealed the robustness of set difference for subtype indentification.
 
-### Discussion
+As shown in Figure \@ref(fig:tsp), TSP matrix here should be :
+
+
+```r
+
+# TSP matrix
+tsp <- rbind(
+  
+  # Binned expression
+  expr_binned[gene_bigRank,],
+  
+  # Pair difference
+  gene_bigRank_pairs,
+  
+  # Set difference
+  resMat
+)
+
+# Report 
+cat('TSP matrix: ', '\n')
+print(tsp)
+# TSP matrix:  
+#             Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+# Gene1             3       3       4       1       2       2
+# Gene2             4       4       3       2       2       2
+# Gene3             4       4       4       2       1       1
+# Gene4             1       2       2       3       4       4
+# Gene5             2       2       2       4       4       3
+# Gene6             2       1       1       4       3       4
+# Gene1:Gene2       0       0       1       0       0       1
+# Gene1:Gene3       0       0       0       0       1       1
+# Gene1:Gene4       1       1       1       0       0       0
+# Gene1:Gene5       1       1       1       0       0       0
+# Gene1:Gene6       1       1       1       0       0       0
+# Gene2:Gene3       0       0       0       0       1       1
+# Gene2:Gene4       1       1       1       0       0       0
+# Gene2:Gene5       1       1       1       0       0       0
+# Gene2:Gene6       1       1       1       0       0       0
+# Gene3:Gene4       1       1       1       0       0       0
+# Gene3:Gene5       1       1       1       0       0       0
+# Gene3:Gene6       1       1       1       0       0       0
+# Gene4:Gene5       0       0       1       0       0       1
+# Gene4:Gene6       0       1       1       0       1       0
+# Gene5:Gene6       0       1       1       0       1       0
+# s1s2              1       1       1       0       0       0
+```
+
+## Discussion
+
+### Model complexibility
 
 Linear growth/exponential growth 
 
+### Missing value
+
+Talk about strategy in subtypes modeling and calling
 
 
 

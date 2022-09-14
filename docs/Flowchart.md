@@ -11,7 +11,7 @@
 
 ## Flowchart
 
-The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
+The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 补充一些内容，说明一下图的框架。
 
 \begin{figure}
 
@@ -179,7 +179,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
 
-## Top scoring pairs (TSP) matrix
+## Top scoring pairs (TSP)
 
 With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
 
@@ -200,7 +200,7 @@ trainDataProc(
 )
 ```
 
-As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**.
+As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
 
 \begin{figure}
 
@@ -210,14 +210,13 @@ As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned e
 
 \caption{The components of TSP (2 gene sets)}(\#fig:tsp)
 \end{figure}
-Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
 
 
 ### Binned expression
 
 First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
 
-Take data of **Sample4** as an example:
+Take **Sample4** as an example:
 
 
 ```r
@@ -302,16 +301,21 @@ print(expr_binned_rank)
 # Gene7     1.5     1.5     1.5     1.5     1.5     1.5
 ```
 
-Then, get rank differences of each gene based on specified subtype distribution (**Ybin**):
+Then, get weighted average rank difference of each gene based on specified subtype distribution (**Ybin**):
 
 
 ```r
 testRes <- sapply(
   1:nrow(expr_binned_rank), 
   function(gi){
-    GSClassifier:::testFun(
-      as.numeric(expr_binned_rank[gi,]), 
-      Ybin)
+    
+    # Rank vector of each gene
+    rankg = expr_binned_rank[gi,];
+    
+    # Weighted average rank difference of a gene for specified subtype 
+    # Here is subtype 1 vs. others
+    (sum(rankg[Ybin == 0], na.rm = T) / sum(Ybin == 0, na.rm = T)) - 
+    (sum(rankg[Ybin == 1], na.rm = T) / sum(Ybin == 1, na.rm = T))
   }
 )
 names(testRes) <- rownames(expr_binned_rank)
@@ -320,9 +324,9 @@ print(testRes)
 # -2.666667 -2.500000 -4.333333  3.166667  2.500000  3.833333  0.000000
 ```
 
-**Gene7** is the one with the lowest absolute value (0) of rank diffrence. By the way, **Gene 1-3** have the same direction (<0), so do **Gene 4-6**, which indicates the basis of gene clustering.
+**Gene7** is the one with the lowest absolute value (0) of rank diffrence. By the way, **Gene 1-3** have the same direction (<0), so do **Gene 4-6** (>0), which indicates the nature of clustering based on these two gene sets.
 
-In **GSClassifier**, we use **ptail** to select differential genes based on rank diffrences. **Less ptail is, less gene kept**. Here, we just set **ptail=0.4**:
+In practice, we use **ptail** to select differential genes based on rank diffrences. **Smaller ptail is, less gene kept**. Here, we just set **ptail=0.4**:
 
 
 ```r
@@ -339,7 +343,7 @@ gene_bigRank <- names(testRes)[idx]
 
 # Report
 cat('Index of target genes: ','\n');print(idx); cat('\n')
-cat('Target genes:','\n');print(gene_bigRank); cat('\n')
+cat('Target genes:','\n');print(gene_bigRank)
 # Index of target genes:  
 # Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 
 #     1     2     3     4     5     6 
@@ -348,7 +352,7 @@ cat('Target genes:','\n');print(gene_bigRank); cat('\n')
 # [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
 ```
 
-Hence, **Gene7** was filtered and excluded in the following analysis. In practice, both **ptail** and **breakVec** are hyperparameters in GSClassifier modeling.
+Hence, **Gene7** was filtered and excluded in the following analysis. By the way, both **ptail** and **breakVec** are hyperparameters in GSClassifier modeling.
 
 ### Pair difference
 
@@ -412,18 +416,86 @@ Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Express
 
 ### Set difference
 
-In GSClassifier, we use function **makeSetData** to calculate gene set difference score:
+In **GSClassifier**, **Set difference** is defined as a weight average of gene-geneset rank difference. 
 
 
 ```r
-geneset_interaction <- GSClassifier:::makeSetData(expr,geneSet)
-print(geneset_interaction)
+# No. of gene sets
+nGS = 2
+
+# Name of gene set comparision, which is like s1s2, s1s3 and so on.
+featureNames <- 's1s2'
+
+# Gene set difference across samples
+resultList <- list()
+for (i in 1:ncol(expr_sub)) { # i=1
+  res0 <- numeric(length=length(featureNames))
+  idx <- 1
+  for (j1 in 1:(nGS-1)) { # j1=1
+    for (j2 in (j1+1):nGS) { # j2=2
+      
+      # If j1=1 and j2=2, gene sets s1/s2 would be selected
+      
+      # Genes of different gene sets
+      set1 <- geneSet[[j1]] # "Gene1" "Gene2" "Gene3"
+      set2 <- geneSet[[j2]] # "Gene4" "Gene5" "Gene6"
+      
+      # RNA expression of Genes by different gene sets
+      vals1 <- expr_sub[rownames(expr_sub) %in% set1,i]
+      # Gene1 Gene2 Gene3
+      # 0.51  0.52  0.53
+      vals2 <- expr_sub[rownames(expr_sub) %in% set2,i]
+      # Gene4 Gene5 Gene6
+      # 0.21  0.22  0.23
+
+      # Differences between one gene and gene sets
+      # Compare expression level of each gene in Set1 with all genes in Set2. 
+      # For example, 0.51>0.21/0.22/0.23, so the value of Gene1:s2 is 3.
+      res1 <- sapply(vals1, function(v1) sum(v1 > vals2, na.rm=T))
+      # Gene1:s2   Gene2:s2   Gene3:s2
+      # 3          3           3
+      
+      # Weight average of gene-geneset rank difference
+      res0[idx] <- sum(res1, na.rm = T) / (length(vals1) * length(vals2))
+      
+      # Next gene set pair
+      idx <- idx + 1
+    }
+  }
+  resultList[[i]] <- as.numeric(res0)
+}
+resMat <- do.call(cbind, resultList)
+colnames(resMat) <- colnames(expr_sub)
+rownames(resMat) <- featureNames
+
+# Report 
+cat('Set difference across samples: ', '\n')
+print(resMat)
+# Set difference across samples:  
 #      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
 # s1s2       1       1       1       0       0       0
 ```
 
+In **GSClassifier**, we established **makeSetData** to evaluate set difference across samples:
 
 
+```r
+
+# Gene set difference across samples
+geneset_interaction <- GSClassifier:::makeSetData(expr_sub, geneSet)
+
+# Report 
+cat('Set difference across samples: ', '\n')
+print(resMat)
+# Set difference across samples:  
+#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6
+# s1s2       1       1       1       0       0       0
+```
+We have known that the subtype of **Sample 1-3** differs from that of **Sample 4-6**, which revealed the robustness of set difference for subtype indentification.
+
+### Discussion
+
+Linear growth/exponential growth 
 
 
 

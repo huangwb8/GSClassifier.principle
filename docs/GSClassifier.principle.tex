@@ -168,7 +168,7 @@
 \hypertarget{flowchart}{%
 \section{Flowchart}\label{flowchart}}
 
-The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
+The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}. 补充一些内容，说明一下图的框架。
 
 \begin{figure}
 
@@ -341,8 +341,8 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80\% of datasets were retained so as to minumize the impact from mising value.
 
-\hypertarget{top-scoring-pairs-tsp-matrix}{%
-\section{Top scoring pairs (TSP) matrix}\label{top-scoring-pairs-tsp-matrix}}
+\hypertarget{top-scoring-pairs-tsp}{%
+\section{Top scoring pairs (TSP)}\label{top-scoring-pairs-tsp}}
 
 With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
 
@@ -364,7 +364,7 @@ With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a spec
 \end{Highlighting}
 \end{Shaded}
 
-As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}.
+As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. Next, we would use a simulated dataset to introduce \textbf{how TSP matrix calculated in GSClassifier}.
 
 \begin{figure}
 
@@ -375,14 +375,12 @@ As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{bin
 \caption{The components of TSP (2 gene sets)}\label{fig:tsp}
 \end{figure}
 
-Next, we would use a simulated dataset to introduce \textbf{how TSP matrix calculated in GSClassifier}.
-
 \hypertarget{binned-expression}{%
 \subsection{Binned expression}\label{binned-expression}}
 
 First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
 
-Take data of \textbf{Sample4} as an example:
+Take \textbf{Sample4} as an example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -470,16 +468,21 @@ First, We use \textbf{base::rank} to return the sample ranks of the values in a 
 \end{Highlighting}
 \end{Shaded}
 
-Then, get rank differences of each gene based on specified subtype distribution (\textbf{Ybin}):
+Then, get weighted average rank difference of each gene based on specified subtype distribution (\textbf{Ybin}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{testRes }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}
   \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(expr\_binned\_rank), }
   \ControlFlowTok{function}\NormalTok{(gi)\{}
-\NormalTok{    GSClassifier}\SpecialCharTok{:::}\FunctionTok{testFun}\NormalTok{(}
-      \FunctionTok{as.numeric}\NormalTok{(expr\_binned\_rank[gi,]), }
-\NormalTok{      Ybin)}
+    
+    \CommentTok{\# Rank vector of each gene}
+\NormalTok{    rankg }\OtherTok{=}\NormalTok{ expr\_binned\_rank[gi,];}
+    
+    \CommentTok{\# Weighted average rank difference of a gene for specified subtype }
+    \CommentTok{\# Here is subtype 1 vs. others}
+\NormalTok{    (}\FunctionTok{sum}\NormalTok{(rankg[Ybin }\SpecialCharTok{==} \DecValTok{0}\NormalTok{], }\AttributeTok{na.rm =}\NormalTok{ T) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(Ybin }\SpecialCharTok{==} \DecValTok{0}\NormalTok{, }\AttributeTok{na.rm =}\NormalTok{ T)) }\SpecialCharTok{{-}} 
+\NormalTok{    (}\FunctionTok{sum}\NormalTok{(rankg[Ybin }\SpecialCharTok{==} \DecValTok{1}\NormalTok{], }\AttributeTok{na.rm =}\NormalTok{ T) }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(Ybin }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =}\NormalTok{ T))}
 \NormalTok{  \}}
 \NormalTok{)}
 \FunctionTok{names}\NormalTok{(testRes) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(expr\_binned\_rank)}
@@ -489,9 +492,9 @@ Then, get rank differences of each gene based on specified subtype distribution 
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence. By the way, \textbf{Gene 1-3} have the same direction (\textless0), so do \textbf{Gene 4-6}, which indicates the basis of gene clustering.
+\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence. By the way, \textbf{Gene 1-3} have the same direction (\textless0), so do \textbf{Gene 4-6} (\textgreater0), which indicates the nature of clustering based on these two gene sets.
 
-In \textbf{GSClassifier}, we use \textbf{ptail} to select differential genes based on rank diffrences. \textbf{Less ptail is, less gene kept}. Here, we just set \textbf{ptail=0.4}:
+In practice, we use \textbf{ptail} to select differential genes based on rank diffrences. \textbf{Smaller ptail is, less gene kept}. Here, we just set \textbf{ptail=0.4}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -508,7 +511,7 @@ In \textbf{GSClassifier}, we use \textbf{ptail} to select differential genes bas
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Index of target genes: \textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(idx); }\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Target genes:\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(gene\_bigRank); }\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Target genes:\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{);}\FunctionTok{print}\NormalTok{(gene\_bigRank)}
 \CommentTok{\# Index of target genes:  }
 \CommentTok{\# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 }
 \CommentTok{\#     1     2     3     4     5     6 }
@@ -518,7 +521,7 @@ In \textbf{GSClassifier}, we use \textbf{ptail} to select differential genes bas
 \end{Highlighting}
 \end{Shaded}
 
-Hence, \textbf{Gene7} was filtered and excluded in the following analysis. In practice, both \textbf{ptail} and \textbf{breakVec} are hyperparameters in GSClassifier modeling.
+Hence, \textbf{Gene7} was filtered and excluded in the following analysis. By the way, both \textbf{ptail} and \textbf{breakVec} are hyperparameters in GSClassifier modeling.
 
 \hypertarget{pair-difference}{%
 \subsection{Pair difference}\label{pair-difference}}
@@ -586,17 +589,90 @@ Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1
 \hypertarget{set-difference}{%
 \subsection{Set difference}\label{set-difference}}
 
-In GSClassifier, we use function \textbf{makeSetData} to calculate gene set difference score:
+In \textbf{GSClassifier}, \textbf{Set difference} is defined as a weight average of gene-geneset rank difference.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{geneset\_interaction }\OtherTok{\textless{}{-}}\NormalTok{ GSClassifier}\SpecialCharTok{:::}\FunctionTok{makeSetData}\NormalTok{(expr,geneSet)}
-\FunctionTok{print}\NormalTok{(geneset\_interaction)}
+\CommentTok{\# No. of gene sets}
+\NormalTok{nGS }\OtherTok{=} \DecValTok{2}
+
+\CommentTok{\# Name of gene set comparision, which is like s1s2, s1s3 and so on.}
+\NormalTok{featureNames }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}s1s2\textquotesingle{}}
+
+\CommentTok{\# Gene set difference across samples}
+\NormalTok{resultList }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(expr\_sub)) \{ }\CommentTok{\# i=1}
+\NormalTok{  res0 }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(}\AttributeTok{length=}\FunctionTok{length}\NormalTok{(featureNames))}
+\NormalTok{  idx }\OtherTok{\textless{}{-}} \DecValTok{1}
+  \ControlFlowTok{for}\NormalTok{ (j1 }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(nGS}\DecValTok{{-}1}\NormalTok{)) \{ }\CommentTok{\# j1=1}
+    \ControlFlowTok{for}\NormalTok{ (j2 }\ControlFlowTok{in}\NormalTok{ (j1}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{nGS) \{ }\CommentTok{\# j2=2}
+      
+      \CommentTok{\# If j1=1 and j2=2, gene sets s1/s2 would be selected}
+      
+      \CommentTok{\# Genes of different gene sets}
+\NormalTok{      set1 }\OtherTok{\textless{}{-}}\NormalTok{ geneSet[[j1]] }\CommentTok{\# "Gene1" "Gene2" "Gene3"}
+\NormalTok{      set2 }\OtherTok{\textless{}{-}}\NormalTok{ geneSet[[j2]] }\CommentTok{\# "Gene4" "Gene5" "Gene6"}
+      
+      \CommentTok{\# RNA expression of Genes by different gene sets}
+\NormalTok{      vals1 }\OtherTok{\textless{}{-}}\NormalTok{ expr\_sub[}\FunctionTok{rownames}\NormalTok{(expr\_sub) }\SpecialCharTok{\%in\%}\NormalTok{ set1,i]}
+      \CommentTok{\# Gene1 Gene2 Gene3}
+      \CommentTok{\# 0.51  0.52  0.53}
+\NormalTok{      vals2 }\OtherTok{\textless{}{-}}\NormalTok{ expr\_sub[}\FunctionTok{rownames}\NormalTok{(expr\_sub) }\SpecialCharTok{\%in\%}\NormalTok{ set2,i]}
+      \CommentTok{\# Gene4 Gene5 Gene6}
+      \CommentTok{\# 0.21  0.22  0.23}
+
+      \CommentTok{\# Differences between one gene and gene sets}
+      \CommentTok{\# Compare expression level of each gene in Set1 with all genes in Set2. }
+      \CommentTok{\# For example, 0.51\textgreater{}0.21/0.22/0.23, so the value of Gene1:s2 is 3.}
+\NormalTok{      res1 }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(vals1, }\ControlFlowTok{function}\NormalTok{(v1) }\FunctionTok{sum}\NormalTok{(v1 }\SpecialCharTok{\textgreater{}}\NormalTok{ vals2, }\AttributeTok{na.rm=}\NormalTok{T))}
+      \CommentTok{\# Gene1:s2   Gene2:s2   Gene3:s2}
+      \CommentTok{\# 3          3           3}
+      
+      \CommentTok{\# Weight average of gene{-}geneset rank difference}
+\NormalTok{      res0[idx] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(res1, }\AttributeTok{na.rm =}\NormalTok{ T) }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{length}\NormalTok{(vals1) }\SpecialCharTok{*} \FunctionTok{length}\NormalTok{(vals2))}
+      
+      \CommentTok{\# Next gene set pair}
+\NormalTok{      idx }\OtherTok{\textless{}{-}}\NormalTok{ idx }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  resultList[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(res0)}
+\NormalTok{\}}
+\NormalTok{resMat }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(cbind, resultList)}
+\FunctionTok{colnames}\NormalTok{(resMat) }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(expr\_sub)}
+\FunctionTok{rownames}\NormalTok{(resMat) }\OtherTok{\textless{}{-}}\NormalTok{ featureNames}
+
+\CommentTok{\# Report }
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Set difference across samples: \textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(resMat)}
+\CommentTok{\# Set difference across samples:  }
 \CommentTok{\#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
 \CommentTok{\# s1s2       1       1       1       0       0       0}
 \end{Highlighting}
 \end{Shaded}
 
+In \textbf{GSClassifier}, we established \textbf{makeSetData} to evaluate set difference across samples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# Gene set difference across samples}
+\NormalTok{geneset\_interaction }\OtherTok{\textless{}{-}}\NormalTok{ GSClassifier}\SpecialCharTok{:::}\FunctionTok{makeSetData}\NormalTok{(expr\_sub, geneSet)}
+
+\CommentTok{\# Report }
+\FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Set difference across samples: \textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(resMat)}
+\CommentTok{\# Set difference across samples:  }
+\CommentTok{\#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
+\CommentTok{\# s1s2       1       1       1       0       0       0}
+\end{Highlighting}
+\end{Shaded}
+
+We have known that the subtype of \textbf{Sample 1-3} differs from that of \textbf{Sample 4-6}, which revealed the robustness of set difference for subtype indentification.
+
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+Linear growth/exponential growth
 
   \bibliography{book.bib,packages.bib}
 

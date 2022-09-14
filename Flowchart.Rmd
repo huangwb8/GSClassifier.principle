@@ -17,9 +17,9 @@ The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
 ### Data Processing
 
-A **subtype vector** should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the **subtype vector** data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (**PIAM^high^PIDG^high^**, **PIAM^high^PIDG^low^**, **PIAM^low^PIDG^high^**, and **PIAM^low^PIDG^low^**). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations were lacked for chasing such a complex model.
+A **subtype vector** should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the **subtype vector** data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (**PIAM^high^PIDG^high^**, **PIAM^high^PIDG^low^**, **PIAM^low^PIDG^high^**, and **PIAM^low^PIDG^low^**). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
 
-\@ref(subtypevector)
+As described in Figure \@ref(fig:flowchart), we identified **subtype vector** based on independent cohorts instead of a merged matrix with batch-effect control technologies. It's due to several conflicts with top scoring pairs (TSP) algorithm, the core data for model training and application in **GSClassifier**. More details are discussed in \@ref(subtypevector).
 
 
 ### Model Establishment and Validation

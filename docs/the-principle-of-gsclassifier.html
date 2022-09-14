@@ -156,6 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="the-principle-of-gsclassifier.html#model-complexibility" id="toc-model-complexibility"><span class="toc-section-number">1.7.1</span> Model complexibility</a></li>
 <li><a href="the-principle-of-gsclassifier.html#missing-value" id="toc-missing-value"><span class="toc-section-number">1.7.2</span> Missing value</a></li>
+<li><a href="the-principle-of-gsclassifier.html#subtypevector" id="toc-subtypevector"><span class="toc-section-number">1.7.3</span> Subtype vector calling</a></li>
 </ul></li>
 </ul></li>
 <li><a href="references.html#references" id="toc-references">References</a></li>
@@ -195,8 +196,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The flowchart of <strong>GSClassifier</strong> is showed in Figure <a href="the-principle-of-gsclassifier.html#fig:flowchart">1.1</a>.</p>
 <div id="data-processing" class="section level3" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Data Processing</h3>
-<p>A <strong>subtype vector</strong> should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the <strong>subtype vector</strong> data, which depends on the GEPs used and the related biological problems.</p>
-<p>For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (PIAM<sup>high</sup>PIDG<sup>high</sup>, PIAM<sup>high</sup>PIDG<sup>low</sup>, PIAM<sup>low</sup>PIDG<sup>high</sup>, and PIAM<sup>low</sup>PIDG<sup>low</sup>).</p>
+<p>A <strong>subtype vector</strong> should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the <strong>subtype vector</strong> data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (<strong>PIAM<sup>high</sup>PIDG<sup>high</sup></strong>, <strong>PIAM<sup>high</sup>PIDG<sup>low</sup></strong>, <strong>PIAM<sup>low</sup>PIDG<sup>high</sup></strong>, and <strong>PIAM<sup>low</sup>PIDG<sup>low</sup></strong>). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.</p>
+<p>As described in Figure <a href="the-principle-of-gsclassifier.html#fig:flowchart">1.1</a>, we identified <strong>subtype vector</strong> based on independent cohorts instead of a merged matrix with batch-effect control technologies. It’s due to several conflicts with top scoring pairs (TSP) algorithm, the core data for model training and application in <strong>GSClassifier</strong>. More details are discussed in <a href="the-principle-of-gsclassifier.html#subtypevector">1.7.3</a>.</p>
 </div>
 <div id="model-establishment-and-validation" class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Model Establishment and Validation</h3>
@@ -646,6 +647,9 @@ Figure 1.2: The components of TSP (2 gene sets)
 <div id="missing-value" class="section level3" number="1.7.2">
 <h3><span class="header-section-number">1.7.2</span> Missing value</h3>
 <p>Talk about strategy in subtypes modeling and calling</p>
+</div>
+<div id="subtypevector" class="section level3" number="1.7.3">
+<h3><span class="header-section-number">1.7.3</span> Subtype vector calling</h3>
 
 </div>
 </div>

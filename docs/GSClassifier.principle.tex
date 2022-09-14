@@ -173,9 +173,9 @@ The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 \hypertarget{data-processing}{%
 \subsection{Data Processing}\label{data-processing}}
 
-A \textbf{subtype vector} should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the \textbf{subtype vector} data, which depends on the GEPs used and the related biological problems.
+A \textbf{subtype vector} should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the \textbf{subtype vector} data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (\textbf{PIAM\textsuperscript{high}PIDG\textsuperscript{high}}, \textbf{PIAM\textsuperscript{high}PIDG\textsuperscript{low}}, \textbf{PIAM\textsuperscript{low}PIDG\textsuperscript{high}}, and \textbf{PIAM\textsuperscript{low}PIDG\textsuperscript{low}}). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
 
-For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (PIAM\textsuperscript{high}PIDG\textsuperscript{high}, PIAM\textsuperscript{high}PIDG\textsuperscript{low}, PIAM\textsuperscript{low}PIDG\textsuperscript{high}, and PIAM\textsuperscript{low}PIDG\textsuperscript{low}).
+As described in Figure \ref{fig:flowchart}, we identified \textbf{subtype vector} based on independent cohorts instead of a merged matrix with batch-effect control technologies. It's due to several conflicts with top scoring pairs (TSP) algorithm, the core data for model training and application in \textbf{GSClassifier}. More details are discussed in \ref{subtypevector}.
 
 \hypertarget{model-establishment-and-validation}{%
 \subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
@@ -750,6 +750,9 @@ Linear growth/exponential growth
 \subsection{Missing value}\label{missing-value}}
 
 Talk about strategy in subtypes modeling and calling
+
+\hypertarget{subtypevector}{%
+\subsection{Subtype vector calling}\label{subtypevector}}
 
   \bibliography{book.bib,packages.bib}
 

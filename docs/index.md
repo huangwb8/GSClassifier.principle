@@ -1,7 +1,7 @@
 --- 
 title: "The Principle of R Package GSClassifier"
 author: "Weibin Huang"
-date: "2022-09-14"
+date: "2022-09-15"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -19,13 +19,13 @@ description: "The Principle of GSClassifier"
 ---
 
 
- 
+<!-- 
 
 # Welcome {-}
 
 **The Priciple of GSClassifier** is a book for **GSClassifier** users who want to know the most details.
 
-If you're looking for the PDF edition, you can find it at <https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf>.
+If you're looking for the PDF edition, you can find it at <a rel="pdf" href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.
 
 ## License {-}
 
@@ -43,4 +43,4 @@ You may also be interested in:
 
 * __"[luckyModel](https://github.com/huangwb8/luckyModel)"__ Model ensemble for third-party lucky series, such GSClassifier.
 
-
+-->

@@ -146,7 +146,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-14}
+\date{2022-09-15}
 
 \begin{document}
 \maketitle
@@ -173,9 +173,11 @@ The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 \hypertarget{data-processing}{%
 \subsection{Data Processing}\label{data-processing}}
 
-A \textbf{subtype vector} should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the \textbf{subtype vector} data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (\textbf{PIAM\textsuperscript{high}PIDG\textsuperscript{high}}, \textbf{PIAM\textsuperscript{high}PIDG\textsuperscript{low}}, \textbf{PIAM\textsuperscript{low}PIDG\textsuperscript{high}}, and \textbf{PIAM\textsuperscript{low}PIDG\textsuperscript{low}}). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+For each dataset, RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{subtypevector}.
 
-As described in Figure \ref{fig:flowchart}, we identified \textbf{subtype vector} based on independent cohorts instead of a merged matrix with batch-effect control technologies. It's due to several conflicts with top scoring pairs (TSP) algorithm, the core data for model training and application in \textbf{GSClassifier}. More details are discussed in \ref{subtypevector}.
+There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For Pan-immune Activation and Dysfunction (PAD) subtypes, the GEPs, Pan-Immune Activation Module (PIAM) and Pan-Immune Dysfunction Genes (PIDG), are biologically associated and suitable for calling four sutbypes (\textbf{PIAM\textsuperscript{high}PIDG\textsuperscript{high}}, \textbf{PIAM\textsuperscript{high}PIDG\textsuperscript{low}}, \textbf{PIAM\textsuperscript{low}PIDG\textsuperscript{high}}, and \textbf{PIAM\textsuperscript{low}PIDG\textsuperscript{low}}). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+
+With subtype vectors and raw matrices, \textbf{Top Scoring Pairs (TSP)}, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \ref{topicTSP}.
 
 \hypertarget{model-establishment-and-validation}{%
 \subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
@@ -195,13 +197,6 @@ How to use
 
 \caption{The flow chart of GSClassifier}\label{fig:flowchart}
 \end{figure}
-
-\hypertarget{data-processing-1}{%
-\section{Data Processing}\label{data-processing-1}}
-
-For each dataset, the RNA expression matrix would be normalized (we called \textbf{Raw Matrix} in the flowchart) internally so that the expression data of the samples in the dataset were comparable.
-
-Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to \textbf{Subtype Vector} in the flowchart, via hierarchical clustering analysis.
 
 \hypertarget{simulated-dataset}{%
 \section{Simulated Dataset}\label{simulated-dataset}}
@@ -362,8 +357,8 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80\% of datasets were retained so as to minumize the impact from mising value.
 
-\hypertarget{top-scoring-pairs-tsp}{%
-\section{Top scoring pairs (TSP)}\label{top-scoring-pairs-tsp}}
+\hypertarget{topicTSP}{%
+\section{Top scoring pairs (TSP)}\label{topicTSP}}
 
 With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
 
@@ -739,20 +734,20 @@ As shown in Figure \ref{fig:tsp}, TSP matrix here should be :
 \end{Shaded}
 
 \hypertarget{discussion}{%
-\section{Discussion}\label{discussion}}
+\chapter{Discussion}\label{discussion}}
 
 \hypertarget{model-complexibility}{%
-\subsection{Model complexibility}\label{model-complexibility}}
+\section{Model complexibility}\label{model-complexibility}}
 
 Linear growth/exponential growth
 
 \hypertarget{missing-value}{%
-\subsection{Missing value}\label{missing-value}}
+\section{Missing value}\label{missing-value}}
 
 Talk about strategy in subtypes modeling and calling
 
 \hypertarget{subtypevector}{%
-\subsection{Subtype vector calling}\label{subtypevector}}
+\section{Subtype vector calling}\label{subtypevector}}
 
   \bibliography{book.bib,packages.bib}
 

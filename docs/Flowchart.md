@@ -17,9 +17,11 @@ The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
 ### Data Processing
 
-A **subtype vector** should be confirmed before model training because it would be an input in supervised learning. There is no standard method to figure out the **subtype vector** data, which depends on the GEPs used and the related biological problems. For PAD subtypes, the GEPs (PIAM and PIDG) are biologically associated and suitable for calling 4 sutbypes (**PIAM^high^PIDG^high^**, **PIAM^high^PIDG^low^**, **PIAM^low^PIDG^high^**, and **PIAM^low^PIDG^low^**). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
 
-As described in Figure \@ref(fig:flowchart), we identified **subtype vector** based on independent cohorts instead of a merged matrix with batch-effect control technologies. It's due to several conflicts with top scoring pairs (TSP) algorithm, the core data for model training and application in **GSClassifier**. More details are discussed in \@ref(subtypevector).
+There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For Pan-immune Activation and Dysfunction (PAD) subtypes, the GEPs, Pan-Immune Activation Module (PIAM) and Pan-Immune Dysfunction Genes (PIDG), are biologically associated and suitable for calling four sutbypes (**PIAM^high^PIDG^high^**, **PIAM^high^PIDG^low^**, **PIAM^low^PIDG^high^**, and **PIAM^low^PIDG^low^**).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+
+With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \@ref(topicTSP).
 
 
 ### Model Establishment and Validation
@@ -32,17 +34,15 @@ How to training
 How to use
 
 
-<div class="figure" style="text-align: center">
-<img src="./fig/flowchart.png" alt="The flow chart of GSClassifier" width="90%" />
-<p class="caption">(\#fig:flowchart)The flow chart of GSClassifier</p>
-</div>
+\begin{figure}
 
+{\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
 
-## Data Processing
+}
 
-For each dataset, the RNA expression matrix would be normalized (we called **Raw Matrix** in the flowchart) internally so that the expression data of the samples in the dataset were comparable. 
+\caption{The flow chart of GSClassifier}(\#fig:flowchart)
+\end{figure}
 
-Next, the subtypes of the samples in each dataset would be called based on cluster analysis. Specially, we figured out PAD subtypes, which belong to **Subtype Vector** in the flowchart, via hierarchical clustering analysis.
 
 ## Simulated Dataset
 
@@ -136,7 +136,9 @@ Look at the matrix via heatmap:
 Heatmap(t(scale(t(expr0))), name = "Z-score")
 ```
 
-<img src="Flowchart_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
 
 This is an intersting dataset with features as following:
@@ -190,11 +192,13 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 Heatmap(t(scale(t(expr))), name = "Z-score")
 ```
 
-<img src="Flowchart_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
 
-## Top scoring pairs (TSP)
+## Top scoring pairs (TSP) {#topicTSP}
 
 With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
 
@@ -217,10 +221,14 @@ trainDataProc(
 
 As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
 
-<div class="figure" style="text-align: center">
-<img src="./fig/TSP.png" alt="The components of TSP (2 gene sets)" width="85%" />
-<p class="caption">(\#fig:tsp)The components of TSP (2 gene sets)</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
+\end{figure}
 
 
 ### Binned expression
@@ -550,28 +558,6 @@ print(tsp)
 # Gene5:Gene6       0       1       1       0       1       0
 # s1s2              1       1       1       0       0       0
 ```
-
-## Discussion
-
-### Model complexibility
-
-Linear growth/exponential growth 
-
-### Missing value
-
-Talk about strategy in subtypes modeling and calling
-
-### Subtype vector calling {#subtypevector}
-
-
-
-
-
-
-
-
-
-
 
 
 

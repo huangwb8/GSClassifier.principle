@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  14 SEP 2022 23:07
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  15 SEP 2022 09:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1153,37 +1153,21 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ]
 Chapter 1.
-
-Underfull \hbox (badness 1242) in paragraph at lines 176--177
-\TU/lmr/m/n/12 calling 4 sutbypes (\TU/lmr/bx/n/12 PIAM$[]$PIDG$[]$\TU/lmr/m/n/
-12 , \TU/lmr/bx/n/12 PIAM$[]$PIDG$[]$\TU/lmr/m/n/12 , \TU/lmr/bx/n/12 PIAM$[]$P
-IDG$[]$\TU/lmr/m/n/12 ,
- []
-
-
-Underfull \hbox (badness 1107) in paragraph at lines 176--177
-\TU/lmr/m/n/12 and \TU/lmr/bx/n/12 PIAM$[]$PIDG$[]$\TU/lmr/m/n/12 ). Theoretica
-lly, we can also use a category strategy like
- []
-
 [5]
 File: ./fig/flowchart.png Graphic file (type bmp)
 <./fig/flowchart.png>
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 215.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 210.
 [6] [7]
-Underfull \vbox (badness 10000) detected at line 292
+Underfull \vbox (badness 1137) detected at line 287
  []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [8]
-Underfull \vbox (badness 10000) detected at line 292
+Underfull \vbox (badness 10000) detected at line 287
  []
 
 
-Underfull \vbox (badness 10000) detected at line 292
+Underfull \vbox (badness 10000) detected at line 287
  []
 
 [9]
@@ -1194,90 +1178,73 @@ File: Flowchart_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf
 File: Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [12]
 File: ./fig/TSP.png Graphic file (type bmp)
 <./fig/TSP.png>
 [13]
-Underfull \vbox (badness 10000) detected at line 443
+Underfull \vbox (badness 10000) detected at line 438
  []
 
 
-Underfull \vbox (badness 10000) detected at line 443
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [14]
-Underfull \vbox (badness 8151) detected at line 466
- []
-
-
-Underfull \vbox (badness 4954) has occurred while \output is active []
-
-[15]
 
 Package amsmath Warning: Foreign command \atop;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 470.
+(amsmath)                 on input line 465.
 
-
-Underfull \vbox (badness 1454) detected at line 514
- []
-
-[16]
-Underfull \vbox (badness 2875) detected at line 543
+[15]
+Underfull \vbox (badness 10000) detected at line 509
  []
 
 
-Underfull \vbox (badness 1342) has occurred while \output is active []
+Underfull \vbox (badness 7851) has occurred while \output is active []
 
-[17] [18] [19]
-Underfull \vbox (badness 1642) detected at line 672
+[16] [17] [18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[19]
+Underfull \vbox (badness 1132) detected at line 667
  []
 
 
-Underfull \vbox (badness 1077) has occurred while \output is active []
+Underfull \vbox (badness 1102) has occurred while \output is active []
 
 [20]
-Underfull \vbox (badness 10000) detected at line 672
+Underfull \vbox (badness 10000) detected at line 667
  []
 
 
-Underfull \vbox (badness 10000) detected at line 672
+Underfull \vbox (badness 10000) detected at line 667
  []
 
 [21]
-Underfull \vbox (badness 4181) detected at line 739
+Underfull \vbox (badness 4726) detected at line 734
  []
 
 
-Underfull \vbox (badness 2735) has occurred while \output is active []
+Underfull \vbox (badness 4096) has occurred while \output is active []
 
-[22]
-Underfull \vbox (badness 10000) detected at line 739
- []
+[22] [23] [24
 
-
-Underfull \vbox (badness 10000) detected at line 739
- []
-
-[23]
+]
+Chapter 2.
 No file GSClassifier.principle.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 759.
-[24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 759.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 754.
+[25]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 754.
 (./GSClassifier.principle.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 759.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 759.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 754.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 754.
  ) 
 Here is how much of TeX's memory you used:
- 28927 strings out of 492922
- 524785 string characters out of 6130480
- 764390 words of memory out of 5000000
- 32679 multiletter control sequences out of 15000+600000
+ 28925 strings out of 492922
+ 524747 string characters out of 6130480
+ 764323 words of memory out of 5000000
+ 32677 multiletter control sequences out of 15000+600000
  538734 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,6n,115p,835b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,6n,115p,839b,446s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on GSClassifier.principle.pdf (24 pages).
+Output written on GSClassifier.principle.pdf (25 pages).

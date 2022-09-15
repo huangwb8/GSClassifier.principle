@@ -17,3 +17,8 @@ Talk about strategy in subtypes modeling and calling
 ## Subtype vector calling {#subtypevector}
 
 
+## The number of submodels {#topicSubmodel}
+
+Talk about the number of submodels we should train.
+
+

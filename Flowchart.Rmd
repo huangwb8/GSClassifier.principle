@@ -17,6 +17,10 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE, results = '
 
 The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 
 
+```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics(rep("./fig/flowchart.png", 1))
+```
+
 ### Data Processing
 
 For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
@@ -28,18 +32,14 @@ With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core dat
 
 ### Model Establishment and Validation
 
-The TSP matrix would be devided into a training cohort and a test cohort (or internal validation cohort). In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **Subset** (70% of the training cohort in PAD project) would be further selected randomly to build a **Submodel** via Extreme Gradient Boosting algorithm.
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **Subset** (70% of the training cohort in PAD project) would be further selected randomly to build a **Submodel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function),<!--引文-->. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)). 
+
+The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, **the data of both internal and external validation cohort would not be used during model training**. 
 
 
 ### Model Application
 
-How to use
-
-
-```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics(rep("./fig/flowchart.png", 1))
-```
-
+In PAD project, **Model for individual**, the ensemble of submodels, is called "**PAD for individual**" (**PADi**).
 
 ## Simulated Dataset
 

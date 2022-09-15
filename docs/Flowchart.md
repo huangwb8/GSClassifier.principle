@@ -15,25 +15,6 @@
 
 The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart). 
 
-### Data Processing
-
-For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
-
-There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For Pan-immune Activation and Dysfunction (PAD) subtypes, the GEPs, Pan-Immune Activation Module (PIAM) and Pan-Immune Dysfunction Genes (PIDG), are biologically associated and suitable for calling four sutbypes (**PIAM^high^PIDG^high^**, **PIAM^high^PIDG^low^**, **PIAM^low^PIDG^high^**, and **PIAM^low^PIDG^low^**).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
-
-With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \@ref(topicTSP).
-
-
-### Model Establishment and Validation
-
-How to training 
-
-
-### Model Application
-
-How to use
-
-
 \begin{figure}
 
 {\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
@@ -42,6 +23,27 @@ How to use
 
 \caption{The flow chart of GSClassifier}(\#fig:flowchart)
 \end{figure}
+
+### Data Processing
+
+For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
+
+There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+
+With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \@ref(topicTSP).
+
+
+### Model Establishment and Validation
+
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **Subset** (70% of the training cohort in PAD project) would be further selected randomly to build a **Submodel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function),<!--引文-->. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)). 
+
+The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, **the data of both internal and external validation cohort would not be used during model training**. 
+
+
+### Model Application
+
+In PAD project, the ensemble of submodels is called "**PAD for individual**" (**PADi**).
+
 
 
 ## Simulated Dataset

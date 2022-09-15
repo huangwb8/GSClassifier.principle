@@ -9,7 +9,11 @@
 
 ## Introduction
 
-[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
+[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of **GSClassifier** package usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control.
+<!--
+描述GSClassifier的Flowchart，关注每一步的具体细节；
+演示TSP的计算过程
+-->
 
 ## Flowchart
 
@@ -42,11 +46,25 @@ The internal validation cohort and external validation cohort (if any) would be 
 
 ### Model Application
 
-In PAD project, the ensemble of submodels is called "**PAD for individual**" (**PADi**).
+In PAD project, **Model for individual**, the ensemble of submodels, is called "**PAD for individual**" (**PADi**). Supposed raw RNA expression of a patient was given, **GSClassifier** would turn it into TSP vector, which would be as a input to **PADi**. Then, **GSClassifier** would output the possibility matrix and the subtype for this patient. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so models like **PADi** are personalized.
+
+## Top scoring pairs {#topicTSP}
+
+Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**) algorithm, which was previously described by Geman et al<!--参考文献-->. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response<!--参考文献-->. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma<!--参考文献-->. TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.<!--参考文献：https://pubmed.ncbi.nlm.nih.gov/36088543/ -->
+
+As show in Figure \@ref(fig:tsp), The TSP matrix in GSClassifier consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
+\end{figure}
 
 
-
-## Simulated Dataset
+### Packages
 
 First, load needed packages:
 
@@ -83,7 +101,9 @@ packages_needed <- c(
 for(i in packages_needed){p_load(char=i)}
 ```
 
-We simulated a dataset:
+### Simulated Dataset
+
+We simulated a dataset to demonstrate the principle of TSP normalization in GSClassifier:
 
 
 ```r
@@ -200,8 +220,6 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
 
-## Top scoring pairs (TSP) {#topicTSP}
-
 With **subtype vectors** and **Raw Matrix**, the TSP matrix for a specified subtypes could be calculated via function `GSClassifier::trainDataProc`:
 
 
@@ -220,17 +238,6 @@ trainDataProc(
   breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
 )
 ```
-
-As show in Figure \@ref(fig:tsp), The TSP matrix consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. Next, we would use a simulated dataset to introduce **how TSP matrix calculated in GSClassifier**. 
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
-
-}
-
-\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
-\end{figure}
 
 
 ### Binned expression

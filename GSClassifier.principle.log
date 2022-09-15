@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  15 SEP 2022 10:14
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  15 SEP 2022 11:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1156,109 +1156,76 @@ Chapter 1.
 File: ./fig/flowchart.png Graphic file (type bmp)
 <./fig/flowchart.png>
 [5] [6] [7]
+File: ./fig/TSP.png Graphic file (type bmp)
+<./fig/TSP.png>
+[8]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 212.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 228.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[8]
-Underfull \vbox (badness 10000) detected at line 289
- []
-
-
-Overfull \vbox (0.77998pt too high) detected at line 289
- []
-
 [9]
+Underfull \vbox (badness 10000) detected at line 308
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10]
 File: Flowchart_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-3-1.pdf>
-[10] [11]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[11] [12]
 File: Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf>
-[12]
-File: ./fig/TSP.png Graphic file (type bmp)
-<./fig/TSP.png>
-[13]
-Underfull \vbox (badness 10000) detected at line 440
- []
-
-
-Underfull \vbox (badness 10000) detected at line 440
- []
-
-[14]
-Underfull \vbox (badness 8151) detected at line 463
- []
-
-
-Underfull \vbox (badness 4954) has occurred while \output is active []
+[13] [14]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [15]
 
 Package amsmath Warning: Foreign command \atop;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 467.
+(amsmath)                 on input line 472.
 
+[16] [17]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Underfull \vbox (badness 1454) detected at line 511
- []
-
-[16]
-Underfull \vbox (badness 2875) detected at line 540
- []
-
-
-Underfull \vbox (badness 1342) has occurred while \output is active []
-
-[17] [18] [19]
-Underfull \vbox (badness 1642) detected at line 669
+[18] [19] [20]
+Underfull \vbox (badness 10000) detected at line 674
  []
 
 
-Underfull \vbox (badness 1077) has occurred while \output is active []
-
-[20]
-Underfull \vbox (badness 10000) detected at line 669
- []
-
-
-Underfull \vbox (badness 10000) detected at line 669
+Overfull \vbox (2.45999pt too high) detected at line 674
  []
 
 [21]
-Underfull \vbox (badness 4181) detected at line 736
+Underfull \vbox (badness 10000) detected at line 691
  []
 
 
-Underfull \vbox (badness 2735) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[22]
-Underfull \vbox (badness 10000) detected at line 736
- []
-
-
-Underfull \vbox (badness 10000) detected at line 736
- []
-
-[23] [24]
+[22] [23] [24]
 Chapter 2.
 No file GSClassifier.principle.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 761.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 771.
 [25
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 761.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 771.
 (./GSClassifier.principle.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 761.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 761.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 771.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 771.
  ) 
 Here is how much of TeX's memory you used:
- 28927 strings out of 492922
- 524772 string characters out of 6130480
- 764374 words of memory out of 5000000
- 32679 multiletter control sequences out of 15000+600000
+ 28931 strings out of 492922
+ 524809 string characters out of 6130480
+ 763457 words of memory out of 5000000
+ 32683 multiletter control sequences out of 15000+600000
  538734 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,6n,115p,830b,446s stack positions out of 5000i,500n,10000p,200000b,80000s

@@ -163,7 +163,7 @@
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-\href{https://github.com/huangwb8/GSClassifier}{GSClassifier} is an R package for modeling and identification of gene expression profiles (GEPs) subtypes. The detail of usage had been demonstrated in \href{https://github.com/huangwb8/GSClassifier/wiki}{Github WiKi}. Here, we propose to introduce the principle of GSClassifier, including flowchart, \textbf{top scoring pairs (TSP)} algorithm, and batch effect control.
+\href{https://github.com/huangwb8/GSClassifier}{GSClassifier} is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of \textbf{GSClassifier} package usage had been demonstrated in \href{https://github.com/huangwb8/GSClassifier/wiki}{Github WiKi}. Here, we propose to introduce the principle of GSClassifier, including flowchart, \textbf{top scoring pairs (TSP)} algorithm, and batch effect control.
 
 \hypertarget{flowchart}{%
 \section{Flowchart}\label{flowchart}}
@@ -198,10 +198,26 @@ The internal validation cohort and external validation cohort (if any) would be 
 \hypertarget{model-application}{%
 \subsection{Model Application}\label{model-application}}
 
-In PAD project, the ensemble of submodels is called ``\textbf{PAD for individual}'' (\textbf{PADi}).
+In PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``\textbf{PAD for individual}'' (\textbf{PADi}). Supposed raw RNA expression of a patient was given, \textbf{GSClassifier} would turn it into TSP vector, which would be as a input to \textbf{PADi}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this patient. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so models like \textbf{PADi} are personalized.
 
-\hypertarget{simulated-dataset}{%
-\section{Simulated Dataset}\label{simulated-dataset}}
+\hypertarget{topicTSP}{%
+\section{Top scoring pairs}\label{topicTSP}}
+
+Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}) algorithm, which was previously described by Geman et al. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma. TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.
+
+As show in Figure \ref{fig:tsp}, The TSP matrix in GSClassifier consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
+
+}
+
+\caption{The components of TSP (2 gene sets)}\label{fig:tsp}
+\end{figure}
+
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
 
 First, load needed packages:
 
@@ -239,7 +255,10 @@ First, load needed packages:
 \end{Highlighting}
 \end{Shaded}
 
-We simulated a dataset:
+\hypertarget{simulated-dataset}{%
+\subsection{Simulated Dataset}\label{simulated-dataset}}
+
+We simulated a dataset to demonstrate the principle of TSP normalization in GSClassifier:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -359,9 +378,6 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80\% of datasets were retained so as to minumize the impact from mising value.
 
-\hypertarget{topicTSP}{%
-\section{Top scoring pairs (TSP)}\label{topicTSP}}
-
 With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
 
 \begin{Shaded}
@@ -381,17 +397,6 @@ With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a spec
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-As show in Figure \ref{fig:tsp}, The TSP matrix consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. Next, we would use a simulated dataset to introduce \textbf{how TSP matrix calculated in GSClassifier}.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
-
-}
-
-\caption{The components of TSP (2 gene sets)}\label{fig:tsp}
-\end{figure}
 
 \hypertarget{binned-expression}{%
 \subsection{Binned expression}\label{binned-expression}}
@@ -747,6 +752,11 @@ Linear growth/exponential growth
 \section{Missing value}\label{missing-value}}
 
 Talk about strategy in subtypes modeling and calling
+
+\hypertarget{extensibility}{%
+\section{Extensibility}\label{extensibility}}
+
+How could
 
 \hypertarget{subtypevector}{%
 \section{Subtype vector calling}\label{subtypevector}}

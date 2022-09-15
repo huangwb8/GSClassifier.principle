@@ -14,6 +14,10 @@ Linear growth/exponential growth
 
 Talk about strategy in subtypes modeling and calling
 
+## Extensibility
+
+How could 
+
 ## Subtype vector calling {#subtypevector}
 
 

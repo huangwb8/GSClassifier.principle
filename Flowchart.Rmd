@@ -47,9 +47,9 @@ In PAD project, **Model for individual**, the ensemble of submodels, is called "
 
 ## Top scoring pairs {#topicTSP}
 
-Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**) algorithm, which was previously described by Geman et al<!--参考文献-->. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response<!--参考文献-->. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma<!--参考文献-->. TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.<!--参考文献：https://pubmed.ncbi.nlm.nih.gov/36088543/ -->
+Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**) algorithm, which was previously described by Geman et al<!--参考文献-->. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response<!--参考文献-->. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma<!--参考文献-->. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.<!--参考文献：https://pubmed.ncbi.nlm.nih.gov/36088543/ -->
 
-As show in Figure \@ref(fig:tsp), The TSP matrix in GSClassifier consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. As show in Figure \@ref(fig:tsp), The TSP matrix in GSClassifier consists of 3 parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 ```{r echo=FALSE, tsp, fig.cap='The components of TSP (2 gene sets)', out.width='85%', fig.align='center'}
 knitr::include_graphics(rep("./fig/TSP.png", 1))
@@ -141,7 +141,7 @@ This is an intersting dataset with features as following:
 
 + **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 
-## Missing values
+### Missing values
 
 Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
 

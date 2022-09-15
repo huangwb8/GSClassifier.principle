@@ -203,9 +203,9 @@ In PAD project, \textbf{Model for individual}, the ensemble of submodels, is cal
 \hypertarget{topicTSP}{%
 \section{Top scoring pairs}\label{topicTSP}}
 
-Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}) algorithm, which was previously described by Geman et al. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma. TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.
+Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}) algorithm, which was previously described by Geman et al. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.
 
-As show in Figure \ref{fig:tsp}, The TSP matrix in GSClassifier consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. As show in Figure \ref{fig:tsp}, The TSP matrix in GSClassifier consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 \begin{figure}
 
@@ -329,7 +329,7 @@ This is an intersting dataset with features as following:
 \end{itemize}
 
 \hypertarget{missing-values}{%
-\section{Missing values}\label{missing-values}}
+\subsection{Missing values}\label{missing-values}}
 
 Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
 

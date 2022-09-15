@@ -152,12 +152,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.3.1</span> Packages</a></li>
 <li><a href="the-principle-of-gsclassifier.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.3.2</span> Simulated Dataset</a></li>
-</ul></li>
-<li><a href="the-principle-of-gsclassifier.html#missing-values" id="toc-missing-values"><span class="toc-section-number">1.4</span> Missing values</a>
-<ul>
-<li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.4.1</span> Binned expression</a></li>
-<li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.4.2</span> Pair difference</a></li>
-<li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.4.3</span> Set difference</a></li>
+<li><a href="the-principle-of-gsclassifier.html#missing-values" id="toc-missing-values"><span class="toc-section-number">1.3.3</span> Missing values</a></li>
+<li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.3.4</span> Binned expression</a></li>
+<li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.3.5</span> Pair difference</a></li>
+<li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.3.6</span> Set difference</a></li>
 </ul></li>
 </ul></li>
 <li><a href="discussion.html#discussion" id="toc-discussion"><span class="toc-section-number">2</span> Discussion</a>
@@ -226,8 +224,8 @@ Figure 1.1: The flow chart of GSClassifier
 </div>
 <div id="topicTSP" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Top scoring pairs</h2>
-<p>Genes expression of an individual is normalized during the model training and the subtype identification via <strong>Top Scoring Pairs</strong> (<strong>TSP</strong>) algorithm, which was previously described by Geman et al<!--参考文献-->. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response<!--参考文献-->. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma<!--参考文献-->. TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.<!--参考文献：https://pubmed.ncbi.nlm.nih.gov/36088543/ --></p>
-<p>As show in Figure <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, The TSP matrix in GSClassifier consists of 3 parts: <strong>binned expression</strong>, <strong>pair difference</strong>, and <strong>set difference</strong>. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.</p>
+<p>Genes expression of an individual is normalized during the model training and the subtype identification via <strong>Top Scoring Pairs</strong> (<strong>TSP</strong>) algorithm, which was previously described by Geman et al<!--参考文献-->. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response<!--参考文献-->. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma<!--参考文献-->. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.<!--参考文献：https://pubmed.ncbi.nlm.nih.gov/36088543/ --></p>
+<p>TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. As show in Figure <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, The TSP matrix in GSClassifier consists of 3 parts: <strong>binned expression</strong>, <strong>pair difference</strong>, and <strong>set difference</strong>. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.</p>
 <div class="figure" style="text-align: center"><span id="fig:tsp"></span>
 <img src="fig/TSP.png" alt="The components of TSP (2 gene sets)" width="85%" />
 <p class="caption">
@@ -322,9 +320,8 @@ Figure 1.2: The components of TSP (2 gene sets)
 <li><p><strong>Expression heterogeneity &amp; rank homogeneity</strong>: Take <strong>Sample1</strong> and <strong>Sample3</strong> as examples. The expression of <strong>Gene 1-6</strong> in <strong>Sample3</strong> seemed to be higher than those of <strong>Sample1</strong>. However, the expression of <strong>Gene 1-3</strong> is higher than <strong>Gene 4-6</strong> in both <strong>Sample1</strong> and <strong>Sample3</strong>, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.</p></li>
 </ul>
 </div>
-</div>
-<div id="missing-values" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Missing values</h2>
+<div id="missing-values" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Missing values</h3>
 <p>Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="the-principle-of-gsclassifier.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RPART</span></span>
 <span id="cb4-2"><a href="the-principle-of-gsclassifier.html#cb4-2" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">na_fill</span>(expr0, <span class="at">method=</span><span class="st">&quot;anova&quot;</span>, <span class="at">na.action =</span> na.rpart)</span>
@@ -372,8 +369,9 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb6-11"><a href="the-principle-of-gsclassifier.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project</span></span>
 <span id="cb6-12"><a href="the-principle-of-gsclassifier.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">breakVec =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
 <span id="cb6-13"><a href="the-principle-of-gsclassifier.html#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div id="binned-expression" class="section level3" number="1.4.1">
-<h3><span class="header-section-number">1.4.1</span> Binned expression</h3>
+</div>
+<div id="binned-expression" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Binned expression</h3>
 <p>First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.</p>
 <p>Take <strong>Sample4</strong> as an example:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="the-principle-of-gsclassifier.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -484,8 +482,8 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb11-20"><a href="the-principle-of-gsclassifier.html#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot; &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span></code></pre></div>
 <p>Hence, <strong>Gene7</strong> was filtered and excluded in the following analysis. By the way, both <strong>ptail</strong> and <strong>breakVec</strong> are hyperparameters in GSClassifier modeling.</p>
 </div>
-<div id="pair-difference" class="section level3" number="1.4.2">
-<h3><span class="header-section-number">1.4.2</span> Pair difference</h3>
+<div id="pair-difference" class="section level3" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> Pair difference</h3>
 <p>In GSClassifier, we use a ensemble function <strong>featureSelection</strong> to select data for pair difference scoring.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="the-principle-of-gsclassifier.html#cb12-1" aria-hidden="true" tabindex="-1"></a>expr_feat <span class="ot">&lt;-</span> <span class="fu">featureSelection</span>(expr, Ybin,</span>
 <span id="cb12-2"><a href="the-principle-of-gsclassifier.html#cb12-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">testRes =</span> testRes,</span>
@@ -534,8 +532,8 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb13-20"><a href="the-principle-of-gsclassifier.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5:Gene6       0       1       1       0       1       0</span></span></code></pre></div>
 <p>Take <strong>Gene1:Gene4</strong> of <strong>Sample1</strong> as an example. <span class="math inline">\(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 &gt; 0\)</span>, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between <strong>Sample 1-3</strong> and <strong>Sample 4-6</strong> is obivous, revealing the robustness of pair difference for subtype identification.</p>
 </div>
-<div id="set-difference" class="section level3" number="1.4.3">
-<h3><span class="header-section-number">1.4.3</span> Set difference</h3>
+<div id="set-difference" class="section level3" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> Set difference</h3>
 <p>In <strong>GSClassifier</strong>, <strong>Set difference</strong> is defined as a weight average of gene-geneset rank difference.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="the-principle-of-gsclassifier.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No. of gene sets</span></span>
 <span id="cb14-2"><a href="the-principle-of-gsclassifier.html#cb14-2" aria-hidden="true" tabindex="-1"></a>nGS <span class="ot">=</span> <span class="dv">2</span></span>

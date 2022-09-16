@@ -130,7 +130,7 @@
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[]{natbib}
-\bibliographystyle{apalike}
+\bibliographystyle{plainnat}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
@@ -146,7 +146,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-15}
+\date{2022-09-16}
 
 \begin{document}
 \maketitle
@@ -191,21 +191,24 @@ With subtype vectors and raw matrices, \textbf{Top Scoring Pairs (TSP)}, the cor
 \hypertarget{model-establishment-and-validation}{%
 \subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
 
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{Subset} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{Submodel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function),. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{Subset} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{Submodel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) \citep{RN345}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
 
-The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, \textbf{the data of both internal and external validation cohort would not be used during model training}.
+The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, \textbf{the data of both internal and external validation cohort would not be used during model training} so as to avoid over-fitting.
 
 \hypertarget{model-application}{%
 \subsection{Model Application}\label{model-application}}
 
-In PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``\textbf{PAD for individual}'' (\textbf{PADi}). Supposed raw RNA expression of a patient was given, \textbf{GSClassifier} would turn it into TSP vector, which would be as a input to \textbf{PADi}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this patient. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so models like \textbf{PADi} are personalized.
+In PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``\textbf{PAD for individual}'' (\textbf{PADi}). Supposed raw RNA expression of a sample was given. As showed in \ref{fig:flowchart} and \ref{fig:tsp}, \textbf{GSClassifier} would turn raw RNA expression into a TSP vector, which would be as a input to \textbf{Model for individual}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest \textbf{Model for individual} (\textbf{PADi}, etc) as personalized model.
 
 \hypertarget{topicTSP}{%
 \section{Top scoring pairs}\label{topicTSP}}
 
-Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}) algorithm, which was previously described by Geman et al. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.
+\hypertarget{tsp-intro}{%
+\subsection{Introduction}\label{tsp-intro}}
 
-TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. As show in Figure \ref{fig:tsp}, The TSP matrix in GSClassifier consists of 3 parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}, also called \textbf{Relative Expression Orderings} (\textbf{REOs})) algorithm, which was previously described by Geman et al \citep{RN267}. \textbf{TSP} normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. \textbf{TSP} had been used in cancer research and effectively predicts cancer progression and ICIs response \citep{RN265, RN266, RN261}.
+
+As show in Figure \ref{fig:tsp}, The TSP matrix in GSClassifier consists of three parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 \begin{figure}
 
@@ -250,10 +253,77 @@ First, load needed packages:
   \StringTok{"ComplexHeatmap"}\NormalTok{,}
   \StringTok{"GSClassifier"}\NormalTok{,}
   \StringTok{"rpart"}\NormalTok{,}
-  \StringTok{"tidyr"}\NormalTok{)}
+  \StringTok{"tidyr"}\NormalTok{,}
+  \StringTok{"reshape2"}\NormalTok{,}
+  \StringTok{"ggplot2"}\NormalTok{)}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ packages\_needed)\{}\FunctionTok{p\_load}\NormalTok{(}\AttributeTok{char=}\NormalTok{i)\}}
 \end{Highlighting}
 \end{Shaded}
+
+Here is the environment of R programming:
+
+\begin{verbatim}
+# R version 4.0.3 (2020-10-10)
+# Platform: x86_64-w64-mingw32/x64 (64-bit)
+# Running under: Windows 10 x64 (build 18363)
+# 
+# Matrix products: default
+# 
+# locale:
+# [1] LC_COLLATE=Chinese (Simplified)_China.936 
+# [2] LC_CTYPE=Chinese (Simplified)_China.936   
+# [3] LC_MONETARY=Chinese (Simplified)_China.936
+# [4] LC_NUMERIC=C                              
+# [5] LC_TIME=Chinese (Simplified)_China.936    
+# 
+# attached base packages:
+# [1] grid      stats     graphics  grDevices utils     datasets  methods  
+# [8] base     
+# 
+# other attached packages:
+# [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
+# [4] rpart_4.1.16         GSClassifier_0.1.20  luckyBase_0.1.0     
+# [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
+# 
+# loaded via a namespace (and not attached):
+#   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
+#   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
+#   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
+#  [10] clue_0.3-57          rstudioapi_0.13      ggpubr_0.4.0        
+#  [13] listenv_0.8.0        remotes_2.4.2        prodlim_2019.11.13  
+#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
+#  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
+#  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
+#  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
+#  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
+#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.2-18       
+#  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
+#  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
+#  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
+#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.4.1         
+#  [46] nlme_3.1-149         iterators_1.0.14     timeDate_3043.102   
+#  [49] xfun_0.33            gower_1.0.0          stringr_1.4.0       
+#  [52] globals_0.15.1       ps_1.4.0             testthat_3.1.0      
+#  [55] lifecycle_1.0.1      devtools_2.4.3       rstatix_0.7.0       
+#  [58] future_1.26.1        MASS_7.3-53          scales_1.2.0        
+#  [61] ipred_0.9-12         parallel_4.0.3       RColorBrewer_1.1-3  
+#  [64] yaml_2.3.5           memoise_2.0.1        stringi_1.7.6       
+#  [67] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
+#  [70] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
+#  [73] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
+#  [76] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
+#  [79] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
+#  [82] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
+#  [85] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
+#  [88] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
+#  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
+#  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
+#  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
+# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
+# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
+# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
+# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+\end{verbatim}
 
 \hypertarget{simulated-dataset}{%
 \subsection{Simulated Dataset}\label{simulated-dataset}}
@@ -315,7 +385,7 @@ Look at the matrix via heatmap:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-3-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 This is an intersting dataset with features as following:
 
@@ -328,15 +398,35 @@ This is an intersting dataset with features as following:
   \textbf{Expression heterogeneity \& rank homogeneity}: Take \textbf{Sample1} and \textbf{Sample3} as examples. The expression of \textbf{Gene 1-6} in \textbf{Sample3} seemed to be higher than those of \textbf{Sample1}. However, the expression of \textbf{Gene 1-3} is higher than \textbf{Gene 4-6} in both \textbf{Sample1} and \textbf{Sample3}, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 \end{itemize}
 
-\hypertarget{missing-values}{%
-\subsection{Missing values}\label{missing-values}}
+\hypertarget{missing-value-imputation}{%
+\subsection{Missing value imputation}\label{missing-value-imputation}}
 
-Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:
+Here, we do missing value imputation with quantile algorithm:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# RPART}
-\NormalTok{expr }\OtherTok{\textless{}{-}}\NormalTok{ GSClassifier}\SpecialCharTok{:::}\FunctionTok{na\_fill}\NormalTok{(expr0, }\AttributeTok{method=}\StringTok{"anova"}\NormalTok{, }\AttributeTok{na.action =}\NormalTok{ na.rpart)}
+
+\CommentTok{\# Quantile algorithm}
+\NormalTok{expr }\OtherTok{\textless{}{-}}\NormalTok{ expr0}
+\NormalTok{na.pos }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(expr,}\DecValTok{2}\NormalTok{,is.one.na)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{478}\NormalTok{); seeds }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(expr)}\SpecialCharTok{*}\DecValTok{10}\NormalTok{, }\FunctionTok{sum}\NormalTok{(na.pos), }\AttributeTok{replace =}\NormalTok{ F)}
+\NormalTok{tSample }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(na.pos)[na.pos]}
+\NormalTok{quantile\_vector }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{)}\SpecialCharTok{/}\DecValTok{1000}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(tSample))\{ }\CommentTok{\# i=1}
+  
+\NormalTok{  sample.i }\OtherTok{\textless{}{-}}\NormalTok{ tSample[i]}
+\NormalTok{  expr.i }\OtherTok{\textless{}{-}}\NormalTok{ expr[, sample.i]}
+\NormalTok{  expr.i.max }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(expr.i, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{  expr.i.min }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(expr.i, }\AttributeTok{na.rm =}\NormalTok{ T)}
+  \FunctionTok{set.seed}\NormalTok{(seeds[i]);}
+\NormalTok{  expr.i[}\FunctionTok{is.na}\NormalTok{(expr.i)] }\OtherTok{\textless{}{-}}
+\NormalTok{    expr.i.min }\SpecialCharTok{+}
+\NormalTok{    (expr.i.max}\SpecialCharTok{{-}}\NormalTok{expr.i.min) }\SpecialCharTok{*} \FunctionTok{sample}\NormalTok{(quantile\_vector,}
+                                     \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(expr.i)),}
+                                     \AttributeTok{replace =}\NormalTok{ T)}
+\NormalTok{  expr[, sample.i] }\OtherTok{\textless{}{-}}\NormalTok{ expr.i}
+\NormalTok{\}}
+  
 
 \CommentTok{\# Report}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}RNA expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
@@ -356,13 +446,13 @@ Here, we fill missing value with Recursive Partitioning and Regression Trees (RP
 \CommentTok{\# }
 \CommentTok{\# RNA expression without NA value: }
 \CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
-\CommentTok{\# Gene1    0.51    0.52    0.60   0.210   0.300    0.40}
-\CommentTok{\# Gene2    0.52    0.54    0.58   0.220   0.310    0.35}
-\CommentTok{\# Gene3    0.53    0.60    0.61   0.466   0.290    0.30}
-\CommentTok{\# Gene4    0.21    0.30    0.40   0.510   0.520    0.60}
-\CommentTok{\# Gene5    0.22    0.31    0.35   0.520   0.540    0.58}
-\CommentTok{\# Gene6    0.23    0.29    0.30   0.530   0.392    0.61}
-\CommentTok{\# Gene7    0.10    0.12    0.09   0.110   0.120    0.14}
+\CommentTok{\# Gene1    0.51    0.52    0.60 0.21000 0.30000    0.40}
+\CommentTok{\# Gene2    0.52    0.54    0.58 0.22000 0.31000    0.35}
+\CommentTok{\# Gene3    0.53    0.60    0.61 0.43256 0.29000    0.30}
+\CommentTok{\# Gene4    0.21    0.30    0.40 0.51000 0.52000    0.60}
+\CommentTok{\# Gene5    0.22    0.31    0.35 0.52000 0.54000    0.58}
+\CommentTok{\# Gene6    0.23    0.29    0.30 0.53000 0.32622    0.61}
+\CommentTok{\# Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14}
 \end{Highlighting}
 \end{Shaded}
 
@@ -374,29 +464,9 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80\% of datasets were retained so as to minumize the impact from mising value.
-
-With \textbf{subtype vectors} and \textbf{Raw Matrix}, the TSP matrix for a specified subtypes could be calculated via function \texttt{GSClassifier::trainDataProc}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{trainDataProc}\NormalTok{(}
-\NormalTok{  Xmat, Yvec,}
-  
-\NormalTok{  geneSet, }
-
-  \AttributeTok{subtype =} \DecValTok{1}\NormalTok{, }
-  
-  \CommentTok{\# 0.2 was Used in PAD project}
-  \AttributeTok{ptail =} \FloatTok{0.2}\NormalTok{,}
-  
-  \CommentTok{\# c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project}
-  \AttributeTok{breakVec =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{binned-expression}{%
 \subsection{Binned expression}\label{binned-expression}}
@@ -431,12 +501,12 @@ Take \textbf{Sample4} as an example:
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{\textquotesingle{}Binned expression:\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}n}\StringTok{\textquotesingle{}}\NormalTok{); }\FunctionTok{print}\NormalTok{(xbin)}
 \CommentTok{\# Quantiles: }
-\CommentTok{\#    0\%   25\%   50\%   75\%  100\% }
-\CommentTok{\# 0.110 0.215 0.466 0.515 0.530 }
+\CommentTok{\#      0\%     25\%     50\%     75\%    100\% }
+\CommentTok{\# 0.11000 0.21500 0.43256 0.51500 0.53000 }
 \CommentTok{\# }
 \CommentTok{\# Raw expression: }
-\CommentTok{\# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 }
-\CommentTok{\# 0.210 0.220 0.466 0.510 0.520 0.530 0.110 }
+\CommentTok{\#   Gene1   Gene2   Gene3   Gene4   Gene5   Gene6   Gene7 }
+\CommentTok{\# 0.21000 0.22000 0.43256 0.51000 0.52000 0.53000 0.11000 }
 \CommentTok{\# }
 \CommentTok{\# Binned expression: }
 \CommentTok{\# Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 }
@@ -568,12 +638,12 @@ In GSClassifier, we use a ensemble function \textbf{featureSelection} to select 
 \FunctionTok{print}\NormalTok{(gene\_bigRank)}
 \CommentTok{\# Raw xpression without NA: }
 \CommentTok{\#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6}
-\CommentTok{\# Gene1    0.51    0.52    0.60   0.210   0.300    0.40}
-\CommentTok{\# Gene2    0.52    0.54    0.58   0.220   0.310    0.35}
-\CommentTok{\# Gene3    0.53    0.60    0.61   0.466   0.290    0.30}
-\CommentTok{\# Gene4    0.21    0.30    0.40   0.510   0.520    0.60}
-\CommentTok{\# Gene5    0.22    0.31    0.35   0.520   0.540    0.58}
-\CommentTok{\# Gene6    0.23    0.29    0.30   0.530   0.392    0.61}
+\CommentTok{\# Gene1    0.51    0.52    0.60 0.21000 0.30000    0.40}
+\CommentTok{\# Gene2    0.52    0.54    0.58 0.22000 0.31000    0.35}
+\CommentTok{\# Gene3    0.53    0.60    0.61 0.43256 0.29000    0.30}
+\CommentTok{\# Gene4    0.21    0.30    0.40 0.51000 0.52000    0.60}
+\CommentTok{\# Gene5    0.22    0.31    0.35 0.52000 0.54000    0.58}
+\CommentTok{\# Gene6    0.23    0.29    0.30 0.53000 0.32622    0.61}
 \CommentTok{\# }
 \CommentTok{\# Genes with large rank diff: }
 \CommentTok{\# [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"}
@@ -692,7 +762,7 @@ In \textbf{GSClassifier}, we established \textbf{makeSetData} to evaluate set di
 
 We have known that the subtype of \textbf{Sample 1-3} differs from that of \textbf{Sample 4-6}, which revealed the robustness of set difference for subtype indentification.
 
-As shown in Figure \ref{fig:tsp}, TSP matrix here should be :
+Based on the structure of TSP in Figure \ref{fig:tsp}, TSP matrix of the simulated dataset should be :
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -740,6 +810,49 @@ As shown in Figure \ref{fig:tsp}, TSP matrix here should be :
 \end{Highlighting}
 \end{Shaded}
 
+Have a look at the distribution:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# Data}
+\NormalTok{tsp\_df }\OtherTok{\textless{}{-}}\NormalTok{ reshape2}\SpecialCharTok{::}\FunctionTok{melt}\NormalTok{(tsp)}
+
+\FunctionTok{ggplot}\NormalTok{(tsp\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Var2,}\AttributeTok{y=}\NormalTok{value,}\AttributeTok{fill=}\NormalTok{Var2)) }\SpecialCharTok{+} 
+      \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{outlier.size =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} 
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Samples\textquotesingle{}}\NormalTok{,}
+           \AttributeTok{y =} \StringTok{\textquotesingle{}Epression\textquotesingle{}}\NormalTok{,}
+           \AttributeTok{fill =} \ConstantTok{NULL}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-17-1} \end{center}
+
+\hypertarget{batch-effect}{%
+\subsection{Batch effect}\label{batch-effect}}
+
+\textbf{TSP} was widely applied to control batch effects in transciptomic data \citep{RN369, RN367, RN368, RN364, RN363, RN362, RN366, RN365}. Still, we tested whether \textbf{TSP} is a robust method for batch effect control in real-world data. As demonstrated in Figure \ref{fig:be01}, the obvious batch effects across gastric cancer datsets were significantly reduced after \textbf{TSP} normalization.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/bactch-effect-01} 
+
+}
+
+\caption{Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.}\label{fig:be01}
+\end{figure}
+
+In order to confirmed the association between \textbf{gene counts} in modeling and batch effect control via \textbf{TSP} normalization, we selected random genes with counts ranging 4, 8, 20, 40, and 80 for TSP matrix establishment. As shown in Figure \ref{fig:be02}, \textbf{TSP} normalization works greatly in different gene counts for batch effect control compared with raw expression matrix.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/bactch-effect-02} 
+
+}
+
+\caption{Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.}\label{fig:be02}
+\end{figure}
+
 \hypertarget{discussion}{%
 \chapter{Discussion}\label{discussion}}
 
@@ -748,15 +861,15 @@ As shown in Figure \ref{fig:tsp}, TSP matrix here should be :
 
 Linear growth/exponential growth
 
+\hypertarget{model-extensibility}{%
+\section{Model extensibility}\label{model-extensibility}}
+
+How could
+
 \hypertarget{missing-value}{%
 \section{Missing value}\label{missing-value}}
 
 Talk about strategy in subtypes modeling and calling
-
-\hypertarget{extensibility}{%
-\section{Extensibility}\label{extensibility}}
-
-How could
 
 \hypertarget{subtypevector}{%
 \section{Subtype vector calling}\label{subtypevector}}
@@ -766,6 +879,1234 @@ How could
 
 Talk about the number of submodels we should train.
 
-  \bibliography{book.bib,packages.bib}
+\hypertarget{quick-start}{%
+\chapter{Quick start}\label{quick-start}}
+
+\hypertarget{about}{%
+\section{About}\label{about}}
+
+\begin{itemize}
+\tightlist
+\item
+  Although with bright prospects in Pan-disease analysis, \href{https://github.com/huangwb8/GSClassifier}{GSClassifier} was primarily developed for clinic-friendly immune subtypes of gastric cancer (GC). Currently, only \texttt{PAD} subtypes and \texttt{PADi} for GC were supported. We would try to support more cancer types in the future as possible. More details in \href{https://github.com/huangwb8/GSClassifier/wiki/Plans-in-the-future}{Plans in the future} section.
+\item
+  Gibbs' \texttt{PanCancer\ immune\ subtypes} based on five gene signatures (485 genes) could also be called in \texttt{GSClassifier}, with a pre-trained model from the \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier} package. If you use their jobs, please cite: \href{https://github.com/huangwb8/GSClassifier/wiki/Introduction\#Reference}{references}.
+\item
+  Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.
+\end{itemize}
+
+\hypertarget{data}{%
+\section{Data}\label{data}}
+
+To lower the learning cost of \texttt{GSClassifier}, we provides some test data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GSClassifier)}
+\CommentTok{\# 载入需要的程辑包：luckyBase}
+\NormalTok{testData }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"testData.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Explore the \texttt{testData}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(testData)}
+\CommentTok{\# [1] "Kim2018\_3"              "PanSTAD\_phenotype\_part" "PanSTAD\_expr\_part"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pad}{%
+\section{PAD}\label{pad}}
+
+\hypertarget{preparation-of-the-test-data}{%
+\subsection{Preparation of the test data}\label{preparation-of-the-test-data}}
+
+load phenotype data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_phenotype\_part}
+\FunctionTok{table}\NormalTok{(design}\SpecialCharTok{$}\NormalTok{Dataset)}
+\CommentTok{\# }
+\CommentTok{\#  GSE13861  GSE13911  GSE15459  GSE22377  GSE26899  GSE26901  GSE29272  GSE51105 }
+\CommentTok{\#        65        39       192        43        96       108       134        94 }
+\CommentTok{\#  GSE54129  GSE57303  GSE62254  GSE65801  GSE84437 TCGA{-}STAD }
+\CommentTok{\#       111        70       300        32       433       372}
+\end{Highlighting}
+\end{Shaded}
+
+load target sample IDs in \texttt{GSE54129} cohort:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{target\_ID }\OtherTok{\textless{}{-}}\NormalTok{ design}\SpecialCharTok{$}\NormalTok{ID[design}\SpecialCharTok{$}\NormalTok{Dataset }\SpecialCharTok{\%in\%} \StringTok{\textquotesingle{}GSE54129\textquotesingle{}}\NormalTok{]}
+\NormalTok{expr }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_expr\_part[,target\_ID]}
+\FunctionTok{head}\NormalTok{(expr[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{])}
+\CommentTok{\#                 GSM1308413 GSM1308414 GSM1308415 GSM1308416 GSM1308417}
+\CommentTok{\# ENSG00000122122   7.888349   7.623663   6.873493   6.961102   7.150572}
+\CommentTok{\# ENSG00000117091   7.051760   6.217445   5.651839   5.830996   5.908532}
+\CommentTok{\# ENSG00000163219   6.056472   5.681844   5.411533   5.652684   5.555147}
+\CommentTok{\# ENSG00000136167   9.322191   8.765794   8.502315   8.838166   8.845952}
+\CommentTok{\# ENSG00000005844   7.119594   6.023631   5.400999   6.172863   6.059838}
+\CommentTok{\# ENSG00000123338   7.204051   6.925328   6.259809   6.610681   6.595882}
+\CommentTok{\#                 GSM1308418 GSM1308419 GSM1308420 GSM1308421 GSM1308422}
+\CommentTok{\# ENSG00000122122   7.871423   6.953329   8.334037   6.764335   6.522554}
+\CommentTok{\# ENSG00000117091   6.526917   5.646446   6.617520   5.637693   5.742848}
+\CommentTok{\# ENSG00000163219   5.962885   5.361763   5.975842   5.330428   5.172705}
+\CommentTok{\# ENSG00000136167   9.366074   8.675718   9.118517   8.614068   8.114096}
+\CommentTok{\# ENSG00000005844   6.523530   6.129181   7.331588   5.547059   5.867118}
+\CommentTok{\# ENSG00000123338   6.699790   6.935390   7.050288   6.536710   6.200269}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{unsupervised-clustering}{%
+\subsection{Unsupervised clustering}\label{unsupervised-clustering}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res\_pad }\OtherTok{\textless{}{-}} \FunctionTok{PAD}\NormalTok{(}
+  \AttributeTok{expr =}\NormalTok{ expr,}
+  \AttributeTok{cluster.method =} \StringTok{"ward.D2"}\NormalTok{,}
+  \AttributeTok{extra.annot =} \ConstantTok{NULL}\NormalTok{,}
+  \AttributeTok{plot.title =} \StringTok{\textquotesingle{}PAD test\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{subtype =} \StringTok{"PAD.train\_20200110"}\NormalTok{,}
+  \AttributeTok{verbose =}\NormalTok{ T}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.6\linewidth]{Quick-start_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+\begin{verbatim}
+# Use default PIAM... 
+# Use default PIDG... 
+# Gene match: 100%. 
+# Done!
+\end{verbatim}
+
+\hypertarget{of-note}{%
+\subsection{Of note}\label{of-note}}
+
+\begin{itemize}
+\item
+  It's strongly recommanded that the gene type of \texttt{expr} should be alway the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for examples).
+\item
+  \texttt{PAD} function is only for datasets with lots of samples for its classification depends on population-based unsupervised clusting. \texttt{PAD} is population-dependent and non-personalized.
+\item
+  Beta characteristics: You could try random forest classification based on the \texttt{randomForest} package or methods in \texttt{stats::hclust}.
+\end{itemize}
+
+\hypertarget{padi}{%
+\section{PADi}\label{padi}}
+
+\begin{itemize}
+\item
+  In \texttt{GSClassifier}, \texttt{PADi} is a pre-trained out-of-the-box model for GC personalized PAD subtypes calling.
+\item
+  During the sutype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, \textbf{you don't have to do batch normalization} even though the data (the \texttt{X} input) come from multiple cohorts or platform.
+\item
+  More limitations were discussed in our paper that you had better know.
+\end{itemize}
+
+In this section, we would showed how to use \texttt{PADi} series: \texttt{PADi}, \texttt{callEnsemble}, and \texttt{parCallEnsemble} functions.
+
+\hypertarget{preparation-of-the-test-data-1}{%
+\subsection{Preparation of the test data}\label{preparation-of-the-test-data-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{ X }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{Kim2018\_3}
+ \FunctionTok{head}\NormalTok{(X)}
+\CommentTok{\#                   PB{-}16{-}002   PB{-}16{-}003   PB{-}16{-}004}
+\CommentTok{\# ENSG00000121410  0.07075272 {-}2.08976724 {-}1.43569557}
+\CommentTok{\# ENSG00000148584 {-}1.49631022 {-}0.23917056  0.94827471}
+\CommentTok{\# ENSG00000175899 {-}0.77315329  0.52163146  0.91264015}
+\CommentTok{\# ENSG00000166535 {-}0.28860715 {-}0.45964255 {-}0.38401295}
+\CommentTok{\# ENSG00000256069 {-}0.25034243  0.06863867  0.14429081}
+\CommentTok{\# ENSG00000184389  0.08215945 {-}0.05966481  0.04937924}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{use-a-specific-function-called-padi}{%
+\subsection{\texorpdfstring{Use a specific function called \texttt{PADi}}{Use a specific function called PADi}}\label{use-a-specific-function-called-padi}}
+
+Very simple, just:
+
+Check the result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(res\_padi)}
+\CommentTok{\#   SampleIDs BestCall BestCall\_Max           1          2          3         4}
+\CommentTok{\# 1 PB{-}16{-}002        4            4 0.023372779 0.02631794 0.04864784 0.3336484}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 0.007271698 0.08650742 0.01974812 0.9530730}
+\CommentTok{\# 3 PB{-}16{-}004        4            4 0.011559768 0.02922151 0.09018894 0.8649045}
+\end{Highlighting}
+\end{Shaded}
+
+Actually, \texttt{PADi} is exactly based on a general function called \texttt{callEnsemble}.
+
+\hypertarget{use-the-callensemble-function}{%
+\subsection{\texorpdfstring{Use the \texttt{callEnsemble} function}{Use the callEnsemble function}}\label{use-the-callensemble-function}}
+
+Also simple, just:
+
+Check the result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(res\_padi)}
+\CommentTok{\#   SampleIDs BestCall BestCall\_Max           1          2          3         4}
+\CommentTok{\# 1 PB{-}16{-}002        4            4 0.023372779 0.02631794 0.04864784 0.3336484}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 0.007271698 0.08650742 0.01974812 0.9530730}
+\CommentTok{\# 3 PB{-}16{-}004        4            4 0.011559768 0.02922151 0.09018894 0.8649045}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{parallel-strategy-for-padi}{%
+\subsection{Parallel strategy for PADi}\label{parallel-strategy-for-padi}}
+
+\begin{itemize}
+\item
+  Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, the parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of \texttt{GSClassifier} package.
+\item
+  The parameter \texttt{numCores} was used to control the No.~of CPU for computing (which depends on your CPU capacity).
+\end{itemize}
+
+\begin{verbatim}
+# No run for the tiny test data. With errors.
+
+# Method 1:
+res_padi <- PADi(X = X, verbose = F, numCores = 4)
+
+# Method 2: 
+res_padi <- parCallEnsemble(
+  X = X,
+  ens = NULL,
+  geneAnnotation = NULL,
+  geneSet = NULL,
+  scaller = NULL,
+  geneids = 'ensembl',
+  subtype = 'PAD.train_20200110',
+  verbose = T,
+  numCores = 4)
+\end{verbatim}
+
+\hypertarget{single-sample-subtype-calling}{%
+\subsection{Single sample subtype calling}\label{single-sample-subtype-calling}}
+
+In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of \texttt{PADi} series.
+
+Supposed that there is a GC patient, its information should be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X\_ind }\OtherTok{\textless{}{-}}\NormalTok{ X[,}\DecValTok{1}\NormalTok{]; }\FunctionTok{names}\NormalTok{(X\_ind) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(X)}
+\FunctionTok{head}\NormalTok{(X\_ind)}
+\CommentTok{\# ENSG00000121410 ENSG00000148584 ENSG00000175899 ENSG00000166535 ENSG00000256069 }
+\CommentTok{\#      0.07075272     {-}1.49631022     {-}0.77315329     {-}0.28860715     {-}0.25034243 }
+\CommentTok{\# ENSG00000184389 }
+\CommentTok{\#      0.08215945}
+\end{Highlighting}
+\end{Shaded}
+
+Or it can also be another format:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X\_ind }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(X[,}\DecValTok{1}\NormalTok{]); }\FunctionTok{rownames}\NormalTok{(X\_ind) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(X)}
+\FunctionTok{head}\NormalTok{(X\_ind)}
+\CommentTok{\#                        [,1]}
+\CommentTok{\# ENSG00000121410  0.07075272}
+\CommentTok{\# ENSG00000148584 {-}1.49631022}
+\CommentTok{\# ENSG00000175899 {-}0.77315329}
+\CommentTok{\# ENSG00000166535 {-}0.28860715}
+\CommentTok{\# ENSG00000256069 {-}0.25034243}
+\CommentTok{\# ENSG00000184389  0.08215945}
+\end{Highlighting}
+\end{Shaded}
+
+Similar to multiples sample calling, just:
+
+check the result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(res\_padi)}
+\CommentTok{\#   SampleIDs BestCall BestCall\_Max          1          2          3         4}
+\CommentTok{\# 1    target        4            4 0.02337278 0.02631794 0.04864784 0.3336484}
+\end{Highlighting}
+\end{Shaded}
+
+Similarly, there is alternative choice:
+
+Check the result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(res\_padi)}
+\CommentTok{\#   SampleIDs BestCall BestCall\_Max          1          2          3         4}
+\CommentTok{\# 1    target        4            4 0.02337278 0.02631794 0.04864784 0.3336484}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{of-note-1}{%
+\subsection{Of note}\label{of-note-1}}
+
+\begin{itemize}
+\item
+  In the results of \texttt{PADi}, two types of subtypes (\texttt{BestCall} and \texttt{BestCall\_Max}) were integrated. \texttt{BestCall} was predicted based on a xgboost-trained model based on prior knowlege of \texttt{PAD} subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while \texttt{BestCall\_Max} was predicted via maximum strategy. You should use THE SAME ONE in a specific practice no matter which one you use.
+\item
+  \texttt{PADi} is individual-dependent and personalized, which means that the result of subtype calling would not be influenced by the data of others.
+\end{itemize}
+
+\hypertarget{use-external-models-from-luckymodel-package}{%
+\section{Use external models from luckyModel package}\label{use-external-models-from-luckymodel-package}}
+
+In the future, there might be lots of models available as a resource of \texttt{GSClassifier}, such as \href{https://github.com/huangwb8/luckyModel}{luckyModel}. Here we show how \texttt{luckyModel} support \texttt{GSClassifier}.
+
+First, intall and load \texttt{luckyModel}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install luckyModel}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"luckyModel"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
+\NormalTok{    devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/luckyModel"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(luckyModel)}
+\end{Highlighting}
+\end{Shaded}
+
+Check projects supported in current \texttt{luckyModel}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list\_project}\NormalTok{()}
+\CommentTok{\# [1] "GSClassifier"}
+\end{Highlighting}
+\end{Shaded}
+
+Check available models in the project:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list\_model}\NormalTok{(}\AttributeTok{project=}\StringTok{\textquotesingle{}GSClassifier\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Available models in GSClassifier:}
+\CommentTok{\#   *Gibbs\_PanCancerImmuneSubtype\_v20190731}
+\CommentTok{\#   *HWB\_PAD\_v20200110}
+\end{Highlighting}
+\end{Shaded}
+
+Here, \texttt{HWB\_PAD\_v20200110} is a standard name of \texttt{PADi}. They are exactly the same.
+
+Taking \texttt{PADi} as an example, we here show how to use an external model from \texttt{luckyModel}. First, load a model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lucky\_model}\NormalTok{(}\AttributeTok{project =} \StringTok{\textquotesingle{}GSClassifier\textquotesingle{}}\NormalTok{,}
+                     \AttributeTok{developer=}\StringTok{\textquotesingle{}HWB\textquotesingle{}}\NormalTok{,}
+                     \AttributeTok{model =} \StringTok{\textquotesingle{}PAD\textquotesingle{}}\NormalTok{,}
+                     \AttributeTok{version =} \StringTok{\textquotesingle{}v20200110\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then, check the gene id type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model}\SpecialCharTok{$}\NormalTok{geneSet}
+\CommentTok{\# $PIAM}
+\CommentTok{\#  [1] "ENSG00000122122" "ENSG00000117091" "ENSG00000163219" "ENSG00000136167"}
+\CommentTok{\#  [5] "ENSG00000005844" "ENSG00000123338" "ENSG00000102879" "ENSG00000010671"}
+\CommentTok{\#  [9] "ENSG00000185862" "ENSG00000104814" "ENSG00000134516" "ENSG00000100055"}
+\CommentTok{\# [13] "ENSG00000082074" "ENSG00000113263" "ENSG00000153283" "ENSG00000198821"}
+\CommentTok{\# [17] "ENSG00000185811" "ENSG00000117090" "ENSG00000171608"}
+\CommentTok{\# }
+\CommentTok{\# $PIDG}
+\CommentTok{\#  [1] "ENSG00000116667" "ENSG00000107771" "ENSG00000196782" "ENSG00000271447"}
+\CommentTok{\#  [5] "ENSG00000173517" "ENSG00000134686" "ENSG00000100614" "ENSG00000134247"}
+\CommentTok{\#  [9] "ENSG00000109686" "ENSG00000197321" "ENSG00000179981" "ENSG00000187189"}
+\CommentTok{\# [13] "ENSG00000140836"}
+\end{Highlighting}
+\end{Shaded}
+
+The model should use \texttt{ensembl} as the value of \texttt{geneid} parameter in \texttt{callEnsemble} series.
+
+Next, you can use the model like:
+
+Or just:
+
+They are exactly the same.
+
+Finally, check the result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(res\_padi)}
+\CommentTok{\#   SampleIDs BestCall BestCall\_Max           1          2          3         4}
+\CommentTok{\# 1 PB{-}16{-}002        4            4 0.023372779 0.02631794 0.04864784 0.3336484}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 0.007271698 0.08650742 0.01974812 0.9530730}
+\CommentTok{\# 3 PB{-}16{-}004        4            4 0.011559768 0.02922151 0.09018894 0.8649045}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pancancer-immune-subtypes}{%
+\section{PanCancer immune subtypes}\label{pancancer-immune-subtypes}}
+
+\texttt{GSClassifier} could also call the \texttt{PanCancer\ immune\ subtypes} of Gibbs'.
+
+First, see data available in current \texttt{GSClassifier}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{GSClassifier\_Data}\NormalTok{()}
+\CommentTok{\# Available data:}
+\CommentTok{\# Usage example:}
+\CommentTok{\#   ImmuneSubtype.rds }
+\CommentTok{\#   PAD.train\_20200110.rds }
+\CommentTok{\#   PAD.train\_20220916.rds }
+\CommentTok{\#   PAD \textless{}{-} readRDS(system.file("extdata", "PAD.train\_20200110.rds", package = "GSClassifier")) }
+\CommentTok{\#   ImmuneSubtype \textless{}{-} readRDS(system.file("extdata", "ImmuneSubtype.rds", package = "GSClassifier"))}
+\end{Highlighting}
+\end{Shaded}
+
+Let's use our test data to do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{Kim2018\_3}
+\NormalTok{symbol }\OtherTok{\textless{}{-}} \FunctionTok{convert}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(X))}
+\FunctionTok{rownames}\NormalTok{(X) }\OtherTok{\textless{}{-}}\NormalTok{ symbol}
+\NormalTok{X }\OtherTok{\textless{}{-}}\NormalTok{ X[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(symbol),]}
+\FunctionTok{dim}\NormalTok{(X)}
+\CommentTok{\# [1] 19118     3}
+\end{Highlighting}
+\end{Shaded}
+
+Have a check
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(X)}
+\CommentTok{\#                 PB{-}16{-}002   PB{-}16{-}003   PB{-}16{-}004}
+\CommentTok{\# A1BG           0.07075272 {-}2.08976724 {-}1.43569557}
+\CommentTok{\# A1CF          {-}1.49631022 {-}0.23917056  0.94827471}
+\CommentTok{\# A2M           {-}0.77315329  0.52163146  0.91264015}
+\CommentTok{\# A2ML1         {-}0.28860715 {-}0.45964255 {-}0.38401295}
+\CommentTok{\# RP11{-}118B22.6 {-}0.25034243  0.06863867  0.14429081}
+\CommentTok{\# A3GALT2        0.08215945 {-}0.05966481  0.04937924}
+\end{Highlighting}
+\end{Shaded}
+
+PanCan Immune Subtype callings:
+
+Check the result:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(res\_pis)}
+\CommentTok{\#   SampleIDs BestCall BestCall\_Max            1           2            3}
+\CommentTok{\# 1 PB{-}16{-}002        2            2 9.677974e{-}04 0.561300665 0.0000031733}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 4.963801e{-}07 0.018167170 0.0001958085}
+\CommentTok{\# 3 PB{-}16{-}004        3            3 5.107389e{-}06 0.001126488 0.2720691785}
+\CommentTok{\#              4           5           6}
+\CommentTok{\# 1 0.2133894339 0.007000939 0.005137485}
+\CommentTok{\# 2 0.3924977928 0.002049010 0.002650601}
+\CommentTok{\# 3 0.0001744295 0.006241082 0.004441003}
+\end{Highlighting}
+\end{Shaded}
+
+Also, you can try to use \texttt{luckyModel}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pci }\OtherTok{\textless{}{-}} \FunctionTok{lucky\_model}\NormalTok{(}
+  \AttributeTok{project =} \StringTok{"GSClassifier"}\NormalTok{,}
+  \AttributeTok{model =} \StringTok{"PanCancerImmuneSubtype"}\NormalTok{,}
+  \AttributeTok{developer =} \StringTok{"Gibbs"}\NormalTok{,}
+  \AttributeTok{version =} \StringTok{"v20190731"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+PanCan Immune Subtype callings:
+
+Finally, we take a look at the \texttt{PanCancer\ immune\ subtypes} model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ImmuneSubtype }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"ImmuneSubtype.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\FunctionTok{names}\NormalTok{(ImmuneSubtype)}
+\CommentTok{\# [1] "ens"            "scaller"        "geneAnnotation" "geneSet"}
+\end{Highlighting}
+\end{Shaded}
+
+Its gene annotation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(ImmuneSubtype}\SpecialCharTok{$}\NormalTok{geneAnnotation)}
+\CommentTok{\#      SYMBOL ENTREZID         ENSEMBL}
+\CommentTok{\# 235  ACTL6A       86 ENSG00000136518}
+\CommentTok{\# 294   ADAM9     8754 ENSG00000168615}
+\CommentTok{\# 305 ADAMTS1     9510 ENSG00000154734}
+\CommentTok{\# 322    ADAR      103 ENSG00000160710}
+\CommentTok{\# 340   ADCY7      113 ENSG00000121281}
+\CommentTok{\# 479   AIMP2     7965 ENSG00000106305}
+\end{Highlighting}
+\end{Shaded}
+
+Its gene sets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ImmuneSubtype}\SpecialCharTok{$}\NormalTok{geneSet}
+\CommentTok{\# $LIexpression\_score}
+\CommentTok{\#  [1] "CCL5"  "CD19"  "CD37"  "CD3D"  "CD3E"  "CD3G"  "CD3Z"  "CD79A" "CD79B"}
+\CommentTok{\# [10] "CD8A"  "CD8B1" "IGHG3" "IGJ"   "IGLC1" "CD14"  "LCK"   "LTB"   "MS4A1"}
+\CommentTok{\# }
+\CommentTok{\# $CSF1\_response}
+\CommentTok{\#   [1] "CORO1A"   "MNDA"     "CCRL2"    "SLC7A7"   "HLA{-}DMA"  "FYB"     }
+\CommentTok{\#   [7] "RNASE6"   "TLR2"     "CTSC"     "LILRB4"   "PSCDBP"   "CTSS"    }
+\CommentTok{\#  [13] "RASSF4"   "MSN"      "CYBB"     "LAPTM5"   "DOCK2"    "FCGR1A"  }
+\CommentTok{\#  [19] "EVI2B"    "ADCY7"    "CD48"     "ARHGAP15" "ARRB2"    "SYK"     }
+\CommentTok{\#  [25] "BTK"      "TNFAIP3"  "FCGR2A"   "VSIG4"    "FPRL2"    "IL10RA"  }
+\CommentTok{\#  [31] "IFI16"    "ITGB2"    "IL7R"     "TBXAS1"   "FMNL1"    "FLI1"    }
+\CommentTok{\#  [37] "RASSF2"   "LYZ"      "CD163"    "CD97"     "CCL2"     "FCGR2B"  }
+\CommentTok{\#  [43] "MERTK"    "CD84"     "CD53"     "CD86"     "HMHA1"    "CTSL"    }
+\CommentTok{\#  [49] "EVI2A"    "TNFRSF1B" "CXCR4"    "LCP1"     "SAMHD1"   "CPVL"    }
+\CommentTok{\#  [55] "HLA{-}DRB1" "C13orf18" "GIMAP4"   "SAMSN1"   "PLCG2"    "OSBPL3"  }
+\CommentTok{\#  [61] "CD8A"     "RUNX3"    "FCGR3A"   "AMPD3"    "MYO1F"    "CECR1"   }
+\CommentTok{\#  [67] "LYN"      "MPP1"     "LRMP"     "FGL2"     "NCKAP1L"  "HCLS1"   }
+\CommentTok{\#  [73] "SELL"     "CASP1"    "SELPLG"   "CD33"     "GPNMB"    "NCF2"    }
+\CommentTok{\#  [79] "FNBP1"    "IL18"     "B2M"      "SP140"    "FCER1G"   "LCP2"    }
+\CommentTok{\#  [85] "LY86"     "LAIR1"    "IFI30"    "TNFSF13B" "LST1"     "FGR"     }
+\CommentTok{\#  [91] "NPL"      "PLEK"     "CCL5"     "PTPRC"    "GNPTAB"   "SLC1A3"  }
+\CommentTok{\#  [97] "HCK"      "NPC2"     "C3AR1"    "PIK3CG"   "DAPK1"    "ALOX5AP" }
+\CommentTok{\# [103] "CSF1R"    "CUGBP2"   "APOE"     "APOC1"    "CD52"     "LHFPL2"  }
+\CommentTok{\# [109] "C1orf54"  "IKZF1"    "SH2B3"    "WIPF1"   }
+\CommentTok{\# }
+\CommentTok{\# $Module3\_IFN\_score}
+\CommentTok{\#  [1] "IFI44"  "IFI44L" "DDX58"  "IFI6"   "IFI27"  "IFIT2"  "IFIT1"  "IFIT3" }
+\CommentTok{\#  [9] "CXCL10" "MX1"    "OAS1"   "OAS2"   "OAS3"   "HERC5"  "SAMD9"  "HERC6" }
+\CommentTok{\# [17] "DDX60"  "RTP4"   "IFIH1"  "STAT1"  "TAP1"   "OASL"   "RSAD2"  "ISG15" }
+\CommentTok{\# }
+\CommentTok{\# $TGFB\_score\_21050467}
+\CommentTok{\#  [1] "MMP3"     "MARCKSL1" "IGF2R"    "LAMB1"    "SPARC"    "FN1"     }
+\CommentTok{\#  [7] "ITGA4"    "SMO"      "MMP19"    "ITGB8"    "ITGA5"    "NID1"    }
+\CommentTok{\# [13] "TIMP1"    "SEMA3F"   "RHOQ"     "CTNNB1"   "MMP2"     "SERPINE1"}
+\CommentTok{\# [19] "EPHB2"    "COL16A1"  "EPHA2"    "TNC"      "JUP"      "ITGA3"   }
+\CommentTok{\# [25] "TCF7L2"   "COL3A1"   "CDH6"     "WNT2B"    "ADAM9"    "DSP"     }
+\CommentTok{\# [31] "HSPG2"    "ARHGAP1"  "ITGB5"    "IGFBP5"   "ARHGDIA"  "LRP1"    }
+\CommentTok{\# [37] "IGFBP2"   "CTNNA1"   "LRRC17"   "MMP14"    "NEO1"     "EFNA5"   }
+\CommentTok{\# [43] "ITGB3"    "EPHB3"    "CD44"     "IGFBP4"   "TNFRSF1A" "RAC1"    }
+\CommentTok{\# [49] "PXN"      "PLAT"     "COL8A1"   "WNT8B"    "IGFBP3"   "RHOA"    }
+\CommentTok{\# [55] "EPHB4"    "MMP1"     "PAK1"     "MTA1"     "THBS2"    "CSPG2"   }
+\CommentTok{\# [61] "MMP17"    "CD59"     "DVL3"     "RHOB"     "COL6A3"   "NOTCH2"  }
+\CommentTok{\# [67] "BSG"      "MMP11"    "COL1A2"   "ZYX"      "RND3"     "THBS1"   }
+\CommentTok{\# [73] "RHOG"     "ICAM1"    "LAMA4"    "DVL1"     "PAK2"     "ITGB2"   }
+\CommentTok{\# [79] "COL6A1"   "FGD1"    }
+\CommentTok{\# }
+\CommentTok{\# $CHANG\_CORE\_SERUM\_RESPONSE\_UP}
+\CommentTok{\#   [1] "CEP78"     "LSM3"      "LRRC40"    "STK17A"    "RPN1"      "JUNB"     }
+\CommentTok{\#   [7] "NUP85"     "FLNC"      "HMGN2"     "RPP40"     "UQCR10"    "AIMP2"    }
+\CommentTok{\#  [13] "CHEK1"     "VTA1"      "EXOSC8"    "CENPO"     "PNO1"      "SLC16A1"  }
+\CommentTok{\#  [19] "WDR77"     "UBE2J1"    "NOP16"     "NUDT1"     "SMC2"      "SLC25A5"  }
+\CommentTok{\#  [25] "NUPL1"     "DLEU2"     "PDAP1"     "CCBL2"     "COX17"     "BCCIP"    }
+\CommentTok{\#  [31] "PLG"       "RGS8"      "SNRPC"     "PLK4"      "NUTF2"     "LSM4"     }
+\CommentTok{\#  [37] "SMS"       "EBNA1BP2"  "C13orf27"  "VDAC1"     "PSMD14"    "MYCBP"    }
+\CommentTok{\#  [43] "SMURF2"    "GNG11"     "F3"        "IL7R"      "BRIP1"     "HNRNPA2B1"}
+\CommentTok{\#  [49] "DCK"       "ALKBH7"    "HN1L"      "MSN"       "TPM1"      "HYLS1"    }
+\CommentTok{\#  [55] "HAUS1"     "NUP93"     "SNRPE"     "ITGA6"     "CENPN"     "C11orf24" }
+\CommentTok{\#  [61] "GGH"       "PFKP"      "FARSA"     "EIF2AK1"   "CENPW"     "TUBA4A"   }
+\CommentTok{\#  [67] "TRA2B"     "UMPS"      "MRTO4"     "NUDT15"    "PGM2"      "DBNDD1"   }
+\CommentTok{\#  [73] "SNRPB"     "MNAT1"     "NUP35"     "TCEB1"     "HSPB11"    "C19orf48" }
+\CommentTok{\#  [79] "ID3"       "IPO4"      "FARSB"     "EIF4G1"    "SKA1"      "MFSD11"   }
+\CommentTok{\#  [85] "PLAUR"     "MARVELD2"  "MCM3"      "DHFR"      "RNF41"     "ID2"      }
+\CommentTok{\#  [91] "H2AFZ"     "CDK2"      "NCLN"      "ZWILCH"    "DYNLT1"    "C16orf61" }
+\CommentTok{\#  [97] "SLC25A40"  "RHOC"      "CCT5"      "PDIA4"     "SNRPA"     "RBM14"    }
+\CommentTok{\# [103] "PDLIM7"    "PITPNC1"   "TPM3"      "CORO1C"    "ERLIN1"    "PAICS"    }
+\CommentTok{\# [109] "TPRKB"     "SKA2"      "MYBL1"     "SH3BP5L"   "BRCA2"     "SAR1A"    }
+\CommentTok{\# [115] "POLR3K"    "MRPS28"    "NUP107"    "TUBG1"     "PNN"       "FAM167A"  }
+\CommentTok{\# [121] "RFC3"      "MYL6"      "MCM7"      "MAGOHB"    "FAM89B"    "TOMM40"   }
+\CommentTok{\# [127] "CDCA4"     "MT3"       "MTHFD1"    "PSMD12"    "MYBL2"     "CKLF"     }
+\CommentTok{\# [133] "NRIP3"     "EZR"       "C12orf24"  "GPLD1"     "SRM"       "RAB3B"    }
+\CommentTok{\# [139] "NLN"       "MT1F"      "TNFRSF12A" "TPI1"      "HAS2"      "APOO"     }
+\CommentTok{\# [145] "FBXO41"    "MRPL37"    "GSTCD"     "SDC1"      "WDR54"     "RNF138"   }
+\CommentTok{\# [151] "APITD1"    "RMND5B"    "ENO1"      "MAP3K8"    "TMEM130"   "SNX17"    }
+\CommentTok{\# [157] "KRR1"      "TAGLN"     "PA2G4"     "RUVBL1"    "SNRPD1"    "LOXL2"    }
+\CommentTok{\# [163] "POLE2"     "MAPRE1"    "IMP4"      "EMP2"      "PSMD2"     "MET"      }
+\CommentTok{\# [169] "IFRD2"     "LMNB2"     "PLOD2"     "NCEH1"     "NME1"      "STRA13"   }
+\CommentTok{\# [175] "ACTL6A"    "DLEU1"     "SNRPA1"    "CBX1"      "LYAR"      "PTPLB"    }
+\CommentTok{\# [181] "PFN1"      "CENPJ"     "COTL1"     "SPRYD7"    "USPL1"     "MRPL12"   }
+\CommentTok{\# [187] "ADAMTS1"   "GLRX3"     "WSB2"      "MRPS16"    "DCLRE1B"   "MKKS"     }
+\CommentTok{\# [193] "C3orf26"   "CPEB4"     "SPAG17"    "MLF1IP"    "UAP1"      "COQ2"     }
+\CommentTok{\# [199] "WDHD1"     "DCBLD2"    "KIAA0090"  "SAR1B"     "PSMA7"     "PSMC3"    }
+\CommentTok{\# [205] "COPS6"     "DUT"       "PPIH"      "PHF19"     "TPM2"      "MCTS1"    }
+\CommentTok{\# [211] "EIF4EBP1"  "HNRNPR"}
+\end{Highlighting}
+\end{Shaded}
+
+Enjoy \texttt{GSClassifier}!
+
+\hypertarget{model-establishment-via-gsclassifier}{%
+\chapter{Model establishment via GSClassifier}\label{model-establishment-via-gsclassifier}}
+
+\hypertarget{about-1}{%
+\section{About}\label{about-1}}
+
+Sometimes, researchers might have their own gene signatures and know how many subtypes they want to call before (based on some knowledges). Gratifyingly, comprehensive functions were also provided in \texttt{GSClassifier}. In this section, we would show how to build a \texttt{GSClassifier} model like \texttt{PADi}.
+
+\hypertarget{data-preparation}{%
+\section{Data preparation}\label{data-preparation}}
+
+\begin{quote}
+Note: The test data is only for the demonstration of the modeling
+\end{quote}
+
+Load packages:
+
+Load data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testData }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"testData.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\NormalTok{expr }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_expr\_part}
+\NormalTok{design }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_phenotype\_part}
+\end{Highlighting}
+\end{Shaded}
+
+Select training and testing cohorts across different platforms and \texttt{PAD\ subtypes} from \texttt{PAD} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelInfo }\OtherTok{\textless{}{-}} \FunctionTok{modelData}\NormalTok{(}
+\NormalTok{    design,}
+    \AttributeTok{id.col =} \StringTok{"ID"}\NormalTok{,}
+    \AttributeTok{variable =} \FunctionTok{c}\NormalTok{(}\StringTok{"platform"}\NormalTok{, }\StringTok{"PAD\_subtype"}\NormalTok{),}
+    \AttributeTok{Prop =} \FloatTok{0.7}\NormalTok{,}
+    \AttributeTok{seed =} \DecValTok{145}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+Check the result \texttt{modelInfo}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(modelInfo)}
+
+\FunctionTok{head}\NormalTok{(modelInfo}\SpecialCharTok{$}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Train)}
+
+\FunctionTok{head}\NormalTok{(modelInfo}\SpecialCharTok{$}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Valid)}
+\CommentTok{\# [1] "Repeat" "Data"  }
+\CommentTok{\#                    ID  Dataset PAD\_subtype PIAM\_subtype PIDG\_subtype platform}
+\CommentTok{\# GSM1606509 GSM1606509 GSE65801       PAD{-}I         high         high GPL14550}
+\CommentTok{\# GSM1606517 GSM1606517 GSE65801       PAD{-}I         high         high GPL14550}
+\CommentTok{\# GSM1606503 GSM1606503 GSE65801       PAD{-}I         high         high GPL14550}
+\CommentTok{\# GSM1606525 GSM1606525 GSE65801       PAD{-}I         high         high GPL14550}
+\CommentTok{\# GSM1606511 GSM1606511 GSE65801       PAD{-}I         high         high GPL14550}
+\CommentTok{\# GSM1606527 GSM1606527 GSE65801       PAD{-}I         high         high GPL14550}
+\CommentTok{\#                    ID  Dataset PAD\_subtype PIAM\_subtype PIDG\_subtype platform}
+\CommentTok{\# GSM2235558 GSM2235558 GSE84437       PAD{-}I         high         high  GPL6947}
+\CommentTok{\# GSM2235561 GSM2235561 GSE84437      PAD{-}II         high          low  GPL6947}
+\CommentTok{\# GSM2235562 GSM2235562 GSE84437      PAD{-}IV          low          low  GPL6947}
+\CommentTok{\# GSM2235563 GSM2235563 GSE84437      PAD{-}IV          low          low  GPL6947}
+\CommentTok{\# GSM2235564 GSM2235564 GSE84437      PAD{-}IV          low          low  GPL6947}
+\CommentTok{\# GSM2235567 GSM2235567 GSE84437      PAD{-}IV          low          low  GPL6947}
+\end{Highlighting}
+\end{Shaded}
+
+Get training data \texttt{Xs} and \texttt{Ys}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{\# Training data}
+\NormalTok{  Xs }\OtherTok{\textless{}{-}}\NormalTok{ expr[,modelInfo}\SpecialCharTok{$}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Train}\SpecialCharTok{$}\NormalTok{ID]}
+\NormalTok{  y }\OtherTok{\textless{}{-}}\NormalTok{ modelInfo}\SpecialCharTok{$}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Train}
+\NormalTok{  y }\OtherTok{\textless{}{-}}\NormalTok{ y[}\FunctionTok{colnames}\NormalTok{(Xs),]}
+\NormalTok{  Ys }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}I\textquotesingle{}}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}II\textquotesingle{}}\NormalTok{,}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}III\textquotesingle{}}\NormalTok{,}\DecValTok{3}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}IV\textquotesingle{}}\NormalTok{,}\DecValTok{4}\NormalTok{,}\ConstantTok{NA}\NormalTok{)))); }\FunctionTok{table}\NormalTok{(Ys)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(Ys)}
+\CommentTok{\# Ys}
+\CommentTok{\#         1         2         3         4 }
+\CommentTok{\# 0.1010169 0.2474576 0.1694915 0.4820339}
+\end{Highlighting}
+\end{Shaded}
+
+Get the number of subtype:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# No. of subtypes}
+\NormalTok{nSubtype }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(Ys))}
+\FunctionTok{print}\NormalTok{(nSubtype)}
+\CommentTok{\# [1] 4}
+\end{Highlighting}
+\end{Shaded}
+
+Also, you can take a look at the validation data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Validating data}
+\NormalTok{Xs\_valid }\OtherTok{\textless{}{-}}\NormalTok{ expr[,modelInfo}\SpecialCharTok{$}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Valid}\SpecialCharTok{$}\NormalTok{ID]}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ modelInfo}\SpecialCharTok{$}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Valid}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ y[}\FunctionTok{colnames}\NormalTok{(Xs\_valid),]}
+\NormalTok{Ys\_valid }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}I\textquotesingle{}}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}II\textquotesingle{}}\NormalTok{,}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}III\textquotesingle{}}\NormalTok{,}\DecValTok{3}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(y}\SpecialCharTok{$}\NormalTok{PAD\_subtype }\SpecialCharTok{==} \StringTok{\textquotesingle{}PAD{-}IV\textquotesingle{}}\NormalTok{,}\DecValTok{4}\NormalTok{,}\ConstantTok{NA}\NormalTok{))))}
+\FunctionTok{table}\NormalTok{(Ys\_valid)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(Ys\_valid)}
+\CommentTok{\# Ys\_valid}
+\CommentTok{\#          1          2          3          4 }
+\CommentTok{\# 0.09609121 0.24592834 0.16612378 0.49185668}
+\end{Highlighting}
+\end{Shaded}
+
+Note: When you convert your phenotype into numeric, \textbf{You CANNOT USE A ZERO VALUE}, which is not supported by the xGboost.
+
+Other parameteres for modeling:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\# Build 20 models}
+\NormalTok{n}\OtherTok{=}\DecValTok{20} 
+
+\CommentTok{\# In every model, 70\% samples in the training cohort would be selected. }
+\NormalTok{sampSize}\OtherTok{=}\FloatTok{0.7}
+
+\CommentTok{\# Seed for sampling}
+\NormalTok{sampSeed }\OtherTok{=} \DecValTok{2020}
+\NormalTok{na.fill.seed }\OtherTok{=} \DecValTok{2022}
+
+\CommentTok{\# A vector for approximate gene rank estimation}
+\NormalTok{breakVec}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
+  
+\CommentTok{\# Use 80\% most variable gene \& gene{-}pairs for modeling}
+\NormalTok{ptail}\OtherTok{=}\FloatTok{0.8}\SpecialCharTok{/}\DecValTok{2}
+
+\CommentTok{\# Automatical selection of parameters for xGboost}
+\NormalTok{auto }\OtherTok{=}\NormalTok{ F}
+
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\NormalTok{auto)\{}
+      
+      \CommentTok{\# Self{-}defined params. Fast.}
+\NormalTok{      params }\OtherTok{=} \FunctionTok{list}\NormalTok{(}\AttributeTok{max\_depth =} \DecValTok{10}\NormalTok{,}
+                    \AttributeTok{eta =} \FloatTok{0.5}\NormalTok{,}
+                    \AttributeTok{nrounds =} \DecValTok{100}\NormalTok{,}
+                    \AttributeTok{nthread =} \DecValTok{10}\NormalTok{,}
+                    \AttributeTok{nfold=}\DecValTok{5}\NormalTok{)}
+\NormalTok{      caret.seed }\OtherTok{=} \ConstantTok{NULL}
+      
+      \CommentTok{\# No. of CPU for parallel computing. The optimized value depends on your CPU and RAM}
+\NormalTok{      numCores }\OtherTok{=} \DecValTok{4}
+      
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{}
+      
+      \CommentTok{\# caret::train strategy by GSClassifier:::cvFitOneModel2. Time consuming}
+\NormalTok{      params }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{      caret.seed }\OtherTok{=} \DecValTok{105}
+      
+      \CommentTok{\# Self{-}defined. For this exmaple training grid, there are 2×1×1×3×2×1×2=24 grids. Make sure that you have a computer with a powerfull CPU.}
+\NormalTok{      grid }\OtherTok{=} \FunctionTok{expand.grid}\NormalTok{(}
+        \AttributeTok{nrounds =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{200}\NormalTok{),}
+        \AttributeTok{colsample\_bytree =} \DecValTok{1}\NormalTok{,}
+        \AttributeTok{min\_child\_weight =} \DecValTok{1}\NormalTok{,}
+        \AttributeTok{eta =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.01}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.3}\NormalTok{),}
+        \AttributeTok{gamma =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.3}\NormalTok{),}
+        \AttributeTok{subsample =} \FloatTok{0.7}\NormalTok{,}
+        \AttributeTok{max\_depth =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{8}\NormalTok{)}
+\NormalTok{      )}
+      
+      \CommentTok{\# If you don\textquotesingle{}t know how to set, just use the same number of your subtypes}
+\NormalTok{      numCores }\OtherTok{=} \DecValTok{4} 
+\NormalTok{    \}}
+\end{Highlighting}
+\end{Shaded}
+
+Finaly, you have to provide your gene sets as a \texttt{list} object:
+
+\begin{verbatim}
+geneSet = <Your gene sets>
+\end{verbatim}
+
+Let's take \texttt{PAD} as an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PAD }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"PAD.train\_20200110.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\NormalTok{geneSet }\OtherTok{\textless{}{-}}\NormalTok{ PAD}\SpecialCharTok{$}\NormalTok{geneSet}
+\FunctionTok{print}\NormalTok{(geneSet)}
+\CommentTok{\# $PIAM}
+\CommentTok{\#  [1] "ENSG00000122122" "ENSG00000117091" "ENSG00000163219" "ENSG00000136167"}
+\CommentTok{\#  [5] "ENSG00000005844" "ENSG00000123338" "ENSG00000102879" "ENSG00000010671"}
+\CommentTok{\#  [9] "ENSG00000185862" "ENSG00000104814" "ENSG00000134516" "ENSG00000100055"}
+\CommentTok{\# [13] "ENSG00000082074" "ENSG00000113263" "ENSG00000153283" "ENSG00000198821"}
+\CommentTok{\# [17] "ENSG00000185811" "ENSG00000117090" "ENSG00000171608"}
+\CommentTok{\# }
+\CommentTok{\# $PIDG}
+\CommentTok{\#  [1] "ENSG00000116667" "ENSG00000107771" "ENSG00000196782" "ENSG00000271447"}
+\CommentTok{\#  [5] "ENSG00000173517" "ENSG00000134686" "ENSG00000100614" "ENSG00000134247"}
+\CommentTok{\#  [9] "ENSG00000109686" "ENSG00000197321" "ENSG00000179981" "ENSG00000187189"}
+\CommentTok{\# [13] "ENSG00000140836"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fitting-models}{%
+\section{Fitting models}\label{fitting-models}}
+
+\hypertarget{gsclassifier-model-training}{%
+\subsection{GSClassifier model training}\label{gsclassifier-model-training}}
+
+Just fit the model like:
+
+\begin{verbatim}
+
+if(!auto){
+  
+  # Self-defined
+  
+  system.time(
+    res <- fitEnsembleModel(Xs,
+                            Ys,
+                            geneSet = geneSet,
+                            na.fill.method = c('quantile','rpart',NULL)[1],
+                            na.fill.seed = na.fill.seed,
+                            n = n,
+                            sampSize = sampSize,
+                            sampSeed = sampSeed ,
+                            breakVec = breakVec,
+                            params = params,
+                            ptail = ptail,
+                            caret.grid = NULL,
+                            caret.seed =  caret.seed,
+                            verbose = verbose,
+                            numCores = numCores)
+  )
+  
+  # user   system  elapsed
+  # 0.08s  0.18s   92.70s
+  
+} else {
+  
+  # caret::train-defined and time-consuming
+  system.time(
+    res <- fitEnsembleModel(Xs,
+                            Ys,
+                            geneSet = geneSet,
+                            na.fill.method = c('quantile','rpart',NULL)[1],
+                            na.fill.seed = na.fill.seed,
+                            n = n,
+                            sampSize = sampSize,
+                            sampSeed = sampSeed ,
+                            breakVec = breakVec,
+                            params = NULL,  # This must be NULL
+                            ptail = ptail,
+                            caret.grid = grid,
+                            caret.seed =  caret.seed,
+                            verbose = verbose,
+                            numCores = numCores)
+  )
+  
+  # user   system   elapsed
+  # 1.10s  2.60s    2311.55s
+}
+
+mymusic() # Remind me with a music when the process completed
+\end{verbatim}
+
+You should save it for convenience:
+
+\begin{verbatim}
+saveRDS(res,'<your path>/train_ens.rds')
+\end{verbatim}
+
+Although a \texttt{auto-parameter\ strategy} was provided in\texttt{GSClassifier}, it's unknown for this method to improve your model performance to what extent. You can just try. It's not a prior recommendation. In generall, setting \texttt{auto=F} in this script could be more cost-effective. Empirically, the speed of \texttt{caret::train} depends on single-core performance of the CPU instead of the core number.
+
+\hypertarget{scaller-for-the-best-call}{%
+\subsection{Scaller for the best call}\label{scaller-for-the-best-call}}
+
+Next, we model the \texttt{scaller} for the training cohort, which would be used for \texttt{BestCall} based on the \texttt{probability\ matrix} in \texttt{callEnsemble} series. Here, \texttt{scaller=NULL} would cause an \texttt{NA} value of \texttt{BestCall} col.~It's not a big deal, because the \texttt{probability\ matrix} is the information we need.
+
+\begin{verbatim}
+# Time-consuming modeling
+resTrain <- parCallEnsemble(X = Xs,
+                            ens = res$Model,
+                            geneAnnotation = res$geneAnnotation,
+                            geneSet = geneSet,
+                            scaller = NULL,
+                            geneids = "ensembl",
+                            subtype = NULL,
+                            numCores = numCores)
+
+# xgboost via best interation
+library(xgboost)
+dtrain <- xgb.DMatrix(as.matrix(resTrain[4:(3 + nSubtype)]), label = Ys-1)
+
+cvRes <- xgb.cv(data = dtrain,
+                nrounds=100,
+                nthread=10,
+                nfold=5,
+                max_depth=5,
+                eta=0.5,
+                early_stopping_rounds=100,
+                num_class = 4,
+                objective = "multi:softmax")
+
+# xgboost via best interation
+bst <- xgboost(data = dtrain,
+               max_depth=5,
+               eta=0.5,
+               nrounds = cvRes$best_iteration,
+               nthread=10,
+               num_class = 4,
+               objective = "multi:softmax")
+Ys_pred <- predict(bst, as.matrix(resTrain[4:7])) + 1
+mean(Ys_pred == Ys) # Prediction rates
+
+# Ensemble results
+scaller.train <- list(
+      Repeat = list(
+        data = dtrain,
+        max_depth=5,
+        eta=0.5,
+        nrounds = cvRes$best_iteration,
+        nthread=10,
+        num_class = 4,
+        objective = "multi:softmax"
+      ), 
+      Model = bst
+    )
+\end{verbatim}
+
+\hypertarget{assemble-your-model}{%
+\subsection{Assemble your model}\label{assemble-your-model}}
+
+\begin{quote}
+For more information of \texttt{geneAnnotation}, you could see \href{https://github.com/huangwb8/GSClassifier/wiki/Advanced-development\#Gene-Annotation}{Advanced development: Gene Annotation} section for assistance.
+\end{quote}
+
+Here we give an example:
+
+\begin{verbatim}
+l.train <- list()
+
+# bootstrap models based on the training cohort
+l.train[['ens']] <- res 
+
+# Scaller model
+l.train[['scaller']] <- scaller.train 
+
+# a data frame contarining gene annotation for IDs convertion
+l.train[['geneAnnotation']] <- <Your gene annotation>
+
+# Your gene sets
+l.train[['geneSet']] <- geneSet
+\end{verbatim}
+
+Finally, save it for downstream analysis
+
+\begin{verbatim}
+saveRDS(l.train,'<Your path>/train.rds')
+\end{verbatim}
+
+About model constributions, you can go \texttt{Advanced\ development} in \href{https://github.com/huangwb8/GSClassifier/wiki/Advanced-development}{here} or \href{http://htmlpreview.github.io/?https://raw.githubusercontent.com/wiki/huangwb8/GSClassifier/Advanced-development.html}{here} for more information.
+
+\hypertarget{of-note-2}{%
+\subsection{Of note}\label{of-note-2}}
+
+You can take a look at the \texttt{PAD.train\_20200110} model (\texttt{PADi}). You have to make your model frame similar to the \texttt{PAD.train\_20200110} model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l.train }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"PAD.train\_20200110.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\FunctionTok{names}\NormalTok{(l.train)}
+\CommentTok{\# [1] "ens"            "scaller"        "geneAnnotation" "geneSet"}
+\end{Highlighting}
+\end{Shaded}
+
+The time of \texttt{GSClassifier} modeling depends on the number of individual models (controlled by \texttt{n})/called subtypes/gene signatures, automatic parameter selection, and your CPU capacity.
+
+\hypertarget{calling-subtypes}{%
+\section{Calling subtypes}\label{calling-subtypes}}
+
+Supposed that you had got a \texttt{GSClassifier} model, next you want to use it for personalized subtype calling.
+
+Just:
+
+\begin{verbatim}
+# Load your model
+l <- readRDS('<Your path>/train.rds')
+
+# subtype calling
+res_i = callEnsemble(
+  X,
+  ens = l$ens$Model,
+  geneAnnotation = l$geneAnnotation,
+  geneSet = l$geneSet,
+  scaller = l$scaller$Model,
+  geneid = <ID type of your training data>,
+  subtype = NULL,
+  verbose = T
+)
+\end{verbatim}
+
+The usage of \texttt{parCallEnsemble} (for huge amount of samples) is similar.
+
+\hypertarget{suggestions-for-gsclassifier-model-developers}{%
+\chapter{Suggestions for GSClassifier model developers}\label{suggestions-for-gsclassifier-model-developers}}
+
+\hypertarget{about-2}{%
+\section{About}\label{about-2}}
+
+\begin{itemize}
+\item
+  The book \texttt{R\ packages} is a straightaway and useful reference book for R developers. The free-access website of \texttt{R\ packages} is \url{https://r-pkgs.org/}. As a developer of R, if you haven't hear about it, it's strongly recommanded to just read it. Hadley Wickham, the main author of the book, is an active R developer and have led some master works like \texttt{ggplot2} and \texttt{plyr}.
+\item
+  With \texttt{GSClassifier} package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interesting in sharing your model, \texttt{GSClassifier} also provides a simple methodology for this vision. In this section, let's see how to achieve it!
+\end{itemize}
+
+First, load the package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GSClassifier)}
+\CommentTok{\# 载入需要的程辑包：luckyBase}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{available-models}{%
+\section{Available models}\label{available-models}}
+
+With \texttt{GSClassifier\_Data()}, all models supported in the current \texttt{GSClassifier} package would showed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{GSClassifier\_Data}\NormalTok{()}
+\CommentTok{\# Available data:}
+\CommentTok{\# Usage example:}
+\CommentTok{\#   ImmuneSubtype.rds }
+\CommentTok{\#   PAD.train\_20200110.rds }
+\CommentTok{\#   PAD.train\_20220916.rds }
+\CommentTok{\#   PAD \textless{}{-} readRDS(system.file("extdata", "PAD.train\_20200110.rds", package = "GSClassifier")) }
+\CommentTok{\#   ImmuneSubtype \textless{}{-} readRDS(system.file("extdata", "ImmuneSubtype.rds", package = "GSClassifier"))}
+\end{Highlighting}
+\end{Shaded}
+
+For more details of \texttt{GSClassifier\_Data()}, just:
+
+\begin{verbatim}
+?GSClassifier_Data()
+\end{verbatim}
+
+Set \texttt{model=F}, all \texttt{.rds} data would be showed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{GSClassifier\_Data}\NormalTok{(}\AttributeTok{model =}\NormalTok{ F)}
+\CommentTok{\# Available data:}
+\CommentTok{\# Usage example:}
+\CommentTok{\#   general{-}gene{-}annotation.rds }
+\CommentTok{\#   ImmuneSubtype.rds }
+\CommentTok{\#   PAD.train\_20200110.rds }
+\CommentTok{\#   PAD.train\_20220916.rds }
+\CommentTok{\#   testData.rds }
+\CommentTok{\#   PAD \textless{}{-} readRDS(system.file("extdata", "PAD.train\_20200110.rds", package = "GSClassifier")) }
+\CommentTok{\#   ImmuneSubtype \textless{}{-} readRDS(system.file("extdata", "ImmuneSubtype.rds", package = "GSClassifier"))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{components-of-a-gsclassifier-model}{%
+\section{Components of a GSClassifier model}\label{components-of-a-gsclassifier-model}}
+
+Currently, a GSClassifier model and related product environments is designed as a \texttt{list} object. Let's take \texttt{PAD.train\_20210110}(also called \texttt{PADi}) as an example.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PADi }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"PAD.train\_20200110.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+This picture shows the components of \texttt{PADi}:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/GSClassifier-model} 
+
+}
+
+\caption{Details of a GSClassifier model}\label{fig:GSClassifierModel}
+\end{figure}
+
+As shown, a typical \texttt{GSClassifier} model is consist of four parts (with different colors in the picture):
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{1.\ ens}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Repeat}: productive parameters of \texttt{GSClassifier} models
+  \item
+    \texttt{Model}: \texttt{GSClassifier} models. Here, \texttt{PADi} had 20 models from different subs of the training cohorts
+  \end{itemize}
+\item
+  \texttt{2.\ scaller}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Repeat}: productive parameters of the \texttt{scaller} model, which was used for \texttt{BestCall} calling
+  \item
+    \texttt{Model}: the \texttt{scaller} model
+  \end{itemize}
+\item
+  \texttt{3.\ geneAnnotation}: a data frame containing gene annotation information
+\item
+  \texttt{4.\ geneSet}: a list contains several gene sets
+\end{itemize}
+
+Thus, you can assemble your model like:
+
+\begin{verbatim}
+model <- list()
+
+# bootstrap models based on the training cohort
+model[['ens']] <- <Your model for subtypes calling>
+
+# Scaller model
+model[['scaller']] <- <Your scaller for BestCall calling>
+
+# a data frame contarining gene annotation for IDs convertion
+model[['geneAnnotation']] <- <Your gene annotation>
+
+# Your gene sets
+model[['geneSet']] <- <Your gene sets>
+
+saveRDS(model, 'your-model.rds')
+\end{verbatim}
+
+More tutorials for model establishment, please go to \href{https://github.com/huangwb8/GSClassifier/wiki/Model-establishment}{markdown tutorial} or \href{http://htmlpreview.github.io/?https://raw.githubusercontent.com/wiki/huangwb8/GSClassifier/Model-establishment.html}{html tutorial}.
+
+\hypertarget{submit-models-to-luckymodel-package}{%
+\section{Submit models to luckyModel package}\label{submit-models-to-luckymodel-package}}
+
+Considering most users of \texttt{GSClassifier} might have no need for lots of models, We divided the model storage feature into an new ensembl package called \href{https://github.com/huangwb8/luckyModel}{\textbf{luckyModel}}. Don't worry, the usage is very easy!
+
+If you want to summit your model, you should apply for a contributor of \texttt{luckyModel} first. Then, just send the model (\texttt{.rds}) into the \texttt{inst/extdata/\textless{}project\textgreater{}} path of \texttt{luckyModel}. After audit, your branch would be accepted and available for the users.
+
+The name of your model must be the format as following:
+
+\begin{verbatim}
+# <project>
+GSClassifier
+
+# <creator>_<model>_v<yyyymmdd>:
+HWB_PAD_v20211201.rds
+\end{verbatim}
+
+\hypertarget{repeatablility-of-models}{%
+\section{Repeatablility of models}\label{repeatablility-of-models}}
+
+For repeatablility, you had better submit a \texttt{.zip} or \texttt{.tar.gz} file that containing the information of your model. Here are some suggestions:
+
+\begin{itemize}
+\item
+  \texttt{\textless{}creator\textgreater{}\_\textless{}model\textgreater{}\_v\textless{}yyyymmdd\textgreater{}.md}
+
+  \begin{itemize}
+  \item
+    \textbf{Destinations}: Why you develop the model
+  \item
+    \textbf{Design}: The evidence for gene sigatures, et al
+  \item
+    \textbf{Data sources}: The data for model training and validating, et al
+  \item
+    \textbf{Applications}: Where to use your model
+  \item
+    \textbf{Limintations}: Limitation or improvement direction of your model
+  \end{itemize}
+\item
+  \texttt{\textless{}creator\textgreater{}\_\textless{}model\textgreater{}\_v\textless{}yyyymmdd\textgreater{}.R}: The code you used for model training and validating.
+\item
+  \texttt{Data-of-\textless{}creator\textgreater{}\_\textless{}model\textgreater{}\_v\textless{}yyyymmdd\textgreater{}.rds} (Optional): Due to huge size of omics data, it's OK for you not to submit the raw data.
+\end{itemize}
+
+:cupid: Welcome your contributions!
+
+\hypertarget{gene-annotation}{%
+\section{Gene Annotation}\label{gene-annotation}}
+
+For convenience, we provided a general gene annotation dataset for different genomics:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gga }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"general{-}gene{-}annotation.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\FunctionTok{names}\NormalTok{(gga)}
+\CommentTok{\# [1] "hg38" "hg19" "mm10"}
+\end{Highlighting}
+\end{Shaded}
+
+I believe they're enough for routine medicine studies.
+
+Here, take a look at \texttt{hg38}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hg38 }\OtherTok{\textless{}{-}}\NormalTok{ gga}\SpecialCharTok{$}\NormalTok{hg38}
+\FunctionTok{head}\NormalTok{(hg38)}
+\CommentTok{\#           ENSEMBL       SYMBOL  ENTREZID}
+\CommentTok{\# 1 ENSG00000223972      DDX11L1 100287102}
+\CommentTok{\# 3 ENSG00000227232       WASH7P      \textless{}NA\textgreater{}}
+\CommentTok{\# 4 ENSG00000278267    MIR6859{-}1 102466751}
+\CommentTok{\# 5 ENSG00000243485 RP11{-}34P13.3      \textless{}NA\textgreater{}}
+\CommentTok{\# 6 ENSG00000284332    MIR1302{-}2 100302278}
+\CommentTok{\# 7 ENSG00000237613      FAM138A    645520}
+\end{Highlighting}
+\end{Shaded}
+
+With this kind of data, it's simple to customize your own gene annotation (take \texttt{PADi} as examples):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{tGene }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{unlist}\NormalTok{(PADi}\SpecialCharTok{$}\NormalTok{geneSet))}
+\NormalTok{geneAnnotation }\OtherTok{\textless{}{-}}\NormalTok{ hg38[hg38}\SpecialCharTok{$}\NormalTok{ENSEMBL }\SpecialCharTok{\%in\%}\NormalTok{ tGene, ]}
+\FunctionTok{dim}\NormalTok{(geneAnnotation)}
+\CommentTok{\# [1] 32  3}
+\end{Highlighting}
+\end{Shaded}
+
+Have a check:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(geneAnnotation)}
+\CommentTok{\#              ENSEMBL SYMBOL ENTREZID}
+\CommentTok{\# 353  ENSG00000171608 PIK3CD     5293}
+\CommentTok{\# 1169 ENSG00000134686   PHC2     1912}
+\CommentTok{\# 2892 ENSG00000134247 PTGFRN     5738}
+\CommentTok{\# 3855 ENSG00000117090 SLAMF1     6504}
+\CommentTok{\# 3858 ENSG00000117091   CD48      962}
+\CommentTok{\# 4043 ENSG00000198821  CD247      919}
+\end{Highlighting}
+\end{Shaded}
+
+This \texttt{geneAnnotation} could be the \texttt{model{[}{[}\textquotesingle{}geneAnnotation\textquotesingle{}{]}{]}}.
+
+Also, we use a function called \texttt{convert} to do gene ID convertion.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{luckyBase}\SpecialCharTok{::}\FunctionTok{convert}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}GAPDH\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}TP53\textquotesingle{}}\NormalTok{), }\StringTok{\textquotesingle{}SYMBOL\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ENSEMBL\textquotesingle{}}\NormalTok{, hg38)}
+\CommentTok{\# [1] "ENSG00000111640" "ENSG00000141510"}
+\end{Highlighting}
+\end{Shaded}
+
+Note: the \texttt{luckyBase} package integrates lots of useful tiny functions, you could explore it sometimes.
+
+  \bibliography{book.bib}
 
 \end{document}

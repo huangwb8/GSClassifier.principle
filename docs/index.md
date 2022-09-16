@@ -1,11 +1,11 @@
 --- 
 title: "The Principle of R Package GSClassifier"
 author: "Weibin Huang"
-date: "2022-09-15"
+date: "2022-09-16"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-biblio-style: apalike
+csl: briefings-in-bioinformatics.csl
 link-citations: yes
 geometry:
   - top=1in
@@ -44,3 +44,5 @@ You may also be interested in:
 * __"[luckyModel](https://github.com/huangwb8/luckyModel)"__ Model ensemble for third-party lucky series, such GSClassifier.
 
 -->
+
+

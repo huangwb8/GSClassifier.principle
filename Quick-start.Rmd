@@ -1,0 +1,420 @@
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    # 在 markdown 文档显示代码块
+    echo = TRUE, 
+    
+    # 不显示警告信息
+    warning = FALSE, 
+    
+    # 在新块中写入代码的输出结果
+    collapse = TRUE, 
+    
+    # 所有代码运行完成后再输出
+    results = 'hold', 
+    
+    # 输出代码前用#号注释
+    comment='#'
+)
+```
+
+
+# Quick start
+
+## About
+
++ Although with bright prospects in Pan-disease analysis, [GSClassifier](https://github.com/huangwb8/GSClassifier) was primarily developed for clinic-friendly immune subtypes of gastric cancer (GC). Currently, only `PAD` subtypes and `PADi` for GC were supported. We would try to support more cancer types in the future as possible. More details in [Plans in the future](https://github.com/huangwb8/GSClassifier/wiki/Plans-in-the-future) section.
++ Gibbs\' `PanCancer immune subtypes` based on five gene signatures (485 genes) could also be called in `GSClassifier`, with a pre-trained model from the [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier) package. If you use their jobs, please cite: [references](https://github.com/huangwb8/GSClassifier/wiki/Introduction#Reference).
++ Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.
+
+## Data
+
+To lower the learning cost of `GSClassifier`, we provides some test data: 
+
+```{r}
+library(GSClassifier)
+testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
+```
+
+
+Explore the `testData`:
+
+```{r}
+names(testData)
+```
+
+## PAD
+
+### Preparation of the test data
+
+load phenotype data:
+
+```{r}
+design <- testData$PanSTAD_phenotype_part
+table(design$Dataset)
+```
+
+load target sample IDs in `GSE54129` cohort:
+
+```{r}
+target_ID <- design$ID[design$Dataset %in% 'GSE54129']
+expr <- testData$PanSTAD_expr_part[,target_ID]
+head(expr[,1:10])
+
+```
+
+
+### Unsupervised clustering
+
+```{r out.width='60%', fig.align='center'}
+res_pad <- PAD(
+  expr = expr,
+  cluster.method = "ward.D2",
+  extra.annot = NULL,
+  plot.title = 'PAD test',
+  subtype = "PAD.train_20200110",
+  verbose = T
+)
+```
+
+
+### Of note
+
++ It's strongly recommanded that the gene type of `expr` should be alway the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for examples).
+
++ `PAD` function is only for datasets with lots of samples for its classification depends on population-based unsupervised clusting. `PAD` is population-dependent and non-personalized.
+
++ Beta characteristics: You could try random forest classification based on the `randomForest` package or methods in `stats::hclust`. 
+
+## PADi
+
++ In `GSClassifier`, `PADi` is a pre-trained out-of-the-box model for GC personalized PAD subtypes calling.
+
++ During the sutype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, **you don't have to do batch normalization** even though the data (the `X` input) come from multiple cohorts or platform.
+
++ More limitations were discussed in our paper that you had better know.
+
+In this section, we would showed how to use `PADi` series: `PADi`, `callEnsemble`, and `parCallEnsemble` functions.
+
+### Preparation of the test data
+
+```{r}
+
+ X <- testData$Kim2018_3
+ head(X)
+
+```
+
+### Use a specific function called `PADi`
+
+Very simple, just:
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_padi <- PADi(X = X, verbose = F)
+```
+
+Check the result:
+
+```{r}
+head(res_padi)
+```
+
+
+Actually, `PADi` is exactly based on a general function called `callEnsemble`.
+
+
+### Use the `callEnsemble` function
+
+Also simple, just:
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_padi <- callEnsemble(
+    X = X,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "ensembl",
+    subtype = "PAD.train_20200110",
+    verbose = F
+  )
+
+```
+
+Check the result:
+
+```{r}
+head(res_padi)
+```
+
+
+### Parallel strategy for PADi
+
++ Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, the parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of `GSClassifier` package.
+
++ The parameter `numCores` was used to control the No. of CPU for computing (which depends on your CPU capacity).
+
+```
+# No run for the tiny test data. With errors.
+
+# Method 1:
+res_padi <- PADi(X = X, verbose = F, numCores = 4)
+
+# Method 2: 
+res_padi <- parCallEnsemble(
+  X = X,
+  ens = NULL,
+  geneAnnotation = NULL,
+  geneSet = NULL,
+  scaller = NULL,
+  geneids = 'ensembl',
+  subtype = 'PAD.train_20200110',
+  verbose = T,
+  numCores = 4)
+```
+
+
+### Single sample subtype calling
+
+In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of `PADi` series.
+
+Supposed that there is a GC patient, its information should be:
+
+```{r}
+X_ind <- X[,1]; names(X_ind) <- rownames(X)
+head(X_ind)
+```
+
+Or it can also be another format:
+
+```{r}
+X_ind <- as.matrix(X[,1]); rownames(X_ind) <- rownames(X)
+head(X_ind)
+```
+
+
+Similar to multiples sample calling, just:
+
+```{r, include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_padi <- PADi(X = X_ind, verbose = F)
+```
+
+check the result:
+
+```{r}
+head(res_padi)
+```
+
+Similarly, there is alternative choice:
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_padi <- callEnsemble(
+    X = X_ind,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "ensembl",
+    subtype = "PAD.train_20200110",
+    verbose = F
+  )
+```
+
+Check the result:
+
+```{r}
+head(res_padi)
+```
+
+
+### Of note
+
++ In the results of `PADi`, two types of subtypes (`BestCall` and `BestCall_Max`) were integrated. `BestCall` was predicted based on a xgboost-trained model based on prior knowlege of `PAD` subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while `BestCall_Max` was predicted via maximum strategy. You should use THE SAME ONE in a specific practice no matter which one you use.
+
++ `PADi` is individual-dependent and personalized, which means that the result of subtype calling would not be influenced by the data of others.
+
+
+## Use external models from luckyModel package
+
+In the future, there might be lots of models available as a resource of `GSClassifier`, such as [luckyModel](https://github.com/huangwb8/luckyModel). Here we show how `luckyModel` support `GSClassifier`.
+
+First, intall and load `luckyModel`:
+
+```{r}
+# Install luckyModel
+if (!requireNamespace("luckyModel", quietly = TRUE))
+    devtools::install_github("huangwb8/luckyModel")
+library(luckyModel)
+```
+
+Check projects supported in current `luckyModel`:
+
+```{r}
+list_project()
+```
+
+Check available models in the project:
+
+```{r}
+list_model(project='GSClassifier')
+```
+Here, `HWB_PAD_v20200110` is a standard name of `PADi`. They are exactly the same. 
+
+Taking `PADi` as an example, we here show how to use an external model from `luckyModel`. First, load a model:
+
+```{R}
+model <- lucky_model(project = 'GSClassifier',
+                     developer='HWB',
+                     model = 'PAD',
+                     version = 'v20200110')
+```
+
+Then, check the gene id type:
+
+```{r}
+model$geneSet
+```
+
+The model should use `ensembl` as the value of `geneid` parameter in `callEnsemble` series.
+
+Next, you can use the model like:
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_padi <- callEnsemble(
+  X = X,
+  ens = model$ens$Model,
+  geneAnnotation = model$geneAnnotation,
+  geneSet = model$geneSet,
+  scaller = model$scaller$Model,
+  geneid = "ensembl",
+  subtype = NULL,
+  verbose = F
+)
+```
+
+Or just:
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_padi <- callEnsemble(
+  X,
+  ens = NULL,
+  geneAnnotation = NULL,
+  geneSet = NULL,
+  scaller = NULL,
+  geneid = "ensembl",
+  subtype = model, 
+  verbose = F
+)
+
+```
+
+They are exactly the same.
+
+Finally, check the result:
+
+```{r}
+head(res_padi)
+```
+
+
+## PanCancer immune subtypes
+
+`GSClassifier` could also call the `PanCancer immune subtypes` of Gibbs'.
+
+First, see data available in current `GSClassifier`:
+
+```{r}
+GSClassifier_Data()
+```
+
+Let's use our test data to do this:
+
+```{r}
+
+X <- testData$Kim2018_3
+symbol <- convert(rownames(X))
+rownames(X) <- symbol
+X <- X[!is.na(symbol),]
+dim(X)
+
+```
+
+Have a check
+
+```{r}
+head(X)
+```
+
+PanCan Immune Subtype callings: 
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_pis <- callEnsemble(
+    X = X,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "symbol",
+    subtype = "ImmuneSubtype",
+    verbose = F
+  )
+```
+
+Check the result:
+
+```{r}
+head(res_pis)
+```
+
+
+Also, you can try to use `luckyModel`:
+
+```{r}
+pci <- lucky_model(
+  project = "GSClassifier",
+  model = "PanCancerImmuneSubtype",
+  developer = "Gibbs",
+  version = "v20190731"
+)
+
+```
+
+
+PanCan Immune Subtype callings: 
+
+
+```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+res_pis <- callEnsemble(
+    X = X,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "symbol",
+    subtype = pci,
+    verbose = F
+  )
+```
+
+
+Finally, we take a look at the `PanCancer immune subtypes` model:
+
+```{r}
+ImmuneSubtype <- readRDS(system.file("extdata", "ImmuneSubtype.rds", package = "GSClassifier"))
+names(ImmuneSubtype)
+```
+
+Its gene annotation:
+
+```{r}
+head(ImmuneSubtype$geneAnnotation)
+```
+
+Its gene sets:
+
+```{r}
+ImmuneSubtype$geneSet
+```
+Enjoy `GSClassifier`! 

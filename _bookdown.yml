@@ -17,6 +17,11 @@ rmd_files:
 
     "Discussion.Rmd",
 
+    "Quick-start.Rmd",
+
+    "Model-establishment.Rmd",
+
+    "Advanced-development.Rmd",
+
     "References.Rmd",
   ]
-

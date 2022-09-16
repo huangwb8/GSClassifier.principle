@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-15" />
+<meta name="date" content="2022-09-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -150,21 +150,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="the-principle-of-gsclassifier.html#topicTSP" id="toc-topicTSP"><span class="toc-section-number">1.3</span> Top scoring pairs</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.3.1</span> Packages</a></li>
-<li><a href="the-principle-of-gsclassifier.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.3.2</span> Simulated Dataset</a></li>
-<li><a href="the-principle-of-gsclassifier.html#missing-values" id="toc-missing-values"><span class="toc-section-number">1.3.3</span> Missing values</a></li>
-<li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.3.4</span> Binned expression</a></li>
-<li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.3.5</span> Pair difference</a></li>
-<li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.3.6</span> Set difference</a></li>
+<li><a href="the-principle-of-gsclassifier.html#tsp-intro" id="toc-tsp-intro"><span class="toc-section-number">1.3.1</span> Introduction</a></li>
+<li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.3.2</span> Packages</a></li>
+<li><a href="the-principle-of-gsclassifier.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.3.3</span> Simulated Dataset</a></li>
+<li><a href="the-principle-of-gsclassifier.html#missing-value-imputation" id="toc-missing-value-imputation"><span class="toc-section-number">1.3.4</span> Missing value imputation</a></li>
+<li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.3.5</span> Binned expression</a></li>
+<li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.3.6</span> Pair difference</a></li>
+<li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.3.7</span> Set difference</a></li>
+<li><a href="the-principle-of-gsclassifier.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">1.3.8</span> Batch effect</a></li>
 </ul></li>
 </ul></li>
 <li><a href="discussion.html#discussion" id="toc-discussion"><span class="toc-section-number">2</span> Discussion</a>
 <ul>
 <li><a href="discussion.html#model-complexibility" id="toc-model-complexibility"><span class="toc-section-number">2.1</span> Model complexibility</a></li>
-<li><a href="discussion.html#missing-value" id="toc-missing-value"><span class="toc-section-number">2.2</span> Missing value</a></li>
-<li><a href="discussion.html#extensibility" id="toc-extensibility"><span class="toc-section-number">2.3</span> Extensibility</a></li>
+<li><a href="discussion.html#model-extensibility" id="toc-model-extensibility"><span class="toc-section-number">2.2</span> Model extensibility</a></li>
+<li><a href="discussion.html#missing-value" id="toc-missing-value"><span class="toc-section-number">2.3</span> Missing value</a></li>
 <li><a href="discussion.html#subtypevector" id="toc-subtypevector"><span class="toc-section-number">2.4</span> Subtype vector calling</a></li>
 <li><a href="discussion.html#topicSubmodel" id="toc-topicSubmodel"><span class="toc-section-number">2.5</span> The number of submodels</a></li>
+</ul></li>
+<li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
+<ul>
+<li><a href="quick-start.html#about" id="toc-about"><span class="toc-section-number">3.1</span> About</a></li>
+<li><a href="quick-start.html#data" id="toc-data"><span class="toc-section-number">3.2</span> Data</a></li>
+<li><a href="quick-start.html#pad" id="toc-pad"><span class="toc-section-number">3.3</span> PAD</a>
+<ul>
+<li><a href="quick-start.html#preparation-of-the-test-data" id="toc-preparation-of-the-test-data"><span class="toc-section-number">3.3.1</span> Preparation of the test data</a></li>
+<li><a href="quick-start.html#unsupervised-clustering" id="toc-unsupervised-clustering"><span class="toc-section-number">3.3.2</span> Unsupervised clustering</a></li>
+<li><a href="quick-start.html#of-note" id="toc-of-note"><span class="toc-section-number">3.3.3</span> Of note</a></li>
+</ul></li>
+<li><a href="quick-start.html#padi" id="toc-padi"><span class="toc-section-number">3.4</span> PADi</a>
+<ul>
+<li><a href="quick-start.html#preparation-of-the-test-data-1" id="toc-preparation-of-the-test-data-1"><span class="toc-section-number">3.4.1</span> Preparation of the test data</a></li>
+<li><a href="quick-start.html#use-a-specific-function-called-padi" id="toc-use-a-specific-function-called-padi"><span class="toc-section-number">3.4.2</span> Use a specific function called <code>PADi</code></a></li>
+<li><a href="quick-start.html#use-the-callensemble-function" id="toc-use-the-callensemble-function"><span class="toc-section-number">3.4.3</span> Use the <code>callEnsemble</code> function</a></li>
+<li><a href="quick-start.html#parallel-strategy-for-padi" id="toc-parallel-strategy-for-padi"><span class="toc-section-number">3.4.4</span> Parallel strategy for PADi</a></li>
+<li><a href="quick-start.html#single-sample-subtype-calling" id="toc-single-sample-subtype-calling"><span class="toc-section-number">3.4.5</span> Single sample subtype calling</a></li>
+<li><a href="quick-start.html#of-note-1" id="toc-of-note-1"><span class="toc-section-number">3.4.6</span> Of note</a></li>
+</ul></li>
+<li><a href="quick-start.html#use-external-models-from-luckymodel-package" id="toc-use-external-models-from-luckymodel-package"><span class="toc-section-number">3.5</span> Use external models from luckyModel package</a></li>
+<li><a href="quick-start.html#pancancer-immune-subtypes" id="toc-pancancer-immune-subtypes"><span class="toc-section-number">3.6</span> PanCancer immune subtypes</a></li>
+</ul></li>
+<li><a href="model-establishment-via-gsclassifier.html#model-establishment-via-gsclassifier" id="toc-model-establishment-via-gsclassifier"><span class="toc-section-number">4</span> Model establishment via GSClassifier</a>
+<ul>
+<li><a href="model-establishment-via-gsclassifier.html#about-1" id="toc-about-1"><span class="toc-section-number">4.1</span> About</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#data-preparation" id="toc-data-preparation"><span class="toc-section-number">4.2</span> Data preparation</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#fitting-models" id="toc-fitting-models"><span class="toc-section-number">4.3</span> Fitting models</a>
+<ul>
+<li><a href="model-establishment-via-gsclassifier.html#gsclassifier-model-training" id="toc-gsclassifier-model-training"><span class="toc-section-number">4.3.1</span> GSClassifier model training</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#scaller-for-the-best-call" id="toc-scaller-for-the-best-call"><span class="toc-section-number">4.3.2</span> Scaller for the best call</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#assemble-your-model" id="toc-assemble-your-model"><span class="toc-section-number">4.3.3</span> Assemble your model</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#of-note-2" id="toc-of-note-2"><span class="toc-section-number">4.3.4</span> Of note</a></li>
+</ul></li>
+<li><a href="model-establishment-via-gsclassifier.html#calling-subtypes" id="toc-calling-subtypes"><span class="toc-section-number">4.4</span> Calling subtypes</a></li>
+</ul></li>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#suggestions-for-gsclassifier-model-developers" id="toc-suggestions-for-gsclassifier-model-developers"><span class="toc-section-number">5</span> Suggestions for GSClassifier model developers</a>
+<ul>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#about-2" id="toc-about-2"><span class="toc-section-number">5.1</span> About</a></li>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#available-models" id="toc-available-models"><span class="toc-section-number">5.2</span> Available models</a></li>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#components-of-a-gsclassifier-model" id="toc-components-of-a-gsclassifier-model"><span class="toc-section-number">5.3</span> Components of a GSClassifier model</a></li>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#submit-models-to-luckymodel-package" id="toc-submit-models-to-luckymodel-package"><span class="toc-section-number">5.4</span> Submit models to luckyModel package</a></li>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#repeatablility-of-models" id="toc-repeatablility-of-models"><span class="toc-section-number">5.5</span> Repeatablility of models</a></li>
+<li><a href="suggestions-for-gsclassifier-model-developers.html#gene-annotation" id="toc-gene-annotation"><span class="toc-section-number">5.6</span> Gene Annotation</a></li>
 </ul></li>
 <li><a href="references.html#references" id="toc-references">References</a></li>
 <li class="divider"></li>
@@ -191,11 +237,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 1</span> The Principle of GSClassifier</h1>
 <div id="introduction" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introduction</h2>
-<p><a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a> is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of <strong>GSClassifier</strong> package usage had been demonstrated in <a href="https://github.com/huangwb8/GSClassifier/wiki">Github WiKi</a>. Here, we propose to introduce the principle of GSClassifier, including flowchart, <strong>top scoring pairs (TSP)</strong> algorithm, and batch effect control.
 <!--
 描述GSClassifier的Flowchart，关注每一步的具体细节；
 演示TSP的计算过程
---></p>
+-->
+<p><a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a> is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of <strong>GSClassifier</strong> package usage had been demonstrated in <a href="https://github.com/huangwb8/GSClassifier/wiki">Github WiKi</a>. Here, we propose to introduce the principle of GSClassifier, including flowchart, <strong>top scoring pairs (TSP)</strong> algorithm, and batch effect control.</p>
 </div>
 <div id="flowchart" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Flowchart</h2>
@@ -214,26 +260,29 @@ Figure 1.1: The flow chart of GSClassifier
 </div>
 <div id="model-establishment-and-validation" class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Model Establishment and Validation</h3>
-<p>The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is <strong>7:3</strong>. Next, each <strong>Subset</strong> (70% of the training cohort in PAD project) would be further selected randomly to build a <strong>Submodel</strong> via cross-validation Extreme Gradient Boosting algorithm (<strong>xgboost::xgb.cv</strong> function),<!--引文-->. The number of submodels is suggested over 20 (more details in <a href="discussion.html#topicSubmodel">2.5</a>).</p>
-<p>The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, <strong>the data of both internal and external validation cohort would not be used during model training</strong>.</p>
+<p>The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is <strong>7:3</strong>. Next, each <strong>Subset</strong> (70% of the training cohort in PAD project) would be further selected randomly to build a <strong>Submodel</strong> via cross-validation Extreme Gradient Boosting algorithm (<strong>xgboost::xgb.cv</strong> function) <span class="citation">[<a href="references.html#ref-RN345" role="doc-biblioref">1</a>]</span>. The number of submodels is suggested over 20 (more details in <a href="discussion.html#topicSubmodel">2.5</a>).</p>
+<p>The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, <strong>the data of both internal and external validation cohort would not be used during model training</strong> so as to avoid over-fitting.</p>
 </div>
 <div id="model-application" class="section level3" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Model Application</h3>
-<p>In PAD project, <strong>Model for individual</strong>, the ensemble of submodels, is called “<strong>PAD for individual</strong>” (<strong>PADi</strong>). Supposed raw RNA expression of a patient was given, <strong>GSClassifier</strong> would turn it into TSP vector, which would be as a input to <strong>PADi</strong>. Then, <strong>GSClassifier</strong> would output the possibility matrix and the subtype for this patient. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so models like <strong>PADi</strong> are personalized.</p>
+<p>In PAD project, <strong>Model for individual</strong>, the ensemble of submodels, is called “<strong>PAD for individual</strong>” (<strong>PADi</strong>). Supposed raw RNA expression of a sample was given. As showed in <a href="the-principle-of-gsclassifier.html#fig:flowchart">1.1</a> and <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, <strong>GSClassifier</strong> would turn raw RNA expression into a TSP vector, which would be as a input to <strong>Model for individual</strong>. Then, <strong>GSClassifier</strong> would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest <strong>Model for individual</strong> (<strong>PADi</strong>, etc) as personalized model.</p>
 </div>
 </div>
 <div id="topicTSP" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Top scoring pairs</h2>
-<p>Genes expression of an individual is normalized during the model training and the subtype identification via <strong>Top Scoring Pairs</strong> (<strong>TSP</strong>) algorithm, which was previously described by Geman et al<!--参考文献-->. TSP had been used in cancer research and effectively predicts cancer progression and ICIs response<!--参考文献-->. Immuno-predictive score (IMPRES), a method resemble TSP, performed well in prediction of ICIs response in melanoma<!--参考文献-->. Moreover, gene-pairing strategy was applied to reduce batch effect in several researches.<!--参考文献：https://pubmed.ncbi.nlm.nih.gov/36088543/ --></p>
-<p>TSP normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. As show in Figure <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, The TSP matrix in GSClassifier consists of 3 parts: <strong>binned expression</strong>, <strong>pair difference</strong>, and <strong>set difference</strong>. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.</p>
+<div id="tsp-intro" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Introduction</h3>
+<p>Genes expression of an individual is normalized during the model training and the subtype identification via <strong>Top Scoring Pairs</strong> (<strong>TSP</strong>, also called <strong>Relative Expression Orderings</strong> (<strong>REOs</strong>)) algorithm, which was previously described by Geman et al <span class="citation">[<a href="references.html#ref-RN267" role="doc-biblioref">2</a>]</span>. <strong>TSP</strong> normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. <strong>TSP</strong> had been used in cancer research and effectively predicts cancer progression and ICIs response <span class="citation">[<a href="references.html#ref-RN265" role="doc-biblioref">3</a>–<a href="references.html#ref-RN261" role="doc-biblioref">5</a>]</span>.</p>
+<p>As show in Figure <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, The TSP matrix in GSClassifier consists of three parts: <strong>binned expression</strong>, <strong>pair difference</strong>, and <strong>set difference</strong>. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.</p>
 <div class="figure" style="text-align: center"><span id="fig:tsp"></span>
 <img src="fig/TSP.png" alt="The components of TSP (2 gene sets)" width="85%" />
 <p class="caption">
 Figure 1.2: The components of TSP (2 gene sets)
 </p>
 </div>
-<div id="packages" class="section level3" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Packages</h3>
+</div>
+<div id="packages" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Packages</h3>
 <p>First, load needed packages:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="the-principle-of-gsclassifier.html#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-2"><a href="the-principle-of-gsclassifier.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Install &quot;devtools&quot; package</span></span>
@@ -262,57 +311,122 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb1-25"><a href="the-principle-of-gsclassifier.html#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ComplexHeatmap&quot;</span>,</span>
 <span id="cb1-26"><a href="the-principle-of-gsclassifier.html#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;GSClassifier&quot;</span>,</span>
 <span id="cb1-27"><a href="the-principle-of-gsclassifier.html#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;rpart&quot;</span>,</span>
-<span id="cb1-28"><a href="the-principle-of-gsclassifier.html#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tidyr&quot;</span>)</span>
-<span id="cb1-29"><a href="the-principle-of-gsclassifier.html#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> packages_needed){<span class="fu">p_load</span>(<span class="at">char=</span>i)}</span></code></pre></div>
+<span id="cb1-28"><a href="the-principle-of-gsclassifier.html#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tidyr&quot;</span>,</span>
+<span id="cb1-29"><a href="the-principle-of-gsclassifier.html#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;reshape2&quot;</span>,</span>
+<span id="cb1-30"><a href="the-principle-of-gsclassifier.html#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-31"><a href="the-principle-of-gsclassifier.html#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> packages_needed){<span class="fu">p_load</span>(<span class="at">char=</span>i)}</span></code></pre></div>
+<p>Here is the environment of R programming:</p>
+<pre><code># R version 4.0.3 (2020-10-10)
+# Platform: x86_64-w64-mingw32/x64 (64-bit)
+# Running under: Windows 10 x64 (build 18363)
+# 
+# Matrix products: default
+# 
+# locale:
+# [1] LC_COLLATE=Chinese (Simplified)_China.936 
+# [2] LC_CTYPE=Chinese (Simplified)_China.936   
+# [3] LC_MONETARY=Chinese (Simplified)_China.936
+# [4] LC_NUMERIC=C                              
+# [5] LC_TIME=Chinese (Simplified)_China.936    
+# 
+# attached base packages:
+# [1] grid      stats     graphics  grDevices utils     datasets  methods  
+# [8] base     
+# 
+# other attached packages:
+# [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
+# [4] rpart_4.1.16         GSClassifier_0.1.20  luckyBase_0.1.0     
+# [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
+# 
+# loaded via a namespace (and not attached):
+#   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
+#   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
+#   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
+#  [10] clue_0.3-57          rstudioapi_0.13      listenv_0.8.0       
+#  [13] ggpubr_0.4.0         remotes_2.4.2        lubridate_1.8.0     
+#  [16] prodlim_2019.11.13   fansi_1.0.3          codetools_0.2-18    
+#  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
+#  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
+#  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
+#  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
+#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.2-18       
+#  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
+#  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
+#  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
+#  [43] carData_3.0-5        cellranger_1.1.0     jquerylib_0.1.4     
+#  [46] vctrs_0.4.1          nlme_3.1-149         iterators_1.0.14    
+#  [49] timeDate_3043.102    xfun_0.33            gower_1.0.0         
+#  [52] stringr_1.4.0        globals_0.15.1       ps_1.4.0            
+#  [55] testthat_3.1.0       lifecycle_1.0.1      devtools_2.4.3      
+#  [58] rstatix_0.7.0        future_1.26.1        MASS_7.3-53         
+#  [61] scales_1.2.0         ipred_0.9-12         parallel_4.0.3      
+#  [64] RColorBrewer_1.1-3   yaml_2.3.5           memoise_2.0.1       
+#  [67] sass_0.4.1           stringi_1.7.6        highr_0.9           
+#  [70] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
+#  [73] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
+#  [76] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
+#  [79] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
+#  [82] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
+#  [85] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
+#  [88] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
+#  [91] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
+#  [94] withr_2.5.0          survival_3.3-1       abind_1.4-5         
+#  [97] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
+# [100] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
+# [103] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
+# [106] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
+# [109] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
+# [112] signal_0.7-7         munsell_0.5.0        bslib_0.3.1         
+# [115] sessioninfo_1.2.2</code></pre>
 </div>
-<div id="simulated-dataset" class="section level3" number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> Simulated Dataset</h3>
+<div id="simulated-dataset" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Simulated Dataset</h3>
 <p>We simulated a dataset to demonstrate the principle of TSP normalization in GSClassifier:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="the-principle-of-gsclassifier.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geneset</span></span>
-<span id="cb2-2"><a href="the-principle-of-gsclassifier.html#cb2-2" aria-hidden="true" tabindex="-1"></a>geneSet <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb2-3"><a href="the-principle-of-gsclassifier.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set1 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>),</span>
-<span id="cb2-4"><a href="the-principle-of-gsclassifier.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set2 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>)</span>
-<span id="cb2-5"><a href="the-principle-of-gsclassifier.html#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-6"><a href="the-principle-of-gsclassifier.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="the-principle-of-gsclassifier.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression</span></span>
-<span id="cb2-8"><a href="the-principle-of-gsclassifier.html#cb2-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&#39;./data/simulated-data.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;RNA&#39;</span>)</span>
-<span id="cb2-9"><a href="the-principle-of-gsclassifier.html#cb2-9" aria-hidden="true" tabindex="-1"></a>expr0 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[,<span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb2-10"><a href="the-principle-of-gsclassifier.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expr0) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">as.matrix</span>(x[,<span class="dv">1</span>])); <span class="fu">rm</span>(x)</span>
-<span id="cb2-11"><a href="the-principle-of-gsclassifier.html#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="the-principle-of-gsclassifier.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtype information</span></span>
-<span id="cb2-13"><a href="the-principle-of-gsclassifier.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># It depends on the application scenarios of GEPs</span></span>
-<span id="cb2-14"><a href="the-principle-of-gsclassifier.html#cb2-14" aria-hidden="true" tabindex="-1"></a>subtype_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb2-15"><a href="the-principle-of-gsclassifier.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Binned data for subtype 1</span></span>
-<span id="cb2-16"><a href="the-principle-of-gsclassifier.html#cb2-16" aria-hidden="true" tabindex="-1"></a>Ybin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(subtype_vector <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb2-17"><a href="the-principle-of-gsclassifier.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="the-principle-of-gsclassifier.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
-<span id="cb2-19"><a href="the-principle-of-gsclassifier.html#cb2-19" aria-hidden="true" tabindex="-1"></a>breakVec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
-<span id="cb2-20"><a href="the-principle-of-gsclassifier.html#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="the-principle-of-gsclassifier.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
-<span id="cb2-22"><a href="the-principle-of-gsclassifier.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">c</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>, <span class="st">&#39;Gene sets:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))</span>
-<span id="cb2-23"><a href="the-principle-of-gsclassifier.html#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geneSet)</span>
-<span id="cb2-24"><a href="the-principle-of-gsclassifier.html#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb2-25"><a href="the-principle-of-gsclassifier.html#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
-<span id="cb2-26"><a href="the-principle-of-gsclassifier.html#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb2-27"><a href="the-principle-of-gsclassifier.html#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#  Gene sets: </span></span>
-<span id="cb2-28"><a href="the-principle-of-gsclassifier.html#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># $Set1</span></span>
-<span id="cb2-29"><a href="the-principle-of-gsclassifier.html#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot;</span></span>
-<span id="cb2-30"><a href="the-principle-of-gsclassifier.html#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb2-31"><a href="the-principle-of-gsclassifier.html#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># $Set2</span></span>
-<span id="cb2-32"><a href="the-principle-of-gsclassifier.html#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span>
-<span id="cb2-33"><a href="the-principle-of-gsclassifier.html#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb2-34"><a href="the-principle-of-gsclassifier.html#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
-<span id="cb2-35"><a href="the-principle-of-gsclassifier.html#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
-<span id="cb2-36"><a href="the-principle-of-gsclassifier.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
-<span id="cb2-37"><a href="the-principle-of-gsclassifier.html#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
-<span id="cb2-38"><a href="the-principle-of-gsclassifier.html#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
-<span id="cb2-39"><a href="the-principle-of-gsclassifier.html#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
-<span id="cb2-40"><a href="the-principle-of-gsclassifier.html#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
-<span id="cb2-41"><a href="the-principle-of-gsclassifier.html#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
-<span id="cb2-42"><a href="the-principle-of-gsclassifier.html#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="the-principle-of-gsclassifier.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geneset</span></span>
+<span id="cb3-2"><a href="the-principle-of-gsclassifier.html#cb3-2" aria-hidden="true" tabindex="-1"></a>geneSet <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb3-3"><a href="the-principle-of-gsclassifier.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set1 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>),</span>
+<span id="cb3-4"><a href="the-principle-of-gsclassifier.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set2 =</span> <span class="fu">paste</span>(<span class="st">&#39;Gene&#39;</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">sep =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb3-5"><a href="the-principle-of-gsclassifier.html#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="the-principle-of-gsclassifier.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="the-principle-of-gsclassifier.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression</span></span>
+<span id="cb3-8"><a href="the-principle-of-gsclassifier.html#cb3-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&#39;./data/simulated-data.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;RNA&#39;</span>)</span>
+<span id="cb3-9"><a href="the-principle-of-gsclassifier.html#cb3-9" aria-hidden="true" tabindex="-1"></a>expr0 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb3-10"><a href="the-principle-of-gsclassifier.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expr0) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">as.matrix</span>(x[,<span class="dv">1</span>])); <span class="fu">rm</span>(x)</span>
+<span id="cb3-11"><a href="the-principle-of-gsclassifier.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="the-principle-of-gsclassifier.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Subtype information</span></span>
+<span id="cb3-13"><a href="the-principle-of-gsclassifier.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># It depends on the application scenarios of GEPs</span></span>
+<span id="cb3-14"><a href="the-principle-of-gsclassifier.html#cb3-14" aria-hidden="true" tabindex="-1"></a>subtype_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb3-15"><a href="the-principle-of-gsclassifier.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Binned data for subtype 1</span></span>
+<span id="cb3-16"><a href="the-principle-of-gsclassifier.html#cb3-16" aria-hidden="true" tabindex="-1"></a>Ybin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(subtype_vector <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb3-17"><a href="the-principle-of-gsclassifier.html#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="the-principle-of-gsclassifier.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb3-19"><a href="the-principle-of-gsclassifier.html#cb3-19" aria-hidden="true" tabindex="-1"></a>breakVec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb3-20"><a href="the-principle-of-gsclassifier.html#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="the-principle-of-gsclassifier.html#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb3-22"><a href="the-principle-of-gsclassifier.html#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">c</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>, <span class="st">&#39;Gene sets:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))</span>
+<span id="cb3-23"><a href="the-principle-of-gsclassifier.html#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geneSet)</span>
+<span id="cb3-24"><a href="the-principle-of-gsclassifier.html#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb3-25"><a href="the-principle-of-gsclassifier.html#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
+<span id="cb3-26"><a href="the-principle-of-gsclassifier.html#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-27"><a href="the-principle-of-gsclassifier.html#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#  Gene sets: </span></span>
+<span id="cb3-28"><a href="the-principle-of-gsclassifier.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># $Set1</span></span>
+<span id="cb3-29"><a href="the-principle-of-gsclassifier.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot;</span></span>
+<span id="cb3-30"><a href="the-principle-of-gsclassifier.html#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-31"><a href="the-principle-of-gsclassifier.html#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co"># $Set2</span></span>
+<span id="cb3-32"><a href="the-principle-of-gsclassifier.html#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span>
+<span id="cb3-33"><a href="the-principle-of-gsclassifier.html#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb3-34"><a href="the-principle-of-gsclassifier.html#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
+<span id="cb3-35"><a href="the-principle-of-gsclassifier.html#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb3-36"><a href="the-principle-of-gsclassifier.html#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
+<span id="cb3-37"><a href="the-principle-of-gsclassifier.html#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
+<span id="cb3-38"><a href="the-principle-of-gsclassifier.html#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
+<span id="cb3-39"><a href="the-principle-of-gsclassifier.html#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
+<span id="cb3-40"><a href="the-principle-of-gsclassifier.html#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
+<span id="cb3-41"><a href="the-principle-of-gsclassifier.html#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
+<span id="cb3-42"><a href="the-principle-of-gsclassifier.html#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span></code></pre></div>
 <p>Look at the matrix via heatmap:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="the-principle-of-gsclassifier.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr0))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
-<p><img src="Flowchart_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="the-principle-of-gsclassifier.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr0))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
+<p><img src="Flowchart_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>This is an intersting dataset with features as following:</p>
 <ul>
 <li><p><strong>Distinguished gene sets</strong>: The expression profile between <strong>Gene 1-3</strong> and <strong>Gene 4-6</strong> is obviously different arross samples. Thus, these gene sets might represent different biology meaning.</p></li>
@@ -320,58 +434,69 @@ Figure 1.2: The components of TSP (2 gene sets)
 <li><p><strong>Expression heterogeneity &amp; rank homogeneity</strong>: Take <strong>Sample1</strong> and <strong>Sample3</strong> as examples. The expression of <strong>Gene 1-6</strong> in <strong>Sample3</strong> seemed to be higher than those of <strong>Sample1</strong>. However, the expression of <strong>Gene 1-3</strong> is higher than <strong>Gene 4-6</strong> in both <strong>Sample1</strong> and <strong>Sample3</strong>, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.</p></li>
 </ul>
 </div>
-<div id="missing-values" class="section level3" number="1.3.3">
-<h3><span class="header-section-number">1.3.3</span> Missing values</h3>
-<p>Here, we fill missing value with Recursive Partitioning and Regression Trees (RPART) algorithm:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="the-principle-of-gsclassifier.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RPART</span></span>
-<span id="cb4-2"><a href="the-principle-of-gsclassifier.html#cb4-2" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> GSClassifier<span class="sc">:::</span><span class="fu">na_fill</span>(expr0, <span class="at">method=</span><span class="st">&quot;anova&quot;</span>, <span class="at">na.action =</span> na.rpart)</span>
-<span id="cb4-3"><a href="the-principle-of-gsclassifier.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="the-principle-of-gsclassifier.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
-<span id="cb4-5"><a href="the-principle-of-gsclassifier.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb4-6"><a href="the-principle-of-gsclassifier.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
-<span id="cb4-7"><a href="the-principle-of-gsclassifier.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb4-8"><a href="the-principle-of-gsclassifier.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression without NA value:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb4-9"><a href="the-principle-of-gsclassifier.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr)</span>
-<span id="cb4-10"><a href="the-principle-of-gsclassifier.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
-<span id="cb4-11"><a href="the-principle-of-gsclassifier.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
-<span id="cb4-12"><a href="the-principle-of-gsclassifier.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
-<span id="cb4-13"><a href="the-principle-of-gsclassifier.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
-<span id="cb4-14"><a href="the-principle-of-gsclassifier.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
-<span id="cb4-15"><a href="the-principle-of-gsclassifier.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
-<span id="cb4-16"><a href="the-principle-of-gsclassifier.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
-<span id="cb4-17"><a href="the-principle-of-gsclassifier.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
-<span id="cb4-18"><a href="the-principle-of-gsclassifier.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span>
-<span id="cb4-19"><a href="the-principle-of-gsclassifier.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb4-20"><a href="the-principle-of-gsclassifier.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression without NA value: </span></span>
-<span id="cb4-21"><a href="the-principle-of-gsclassifier.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
-<span id="cb4-22"><a href="the-principle-of-gsclassifier.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60   0.210   0.300    0.40</span></span>
-<span id="cb4-23"><a href="the-principle-of-gsclassifier.html#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58   0.220   0.310    0.35</span></span>
-<span id="cb4-24"><a href="the-principle-of-gsclassifier.html#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61   0.466   0.290    0.30</span></span>
-<span id="cb4-25"><a href="the-principle-of-gsclassifier.html#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40   0.510   0.520    0.60</span></span>
-<span id="cb4-26"><a href="the-principle-of-gsclassifier.html#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35   0.520   0.540    0.58</span></span>
-<span id="cb4-27"><a href="the-principle-of-gsclassifier.html#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30   0.530   0.392    0.61</span></span>
-<span id="cb4-28"><a href="the-principle-of-gsclassifier.html#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09   0.110   0.120    0.14</span></span></code></pre></div>
+<div id="missing-value-imputation" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Missing value imputation</h3>
+<!--
++ Why is missing value imputation needed in GSClassifier modeling?
++ Set 
++ The flowchart of quantile algorithm
+-->
+<p>Here, we do missing value imputation with quantile algorithm:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="the-principle-of-gsclassifier.html#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="the-principle-of-gsclassifier.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantile algorithm</span></span>
+<span id="cb5-3"><a href="the-principle-of-gsclassifier.html#cb5-3" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> expr0</span>
+<span id="cb5-4"><a href="the-principle-of-gsclassifier.html#cb5-4" aria-hidden="true" tabindex="-1"></a>na.pos <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr,<span class="dv">2</span>,is.one.na)</span>
+<span id="cb5-5"><a href="the-principle-of-gsclassifier.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">478</span>); seeds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(expr)<span class="sc">*</span><span class="dv">10</span>, <span class="fu">sum</span>(na.pos), <span class="at">replace =</span> F)</span>
+<span id="cb5-6"><a href="the-principle-of-gsclassifier.html#cb5-6" aria-hidden="true" tabindex="-1"></a>tSample <span class="ot">&lt;-</span> <span class="fu">names</span>(na.pos)[na.pos]</span>
+<span id="cb5-7"><a href="the-principle-of-gsclassifier.html#cb5-7" aria-hidden="true" tabindex="-1"></a>quantile_vector <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb5-8"><a href="the-principle-of-gsclassifier.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(tSample)){ <span class="co"># i=1</span></span>
+<span id="cb5-9"><a href="the-principle-of-gsclassifier.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-10"><a href="the-principle-of-gsclassifier.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  sample.i <span class="ot">&lt;-</span> tSample[i]</span>
+<span id="cb5-11"><a href="the-principle-of-gsclassifier.html#cb5-11" aria-hidden="true" tabindex="-1"></a>  expr.i <span class="ot">&lt;-</span> expr[, sample.i]</span>
+<span id="cb5-12"><a href="the-principle-of-gsclassifier.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  expr.i.max <span class="ot">&lt;-</span> <span class="fu">max</span>(expr.i, <span class="at">na.rm =</span> T)</span>
+<span id="cb5-13"><a href="the-principle-of-gsclassifier.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  expr.i.min <span class="ot">&lt;-</span> <span class="fu">min</span>(expr.i, <span class="at">na.rm =</span> T)</span>
+<span id="cb5-14"><a href="the-principle-of-gsclassifier.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seeds[i]);</span>
+<span id="cb5-15"><a href="the-principle-of-gsclassifier.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  expr.i[<span class="fu">is.na</span>(expr.i)] <span class="ot">&lt;-</span></span>
+<span id="cb5-16"><a href="the-principle-of-gsclassifier.html#cb5-16" aria-hidden="true" tabindex="-1"></a>    expr.i.min <span class="sc">+</span></span>
+<span id="cb5-17"><a href="the-principle-of-gsclassifier.html#cb5-17" aria-hidden="true" tabindex="-1"></a>    (expr.i.max<span class="sc">-</span>expr.i.min) <span class="sc">*</span> <span class="fu">sample</span>(quantile_vector,</span>
+<span id="cb5-18"><a href="the-principle-of-gsclassifier.html#cb5-18" aria-hidden="true" tabindex="-1"></a>                                     <span class="fu">sum</span>(<span class="fu">is.na</span>(expr.i)),</span>
+<span id="cb5-19"><a href="the-principle-of-gsclassifier.html#cb5-19" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">replace =</span> T)</span>
+<span id="cb5-20"><a href="the-principle-of-gsclassifier.html#cb5-20" aria-hidden="true" tabindex="-1"></a>  expr[, sample.i] <span class="ot">&lt;-</span> expr.i</span>
+<span id="cb5-21"><a href="the-principle-of-gsclassifier.html#cb5-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-22"><a href="the-principle-of-gsclassifier.html#cb5-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-23"><a href="the-principle-of-gsclassifier.html#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="the-principle-of-gsclassifier.html#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb5-25"><a href="the-principle-of-gsclassifier.html#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb5-26"><a href="the-principle-of-gsclassifier.html#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
+<span id="cb5-27"><a href="the-principle-of-gsclassifier.html#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb5-28"><a href="the-principle-of-gsclassifier.html#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression without NA value:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb5-29"><a href="the-principle-of-gsclassifier.html#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr)</span>
+<span id="cb5-30"><a href="the-principle-of-gsclassifier.html#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
+<span id="cb5-31"><a href="the-principle-of-gsclassifier.html#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb5-32"><a href="the-principle-of-gsclassifier.html#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
+<span id="cb5-33"><a href="the-principle-of-gsclassifier.html#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
+<span id="cb5-34"><a href="the-principle-of-gsclassifier.html#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
+<span id="cb5-35"><a href="the-principle-of-gsclassifier.html#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
+<span id="cb5-36"><a href="the-principle-of-gsclassifier.html#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
+<span id="cb5-37"><a href="the-principle-of-gsclassifier.html#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
+<span id="cb5-38"><a href="the-principle-of-gsclassifier.html#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span>
+<span id="cb5-39"><a href="the-principle-of-gsclassifier.html#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-40"><a href="the-principle-of-gsclassifier.html#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression without NA value: </span></span>
+<span id="cb5-41"><a href="the-principle-of-gsclassifier.html#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb5-42"><a href="the-principle-of-gsclassifier.html#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60 0.21000 0.30000    0.40</span></span>
+<span id="cb5-43"><a href="the-principle-of-gsclassifier.html#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58 0.22000 0.31000    0.35</span></span>
+<span id="cb5-44"><a href="the-principle-of-gsclassifier.html#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61 0.43256 0.29000    0.30</span></span>
+<span id="cb5-45"><a href="the-principle-of-gsclassifier.html#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40 0.51000 0.52000    0.60</span></span>
+<span id="cb5-46"><a href="the-principle-of-gsclassifier.html#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35 0.52000 0.54000    0.58</span></span>
+<span id="cb5-47"><a href="the-principle-of-gsclassifier.html#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30 0.53000 0.32622    0.61</span></span>
+<span id="cb5-48"><a href="the-principle-of-gsclassifier.html#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14</span></span></code></pre></div>
 <p>Look at the new matrix via heatmap, where the clustering result is not obviously disturbed by <strong>NA</strong> filling:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="the-principle-of-gsclassifier.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
-<p><img src="Flowchart_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="the-principle-of-gsclassifier.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>)</span></code></pre></div>
+<p><img src="Flowchart_files/figure-html/unnamed-chunk-6-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.</p>
-<p>With <strong>subtype vectors</strong> and <strong>Raw Matrix</strong>, the TSP matrix for a specified subtypes could be calculated via function <code>GSClassifier::trainDataProc</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="the-principle-of-gsclassifier.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trainDataProc</span>(</span>
-<span id="cb6-2"><a href="the-principle-of-gsclassifier.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  Xmat, Yvec,</span>
-<span id="cb6-3"><a href="the-principle-of-gsclassifier.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-4"><a href="the-principle-of-gsclassifier.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  geneSet, </span>
-<span id="cb6-5"><a href="the-principle-of-gsclassifier.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="the-principle-of-gsclassifier.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtype =</span> <span class="dv">1</span>, </span>
-<span id="cb6-7"><a href="the-principle-of-gsclassifier.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-8"><a href="the-principle-of-gsclassifier.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 0.2 was Used in PAD project</span></span>
-<span id="cb6-9"><a href="the-principle-of-gsclassifier.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ptail =</span> <span class="fl">0.2</span>,</span>
-<span id="cb6-10"><a href="the-principle-of-gsclassifier.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-11"><a href="the-principle-of-gsclassifier.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># c(0, 0.25, 0.5, 0.75, 1.0) was Used in PAD project</span></span>
-<span id="cb6-12"><a href="the-principle-of-gsclassifier.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">breakVec =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
-<span id="cb6-13"><a href="the-principle-of-gsclassifier.html#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="binned-expression" class="section level3" number="1.3.4">
-<h3><span class="header-section-number">1.3.4</span> Binned expression</h3>
+<div id="binned-expression" class="section level3" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> Binned expression</h3>
 <p>First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.</p>
 <p>Take <strong>Sample4</strong> as an example:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="the-principle-of-gsclassifier.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -398,12 +523,12 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb7-22"><a href="the-principle-of-gsclassifier.html#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
 <span id="cb7-23"><a href="the-principle-of-gsclassifier.html#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;Binned expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>); <span class="fu">print</span>(xbin)</span>
 <span id="cb7-24"><a href="the-principle-of-gsclassifier.html#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantiles: </span></span>
-<span id="cb7-25"><a href="the-principle-of-gsclassifier.html#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#    0%   25%   50%   75%  100% </span></span>
-<span id="cb7-26"><a href="the-principle-of-gsclassifier.html#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.110 0.215 0.466 0.515 0.530 </span></span>
+<span id="cb7-25"><a href="the-principle-of-gsclassifier.html#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#      0%     25%     50%     75%    100% </span></span>
+<span id="cb7-26"><a href="the-principle-of-gsclassifier.html#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.11000 0.21500 0.43256 0.51500 0.53000 </span></span>
 <span id="cb7-27"><a href="the-principle-of-gsclassifier.html#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb7-28"><a href="the-principle-of-gsclassifier.html#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw expression: </span></span>
-<span id="cb7-29"><a href="the-principle-of-gsclassifier.html#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 </span></span>
-<span id="cb7-30"><a href="the-principle-of-gsclassifier.html#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.210 0.220 0.466 0.510 0.520 0.530 0.110 </span></span>
+<span id="cb7-29"><a href="the-principle-of-gsclassifier.html#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   Gene1   Gene2   Gene3   Gene4   Gene5   Gene6   Gene7 </span></span>
+<span id="cb7-30"><a href="the-principle-of-gsclassifier.html#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.21000 0.22000 0.43256 0.51000 0.52000 0.53000 0.11000 </span></span>
 <span id="cb7-31"><a href="the-principle-of-gsclassifier.html#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb7-32"><a href="the-principle-of-gsclassifier.html#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Binned expression: </span></span>
 <span id="cb7-33"><a href="the-principle-of-gsclassifier.html#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1 Gene2 Gene3 Gene4 Gene5 Gene6 Gene7 </span></span>
@@ -482,8 +607,8 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb11-20"><a href="the-principle-of-gsclassifier.html#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot; &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span></code></pre></div>
 <p>Hence, <strong>Gene7</strong> was filtered and excluded in the following analysis. By the way, both <strong>ptail</strong> and <strong>breakVec</strong> are hyperparameters in GSClassifier modeling.</p>
 </div>
-<div id="pair-difference" class="section level3" number="1.3.5">
-<h3><span class="header-section-number">1.3.5</span> Pair difference</h3>
+<div id="pair-difference" class="section level3" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> Pair difference</h3>
 <p>In GSClassifier, we use a ensemble function <strong>featureSelection</strong> to select data for pair difference scoring.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="the-principle-of-gsclassifier.html#cb12-1" aria-hidden="true" tabindex="-1"></a>expr_feat <span class="ot">&lt;-</span> <span class="fu">featureSelection</span>(expr, Ybin,</span>
 <span id="cb12-2"><a href="the-principle-of-gsclassifier.html#cb12-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">testRes =</span> testRes,</span>
@@ -500,12 +625,12 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb12-13"><a href="the-principle-of-gsclassifier.html#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gene_bigRank)</span>
 <span id="cb12-14"><a href="the-principle-of-gsclassifier.html#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw xpression without NA: </span></span>
 <span id="cb12-15"><a href="the-principle-of-gsclassifier.html#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
-<span id="cb12-16"><a href="the-principle-of-gsclassifier.html#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60   0.210   0.300    0.40</span></span>
-<span id="cb12-17"><a href="the-principle-of-gsclassifier.html#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58   0.220   0.310    0.35</span></span>
-<span id="cb12-18"><a href="the-principle-of-gsclassifier.html#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61   0.466   0.290    0.30</span></span>
-<span id="cb12-19"><a href="the-principle-of-gsclassifier.html#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40   0.510   0.520    0.60</span></span>
-<span id="cb12-20"><a href="the-principle-of-gsclassifier.html#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35   0.520   0.540    0.58</span></span>
-<span id="cb12-21"><a href="the-principle-of-gsclassifier.html#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30   0.530   0.392    0.61</span></span>
+<span id="cb12-16"><a href="the-principle-of-gsclassifier.html#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60 0.21000 0.30000    0.40</span></span>
+<span id="cb12-17"><a href="the-principle-of-gsclassifier.html#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58 0.22000 0.31000    0.35</span></span>
+<span id="cb12-18"><a href="the-principle-of-gsclassifier.html#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61 0.43256 0.29000    0.30</span></span>
+<span id="cb12-19"><a href="the-principle-of-gsclassifier.html#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40 0.51000 0.52000    0.60</span></span>
+<span id="cb12-20"><a href="the-principle-of-gsclassifier.html#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35 0.52000 0.54000    0.58</span></span>
+<span id="cb12-21"><a href="the-principle-of-gsclassifier.html#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30 0.53000 0.32622    0.61</span></span>
 <span id="cb12-22"><a href="the-principle-of-gsclassifier.html#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb12-23"><a href="the-principle-of-gsclassifier.html#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Genes with large rank diff: </span></span>
 <span id="cb12-24"><a href="the-principle-of-gsclassifier.html#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Gene1&quot; &quot;Gene2&quot; &quot;Gene3&quot; &quot;Gene4&quot; &quot;Gene5&quot; &quot;Gene6&quot;</span></span></code></pre></div>
@@ -532,8 +657,8 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb13-20"><a href="the-principle-of-gsclassifier.html#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5:Gene6       0       1       1       0       1       0</span></span></code></pre></div>
 <p>Take <strong>Gene1:Gene4</strong> of <strong>Sample1</strong> as an example. <span class="math inline">\(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 &gt; 0\)</span>, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between <strong>Sample 1-3</strong> and <strong>Sample 4-6</strong> is obivous, revealing the robustness of pair difference for subtype identification.</p>
 </div>
-<div id="set-difference" class="section level3" number="1.3.6">
-<h3><span class="header-section-number">1.3.6</span> Set difference</h3>
+<div id="set-difference" class="section level3" number="1.3.7">
+<h3><span class="header-section-number">1.3.7</span> Set difference</h3>
 <p>In <strong>GSClassifier</strong>, <strong>Set difference</strong> is defined as a weight average of gene-geneset rank difference.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="the-principle-of-gsclassifier.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No. of gene sets</span></span>
 <span id="cb14-2"><a href="the-principle-of-gsclassifier.html#cb14-2" aria-hidden="true" tabindex="-1"></a>nGS <span class="ot">=</span> <span class="dv">2</span></span>
@@ -601,7 +726,7 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb15-9"><a href="the-principle-of-gsclassifier.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#      Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
 <span id="cb15-10"><a href="the-principle-of-gsclassifier.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># s1s2       1       1       1       0       0       0</span></span></code></pre></div>
 <p>We have known that the subtype of <strong>Sample 1-3</strong> differs from that of <strong>Sample 4-6</strong>, which revealed the robustness of set difference for subtype indentification.</p>
-<p>As shown in Figure <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, TSP matrix here should be :</p>
+<p>Based on the structure of TSP in Figure <a href="the-principle-of-gsclassifier.html#fig:tsp">1.2</a>, TSP matrix of the simulated dataset should be :</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="the-principle-of-gsclassifier.html#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-2"><a href="the-principle-of-gsclassifier.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># TSP matrix</span></span>
 <span id="cb16-3"><a href="the-principle-of-gsclassifier.html#cb16-3" aria-hidden="true" tabindex="-1"></a>tsp <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
@@ -643,6 +768,52 @@ Figure 1.2: The components of TSP (2 gene sets)
 <span id="cb16-39"><a href="the-principle-of-gsclassifier.html#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4:Gene6       0       1       1       0       1       0</span></span>
 <span id="cb16-40"><a href="the-principle-of-gsclassifier.html#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5:Gene6       0       1       1       0       1       0</span></span>
 <span id="cb16-41"><a href="the-principle-of-gsclassifier.html#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co"># s1s2              1       1       1       0       0       0</span></span></code></pre></div>
+<p>Have a look at the distribution:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="the-principle-of-gsclassifier.html#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="the-principle-of-gsclassifier.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb17-3"><a href="the-principle-of-gsclassifier.html#cb17-3" aria-hidden="true" tabindex="-1"></a>tsp_df <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(tsp)</span>
+<span id="cb17-4"><a href="the-principle-of-gsclassifier.html#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="the-principle-of-gsclassifier.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tsp_df,<span class="fu">aes</span>(<span class="at">x=</span>Var2,<span class="at">y=</span>value,<span class="at">fill=</span>Var2)) <span class="sc">+</span> </span>
+<span id="cb17-6"><a href="the-principle-of-gsclassifier.html#cb17-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb17-7"><a href="the-principle-of-gsclassifier.html#cb17-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Samples&#39;</span>,</span>
+<span id="cb17-8"><a href="the-principle-of-gsclassifier.html#cb17-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="st">&#39;Epression&#39;</span>,</span>
+<span id="cb17-9"><a href="the-principle-of-gsclassifier.html#cb17-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="cn">NULL</span>) </span></code></pre></div>
+<p><img src="Flowchart_files/figure-html/unnamed-chunk-17-1.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="batch-effect" class="section level3" number="1.3.8">
+<h3><span class="header-section-number">1.3.8</span> Batch effect</h3>
+<!--
+
+gene-pair batch effect in Google Scholar
+
+relative expression orderings (REO)
+
+single-sample enrichment analysis 
+
+Batch effect control & gene number
+
+-->
+<p><strong>TSP</strong> was widely applied to control batch effects in transciptomic data <span class="citation">[<a href="references.html#ref-RN369" role="doc-biblioref">6</a>–<a href="references.html#ref-RN365" role="doc-biblioref">13</a>]</span>. Still, we tested whether <strong>TSP</strong> is a robust method for batch effect control in real-world data. As demonstrated in Figure <a href="the-principle-of-gsclassifier.html#fig:be01">1.3</a>, the obvious batch effects across gastric cancer datsets were significantly reduced after <strong>TSP</strong> normalization.</p>
+<div class="figure" style="text-align: center"><span id="fig:be01"></span>
+<img src="fig/bactch-effect-01.png" alt="Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples." width="90%" />
+<p class="caption">
+Figure 1.3: Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.
+</p>
+</div>
+<p>In order to confirmed the association between <strong>gene counts</strong> in modeling and batch effect control via <strong>TSP</strong> normalization, we selected random genes with counts ranging 4, 8, 20, 40, and 80 for TSP matrix establishment. As shown in Figure <a href="the-principle-of-gsclassifier.html#fig:be02">1.4</a>, <strong>TSP</strong> normalization works greatly in different gene counts for batch effect control compared with raw expression matrix.</p>
+<div class="figure" style="text-align: center"><span id="fig:be02"></span>
+<img src="fig/bactch-effect-02.png" alt="Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied." width="90%" />
+<p class="caption">
+Figure 1.4: Batch effects of random genes across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.
+</p>
+</div>
+<!--
+Batch effect reduction of TSP could be explained in three parts:
+
++ **Binned expression**. Regardless of what raw distribution of a numeric vector is, it would be converted into a binned vector with exactly the same distribution under a fixed quantile vector.
+
++ **Pair/set difference**.
+-->
 
 </div>
 </div>

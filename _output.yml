@@ -14,9 +14,14 @@ bookdown::pdf_book:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
+  pandoc_args: [
+      "--bibliography=book.bib",
+      "--csl=briefings-in-bioinformatics.csl",
+    ]
   keep_tex: yes
   toc: TRUE
   toc_depth: 3
 
-
 # bookdown::epub_book: default
+# Pandoc arguments: https://bookdown.org/yihui/rmarkdown/html-document.html#pandoc-arguments
+# specify the placement of bibliography, rename, remove chapter number in bookdown pdf_book(): https://github.com/rstudio/bookdown/issues/1244

@@ -178,7 +178,7 @@ Let's take `PAD` as an example:
 
 
 ```r
-PAD <- readRDS(system.file("extdata", "PAD.train_20200110.rds", package = "GSClassifier"))
+PAD <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier"))
 geneSet <- PAD$geneSet
 print(geneSet)
 # $PIAM
@@ -359,11 +359,11 @@ About model constributions, you can go `Advanced development` in  [here](https:/
 
 ### Of note
 
-You can take a look at the `PAD.train_20200110` model (`PADi`). You have to make your model frame similar to the `PAD.train_20200110` model.
+You can take a look at the `PAD.train_20220916` model (`PADi`). You have to make your model frame similar to the `PAD.train_20220916` model.
 
 
 ```r
-l.train <- readRDS(system.file("extdata", "PAD.train_20200110.rds", package = "GSClassifier"))
+l.train <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier"))
 names(l.train)
 # [1] "ens"            "scaller"        "geneAnnotation" "geneSet"
 ```

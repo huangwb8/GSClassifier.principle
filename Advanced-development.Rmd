@@ -61,7 +61,7 @@ GSClassifier_Data(model = F)
 Currently, a GSClassifier model and related product environments is designed as a `list` object. Let's take `PAD.train_20210110`(also called `PADi`) as an example.
 
 ```{r}
-PADi <- readRDS(system.file("extdata", "PAD.train_20200110.rds", package = "GSClassifier")) 
+PADi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier")) 
 ```
 
 

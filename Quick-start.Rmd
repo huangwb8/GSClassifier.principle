@@ -74,7 +74,7 @@ res_pad <- PAD(
   cluster.method = "ward.D2",
   extra.annot = NULL,
   plot.title = 'PAD test',
-  subtype = "PAD.train_20200110",
+  subtype = "PAD.train_20220916",
   verbose = T
 )
 ```
@@ -111,7 +111,7 @@ In this section, we would showed how to use `PADi` series: `PADi`, `callEnsemble
 
 Very simple, just:
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_padi <- PADi(X = X, verbose = F)
 ```
 
@@ -129,7 +129,7 @@ Actually, `PADi` is exactly based on a general function called `callEnsemble`.
 
 Also simple, just:
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_padi <- callEnsemble(
     X = X,
     ens = NULL,
@@ -137,7 +137,7 @@ res_padi <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "ensembl",
-    subtype = "PAD.train_20200110",
+    subtype = "PAD.train_20220916",
     verbose = F
   )
 
@@ -170,7 +170,7 @@ res_padi <- parCallEnsemble(
   geneSet = NULL,
   scaller = NULL,
   geneids = 'ensembl',
-  subtype = 'PAD.train_20200110',
+  subtype = 'PAD.train_20220916',
   verbose = T,
   numCores = 4)
 ```
@@ -209,7 +209,7 @@ head(res_padi)
 
 Similarly, there is alternative choice:
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_padi <- callEnsemble(
     X = X_ind,
     ens = NULL,
@@ -217,7 +217,7 @@ res_padi <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "ensembl",
-    subtype = "PAD.train_20200110",
+    subtype = "PAD.train_20220916",
     verbose = F
   )
 ```
@@ -281,7 +281,7 @@ The model should use `ensembl` as the value of `geneid` parameter in `callEnsemb
 
 Next, you can use the model like:
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_padi <- callEnsemble(
   X = X,
   ens = model$ens$Model,
@@ -296,7 +296,7 @@ res_padi <- callEnsemble(
 
 Or just:
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_padi <- callEnsemble(
   X,
   ens = NULL,
@@ -349,7 +349,7 @@ head(X)
 
 PanCan Immune Subtype callings: 
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_pis <- callEnsemble(
     X = X,
     ens = NULL,
@@ -385,7 +385,7 @@ pci <- lucky_model(
 PanCan Immune Subtype callings: 
 
 
-```{r include=FALSE, warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
+```{r warning=FALSE, error=FALSE, message=FALSE, eval=TRUE, results='hide'}
 res_pis <- callEnsemble(
     X = X,
     ens = NULL,

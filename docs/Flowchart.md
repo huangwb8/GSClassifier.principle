@@ -121,7 +121,7 @@ Here is the environment of R programming:
 # 
 # other attached packages:
 # [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.20  luckyBase_0.1.0     
+# [4] rpart_4.1.16         GSClassifier_0.1.22  luckyBase_0.1.0     
 # [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
 # 
 # loaded via a namespace (and not attached):
@@ -233,15 +233,78 @@ This is an intersting dataset with features as following:
 
 -   **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 
-### Missing value imputation
+### Missing value imputation (MVI)
 
 <!--
+Missing Value Imputation (MVI); 
++ Missing Value type: Missing Completely at Random (MCAR), Missing at Random (MAR), and Not Missing at Random (NMAR).
++ The main reason of missing value in the scenario of GSClassifier?
 + Why is missing value imputation needed in GSClassifier modeling?
-+ Set 
-+ The flowchart of quantile algorithm
++ Routine algorithms of missing value imputation for DNA array (mRNA expression)?
++ Missing value imputation in subtype calling?
++ The flowchart of quantile algorithm?
++ zero == Cutout; https://arxiv.org/abs/1708.04552; In this paper, we show that the simple regularization technique of randomly masking out square regions of input during training, which we call cutout, can be used to improve the robustness and overall performance of convolutional neural networks. Not only is this method extremely easy to implement, but we also demonstrate that it can be used in conjunction with existing forms of data augmentation and other regularizers to further improve model performance. We evaluate this method by applying it to current state-of-the-art architectures on the CIFAR-10, CIFAR-100, and SVHN datasets, yielding new state-of-the-art results of 2.56%, 15.20%, and 1.30% test error respectively.
++ Experiments: leave genes out of validation cohorts and then test the performance of GSClassifier-PADi.
 -->
 
-Here, we do missing value imputation with quantile algorithm:
+Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process [@RN387;@RN389;@RN382], **missing value** in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15% [@RN392; @RN386]. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \@ref(fig:mvi01)), had been developed for **missing value imputation (MVI)** [@RN386]. Wang et al [@RN384] categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost [@xgboost] functions (`xgb.train`, `xgboost`, and `xgb.cv`) in GSClassifer, the missing value in expression matrix must be deleted or imputation. In **PAD** project, several strategies were applied to reduce the impact of missing values as possible. 
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/mvi-01} 
+
+}
+
+\caption{Missing value imputation methods reviewed by Hasan et al.}(\#fig:mvi01)
+\end{figure}
+
+First, both **PIAM** and **PIDG** in **PAD** project were curated GEPs that were not be missing in over 80% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.
+
+
+```r
+
+# Data
+testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
+expr_pad <- testData$PanSTAD_expr_part
+
+# Missing value
+expr_pad_na <- apply(expr_pad, 2, function(x) sum(is.na(x))/length(x))
+expr_pad_na_df <- data.frame(
+  sample = names(expr_pad_na),
+  prob = as.numeric(expr_pad_na),
+  stringsAsFactors = F
+)
+```
+
+As shown in Figure \@ref(fig:mvi02), the percentage of all samples in gastric cancer datasets we used is lower than 8%.
+
+
+```r
+# ggplot
+ggplot(data = expr_pad_na_df, 
+       aes(x = sample, y = prob)) + 
+  geom_bar(stat = 'identity', color = mycolor[3]) + 
+  scale_y_continuous(labels=scales::percent) + 
+  labs(x = 'Samples in gastric cancer cohorts', 
+       y = 'Percentage of missing value') + 
+  theme_bw() + 
+  theme(
+    axis.text.x = element_blank()
+  )
+```
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/mvi02-1} 
+
+}
+
+\caption{The distribution of missing value across gastric cancer samples.}(\#fig:mvi02)
+\end{figure}
+
+Due to the high quality of our data, we just set missing value as zero during model training and subtype identification in the early version of PADi (**PAD.train_v20200110**). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
+
+In the new version of PADi (**PAD.train_v20220917**), we designed the so-called **quantile** algorithm for random MVI during **PADi** model training, which also seemed to work well for PADi model training. Here, we demonstrated the use of **quantile** algorithm in the simulated dataset.
 
 
 ```r
@@ -295,7 +358,7 @@ print(expr)
 # Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14
 ```
 
-Look at the new matrix via heatmap, where the clustering result is not obviously disturbed by **NA** filling:
+Look at the new matrix via heatmap, where the clustering result is not obviously disturbed after MVI:
 
 
 ```r
@@ -304,9 +367,90 @@ Heatmap(t(scale(t(expr))), name = "Z-score")
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
-Although RPART algorithm is proved to be powerful dealing with NA value, we should try to use markers with less NA as possible. During PAD subtype establishment, only genes occurring in over 80% of datasets were retained so as to minumize the impact from mising value.
+Next, we explored how the number of missing value impacts subtype identification by **PADi**. First, we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer. Second, we randomly masked different proportion of genes as zero expression. Third, we calculated the relative multi-ROC (masked data vs. MVI data). We had developed a function called **mv_tolerance** in **GSClassifier** to do this task.
+
+Load the internal validation cohort:
+
+
+```r
+# Internal validation cohort
+testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
+expr_pad <- testData$PanSTAD_expr_part
+modelInfo <- modelData(
+  design = testData$PanSTAD_phenotype_part,
+  id.col = "ID",
+  variable = c("platform", "PAD_subtype"),
+  Prop = 0.7,
+  seed = 19871
+)
+validInform <- modelInfo$Data$Valid
+expr_pad_innervalid <- expr_pad[,validInform$ID]
+```
+
+Missing value tolerance analysis:
+
+
+```r
+# Time-consuming
+mvt <- mv_tolerance(
+  X = expr_pad_innervalid,
+  gene.loss = c(2, 4, 6, 8, 10, 12),
+  levels = c(1, 2, 3, 4),
+  model = "PAD.train_20220916",
+  seed = 487,
+  verbose = T
+)
+
+```
+
+
+
+Prepare the data of multi-ROC analysis:
+
+
+```r
+
+# Data
+mvt_auc <- mvt$multiAUC
+mvt_auc_df <- data.frame()
+for(i in 1:length(mvt_auc)){ # i=1
+  df.i <- data.frame(
+    x = as.integer(Fastextra(names(mvt_auc)[i], '=', 2)),
+    y = as.numeric(mvt_auc[[i]]$auc),
+    stringsAsFactors = F
+  )
+  mvt_auc_df <- rbind(mvt_auc_df, df.i)
+}
+  
+```
+
+Plot the missing value tolerance:
+
+
+```r
+ggplot(mvt_auc_df, aes(x,y)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
+  stat_smooth(formula = y ~ x,method = 'glm') +
+  labs(x = 'No. of missing value', 
+       y='Relative AUC in multi-ROC analysis')
+```
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/mvi03-1} 
+
+}
+
+\caption{The association between the number of missing value and subtype identification performance.}(\#fig:mvi03)
+\end{figure}
+
+As showed in Figure \@ref(fig:mvi03), there is linear negative correlation between the number of missing value (mising rate ranges from 6.25% to 37.5%) and subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small gene sets, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no mising value for **PADi** in the 'Kim2018' cohort, an external validation cohort for ICIs therapy response. Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision. 
+
+In conclusion, zero or quantile strategy could be applied for MVI before GSClassifier model training. However, missing value should be avoid as possible in subtype identification for missing value really damage the performance of GSClassifier. Nonetheless, due to low-input gene sets used in **PADi** model (No. of Gene=32), it's easy to avoid missing value in clinical practice.
+
 
 ### Binned expression
 
@@ -654,7 +798,7 @@ ggplot(tsp_df,aes(x=Var2,y=value,fill=Var2)) +
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 ### Batch effect
 

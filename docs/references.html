@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-16" />
+<meta name="date" content="2022-09-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="the-principle-of-gsclassifier.html#tsp-intro" id="toc-tsp-intro"><span class="toc-section-number">1.3.1</span> Introduction</a></li>
 <li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.3.2</span> Packages</a></li>
 <li><a href="the-principle-of-gsclassifier.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.3.3</span> Simulated Dataset</a></li>
-<li><a href="the-principle-of-gsclassifier.html#missing-value-imputation" id="toc-missing-value-imputation"><span class="toc-section-number">1.3.4</span> Missing value imputation</a></li>
+<li><a href="the-principle-of-gsclassifier.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">1.3.4</span> Missing value imputation (MVI)</a></li>
 <li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.3.5</span> Binned expression</a></li>
 <li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.3.6</span> Pair difference</a></li>
 <li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.3.7</span> Set difference</a></li>
@@ -252,29 +252,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ref-RN261" class="csl-entry">
 5. Auslander N, Zhang G, Lee JS, et al. <a href="https://doi.org/10.1038/s41591-018-0157-9">Robust prediction of response to immune checkpoint blockade therapy in metastatic melanoma</a>. Nat Med 2018; 24:1545–1549
 </div>
+<div id="ref-RN387" class="csl-entry">
+6. Troyanskaya O, Cantor M, Sherlock G, et al. <a href="https://doi.org/10.1093/bioinformatics/17.6.520">Missing value estimation methods for DNA microarrays</a>. Bioinformatics 2001; 17:520–5
+</div>
+<div id="ref-RN389" class="csl-entry">
+7. Arbeitman MN, Furlong EE, Imam F, et al. <a href="https://doi.org/10.1126/science.1072152">Gene expression during the life cycle of drosophila melanogaster</a>. Science 2002; 297:2270–5
+</div>
+<div id="ref-RN382" class="csl-entry">
+8. Zhu X, Wang J, Sun B, et al. <a href="https://doi.org/10.1186/s12859-021-04109-4">An efficient ensemble method for missing value imputation in microarray gene expression data</a>. BMC Bioinformatics 2021; 22:188
+</div>
+<div id="ref-RN392" class="csl-entry">
+9. Lin W-C, Tsai C-F. Missing value imputation: A review and analysis of the literature (2006–2017). 2020; 53:1487–1509
+</div>
+<div id="ref-RN386" class="csl-entry">
+10. Hasan MK, Alam MA, Roy S, et al. Missing value imputation affects the performance of machine learning: A review and analysis of the literature (2010–2021). Informatics in Medicine Unlocked 2021; 27:100799
+</div>
+<div id="ref-RN384" class="csl-entry">
+11. Wang A, Yang J, An N. Regularized sparse modelling for microarray missing value estimation. 2021; 9:16899–16913
+</div>
+<div id="ref-xgboost" class="csl-entry">
+12. Chen T, He T, Benesty M, et al. <a href="https://CRAN.R-project.org/package=xgboost">Xgboost: Extreme gradient boosting</a>. 2022;
+</div>
 <div id="ref-RN369" class="csl-entry">
-6. Zhu S, Kong W, Zhu J, et al. <a href="https://doi.org/10.1093/bib/bbac344">The genetic algorithm-aided three-stage ensemble learning method identified a robust survival risk score in patients with glioma</a>. Brief Bioinform 2022;
+13. Zhu S, Kong W, Zhu J, et al. <a href="https://doi.org/10.1093/bib/bbac344">The genetic algorithm-aided three-stage ensemble learning method identified a robust survival risk score in patients with glioma</a>. Brief Bioinform 2022;
 </div>
 <div id="ref-RN367" class="csl-entry">
-7. Tong M, Zheng W, Li H, et al. <a href="https://doi.org/10.1038/oncsis.2016.51">Multi-omics landscapes of colorectal cancer subtypes discriminated by an individualized prognostic signature for 5-fluorouracil-based chemotherapy</a>. Oncogenesis 2016; 5:e242
+14. Tong M, Zheng W, Li H, et al. <a href="https://doi.org/10.1038/oncsis.2016.51">Multi-omics landscapes of colorectal cancer subtypes discriminated by an individualized prognostic signature for 5-fluorouracil-based chemotherapy</a>. Oncogenesis 2016; 5:e242
 </div>
 <div id="ref-RN368" class="csl-entry">
-8. Qi L, Li Y, Qin Y, et al. <a href="https://doi.org/10.1038/bjc.2016.370">An individualised signature for predicting response with concordant survival benefit for lung adenocarcinoma patients receiving platinum-based chemotherapy</a>. Br J Cancer 2016; 115:1513–1519
+15. Qi L, Li Y, Qin Y, et al. <a href="https://doi.org/10.1038/bjc.2016.370">An individualised signature for predicting response with concordant survival benefit for lung adenocarcinoma patients receiving platinum-based chemotherapy</a>. Br J Cancer 2016; 115:1513–1519
 </div>
 <div id="ref-RN364" class="csl-entry">
-9. Huang H, Zou Y, Zhang H, et al. <a href="https://doi.org/10.1016/j.trsl.2020.02.004">A qualitative transcriptional prognostic signature for patients with stage i-II pancreatic ductal adenocarcinoma</a>. Transl Res 2020; 219:30–44
+16. Huang H, Zou Y, Zhang H, et al. <a href="https://doi.org/10.1016/j.trsl.2020.02.004">A qualitative transcriptional prognostic signature for patients with stage i-II pancreatic ductal adenocarcinoma</a>. Transl Res 2020; 219:30–44
 </div>
 <div id="ref-RN363" class="csl-entry">
-10. Zheng H, Song K, Fu Y, et al. <a href="https://doi.org/10.1093/bib/bbz174">An absolute human stemness index associated with oncogenic dedifferentiation</a>. Brief Bioinform 2021; 22:2151–2160
+17. Zheng H, Song K, Fu Y, et al. <a href="https://doi.org/10.1093/bib/bbz174">An absolute human stemness index associated with oncogenic dedifferentiation</a>. Brief Bioinform 2021; 22:2151–2160
 </div>
 <div id="ref-RN362" class="csl-entry">
-11. Kong W, He L, Zhu J, et al. <a href="https://doi.org/10.1038/s41375-022-01662-6">An immunity and pyroptosis gene-pair signature predicts overall survival in acute myeloid leukemia</a>. Leukemia 2022;
+18. Kong W, He L, Zhu J, et al. <a href="https://doi.org/10.1038/s41375-022-01662-6">An immunity and pyroptosis gene-pair signature predicts overall survival in acute myeloid leukemia</a>. Leukemia 2022;
 </div>
 <div id="ref-RN366" class="csl-entry">
-12. Liu K, Geng Y, Wang L, et al. <a href="https://doi.org/10.1002/1878-0261.13279">Systematic exploration of the underlying mechanism of gemcitabine resistance in pancreatic adenocarcinoma</a>. Mol Oncol 2022; 16:3034–3051
+19. Liu K, Geng Y, Wang L, et al. <a href="https://doi.org/10.1002/1878-0261.13279">Systematic exploration of the underlying mechanism of gemcitabine resistance in pancreatic adenocarcinoma</a>. Mol Oncol 2022; 16:3034–3051
 </div>
 <div id="ref-RN365" class="csl-entry">
-13. Zheng H, Xie J, Song K, et al. <a href="https://doi.org/10.1186/s13287-022-02803-5">StemSC: A cross-dataset human stemness index for single-cell samples</a>. Stem Cell Res Ther 2022; 13:115
+20. Zheng H, Xie J, Song K, et al. <a href="https://doi.org/10.1186/s13287-022-02803-5">StemSC: A cross-dataset human stemness index for single-cell samples</a>. Stem Cell Res Ther 2022; 13:115
 </div>
 </div>
 </div>

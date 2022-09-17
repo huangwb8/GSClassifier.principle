@@ -65,7 +65,7 @@ Currently, a GSClassifier model and related product environments is designed as 
 
 
 ```r
-PADi <- readRDS(system.file("extdata", "PAD.train_20200110.rds", package = "GSClassifier")) 
+PADi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier")) 
 ```
 
 

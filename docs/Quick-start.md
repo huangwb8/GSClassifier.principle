@@ -138,6 +138,9 @@ In this section, we would showed how to use `PADi` series: `PADi`, `callEnsemble
 Very simple, just:
 
 
+```r
+res_padi <- PADi(X = X, verbose = F)
+```
 
 Check the result:
 
@@ -159,6 +162,18 @@ Actually, `PADi` is exactly based on a general function called `callEnsemble`.
 Also simple, just:
 
 
+```r
+res_padi <- callEnsemble(
+    X = X,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "ensembl",
+    subtype = "PAD.train_20220916",
+    verbose = F
+  )
+```
 
 Check the result:
 
@@ -246,6 +261,18 @@ head(res_padi)
 Similarly, there is alternative choice:
 
 
+```r
+res_padi <- callEnsemble(
+    X = X_ind,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "ensembl",
+    subtype = "PAD.train_20220916",
+    verbose = F
+  )
+```
 
 Check the result:
 
@@ -331,10 +358,34 @@ The model should use `ensembl` as the value of `geneid` parameter in `callEnsemb
 Next, you can use the model like:
 
 
+```r
+res_padi <- callEnsemble(
+  X = X,
+  ens = model$ens$Model,
+  geneAnnotation = model$geneAnnotation,
+  geneSet = model$geneSet,
+  scaller = model$scaller$Model,
+  geneid = "ensembl",
+  subtype = NULL,
+  verbose = F
+)
+```
 
 Or just:
 
 
+```r
+res_padi <- callEnsemble(
+  X,
+  ens = NULL,
+  geneAnnotation = NULL,
+  geneSet = NULL,
+  scaller = NULL,
+  geneid = "ensembl",
+  subtype = model, 
+  verbose = F
+)
+```
 
 They are exactly the same.
 
@@ -398,6 +449,18 @@ head(X)
 PanCan Immune Subtype callings: 
 
 
+```r
+res_pis <- callEnsemble(
+    X = X,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "symbol",
+    subtype = "ImmuneSubtype",
+    verbose = F
+  )
+```
 
 Check the result:
 
@@ -405,13 +468,13 @@ Check the result:
 ```r
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.038561e-03 0.561300665 9.312571e-06
-# 2 PB-16-003        4            4 7.755418e-07 0.018167170 8.278408e-05
-# 3 PB-16-004        3            3 4.157390e-06 0.001126488 3.865822e-01
+# 1 PB-16-002        2            2 1.041468e-03 0.561300665 5.682942e-06
+# 2 PB-16-003        4            4 3.994623e-07 0.018167170 7.198992e-05
+# 3 PB-16-004        3            3 2.831850e-06 0.001126488 2.087327e-01
 #              4           5           6
-# 1 0.1564358696 0.007000939 0.005555194
-# 2 0.3478336632 0.002621393 0.002479243
-# 3 0.0001988155 0.005643848 0.008174158
+# 1 0.3305687308 0.011658502 0.002704428
+# 2 0.4141998887 0.002884648 0.002158524
+# 3 0.0001598273 0.008763667 0.009933675
 ```
 
 
@@ -432,6 +495,18 @@ PanCan Immune Subtype callings:
 
 
 
+```r
+res_pis <- callEnsemble(
+    X = X,
+    ens = NULL,
+    geneAnnotation = NULL,
+    geneSet = NULL,
+    scaller = NULL,
+    geneid = "symbol",
+    subtype = pci,
+    verbose = F
+  )
+```
 
 
 Finally, we take a look at the `PanCancer immune subtypes` model:

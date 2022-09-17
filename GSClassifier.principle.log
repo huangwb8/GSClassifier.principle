@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  17 SEP 2022 13:12
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  17 SEP 2022 15:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1151,133 +1151,156 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 [4]
 Chapter 1.
-File: ./fig/flowchart.png Graphic file (type bmp)
-<./fig/flowchart.png>
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 175.
 [5
 
-] [6] [7]
+] [6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[7]
+File: ./fig/flowchart.png Graphic file (type bmp)
+<./fig/flowchart.png>
+
+LaTeX Warning: Reference `subtypevector' on page 8 undefined on input line 289.
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[8] [9]
+
+LaTeX Warning: Reference `topicSubmodel' on page 10 undefined on input line 298
+.
+
+[10]
 File: ./fig/TSP.png Graphic file (type bmp)
 <./fig/TSP.png>
-[8]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 231.
-
-Underfull \vbox (badness 10000) detected at line 261
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[9] [10]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [11]
-Underfull \vbox (badness 1122) detected at line 378
+Underfull \vbox (badness 10000) detected at line 392
  []
 
 
-Underfull \vbox (badness 1122) has occurred while \output is active []
+Underfull \vbox (badness 10000) detected at line 392
+ []
 
 [12]
+Underfull \vbox (badness 10000) detected at line 392
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 392
+ []
+
+[13]
 File: Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[13] [14]
-File: ./fig/mvi-01.png Graphic file (type bmp)
-<./fig/mvi-01.png>
-[15] [16]
-File: Flowchart_files/figure-latex/mvi02-1.pdf Graphic file (type pdf)
-<use Flowchart_files/figure-latex/mvi02-1.pdf>
-
-Underfull \vbox (badness 4378) has occurred while \output is active []
-
-[17]
-Underfull \vbox (badness 10000) detected at line 516
- []
-
-
-Underfull \vbox (badness 10000) detected at line 516
- []
-
-[18]
-File: Flowchart_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf
+File: Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf
 )
-<use Flowchart_files/figure-latex/unnamed-chunk-7-1.pdf>
+<use Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[19] [20]
-Underfull \vbox (badness 10000) detected at line 596
+[14]
+Underfull \vbox (badness 1642) has occurred while \output is active []
+
+[15]
+Underfull \vbox (badness 10000) detected at line 467
  []
 
 
-Underfull \vbox (badness 8038) has occurred while \output is active []
-
-[21]
-File: Flowchart_files/figure-latex/mvi03-1.pdf Graphic file (type pdf)
-<use Flowchart_files/figure-latex/mvi03-1.pdf>
-
-Underfull \vbox (badness 4242) has occurred while \output is active []
-
-[22]
-Underfull \vbox (badness 10000) detected at line 655
+Underfull \vbox (badness 10000) detected at line 467
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[23] [24]
+[16]
 
 Package amsmath Warning: Foreign command \atop;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 682.
+(amsmath)                 on input line 494.
 
-[25] [26] [27] [28]
-Underfull \vbox (badness 1132) detected at line 884
- []
-
-[29]
-Underfull \vbox (badness 10000) detected at line 884
+[17]
+Underfull \vbox (badness 1953) detected at line 538
  []
 
 
-Underfull \vbox (badness 10000) detected at line 884
+Underfull \vbox (badness 1057) has occurred while \output is active []
+
+[18] [19] [20]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[21]
+Underfull \vbox (badness 10000) detected at line 696
  []
 
-[30]
-Underfull \vbox (badness 4181) detected at line 951
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[22] [23]
+Underfull \vbox (badness 5050) detected at line 763
  []
 
 
-Underfull \vbox (badness 2735) has occurred while \output is active []
+Underfull \vbox (badness 2781) has occurred while \output is active []
 
+[24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[25]
+File: Flowchart_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type pd
+f)
+<use Flowchart_files/figure-latex/unnamed-chunk-16-1.pdf>
+[26]
+Chapter 2.
+[27
+
+] [28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[29] [30]
+File: ./fig/mvi-01.png Graphic file (type bmp)
+<./fig/mvi-01.png>
 [31]
-Underfull \vbox (badness 10000) detected at line 951
- []
+File: Discussion_files/figure-latex/mvi02-1.pdf Graphic file (type pdf)
+<use Discussion_files/figure-latex/mvi02-1.pdf>
 
-
-Underfull \vbox (badness 10000) detected at line 951
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [32]
-File: Flowchart_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (type pd
+Underfull \vbox (badness 10000) detected at line 1010
+ []
+
+
+Underfull \vbox (badness 4872) has occurred while \output is active []
+
+[33]
+Underfull \vbox (badness 10000) detected at line 1010
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1010
+ []
+
+[34]
+File: Discussion_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pd
 f)
-<use Flowchart_files/figure-latex/unnamed-chunk-22-1.pdf>
+<use Discussion_files/figure-latex/unnamed-chunk-5-1.pdf>
+[35]
+Underfull \vbox (badness 2005) detected at line 1076
+ []
+
+
+Underfull \vbox (badness 1502) has occurred while \output is active []
+
+[36]
+File: Discussion_files/figure-latex/mvi03-1.pdf Graphic file (type pdf)
+<use Discussion_files/figure-latex/mvi03-1.pdf>
+[37]
 File: ./fig/bactch-effect-01.png Graphic file (type bmp)
 <./fig/bactch-effect-01.png>
-[33] [34]
 File: ./fig/bactch-effect-02.png Graphic file (type bmp)
 <./fig/bactch-effect-02.png>
-[35] [36]
-Chapter 2.
-[37
-
-] [38
-
-]
+[38] [39] [40]
 Chapter 3.
 Missing character: There is no 载 in font [lmmono10-italic]:!
 Missing character: There is no 入 in font [lmmono10-italic]:!
@@ -1288,60 +1311,73 @@ Missing character: There is no 程 in font [lmmono10-italic]:!
 Missing character: There is no 辑 in font [lmmono10-italic]:!
 Missing character: There is no 包 in font [lmmono10-italic]:!
 Missing character: There is no ： in font [lmmono10-italic]:!
-[39] [40]
+[41
+
+] [42]
 File: Quick-start_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type p
 df)
 <use Quick-start_files/figure-latex/unnamed-chunk-5-1.pdf>
-[41] [42]
+[43] [44]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1174.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1281.
+[45] [46]
+Underfull \vbox (badness 1571) has occurred while \output is active []
 
+[47] [48] [49]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[43] [44] [45] [46]
-Underfull \vbox (badness 2894) has occurred while \output is active []
-
-[47]
-Underfull \vbox (badness 1540) has occurred while \output is active []
-
-[48] [49] [50]
-Underfull \vbox (badness 10000) detected at line 1591
+[50] [51]
+Underfull \vbox (badness 3590) detected at line 1632
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1591
+Underfull \vbox (badness 2293) has occurred while \output is active []
+
+[52]
+Underfull \vbox (badness 2111) detected at line 1678
  []
 
-[51]
-Underfull \vbox (badness 10000) detected at line 1591
+
+Underfull \vbox (badness 1533) has occurred while \output is active []
+
+[53] [54]
+Underfull \vbox (badness 10000) detected at line 1794
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1591
+Underfull \vbox (badness 10000) detected at line 1794
  []
 
-[52] [53] [54
+[55]
+Underfull \vbox (badness 10000) detected at line 1794
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1794
+ []
+
+[56] [57] [58
 
 ]
 Chapter 4.
-[55]
+[59]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[56] [57]
-Underfull \vbox (badness 10000) detected at line 1765
+[60] [61]
+Underfull \vbox (badness 10000) detected at line 1968
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1765
+Underfull \vbox (badness 10000) detected at line 1968
  []
 
-[58] [59] [60]
+[62] [63] [64]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[61] [62]
+[65] [66]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[63] [64] [65] [66]
+[67] [68] [69] [70]
 Chapter 5.
 Missing character: There is no 载 in font [lmmono10-italic]:!
 Missing character: There is no 入 in font [lmmono10-italic]:!
@@ -1355,37 +1391,40 @@ Missing character: There is no ： in font [lmmono10-italic]:!
 
 Underfull \vbox (badness 4832) has occurred while \output is active []
 
-[67
+[71
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[68]
+[72]
 File: ./fig/GSClassifier-model.jpg Graphic file (type bmp)
 <./fig/GSClassifier-model.jpg>
-[69] [70] [71] [72] (./GSClassifier.principle.bbl [73] [74
+[73] [74] [75] [76] (./GSClassifier.principle.bbl [77] [78
 
 ]
 Underfull \vbox (badness 3323) has occurred while \output is active []
 
-[75] [76]
+[79] [80]
 Underfull \vbox (badness 1472) has occurred while \output is active []
 
-[77])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2252.
-[78]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2252.
+[81])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2455.
+[82]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2455.
 (./GSClassifier.principle.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2252.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2252.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2455.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2455.
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 29112 strings out of 492922
- 528084 string characters out of 6130480
- 776941 words of memory out of 5000000
- 32848 multiletter control sequences out of 15000+600000
+ 29109 strings out of 492922
+ 528219 string characters out of 6130480
+ 776725 words of memory out of 5000000
+ 32845 multiletter control sequences out of 15000+600000
  538750 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,6n,115p,1193b,563s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on GSClassifier.principle.pdf (78 pages).
+Output written on GSClassifier.principle.pdf (82 pages).

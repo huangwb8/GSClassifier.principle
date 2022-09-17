@@ -13,47 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, collapse = TRUE, results = '
 
 [GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of **GSClassifier** package usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control. 
 
-## Flowchart
-
-The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
-
-```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics(rep("./fig/flowchart.png", 1))
-```
-
-### Data Processing
-
-For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
-
-There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
-
-With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \@ref(topicTSP).
-
-### Model Establishment and Validation
-
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **Subset** (70% of the training cohort in PAD project) would be further selected randomly to build a **Submodel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function) [@RN345]. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)).
-
-The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, **the data of both internal and external validation cohort would not be used during model training** so as to avoid over-fitting.
-
-### Model Application
-
-In PAD project, **Model for individual**, the ensemble of submodels, is called "**PAD for individual**" (**PADi**). Supposed raw RNA expression of a sample was given. As showed in \@ref(fig:flowchart) and \@ref(fig:tsp), **GSClassifier** would turn raw RNA expression into a TSP vector, which would be as a input to **Model for individual**. Then, **GSClassifier** would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest **Model for individual** (**PADi**, etc) as personalized model.
-
-## Top scoring pairs {#topicTSP}
-
-### Introduction {#tsp-intro}
-
-Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**, also called **Relative Expression Orderings** (**REOs**)) algorithm, which was previously described by Geman et al [@RN267]. **TSP** normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. **TSP** had been used in cancer research and effectively predicts cancer progression and ICIs response [@RN265; @RN266; @RN261].
-
-As show in Figure \@ref(fig:tsp), The TSP matrix in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
-
-```{r echo=FALSE, tsp, fig.cap='The components of TSP (2 gene sets)', out.width='85%', fig.align='center'}
-knitr::include_graphics(rep("./fig/TSP.png", 1))
-```
-
-### Packages
-
-First, load needed packages:
+## Packages
 
 ```{r}
 
@@ -96,9 +56,47 @@ Here is the environment of R programming:
 sessionInfo()
 ```
 
+## Flowchart
+
+The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
+
+```{r echo=FALSE, flowchart, fig.cap='The flow chart of GSClassifier', out.width='90%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics(rep("./fig/flowchart.png", 1))
+```
+
+### Data Processing
+
+For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
+
+There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+
+With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \@ref(topicTSP).
+
+### Model Establishment and Validation
+
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **Subset** (70% of the training cohort in PAD project) would be further selected randomly to build a **Submodel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function) [@RN345]. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)).
+
+The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, **the data of both internal and external validation cohort would not be used during model training** so as to avoid over-fitting.
+
+### Model Application
+
+In PAD project, **Model for individual**, the ensemble of submodels, is called "**PAD for individual**" (**PADi**). Supposed raw RNA expression of a sample was given. As showed in \@ref(fig:flowchart) and \@ref(fig:tsp), **GSClassifier** would turn raw RNA expression into a TSP vector, which would be as a input to **Model for individual**. Then, **GSClassifier** would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest **Model for individual** (**PADi**, etc) as personalized model.
+
+## Top scoring pairs {#topicTSP}
+
+### Introduction {#tsp-intro}
+
+Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**, also called **Relative Expression Orderings** (**REOs**)) algorithm, which was previously described by Geman et al [@RN267]. **TSP** normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. **TSP** had been used in cancer research and effectively predicts cancer progression and ICIs response [@RN265; @RN266; @RN261].
+
+As show in Figure \@ref(fig:tsp), The TSP matrix in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+
+```{r echo=FALSE, tsp, fig.cap='The components of TSP (2 gene sets)', out.width='85%', fig.align='center'}
+knitr::include_graphics(rep("./fig/TSP.png", 1))
+```
+
 ### Simulated Dataset
 
-We simulated a dataset to demonstrate the principle of TSP normalization in GSClassifier:
+We simulated a dataset to demonstrate TSP normalization in GSClassifier:
 
 ```{r, warning=FALSE}
 # Geneset
@@ -111,6 +109,9 @@ geneSet <- list(
 x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
 expr0 <- as.matrix(x[,-1])
 rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
+
+# Missing value imputation (MVI)
+expr <- na_fill(expr0, method = "quantile", seed = 447)
 
 # Subtype information
 # It depends on the application scenarios of GEPs
@@ -125,14 +126,20 @@ breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
 cat(c('\n', 'Gene sets:', '\n'))
 print(geneSet)
 cat('RNA expression:', '\n')
-print(expr0)
+print(expr0); cat('\n')
+cat('RNA expression after MVI:', '\n')
+print(expr)
 
 ```
 
 Look at the matrix via heatmap:
 
 ```{r out.width='60%', fig.align='center'}
-Heatmap(t(scale(t(expr0))), name = "Z-score")
+Heatmap(t(scale(t(expr0))), name = "Z-score", column_title = "Before MVI")
+```
+
+```{r out.width='60%', fig.align='center'}
+Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 ```
 
 This is an intersting dataset with features as following:
@@ -142,173 +149,6 @@ This is an intersting dataset with features as following:
 -   **Stable gene**: The expression level and rank of **Gene 7** seemed to be similar across samples. Thus, **Gene 7** might not be a robust marker for subtype modeling. Thus, it could help us to understand how filtering of **GSClassifier** works.
 
 -   **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
-
-### Missing value imputation (MVI)
-
-<!--
-Missing Value Imputation (MVI); 
-+ Missing Value type: Missing Completely at Random (MCAR), Missing at Random (MAR), and Not Missing at Random (NMAR).
-+ The main reason of missing value in the scenario of GSClassifier?
-+ Why is missing value imputation needed in GSClassifier modeling?
-+ Routine algorithms of missing value imputation for DNA array (mRNA expression)?
-+ Missing value imputation in subtype calling?
-+ The flowchart of quantile algorithm?
-+ zero == Cutout; https://arxiv.org/abs/1708.04552; In this paper, we show that the simple regularization technique of randomly masking out square regions of input during training, which we call cutout, can be used to improve the robustness and overall performance of convolutional neural networks. Not only is this method extremely easy to implement, but we also demonstrate that it can be used in conjunction with existing forms of data augmentation and other regularizers to further improve model performance. We evaluate this method by applying it to current state-of-the-art architectures on the CIFAR-10, CIFAR-100, and SVHN datasets, yielding new state-of-the-art results of 2.56%, 15.20%, and 1.30% test error respectively.
-+ Experiments: leave genes out of validation cohorts and then test the performance of GSClassifier-PADi.
--->
-
-Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process [@RN387;@RN389;@RN382], **missing value** in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15% [@RN392; @RN386]. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \@ref(fig:mvi01)), had been developed for **missing value imputation (MVI)** [@RN386]. Wang et al [@RN384] categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost [@xgboost] functions (`xgb.train`, `xgboost`, and `xgb.cv`) in GSClassifer, the missing value in expression matrix must be deleted or imputation. In **PAD** project, several strategies were applied to reduce the impact of missing values as possible. 
-
-```{r echo=FALSE, mvi01, fig.cap='Missing value imputation methods reviewed by Hasan et al.', out.width='90%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics(rep("./fig/mvi-01.png", 1))
-```
-
-First, both **PIAM** and **PIDG** in **PAD** project were curated GEPs that were not be missing in over 80% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.
-
-```{r}
-
-# Data
-testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
-expr_pad <- testData$PanSTAD_expr_part
-
-# Missing value
-expr_pad_na <- apply(expr_pad, 2, function(x) sum(is.na(x))/length(x))
-expr_pad_na_df <- data.frame(
-  sample = names(expr_pad_na),
-  prob = as.numeric(expr_pad_na),
-  stringsAsFactors = F
-)
-
-```
-
-As shown in Figure \@ref(fig:mvi02), the percentage of all samples in gastric cancer datasets we used is lower than 8%.
-
-```{r mvi02, fig.cap='The distribution of missing value across gastric cancer samples.', out.width='60%', fig.asp=.75, fig.align='center'}
-# ggplot
-ggplot(data = expr_pad_na_df, 
-       aes(x = sample, y = prob)) + 
-  geom_bar(stat = 'identity', color = mycolor[3]) + 
-  scale_y_continuous(labels=scales::percent) + 
-  labs(x = 'Samples in gastric cancer cohorts', 
-       y = 'Percentage of missing value') + 
-  theme_bw() + 
-  theme(
-    axis.text.x = element_blank()
-  )
-```
-
-Due to the high quality of our data, we just set missing value as zero during model training and subtype identification in the early version of PADi (**PAD.train_v20200110**). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
-
-In the new version of PADi (**PAD.train_v20220917**), we designed the so-called **quantile** algorithm for random MVI during **PADi** model training, which also seemed to work well for PADi model training. Here, we demonstrated the use of **quantile** algorithm in the simulated dataset.
-
-```{r}
-
-# Quantile algorithm
-expr <- expr0
-na.pos <- apply(expr,2,is.one.na)
-set.seed(478); seeds <- sample(1:ncol(expr)*10, sum(na.pos), replace = F)
-tSample <- names(na.pos)[na.pos]
-quantile_vector <- (1:1000)/1000
-for(i in 1:length(tSample)){ # i=1
-  
-  sample.i <- tSample[i]
-  expr.i <- expr[, sample.i]
-  expr.i.max <- max(expr.i, na.rm = T)
-  expr.i.min <- min(expr.i, na.rm = T)
-  set.seed(seeds[i]);
-  expr.i[is.na(expr.i)] <-
-    expr.i.min +
-    (expr.i.max-expr.i.min) * sample(quantile_vector,
-                                     sum(is.na(expr.i)),
-                                     replace = T)
-  expr[, sample.i] <- expr.i
-}
-  
-
-# Report
-cat('RNA expression:', '\n')
-print(expr0)
-cat('\n')
-cat('RNA expression without NA value:', '\n')
-print(expr)
-```
-
-Look at the new matrix via heatmap, where the clustering result is not obviously disturbed after MVI:
-
-```{r out.width='60%', fig.align='center'}
-Heatmap(t(scale(t(expr))), name = "Z-score")
-```
-
-Next, we explored **how the number of missing value impacts subtype identification by PADi**. First, we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer. Second, we randomly masked different proportion of genes as zero expression. Third, we calculated the relative multi-ROC (masked data vs. MVI data). We had developed a function called **mv_tolerance** in **GSClassifier** to do this task.
-
-Load the internal validation cohort:
-
-```{r}
-# Internal validation cohort
-testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
-expr_pad <- testData$PanSTAD_expr_part
-modelInfo <- modelData(
-  design = testData$PanSTAD_phenotype_part,
-  id.col = "ID",
-  variable = c("platform", "PAD_subtype"),
-  Prop = 0.7,
-  seed = 19871
-)
-validInform <- modelInfo$Data$Valid
-expr_pad_innervalid <- expr_pad[,validInform$ID]
-```
-
-Missing value tolerance analysis:
-
-```{r eval=FALSE}
-# Time-consuming
-mvt <- mv_tolerance(
-  X = expr_pad_innervalid,
-  gene.loss = c(2, 4, 6, 8, 10, 12),
-  levels = c(1, 2, 3, 4),
-  model = "PAD.train_20220916",
-  seed = 487,
-  verbose = T
-)
-
-```
-
-```{r include=FALSE}
-mvt <- readRDS('./data/results-mv_tolerance-GC.rds')
-```
-
-Prepare the data of multi-ROC analysis:
-
-```{r}
-# Data
-mvt_auc <- mvt$multiAUC
-mvt_auc_df <- data.frame()
-for(i in 1:length(mvt_auc)){ # i=1
-  df.i <- data.frame(
-    x = as.integer(Fastextra(names(mvt_auc)[i], '=', 2)),
-    y = as.numeric(mvt_auc[[i]]$auc),
-    stringsAsFactors = F
-  )
-  mvt_auc_df <- rbind(mvt_auc_df, df.i)
-}
-  
-```
-
-Plot the missing value tolerance:
-
-```{r mvi03, fig.cap='The association between the number of missing value and subtype identification performance.', out.width='60%', fig.asp=.75, fig.align='center'}
-ggplot(mvt_auc_df, aes(x,y)) +
-  geom_point() +
-  scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
-  stat_smooth(formula = y ~ x,method = 'glm') +
-  labs(x = 'No. of missing value', 
-       y='Relative AUC in multi-ROC analysis')
-```
-
-As showed in Figure \@ref(fig:mvi03), there is linear negative correlation between the number of missing value (mising rate ranges from 6.25% to 37.5%) and subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small gene sets, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no mising value for **PADi** in the 'Kim2018' cohort, an external validation cohort for ICIs therapy response. Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision. 
-
-In conclusion, zero or quantile strategy could be applied for MVI before GSClassifier model training. However, missing value should be avoid as possible in subtype identification for missing value really damage the performance of GSClassifier. Nonetheless, due to low-input gene sets used in **PADi** model (No. of Gene=32), it's easy to avoid missing value in clinical practice.
-
 
 ### Binned expression
 
@@ -554,39 +394,6 @@ ggplot(tsp_df,aes(x=Var2,y=value,fill=Var2)) +
 
 ```
 
-### Batch effect
-
-<!--
-
-gene-pair batch effect in Google Scholar
-
-relative expression orderings (REO)
-
-single-sample enrichment analysis 
-
-Batch effect control & gene number
-
--->
-
-**TSP** was widely applied to control batch effects in transciptomic data [@RN369; @RN367; @RN368; @RN364; @RN363; @RN362; @RN366; @RN365]. Still, we tested whether **TSP** is a robust method for batch effect control in real-world data. As demonstrated in Figure \@ref(fig:be01), the obvious batch effects across gastric cancer datsets were significantly reduced after **TSP** normalization.
-
-```{r echo=FALSE, be01, fig.cap='Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.', out.width='90%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics(rep("./fig/bactch-effect-01.png", 1))
-```
-
-In order to confirmed the association between **gene counts** in modeling and batch effect control via **TSP** normalization, we selected random genes with counts ranging  4, 8, 20, 40, and 80 for TSP matrix establishment. As shown in Figure \@ref(fig:be02), **TSP** normalization works greatly in different gene counts for batch effect control compared with raw expression matrix.
-
-```{r echo=FALSE, be02, fig.cap='Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.', out.width='90%', fig.asp=.75, fig.align='center'}
-knitr::include_graphics(rep("./fig/bactch-effect-02.png", 1))
-```
-
-<!--
-Batch effect reduction of TSP could be explained in three parts:
-
-+ **Binned expression**. Regardless of what raw distribution of a numeric vector is, it would be converted into a binned vector with exactly the same distribution under a fixed quantile vector.
-
-+ **Pair/set difference**.
--->
 
 
 

@@ -163,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="discussion.html#packages-1" id="toc-packages-1"><span class="toc-section-number">2.1</span> Packages</a></li>
 <li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.2</span> Missing value imputation (MVI)</a></li>
 <li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.3</span> Batch effect</a></li>
+<li><a href="discussion.html#hyperparameters" id="toc-hyperparameters"><span class="toc-section-number">2.4</span> Hyperparameters</a></li>
 </ul></li>
 <li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
 <ul>
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="discussion" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Discussion</h1>
-<p>In this section, we would discuss some key topics about GSClassifier, including <strong>Missing value imputation (MVI)</strong>, <strong>Batch effect</strong>, <strong>hyperparameters</strong>, and so on.</p>
+<p>In this section, we would discuss some key topics about <strong>GSClassifier</strong>, including <strong>Missing value imputation (MVI)</strong>, <strong>Batch effect</strong>, <strong>hyperparameters</strong>, and so on.</p>
 <div id="packages-1" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Packages</h2>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="discussion.html#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -243,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-7"><a href="discussion.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;luckyBase&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb17-8"><a href="discussion.html#cb17-8" aria-hidden="true" tabindex="-1"></a>  devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/luckyBase&quot;</span>)</span>
 <span id="cb17-9"><a href="discussion.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="discussion.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the &quot;GSClassifier&quot; package</span></span>
+<span id="cb17-10"><a href="discussion.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the &quot;**GSClassifier**&quot; package</span></span>
 <span id="cb17-11"><a href="discussion.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;GSClassifier&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb17-12"><a href="discussion.html#cb17-12" aria-hidden="true" tabindex="-1"></a>  devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/GSClassifier&quot;</span>)</span>
 <span id="cb17-13"><a href="discussion.html#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
@@ -333,33 +334,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!--
 Missing Value Imputation (MVI); 
 + Missing Value type: Missing Completely at Random (MCAR), Missing at Random (MAR), and Not Missing at Random (NMAR).
-+ The main reason of missing value in the scenario of GSClassifier?
-+ Why is missing value imputation needed in GSClassifier modeling?
++ The main reason of missing value in the scenario of **GSClassifier**?
++ Why is missing value imputation needed in **GSClassifier** modeling?
 + Routine algorithms of missing value imputation for DNA array (mRNA expression)?
 + Missing value imputation in subtype calling?
 + The flowchart of quantile algorithm?
 + zero == Cutout; https://arxiv.org/abs/1708.04552; In this paper, we show that the simple regularization technique of randomly masking out square regions of input during training, which we call cutout, can be used to improve the robustness and overall performance of convolutional neural networks. Not only is this method extremely easy to implement, but we also demonstrate that it can be used in conjunction with existing forms of data augmentation and other regularizers to further improve model performance. We evaluate this method by applying it to current state-of-the-art architectures on the CIFAR-10, CIFAR-100, and SVHN datasets, yielding new state-of-the-art results of 2.56%, 15.20%, and 1.30% test error respectively.
-+ Experiments: leave genes out of validation cohorts and then test the performance of GSClassifier-PADi.
++ Experiments: leave genes out of validation cohorts and then test the performance of **GSClassifier**-PADi.
 -->
-<p>Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process <span class="citation">[<a href="references.html#ref-RN387" role="doc-biblioref">6</a>–<a href="references.html#ref-RN382" role="doc-biblioref">8</a>]</span>, <strong>missing value</strong> in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15% <span class="citation">[<a href="references.html#ref-RN392" role="doc-biblioref">9</a>,<a href="references.html#ref-RN386" role="doc-biblioref">10</a>]</span>. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure <a href="discussion.html#fig:mvi01">2.1</a>), had been developed for <strong>missing value imputation (MVI)</strong> <span class="citation">[<a href="references.html#ref-RN386" role="doc-biblioref">10</a>]</span>. Wang et al <span class="citation">[<a href="references.html#ref-RN384" role="doc-biblioref">11</a>]</span> categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost <span class="citation">[<a href="references.html#ref-xgboost" role="doc-biblioref">12</a>]</span> functions (<code>xgb.train</code>, <code>xgboost</code>, and <code>xgb.cv</code>) in GSClassifer, the missing value in expression matrix must be deleted or imputation. In <strong>PAD</strong> project, several strategies were applied to reduce the impact of missing values as possible.</p>
+<p>Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process <span class="citation">[<a href="references.html#ref-RN387" role="doc-biblioref">6</a>–<a href="references.html#ref-RN382" role="doc-biblioref">8</a>]</span>, <strong>missing value</strong> in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15% <span class="citation">[<a href="references.html#ref-RN392" role="doc-biblioref">9</a>,<a href="references.html#ref-RN386" role="doc-biblioref">10</a>]</span>. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure <a href="discussion.html#fig:mvi01">2.1</a>), had been developed for <strong>missing value imputation (MVI)</strong> <span class="citation">[<a href="references.html#ref-RN386" role="doc-biblioref">10</a>]</span>. Wang et al <span class="citation">[<a href="references.html#ref-RN384" role="doc-biblioref">11</a>]</span> categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost <span class="citation">[<a href="references.html#ref-xgboost" role="doc-biblioref">12</a>]</span> functions (<code>xgb.train</code>, <code>xgboost</code>, and <code>xgb.cv</code>) in GSClassifer, the missing value in expression matrix must be deleted or imputation.</p>
 <div class="figure" style="text-align: center"><span id="fig:mvi01"></span>
 <img src="fig/mvi-01.png" alt="Missing value imputation methods reviewed by Hasan et al." width="90%" />
 <p class="caption">
 Figure 2.1: Missing value imputation methods reviewed by Hasan et al.
 </p>
 </div>
-<p>First, both <strong>PIAM</strong> and <strong>PIDG</strong> in <strong>PAD</strong> project were curated GEPs that were not be missing in over 80% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.</p>
+<p>In <strong>PAD</strong> project, several strategies were applied to reduce the impact of missing values as possible. First, both <strong>PIAM</strong> and <strong>PIDG</strong> in <strong>PAD</strong> project were curated GEPs that were not be missing in over 80% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="discussion.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
-<span id="cb19-2"><a href="discussion.html#cb19-2" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
-<span id="cb19-3"><a href="discussion.html#cb19-3" aria-hidden="true" tabindex="-1"></a>expr_pad <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part</span>
-<span id="cb19-4"><a href="discussion.html#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="discussion.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing value</span></span>
-<span id="cb19-6"><a href="discussion.html#cb19-6" aria-hidden="true" tabindex="-1"></a>expr_pad_na <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_pad, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">length</span>(x))</span>
-<span id="cb19-7"><a href="discussion.html#cb19-7" aria-hidden="true" tabindex="-1"></a>expr_pad_na_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb19-8"><a href="discussion.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample =</span> <span class="fu">names</span>(expr_pad_na),</span>
-<span id="cb19-9"><a href="discussion.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fu">as.numeric</span>(expr_pad_na),</span>
-<span id="cb19-10"><a href="discussion.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
-<span id="cb19-11"><a href="discussion.html#cb19-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb19-2"><a href="discussion.html#cb19-2" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb19-3"><a href="discussion.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, </span>
+<span id="cb19-4"><a href="discussion.html#cb19-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;testData.rds&quot;</span>, </span>
+<span id="cb19-5"><a href="discussion.html#cb19-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>)</span>
+<span id="cb19-6"><a href="discussion.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-7"><a href="discussion.html#cb19-7" aria-hidden="true" tabindex="-1"></a>expr_pad <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part</span>
+<span id="cb19-8"><a href="discussion.html#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="discussion.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing value</span></span>
+<span id="cb19-10"><a href="discussion.html#cb19-10" aria-hidden="true" tabindex="-1"></a>expr_pad_na <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr_pad, <span class="dv">2</span>, </span>
+<span id="cb19-11"><a href="discussion.html#cb19-11" aria-hidden="true" tabindex="-1"></a>                     <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">length</span>(x))</span>
+<span id="cb19-12"><a href="discussion.html#cb19-12" aria-hidden="true" tabindex="-1"></a>expr_pad_na_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb19-13"><a href="discussion.html#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample =</span> <span class="fu">names</span>(expr_pad_na),</span>
+<span id="cb19-14"><a href="discussion.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fu">as.numeric</span>(expr_pad_na),</span>
+<span id="cb19-15"><a href="discussion.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> F</span>
+<span id="cb19-16"><a href="discussion.html#cb19-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>As shown in Figure <a href="discussion.html#fig:mvi02">2.2</a>, the percentage of all samples in gastric cancer datasets we used is lower than 8%.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="discussion.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot</span></span>
 <span id="cb20-2"><a href="discussion.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> expr_pad_na_df, </span>
@@ -373,19 +379,26 @@ Figure 2.1: Missing value imputation methods reviewed by Hasan et al.
 <span id="cb20-10"><a href="discussion.html#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb20-11"><a href="discussion.html#cb20-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:mvi02"></span>
-<img src="Discussion_files/figure-html/mvi02-1.png" alt="The distribution of missing value across gastric cancer samples." width="60%" />
+<img src="Discussion_files/figure-html/mvi02-1.png" alt="The distribution of missing value across gastric cancer samples." width="80%" />
 <p class="caption">
 Figure 2.2: The distribution of missing value across gastric cancer samples.
 </p>
 </div>
-<p>Due to the high quality of our data, we just set missing value as zero during model training and subtype identification in the early version of PADi (<strong>PAD.train_v20200110</strong>). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.</p>
-<p>In the new version of PADi (<strong>PAD.train_v20220917</strong>), we designed the so-called <strong>quantile</strong> algorithm for random MVI during <strong>PADi</strong> model training, which also seemed to work well for PADi model training. Here, we demonstrated the use of <strong>quantile</strong> algorithm in the simulated dataset:</p>
+<p>Second, we did conduct some MVI strategy to deal with data before model training in <strong>GSClassifier</strong>. Due to the low missing rate of our experimental data, we just <strong>set missing value as zero</strong> during model training and subtype identification in the early version of PADi (<strong>PAD.train.v20200110</strong>). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.</p>
+<p>In the new version of PADi (<strong>PAD.train.v20220917</strong>), we designed the so-called <strong>quantile</strong> algorithm for random MVI during <strong>PADi</strong> model training, which also seemed to work well for PADi model training.</p>
+<!--
+
+We supposed that ...
+Add a flowchart for quantile algorithm
+
+-->
+<p>Here, we demonstrated the principle of <strong>quantile</strong> algorithm in the simulated dataset:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="discussion.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated data</span></span>
 <span id="cb21-2"><a href="discussion.html#cb21-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&#39;./data/simulated-data.xlsx&#39;</span>, <span class="at">sheet =</span> <span class="st">&#39;RNA&#39;</span>)</span>
 <span id="cb21-3"><a href="discussion.html#cb21-3" aria-hidden="true" tabindex="-1"></a>expr0 <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[,<span class="sc">-</span><span class="dv">1</span>])</span>
 <span id="cb21-4"><a href="discussion.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expr0) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">as.matrix</span>(x[,<span class="dv">1</span>])); <span class="fu">rm</span>(x)</span>
 <span id="cb21-5"><a href="discussion.html#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="discussion.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantile algorithm</span></span>
+<span id="cb21-6"><a href="discussion.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># MVI with Quantile algorithm</span></span>
 <span id="cb21-7"><a href="discussion.html#cb21-7" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> expr0</span>
 <span id="cb21-8"><a href="discussion.html#cb21-8" aria-hidden="true" tabindex="-1"></a>na.pos <span class="ot">&lt;-</span> <span class="fu">apply</span>(expr,<span class="dv">2</span>,is.one.na)</span>
 <span id="cb21-9"><a href="discussion.html#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">478</span>); seeds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(expr)<span class="sc">*</span><span class="dv">10</span>, <span class="fu">sum</span>(na.pos), <span class="at">replace =</span> F)</span>
@@ -398,58 +411,62 @@ Figure 2.2: The distribution of missing value across gastric cancer samples.
 <span id="cb21-16"><a href="discussion.html#cb21-16" aria-hidden="true" tabindex="-1"></a>  expr.i.max <span class="ot">&lt;-</span> <span class="fu">max</span>(expr.i, <span class="at">na.rm =</span> T)</span>
 <span id="cb21-17"><a href="discussion.html#cb21-17" aria-hidden="true" tabindex="-1"></a>  expr.i.min <span class="ot">&lt;-</span> <span class="fu">min</span>(expr.i, <span class="at">na.rm =</span> T)</span>
 <span id="cb21-18"><a href="discussion.html#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seeds[i]);</span>
-<span id="cb21-19"><a href="discussion.html#cb21-19" aria-hidden="true" tabindex="-1"></a>  expr.i[<span class="fu">is.na</span>(expr.i)] <span class="ot">&lt;-</span></span>
-<span id="cb21-20"><a href="discussion.html#cb21-20" aria-hidden="true" tabindex="-1"></a>    expr.i.min <span class="sc">+</span></span>
-<span id="cb21-21"><a href="discussion.html#cb21-21" aria-hidden="true" tabindex="-1"></a>    (expr.i.max<span class="sc">-</span>expr.i.min) <span class="sc">*</span> <span class="fu">sample</span>(quantile_vector,</span>
-<span id="cb21-22"><a href="discussion.html#cb21-22" aria-hidden="true" tabindex="-1"></a>                                     <span class="fu">sum</span>(<span class="fu">is.na</span>(expr.i)),</span>
-<span id="cb21-23"><a href="discussion.html#cb21-23" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">replace =</span> T)</span>
-<span id="cb21-24"><a href="discussion.html#cb21-24" aria-hidden="true" tabindex="-1"></a>  expr[, sample.i] <span class="ot">&lt;-</span> expr.i</span>
-<span id="cb21-25"><a href="discussion.html#cb21-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-26"><a href="discussion.html#cb21-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-27"><a href="discussion.html#cb21-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-28"><a href="discussion.html#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
-<span id="cb21-29"><a href="discussion.html#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb21-30"><a href="discussion.html#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
-<span id="cb21-31"><a href="discussion.html#cb21-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb21-32"><a href="discussion.html#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression without NA value:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb21-33"><a href="discussion.html#cb21-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr)</span>
-<span id="cb21-34"><a href="discussion.html#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
-<span id="cb21-35"><a href="discussion.html#cb21-35" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
-<span id="cb21-36"><a href="discussion.html#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
-<span id="cb21-37"><a href="discussion.html#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
-<span id="cb21-38"><a href="discussion.html#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
-<span id="cb21-39"><a href="discussion.html#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
-<span id="cb21-40"><a href="discussion.html#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
-<span id="cb21-41"><a href="discussion.html#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
-<span id="cb21-42"><a href="discussion.html#cb21-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span>
-<span id="cb21-43"><a href="discussion.html#cb21-43" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb21-44"><a href="discussion.html#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression without NA value: </span></span>
-<span id="cb21-45"><a href="discussion.html#cb21-45" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
-<span id="cb21-46"><a href="discussion.html#cb21-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60 0.21000 0.30000    0.40</span></span>
-<span id="cb21-47"><a href="discussion.html#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58 0.22000 0.31000    0.35</span></span>
-<span id="cb21-48"><a href="discussion.html#cb21-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61 0.43256 0.29000    0.30</span></span>
-<span id="cb21-49"><a href="discussion.html#cb21-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40 0.51000 0.52000    0.60</span></span>
-<span id="cb21-50"><a href="discussion.html#cb21-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35 0.52000 0.54000    0.58</span></span>
-<span id="cb21-51"><a href="discussion.html#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30 0.53000 0.32622    0.61</span></span>
-<span id="cb21-52"><a href="discussion.html#cb21-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14</span></span></code></pre></div>
+<span id="cb21-19"><a href="discussion.html#cb21-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-20"><a href="discussion.html#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Details of quantile algorithm</span></span>
+<span id="cb21-21"><a href="discussion.html#cb21-21" aria-hidden="true" tabindex="-1"></a>  expr.i[<span class="fu">is.na</span>(expr.i)] <span class="ot">&lt;-</span></span>
+<span id="cb21-22"><a href="discussion.html#cb21-22" aria-hidden="true" tabindex="-1"></a>    expr.i.min <span class="sc">+</span></span>
+<span id="cb21-23"><a href="discussion.html#cb21-23" aria-hidden="true" tabindex="-1"></a>    (expr.i.max<span class="sc">-</span>expr.i.min) <span class="sc">*</span> <span class="fu">sample</span>(quantile_vector,</span>
+<span id="cb21-24"><a href="discussion.html#cb21-24" aria-hidden="true" tabindex="-1"></a>                                     <span class="fu">sum</span>(<span class="fu">is.na</span>(expr.i)),</span>
+<span id="cb21-25"><a href="discussion.html#cb21-25" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">replace =</span> T)</span>
+<span id="cb21-26"><a href="discussion.html#cb21-26" aria-hidden="true" tabindex="-1"></a>  expr[, sample.i] <span class="ot">&lt;-</span> expr.i</span>
+<span id="cb21-27"><a href="discussion.html#cb21-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-28"><a href="discussion.html#cb21-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-29"><a href="discussion.html#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="discussion.html#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Report</span></span>
+<span id="cb21-31"><a href="discussion.html#cb21-31" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb21-32"><a href="discussion.html#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr0)</span>
+<span id="cb21-33"><a href="discussion.html#cb21-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb21-34"><a href="discussion.html#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;RNA expression without NA value:&#39;</span>, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb21-35"><a href="discussion.html#cb21-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(expr)</span>
+<span id="cb21-36"><a href="discussion.html#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression: </span></span>
+<span id="cb21-37"><a href="discussion.html#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb21-38"><a href="discussion.html#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60    0.21    0.30    0.40</span></span>
+<span id="cb21-39"><a href="discussion.html#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58    0.22    0.31    0.35</span></span>
+<span id="cb21-40"><a href="discussion.html#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61      NA    0.29    0.30</span></span>
+<span id="cb21-41"><a href="discussion.html#cb21-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40    0.51    0.52    0.60</span></span>
+<span id="cb21-42"><a href="discussion.html#cb21-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35    0.52    0.54    0.58</span></span>
+<span id="cb21-43"><a href="discussion.html#cb21-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30    0.53      NA    0.61</span></span>
+<span id="cb21-44"><a href="discussion.html#cb21-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09    0.11    0.12    0.14</span></span>
+<span id="cb21-45"><a href="discussion.html#cb21-45" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb21-46"><a href="discussion.html#cb21-46" aria-hidden="true" tabindex="-1"></a><span class="co"># RNA expression without NA value: </span></span>
+<span id="cb21-47"><a href="discussion.html#cb21-47" aria-hidden="true" tabindex="-1"></a><span class="co">#       Sample1 Sample2 Sample3 Sample4 Sample5 Sample6</span></span>
+<span id="cb21-48"><a href="discussion.html#cb21-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene1    0.51    0.52    0.60 0.21000 0.30000    0.40</span></span>
+<span id="cb21-49"><a href="discussion.html#cb21-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene2    0.52    0.54    0.58 0.22000 0.31000    0.35</span></span>
+<span id="cb21-50"><a href="discussion.html#cb21-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene3    0.53    0.60    0.61 0.43256 0.29000    0.30</span></span>
+<span id="cb21-51"><a href="discussion.html#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene4    0.21    0.30    0.40 0.51000 0.52000    0.60</span></span>
+<span id="cb21-52"><a href="discussion.html#cb21-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene5    0.22    0.31    0.35 0.52000 0.54000    0.58</span></span>
+<span id="cb21-53"><a href="discussion.html#cb21-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene6    0.23    0.29    0.30 0.53000 0.32622    0.61</span></span>
+<span id="cb21-54"><a href="discussion.html#cb21-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14</span></span></code></pre></div>
 <p>Look at the new matrix via heatmap, where the clustering result is not obviously disturbed after MVI:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="discussion.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>, <span class="at">column_title =</span> <span class="st">&quot;After MVI&quot;</span>)</span></code></pre></div>
-<p><img src="Discussion_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<p>Next, we explored <strong>how the number of missing value impacts subtype identification by PADi</strong>. First, we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer. Second, we randomly masked different proportion of genes as zero expression. Third, we calculated the relative multi-ROC (masked data vs. MVI data). We had developed a function called <strong>mv_tolerance</strong> in <strong>GSClassifier</strong> to do this task.</p>
-<p>Load the internal validation cohort:</p>
+<p><img src="Discussion_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Due to missing value might damage the integrity of biological information, we explored <strong>how much the number of missing value in one sample impacts subtype identification via PADi</strong>. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC <span class="citation">[<a href="references.html#ref-pROC" role="doc-biblioref">13</a>]</span> (masked data vs. MVI data). In <strong>GSClassifier</strong>, we developed a function called <strong>mv_tolerance</strong> to complete the task.</p>
+<p>(i)Load the internal validation cohort:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="discussion.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Internal validation cohort</span></span>
-<span id="cb23-2"><a href="discussion.html#cb23-2" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
-<span id="cb23-3"><a href="discussion.html#cb23-3" aria-hidden="true" tabindex="-1"></a>expr_pad <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part</span>
-<span id="cb23-4"><a href="discussion.html#cb23-4" aria-hidden="true" tabindex="-1"></a>modelInfo <span class="ot">&lt;-</span> <span class="fu">modelData</span>(</span>
-<span id="cb23-5"><a href="discussion.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> testData<span class="sc">$</span>PanSTAD_phenotype_part,</span>
-<span id="cb23-6"><a href="discussion.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.col =</span> <span class="st">&quot;ID&quot;</span>,</span>
-<span id="cb23-7"><a href="discussion.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;platform&quot;</span>, <span class="st">&quot;PAD_subtype&quot;</span>),</span>
-<span id="cb23-8"><a href="discussion.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prop =</span> <span class="fl">0.7</span>,</span>
-<span id="cb23-9"><a href="discussion.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">19871</span></span>
-<span id="cb23-10"><a href="discussion.html#cb23-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-11"><a href="discussion.html#cb23-11" aria-hidden="true" tabindex="-1"></a>validInform <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid</span>
-<span id="cb23-12"><a href="discussion.html#cb23-12" aria-hidden="true" tabindex="-1"></a>expr_pad_innervalid <span class="ot">&lt;-</span> expr_pad[,validInform<span class="sc">$</span>ID]</span></code></pre></div>
-<p>Missing value tolerance analysis:</p>
+<span id="cb23-2"><a href="discussion.html#cb23-2" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb23-3"><a href="discussion.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>)</span>
+<span id="cb23-4"><a href="discussion.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-5"><a href="discussion.html#cb23-5" aria-hidden="true" tabindex="-1"></a>expr_pad <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part</span>
+<span id="cb23-6"><a href="discussion.html#cb23-6" aria-hidden="true" tabindex="-1"></a>modelInfo <span class="ot">&lt;-</span> <span class="fu">modelData</span>(</span>
+<span id="cb23-7"><a href="discussion.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">design =</span> testData<span class="sc">$</span>PanSTAD_phenotype_part,</span>
+<span id="cb23-8"><a href="discussion.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">id.col =</span> <span class="st">&quot;ID&quot;</span>,</span>
+<span id="cb23-9"><a href="discussion.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;platform&quot;</span>, <span class="st">&quot;PAD_subtype&quot;</span>),</span>
+<span id="cb23-10"><a href="discussion.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Prop =</span> <span class="fl">0.7</span>,</span>
+<span id="cb23-11"><a href="discussion.html#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">19871</span></span>
+<span id="cb23-12"><a href="discussion.html#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-13"><a href="discussion.html#cb23-13" aria-hidden="true" tabindex="-1"></a>validInform <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid</span>
+<span id="cb23-14"><a href="discussion.html#cb23-14" aria-hidden="true" tabindex="-1"></a>expr_pad_innervalid <span class="ot">&lt;-</span> expr_pad[,validInform<span class="sc">$</span>ID]</span></code></pre></div>
+<p>(ii)Missing value tolerance analysis:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="discussion.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Time-consuming</span></span>
 <span id="cb24-2"><a href="discussion.html#cb24-2" aria-hidden="true" tabindex="-1"></a>mvt <span class="ot">&lt;-</span> <span class="fu">mv_tolerance</span>(</span>
 <span id="cb24-3"><a href="discussion.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> expr_pad_innervalid,</span>
@@ -459,7 +476,7 @@ Figure 2.2: The distribution of missing value across gastric cancer samples.
 <span id="cb24-7"><a href="discussion.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">487</span>,</span>
 <span id="cb24-8"><a href="discussion.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> T</span>
 <span id="cb24-9"><a href="discussion.html#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>Prepare the data of multi-ROC analysis:</p>
+<p>(iii)multi-ROC analysis:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="discussion.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
 <span id="cb25-2"><a href="discussion.html#cb25-2" aria-hidden="true" tabindex="-1"></a>mvt_auc <span class="ot">&lt;-</span> mvt<span class="sc">$</span>multiAUC</span>
 <span id="cb25-3"><a href="discussion.html#cb25-3" aria-hidden="true" tabindex="-1"></a>mvt_auc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
@@ -472,7 +489,6 @@ Figure 2.2: The distribution of missing value across gastric cancer samples.
 <span id="cb25-10"><a href="discussion.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  mvt_auc_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mvt_auc_df, df.i)</span>
 <span id="cb25-11"><a href="discussion.html#cb25-11" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb25-12"><a href="discussion.html#cb25-12" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
-<p>Plot the missing value tolerance:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="discussion.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mvt_auc_df, <span class="fu">aes</span>(x,y)) <span class="sc">+</span></span>
 <span id="cb26-2"><a href="discussion.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb26-3"><a href="discussion.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)) <span class="sc">+</span> </span>
@@ -489,7 +505,7 @@ Figure 2.3: The association between the number of missing value and subtype iden
 <!--
 Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision. 
 -->
-<p>In conclusion, zero or quantile strategy could be applied for MVI before GSClassifier model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of GSClassifier. Nonetheless, due to low-input GEPs used in <strong>PADi</strong> model (No. of Gene=32), it’s easy to avoid missing value in clinical practice.</p>
+<p>In conclusion, zero or quantile strategy could be applied for MVI before <strong>GSClassifier</strong> model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of <strong>GSClassifier</strong>. Nonetheless, due to low-input GEPs used in <strong>PADi</strong> model (No. of Gene=32), it’s easy to avoid missing value in clinical practice.</p>
 </div>
 <div id="batch-effect" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Batch effect</h2>
@@ -504,7 +520,7 @@ single-sample enrichment analysis
 Batch effect control & gene number
 
 -->
-<p><strong>TSP</strong> was widely applied to control batch effects in transciptomic data <span class="citation">[<a href="references.html#ref-RN369" role="doc-biblioref">13</a>–<a href="references.html#ref-RN365" role="doc-biblioref">20</a>]</span>. Still, we tested whether <strong>TSP</strong> is a robust method for batch effect control in real-world data. As demonstrated in Figure <a href="discussion.html#fig:be01">2.4</a>, the obvious batch effects across gastric cancer datsets were significantly reduced after <strong>TSP</strong> normalization.</p>
+<p><strong>TSP</strong> was widely applied to control batch effects in transciptomic data <span class="citation">[<a href="references.html#ref-RN369" role="doc-biblioref">14</a>–<a href="references.html#ref-RN365" role="doc-biblioref">21</a>]</span>. Still, we tested whether <strong>TSP</strong> is a robust method for batch effect control in real-world data. As demonstrated in Figure <a href="discussion.html#fig:be01">2.4</a>, the obvious batch effects across gastric cancer datsets were significantly reduced after <strong>TSP</strong> normalization.</p>
 <div class="figure" style="text-align: center"><span id="fig:be01"></span>
 <img src="fig/bactch-effect-01.png" alt="Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples." width="90%" />
 <p class="caption">
@@ -525,6 +541,9 @@ Batch effect reduction of TSP could be explained in three parts:
 
 + **Pair/set difference**.
 -->
+</div>
+<div id="hyperparameters" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Hyperparameters</h2>
 
 </div>
 </div>

@@ -286,23 +286,23 @@ The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 \hypertarget{data-processing}{%
 \subsection{Data Processing}\label{data-processing}}
 
-For each dataset, RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{subtypevector}.
+For each dataset, RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{batch-effect}.
 
 There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For \textbf{Pan-immune Activation and Dysfunction (PAD)} subtypes, the GEPs, \textbf{Pan-Immune Activation Module (PIAM)} and \textbf{Pan-Immune Dysfunction Genes (PIDG)}, are biologically associated and suitable for calling four sutbypes (PIAM\textsuperscript{high}PIDG\textsuperscript{high}, PIAM\textsuperscript{high}PIDG\textsuperscript{low}, PIAM\textsuperscript{low}PIDG\textsuperscript{high}, and PIAM\textsuperscript{low}PIDG\textsuperscript{low}). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
 
-With subtype vectors and raw matrices, \textbf{Top Scoring Pairs (TSP)}, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \ref{topicTSP}.
+With subtype vectors and raw matrices, \textbf{Top Scoring Pairs (TSP)}, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP normalization are summarized in \ref{topicTSP}.
 
 \hypertarget{model-establishment-and-validation}{%
 \subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
 
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{Subset} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{Submodel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) \citep{RN345}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{SubSet} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{SubModel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) \citep{RN345}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
 
 The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, \textbf{the data of both internal and external validation cohort would not be used during model training} so as to avoid over-fitting.
 
 \hypertarget{model-application}{%
 \subsection{Model Application}\label{model-application}}
 
-In PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``\textbf{PAD for individual}'' (\textbf{PADi}). Supposed raw RNA expression of a sample was given. As showed in \ref{fig:flowchart} and \ref{fig:tsp}, \textbf{GSClassifier} would turn raw RNA expression into a TSP vector, which would be as a input to \textbf{Model for individual}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest \textbf{Model for individual} (\textbf{PADi}, etc) as personalized model.
+In PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``PAD for individual'' (\textbf{PADi}). Supposed raw RNA expression of a sample was given. As showed in \ref{fig:flowchart} and \ref{fig:tsp}, \textbf{GSClassifier} would turn raw RNA expression into a TSP vector, which would be as a input to \textbf{Model for individual}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest \textbf{Model for individual} (\textbf{PADi}, etc) as personalized model.
 
 \hypertarget{topicTSP}{%
 \section{Top scoring pairs}\label{topicTSP}}
@@ -312,7 +312,7 @@ In PAD project, \textbf{Model for individual}, the ensemble of submodels, is cal
 
 Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}, also called \textbf{Relative Expression Orderings} (\textbf{REOs})) algorithm, which was previously described by Geman et al \citep{RN267}. \textbf{TSP} normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. \textbf{TSP} had been used in cancer research and effectively predicts cancer progression and ICIs response \citep{RN265, RN266, RN261}.
 
-As show in Figure \ref{fig:tsp}, The TSP matrix in GSClassifier consists of three parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+As show in Figure \ref{fig:tsp}, The TSP data in GSClassifier consists of three parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 \begin{figure}
 
@@ -783,7 +783,7 @@ Have a look at the distribution:
 \hypertarget{discussion}{%
 \chapter{Discussion}\label{discussion}}
 
-In this section, we would discuss some key topics about GSClassifier, including \textbf{Missing value imputation (MVI)}, \textbf{Batch effect}, \textbf{hyperparameters}, and so on.
+In this section, we would discuss some key topics about \textbf{GSClassifier}, including \textbf{Missing value imputation (MVI)}, \textbf{Batch effect}, \textbf{hyperparameters}, and so on.
 
 \hypertarget{packages-1}{%
 \section{Packages}\label{packages-1}}
@@ -799,7 +799,7 @@ In this section, we would discuss some key topics about GSClassifier, including 
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"luckyBase"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
 \NormalTok{  devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/luckyBase"}\NormalTok{)}
 
-\CommentTok{\# Install the "GSClassifier" package}
+\CommentTok{\# Install the "**GSClassifier**" package}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{requireNamespace}\NormalTok{(}\StringTok{"GSClassifier"}\NormalTok{, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{))}
 \NormalTok{  devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"huangwb8/GSClassifier"}\NormalTok{)}
 
@@ -892,7 +892,7 @@ Here is the environment of R programming:
 \hypertarget{missing-value-imputation-mvi}{%
 \section{Missing value imputation (MVI)}\label{missing-value-imputation-mvi}}
 
-Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process \citep{RN387, RN389, RN382}, \textbf{missing value} in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15\% \citep{RN392, RN386}. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \ref{fig:mvi01}), had been developed for \textbf{missing value imputation (MVI)} \citep{RN386}. Wang et al \citep{RN384} categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost \citep{xgboost} functions (\texttt{xgb.train}, \texttt{xgboost}, and \texttt{xgb.cv}) in GSClassifer, the missing value in expression matrix must be deleted or imputation. In \textbf{PAD} project, several strategies were applied to reduce the impact of missing values as possible.
+Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process \citep{RN387, RN389, RN382}, \textbf{missing value} in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15\% \citep{RN392, RN386}. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \ref{fig:mvi01}), had been developed for \textbf{missing value imputation (MVI)} \citep{RN386}. Wang et al \citep{RN384} categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost \citep{xgboost} functions (\texttt{xgb.train}, \texttt{xgboost}, and \texttt{xgb.cv}) in GSClassifer, the missing value in expression matrix must be deleted or imputation.
 
 \begin{figure}
 
@@ -903,16 +903,21 @@ Due to reasons like low expression/weak signal, contamination of microarray surf
 \caption{Missing value imputation methods reviewed by Hasan et al.}\label{fig:mvi01}
 \end{figure}
 
-First, both \textbf{PIAM} and \textbf{PIDG} in \textbf{PAD} project were curated GEPs that were not be missing in over 80\% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.
+In \textbf{PAD} project, several strategies were applied to reduce the impact of missing values as possible. First, both \textbf{PIAM} and \textbf{PIDG} in \textbf{PAD} project were curated GEPs that were not be missing in over 80\% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Data}
-\NormalTok{testData }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"testData.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\NormalTok{testData }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}
+  \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }
+              \StringTok{"testData.rds"}\NormalTok{, }
+              \AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{)}
+\NormalTok{  )}
 \NormalTok{expr\_pad }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_expr\_part}
 
 \CommentTok{\# Missing value}
-\NormalTok{expr\_pad\_na }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(expr\_pad, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x))}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(x))}
+\NormalTok{expr\_pad\_na }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(expr\_pad, }\DecValTok{2}\NormalTok{, }
+                     \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x))}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(x))}
 \NormalTok{expr\_pad\_na\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
   \AttributeTok{sample =} \FunctionTok{names}\NormalTok{(expr\_pad\_na),}
   \AttributeTok{prob =} \FunctionTok{as.numeric}\NormalTok{(expr\_pad\_na),}
@@ -941,16 +946,18 @@ As shown in Figure \ref{fig:mvi02}, the percentage of all samples in gastric can
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/mvi02-1} 
+{\centering \includegraphics[width=0.8\linewidth]{Discussion_files/figure-latex/mvi02-1} 
 
 }
 
 \caption{The distribution of missing value across gastric cancer samples.}\label{fig:mvi02}
 \end{figure}
 
-Due to the high quality of our data, we just set missing value as zero during model training and subtype identification in the early version of PADi (\textbf{PAD.train\_v20200110}). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
+Second, we did conduct some MVI strategy to deal with data before model training in \textbf{GSClassifier}. Due to the low missing rate of our experimental data, we just \textbf{set missing value as zero} during model training and subtype identification in the early version of PADi (\textbf{PAD.train.v20200110}). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
 
-In the new version of PADi (\textbf{PAD.train\_v20220917}), we designed the so-called \textbf{quantile} algorithm for random MVI during \textbf{PADi} model training, which also seemed to work well for PADi model training. Here, we demonstrated the use of \textbf{quantile} algorithm in the simulated dataset:
+In the new version of PADi (\textbf{PAD.train.v20220917}), we designed the so-called \textbf{quantile} algorithm for random MVI during \textbf{PADi} model training, which also seemed to work well for PADi model training.
+
+Here, we demonstrated the principle of \textbf{quantile} algorithm in the simulated dataset:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -959,7 +966,7 @@ In the new version of PADi (\textbf{PAD.train\_v20220917}), we designed the so-c
 \NormalTok{expr0 }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(x[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
 \FunctionTok{rownames}\NormalTok{(expr0) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(x[,}\DecValTok{1}\NormalTok{])); }\FunctionTok{rm}\NormalTok{(x)}
 
-\CommentTok{\# Quantile algorithm}
+\CommentTok{\# MVI with Quantile algorithm}
 \NormalTok{expr }\OtherTok{\textless{}{-}}\NormalTok{ expr0}
 \NormalTok{na.pos }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(expr,}\DecValTok{2}\NormalTok{,is.one.na)}
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{478}\NormalTok{); seeds }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(expr)}\SpecialCharTok{*}\DecValTok{10}\NormalTok{, }\FunctionTok{sum}\NormalTok{(na.pos), }\AttributeTok{replace =}\NormalTok{ F)}
@@ -972,6 +979,8 @@ In the new version of PADi (\textbf{PAD.train\_v20220917}), we designed the so-c
 \NormalTok{  expr.i.max }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(expr.i, }\AttributeTok{na.rm =}\NormalTok{ T)}
 \NormalTok{  expr.i.min }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(expr.i, }\AttributeTok{na.rm =}\NormalTok{ T)}
   \FunctionTok{set.seed}\NormalTok{(seeds[i]);}
+  
+  \CommentTok{\# Details of quantile algorithm}
 \NormalTok{  expr.i[}\FunctionTok{is.na}\NormalTok{(expr.i)] }\OtherTok{\textless{}{-}}
 \NormalTok{    expr.i.min }\SpecialCharTok{+}
 \NormalTok{    (expr.i.max}\SpecialCharTok{{-}}\NormalTok{expr.i.min) }\SpecialCharTok{*} \FunctionTok{sample}\NormalTok{(quantile\_vector,}
@@ -1017,16 +1026,18 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.8\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-Next, we explored \textbf{how the number of missing value impacts subtype identification by PADi}. First, we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer. Second, we randomly masked different proportion of genes as zero expression. Third, we calculated the relative multi-ROC (masked data vs.~MVI data). We had developed a function called \textbf{mv\_tolerance} in \textbf{GSClassifier} to do this task.
+Due to missing value might damage the integrity of biological information, we explored \textbf{how much the number of missing value in one sample impacts subtype identification via PADi}. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC \citep{pROC} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
 
-Load the internal validation cohort:
+(i)Load the internal validation cohort:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Internal validation cohort}
-\NormalTok{testData }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"testData.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{))}
+\NormalTok{testData }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}
+  \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"testData.rds"}\NormalTok{, }\AttributeTok{package =} \StringTok{"GSClassifier"}\NormalTok{)}
+\NormalTok{  )}
 \NormalTok{expr\_pad }\OtherTok{\textless{}{-}}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_expr\_part}
 \NormalTok{modelInfo }\OtherTok{\textless{}{-}} \FunctionTok{modelData}\NormalTok{(}
   \AttributeTok{design =}\NormalTok{ testData}\SpecialCharTok{$}\NormalTok{PanSTAD\_phenotype\_part,}
@@ -1040,7 +1051,7 @@ Load the internal validation cohort:
 \end{Highlighting}
 \end{Shaded}
 
-Missing value tolerance analysis:
+(ii)Missing value tolerance analysis:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1056,7 +1067,7 @@ Missing value tolerance analysis:
 \end{Highlighting}
 \end{Shaded}
 
-Prepare the data of multi-ROC analysis:
+(iii)multi-ROC analysis:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1074,8 +1085,6 @@ Prepare the data of multi-ROC analysis:
   
 \end{Highlighting}
 \end{Shaded}
-
-Plot the missing value tolerance:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1099,7 +1108,7 @@ Plot the missing value tolerance:
 
 As showed in Figure \ref{fig:mvi03}, there is linear negative correlation between the number of missing value (mising rate ranges from 6.25\% to 37.5\%) and subtype identification performance of \textbf{PADi} model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of \textbf{PADi}. By the way, there is no mising value in PIAM/PIDG of the `Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via \textbf{PADi}. Nonetheless, we still used \textbf{zero strategy} during subtype identification of \textbf{PADi} if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision.
 
-In conclusion, zero or quantile strategy could be applied for MVI before GSClassifier model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of GSClassifier. Nonetheless, due to low-input GEPs used in \textbf{PADi} model (No.~of Gene=32), it's easy to avoid missing value in clinical practice.
+In conclusion, zero or quantile strategy could be applied for MVI before \textbf{GSClassifier} model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of \textbf{GSClassifier}. Nonetheless, due to low-input GEPs used in \textbf{PADi} model (No.~of Gene=32), it's easy to avoid missing value in clinical practice.
 
 \hypertarget{batch-effect}{%
 \section{Batch effect}\label{batch-effect}}
@@ -1125,6 +1134,9 @@ In order to confirmed the association between \textbf{gene counts} in modeling a
 
 \caption{Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.}\label{fig:be02}
 \end{figure}
+
+\hypertarget{hyperparameters}{%
+\section{Hyperparameters}\label{hyperparameters}}
 
 \hypertarget{quick-start}{%
 \chapter{Quick start}\label{quick-start}}
@@ -1637,13 +1649,13 @@ Check the result:
 \begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(res\_pis)}
 \CommentTok{\#   SampleIDs BestCall BestCall\_Max            1           2            3}
-\CommentTok{\# 1 PB{-}16{-}002        2            2 1.041468e{-}03 0.561300665 5.682942e{-}06}
-\CommentTok{\# 2 PB{-}16{-}003        4            4 3.994623e{-}07 0.018167170 7.198992e{-}05}
-\CommentTok{\# 3 PB{-}16{-}004        3            3 2.831850e{-}06 0.001126488 2.087327e{-}01}
+\CommentTok{\# 1 PB{-}16{-}002        2            2 1.290197e{-}03 0.561300665 5.817212e{-}06}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 3.244762e{-}07 0.018167170 1.270947e{-}04}
+\CommentTok{\# 3 PB{-}16{-}004        3            3 4.472903e{-}06 0.001126488 3.182718e{-}01}
 \CommentTok{\#              4           5           6}
-\CommentTok{\# 1 0.3305687308 0.011658502 0.002704428}
-\CommentTok{\# 2 0.4141998887 0.002884648 0.002158524}
-\CommentTok{\# 3 0.0001598273 0.008763667 0.009933675}
+\CommentTok{\# 1 0.1675429195 0.006574071 0.003705733}
+\CommentTok{\# 2 0.4210315496 0.002128245 0.001245184}
+\CommentTok{\# 3 0.0002128877 0.007653435 0.004229507}
 \end{Highlighting}
 \end{Shaded}
 

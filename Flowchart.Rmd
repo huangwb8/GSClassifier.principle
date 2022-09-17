@@ -66,21 +66,21 @@ knitr::include_graphics(rep("./fig/flowchart.png", 1))
 
 ### Data Processing
 
-For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(subtypevector).
+For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(batch-effect).
 
 There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
 
-With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP are summarized in \@ref(topicTSP).
+With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP normalization are summarized in \@ref(topicTSP).
 
 ### Model Establishment and Validation
 
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **Subset** (70% of the training cohort in PAD project) would be further selected randomly to build a **Submodel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function) [@RN345]. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)).
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **SubSet** (70% of the training cohort in PAD project) would be further selected randomly to build a **SubModel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function) [@RN345]. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)).
 
 The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, **the data of both internal and external validation cohort would not be used during model training** so as to avoid over-fitting.
 
 ### Model Application
 
-In PAD project, **Model for individual**, the ensemble of submodels, is called "**PAD for individual**" (**PADi**). Supposed raw RNA expression of a sample was given. As showed in \@ref(fig:flowchart) and \@ref(fig:tsp), **GSClassifier** would turn raw RNA expression into a TSP vector, which would be as a input to **Model for individual**. Then, **GSClassifier** would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest **Model for individual** (**PADi**, etc) as personalized model.
+In PAD project, **Model for individual**, the ensemble of submodels, is called "PAD for individual" (**PADi**). Supposed raw RNA expression of a sample was given. As showed in \@ref(fig:flowchart) and \@ref(fig:tsp), **GSClassifier** would turn raw RNA expression into a TSP vector, which would be as a input to **Model for individual**. Then, **GSClassifier** would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest **Model for individual** (**PADi**, etc) as personalized model.
 
 ## Top scoring pairs {#topicTSP}
 
@@ -88,7 +88,7 @@ In PAD project, **Model for individual**, the ensemble of submodels, is called "
 
 Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**, also called **Relative Expression Orderings** (**REOs**)) algorithm, which was previously described by Geman et al [@RN267]. **TSP** normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. **TSP** had been used in cancer research and effectively predicts cancer progression and ICIs response [@RN265; @RN266; @RN261].
 
-As show in Figure \@ref(fig:tsp), The TSP matrix in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+As show in Figure \@ref(fig:tsp), The TSP data in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 ```{r echo=FALSE, tsp, fig.cap='The components of TSP (2 gene sets)', out.width='85%', fig.align='center'}
 knitr::include_graphics(rep("./fig/TSP.png", 1))

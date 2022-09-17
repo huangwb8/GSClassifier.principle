@@ -163,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="discussion.html#packages-1" id="toc-packages-1"><span class="toc-section-number">2.1</span> Packages</a></li>
 <li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.2</span> Missing value imputation (MVI)</a></li>
 <li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.3</span> Batch effect</a></li>
+<li><a href="discussion.html#hyperparameters" id="toc-hyperparameters"><span class="toc-section-number">2.4</span> Hyperparameters</a></li>
 </ul></li>
 <li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
 <ul>
@@ -540,13 +541,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="quick-start.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb56-2"><a href="quick-start.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb56-3"><a href="quick-start.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 6.931489e-04 0.561300665 7.683127e-06</span></span>
-<span id="cb56-4"><a href="quick-start.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 3.081693e-07 0.018167170 1.483593e-04</span></span>
-<span id="cb56-5"><a href="quick-start.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 3.667551e-06 0.001126488 2.401400e-01</span></span>
+<span id="cb56-3"><a href="quick-start.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.876538e-03 0.561300665 4.759441e-06</span></span>
+<span id="cb56-4"><a href="quick-start.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 8.204247e-07 0.018167170 1.305882e-04</span></span>
+<span id="cb56-5"><a href="quick-start.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 5.590479e-06 0.001126488 2.864430e-01</span></span>
 <span id="cb56-6"><a href="quick-start.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
-<span id="cb56-7"><a href="quick-start.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.1894300357 0.010365332 0.004560059</span></span>
-<span id="cb56-8"><a href="quick-start.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.3381356448 0.002927625 0.001709982</span></span>
-<span id="cb56-9"><a href="quick-start.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0001761861 0.005643848 0.007798130</span></span></code></pre></div>
+<span id="cb56-7"><a href="quick-start.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.1008201502 0.007000939 0.003258177</span></span>
+<span id="cb56-8"><a href="quick-start.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.5780602694 0.002510745 0.002620784</span></span>
+<span id="cb56-9"><a href="quick-start.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0002171861 0.007858477 0.010702540</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="quick-start.html#cb57-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb57-2"><a href="quick-start.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

@@ -260,7 +260,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Due to missing value might damage the integrity of biological information, we explored **how much the number of missing value in one sample impacts subtype identification via PADi**. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC [@pROC] (masked data vs. MVI data). In **GSClassifier**, we developed a function called **mv_tolerance** to complete the task.
 
@@ -394,9 +394,38 @@ Batch effect reduction of TSP could be explained in three parts:
 
 ## Hyperparameters
 
+<!--
++ modelData(): Prop, seed
 
++ fitEnsembleModel():
 
-
+  - n=100
+  - sampSize=0.7
+  - sampSeed = 2020
+  - na.fill.seed = 443
+  - breakVec=c(0, 0.25, 0.5, 0.75, 1.0)
+  - ptail=0.8/2
+  
+  - https://www.youtube.com/watch?v=f3ryHJ05h5k
+  
+  - https://xgboost.readthedocs.io/en/latest/parameter.html
+  - Parameters for Tree Booster
+  - params = list(max_depth = 10,
+                  eta = 0.5,
+                  nrounds = 100,
+                  nthread = 10,
+                  nfold=5)
+                  
+  所以，在时间非常宝贵的情况下，你必须应用自 己的判断力，并使用小数据样本来找出合适的调优参数，否则硬盘空间可能不足
+  nrounds ：最大迭代次数（最终模型中树的数量）。
+  colsample_bytree ：建立树时随机抽取的特征数量，用一个比率表示，默认值为1（使
+用100%的特征）。
+  min_child_weight ：对树进行提升时使用的最小权重，默认为1。
+  eta ：学习率，每棵树在最终解中的贡献，默认为0.3。
+  gamma ：在树中新增一个叶子分区时所需的最小减损。
+  subsample ：子样本数据占整个观测的比例，默认值为1（100%）。
+  max_depth ：单个树的最大深度。
+-->
 
 
 

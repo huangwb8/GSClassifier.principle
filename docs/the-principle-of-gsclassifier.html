@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-17" />
+<meta name="date" content="2022-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,7 +141,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="the-principle-of-gsclassifier.html#the-principle-of-gsclassifier" id="toc-the-principle-of-gsclassifier"><span class="toc-section-number">1</span> The Principle of GSClassifier</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#introduction" id="toc-introduction"><span class="toc-section-number">1.1</span> Introduction</a></li>
+<li><a href="the-principle-of-gsclassifier.html#introduction" id="toc-introduction"><span class="toc-section-number">1.1</span> Introduction</a>
+<ul>
+<li><a href="the-principle-of-gsclassifier.html#basic-information" id="toc-basic-information"><span class="toc-section-number">1.1.1</span> 💦 Basic information</a></li>
+<li><a href="the-principle-of-gsclassifier.html#license-1" id="toc-license-1"><span class="toc-section-number">1.1.2</span> 💿 License</a></li>
+<li><a href="the-principle-of-gsclassifier.html#reference" id="toc-reference"><span class="toc-section-number">1.1.3</span> ⭐ Reference</a></li>
+</ul></li>
 <li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.2</span> Packages</a></li>
 <li><a href="the-principle-of-gsclassifier.html#flowchart" id="toc-flowchart"><span class="toc-section-number">1.3</span> Flowchart</a>
 <ul>
@@ -235,10 +240,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introduction</h2>
 <!--
-描述GSClassifier的Flowchart，关注每一步的具体细节；
-演示TSP的计算过程
+[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of **GSClassifier** package usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control. 
+
+emoji: https://github.com/rstudio/blogdown/issues/171
+
 -->
-<p><a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a> is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of <strong>GSClassifier</strong> package usage had been demonstrated in <a href="https://github.com/huangwb8/GSClassifier/wiki">Github WiKi</a>. Here, we propose to introduce the principle of GSClassifier, including flowchart, <strong>top scoring pairs (TSP)</strong> algorithm, and batch effect control.</p>
+<div id="basic-information" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> 💦 Basic information</h3>
+<ul>
+<li><a href="https://github.com/huangwb8/GSClassifier"><strong>GSClassifier</strong></a> is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.</li>
+<li>The inspiration of <strong>GSClassifier</strong> come from <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a>, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al. [1,2]</li>
+<li>Lots of surprising features in <strong>GSClassifier</strong> as follows:
+<ul>
+<li>Optimized for just <code>one sample</code></li>
+<li>Available for modeling and calling of brand-new <code>GEPs-based subtypes</code> in any diseases (cancers)</li>
+<li>No limitation of the amount of <code>gene signatures(≥1)</code> or <code>subtypes(≥2)</code></li>
+<li><code>Normalization insensitive</code> due to the use of the individual <code>gene rank matrix</code></li>
+<li>More ensemble and repeatable modeling process</li>
+<li>More optimizations in the parallel computing</li>
+<li>New useful functions as supplements</li>
+</ul></li>
+<li><strong>ATTENTION!</strong> In the future, there might be third-party contributors in <code>GSClassifier</code> platform, with some useful models for specific usages. If you use models provided by these people, <strong>you had better know more details as possible</strong>, including <strong>designs, data sources, destinations, training scripts and limitations</strong> of models, expecially those from studies under peer-review.</li>
+<li><strong>MORE PROJECTS</strong>:
+<ul>
+<li><a href="https://huangwb8.github.io/GSClassifier.principle/"><strong>The Principle of GSClassifier</strong></a>: A eBook with more details about GSClassifier package</li>
+<li><a href="https://github.com/huangwb8/luckyModel"><strong>luckyModel</strong></a>: Model ensemble for third-party lucky series, such GSClassifier</li>
+</ul></li>
+</ul>
+</div>
+<div id="license-1" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> 💿 License</h3>
+<p><strong>GSClassifier</strong> is released under the Apache-2.0 license. See <a href="https://github.com/huangwb8/GSClassifier/blob/master/license.txt">LICENSE</a> for details.</p>
+</div>
+<div id="reference" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> ⭐ Reference</h3>
+<ol style="list-style-type: decimal">
+<li>Thorsson V, Gibbs D L, Brown S D, et al. The Immune Landscape of Cancer[J]. Immunity, 2018, 48(4): 812-830 e814.</li>
+<li>Gibbs D L J B. Robust classification of Immune Subtypes in Cancer[J]. 2020</li>
+</ol>
+</div>
 </div>
 <div id="packages" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Packages</h2>
@@ -301,8 +341,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
 #   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
 #  [10] clue_0.3-57          rstudioapi_0.13      listenv_0.8.0       
-#  [13] ggpubr_0.4.0         remotes_2.4.2        lubridate_1.8.0     
-#  [16] prodlim_2019.11.13   fansi_1.0.3          codetools_0.2-18    
+#  [13] ggpubr_0.4.0         remotes_2.4.2        prodlim_2019.11.13  
+#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
 #  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
 #  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
 #  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
@@ -331,10 +371,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #  [94] survival_3.3-1       abind_1.4-5          nnet_7.3-17         
 #  [97] tibble_3.1.7         future.apply_1.9.0   crayon_1.5.1        
 # [100] car_3.1-0            xgboost_1.6.0.1      utf8_1.2.2          
-# [103] rmarkdown_2.14       GetoptLong_1.0.5     usethis_2.1.3       
-# [106] data.table_1.14.2    callr_3.7.0          ModelMetrics_1.2.2.2
-# [109] digest_0.6.29        stats4_4.0.3         signal_0.7-7        
-# [112] munsell_0.5.0        bslib_0.3.1          sessioninfo_1.2.2</code></pre>
+# [103] rmarkdown_2.14       emo_0.0.0.9000       GetoptLong_1.0.5    
+# [106] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
+# [109] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
+# [112] signal_0.7-7         munsell_0.5.0        bslib_0.3.1         
+# [115] sessioninfo_1.2.2</code></pre>
 </div>
 <div id="flowchart" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Flowchart</h2>

@@ -146,7 +146,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-17}
+\date{2022-09-18}
 
 \begin{document}
 \maketitle
@@ -163,7 +163,65 @@
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-\href{https://github.com/huangwb8/GSClassifier}{GSClassifier} is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of \textbf{GSClassifier} package usage had been demonstrated in \href{https://github.com/huangwb8/GSClassifier/wiki}{Github WiKi}. Here, we propose to introduce the principle of GSClassifier, including flowchart, \textbf{top scoring pairs (TSP)} algorithm, and batch effect control.
+\hypertarget{basic-information}{%
+\subsection{💦 Basic information}\label{basic-information}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://github.com/huangwb8/GSClassifier}{\textbf{GSClassifier}} is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.
+\item
+  The inspiration of \textbf{GSClassifier} come from \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier}, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al.~{[}1,2{]}
+\item
+  Lots of surprising features in \textbf{GSClassifier} as follows:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Optimized for just \texttt{one\ sample}
+  \item
+    Available for modeling and calling of brand-new \texttt{GEPs-based\ subtypes} in any diseases (cancers)
+  \item
+    No limitation of the amount of \texttt{gene\ signatures(≥1)} or \texttt{subtypes(≥2)}
+  \item
+    \texttt{Normalization\ insensitive} due to the use of the individual \texttt{gene\ rank\ matrix}
+  \item
+    More ensemble and repeatable modeling process
+  \item
+    More optimizations in the parallel computing
+  \item
+    New useful functions as supplements
+  \end{itemize}
+\item
+  \textbf{ATTENTION!} In the future, there might be third-party contributors in \texttt{GSClassifier} platform, with some useful models for specific usages. If you use models provided by these people, \textbf{you had better know more details as possible}, including \textbf{designs, data sources, destinations, training scripts and limitations} of models, expecially those from studies under peer-review.
+\item
+  \textbf{MORE PROJECTS}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://huangwb8.github.io/GSClassifier.principle/}{\textbf{The Principle of GSClassifier}}: A eBook with more details about GSClassifier package
+  \item
+    \href{https://github.com/huangwb8/luckyModel}{\textbf{luckyModel}}: Model ensemble for third-party lucky series, such GSClassifier
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{license}{%
+\subsection{💿 License}\label{license}}
+
+\textbf{GSClassifier} is released under the Apache-2.0 license. See \href{https://github.com/huangwb8/GSClassifier/blob/master/license.txt}{LICENSE} for details.
+
+\hypertarget{reference}{%
+\subsection{⭐ Reference}\label{reference}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Thorsson V, Gibbs D L, Brown S D, et al.~The Immune Landscape of Cancer{[}J{]}. Immunity, 2018, 48(4): 812-830 e814.
+\item
+  Gibbs D L J B. Robust classification of Immune Subtypes in Cancer{[}J{]}. 2020
+\end{enumerate}
 
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
@@ -263,10 +321,11 @@ Here is the environment of R programming:
 #  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
 #  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
 #  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+# [100] utf8_1.2.2           rmarkdown_2.14       emo_0.0.0.9000      
+# [103] GetoptLong_1.0.5     usethis_2.1.3        data.table_1.14.2   
+# [106] callr_3.7.0          ModelMetrics_1.2.2.2 digest_0.6.29       
+# [109] stats4_4.0.3         signal_0.7-7         munsell_0.5.0       
+# [112] sessioninfo_1.2.2
 \end{verbatim}
 
 \hypertarget{flowchart}{%
@@ -1026,7 +1085,7 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.8\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 Due to missing value might damage the integrity of biological information, we explored \textbf{how much the number of missing value in one sample impacts subtype identification via PADi}. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC \citep{pROC} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
 
@@ -1649,13 +1708,13 @@ Check the result:
 \begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(res\_pis)}
 \CommentTok{\#   SampleIDs BestCall BestCall\_Max            1           2            3}
-\CommentTok{\# 1 PB{-}16{-}002        2            2 1.290197e{-}03 0.561300665 5.817212e{-}06}
-\CommentTok{\# 2 PB{-}16{-}003        4            4 3.244762e{-}07 0.018167170 1.270947e{-}04}
-\CommentTok{\# 3 PB{-}16{-}004        3            3 4.472903e{-}06 0.001126488 3.182718e{-}01}
-\CommentTok{\#              4           5           6}
-\CommentTok{\# 1 0.1675429195 0.006574071 0.003705733}
-\CommentTok{\# 2 0.4210315496 0.002128245 0.001245184}
-\CommentTok{\# 3 0.0002128877 0.007653435 0.004229507}
+\CommentTok{\# 1 PB{-}16{-}002        2            2 6.719883e{-}04 0.561300665 4.767997e{-}06}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 6.572277e{-}07 0.018167170 1.158324e{-}04}
+\CommentTok{\# 3 PB{-}16{-}004        3            3 5.316110e{-}06 0.001126488 2.887688e{-}01}
+\CommentTok{\#             4           5           6}
+\CommentTok{\# 1 0.195406221 0.009215117 0.003902150}
+\CommentTok{\# 2 0.490419880 0.002049010 0.001546862}
+\CommentTok{\# 3 0.000277056 0.004840261 0.005153296}
 \end{Highlighting}
 \end{Shaded}
 

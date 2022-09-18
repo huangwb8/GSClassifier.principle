@@ -5,11 +5,39 @@
 ## Introduction
 
 <!--
-描述GSClassifier的Flowchart，关注每一步的具体细节；
-演示TSP的计算过程
+[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of **GSClassifier** package usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control. 
+
+emoji: https://github.com/rstudio/blogdown/issues/171
+
 -->
 
-[GSClassifier](https://github.com/huangwb8/GSClassifier) is an R package for modeling and identification of Gene Expression Profiles (GEPs) subtypes. The detail of **GSClassifier** package usage had been demonstrated in [Github WiKi](https://github.com/huangwb8/GSClassifier/wiki). Here, we propose to introduce the principle of GSClassifier, including flowchart, **top scoring pairs (TSP)** algorithm, and batch effect control. 
+
+### 💦 Basic information
+
++ [**GSClassifier**](https://github.com/huangwb8/GSClassifier) is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.
++ The inspiration of **GSClassifier** come from [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier), an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al. [1,2]
++ Lots of surprising features in **GSClassifier** as follows: 
+  + Optimized for just `one sample`
+  + Available for modeling and calling of brand-new `GEPs-based subtypes` in any diseases (cancers)
+  + No limitation of the amount of `gene signatures(≥1)` or `subtypes(≥2)`
+  + `Normalization insensitive` due to the use of  the individual `gene rank matrix`
+  + More ensemble and repeatable modeling process
+  + More optimizations in the parallel computing
+  + New useful functions as supplements
++ **ATTENTION!** In the future, there might be third-party contributors in `GSClassifier` platform, with some useful models for specific usages. If you use models provided by these people, **you had better know more details as possible**, including **designs, data sources, destinations, training scripts and limitations** of models, expecially those from studies under peer-review.
++ **MORE PROJECTS**:
+  + [**The Principle of GSClassifier**](https://huangwb8.github.io/GSClassifier.principle/): A eBook with more details about GSClassifier package
+  + [**luckyModel**](https://github.com/huangwb8/luckyModel): Model ensemble for third-party lucky series, such GSClassifier
+
+### 💿 License
+
+**GSClassifier** is released under the Apache-2.0 license. See [LICENSE](https://github.com/huangwb8/GSClassifier/blob/master/license.txt) for details.
+
+### ⭐ Reference
+
+1. Thorsson V, Gibbs D L, Brown S D, et al. The Immune Landscape of Cancer[J]. Immunity, 2018, 48(4): 812-830 e814.
+2. Gibbs D L J B. Robust classification of Immune Subtypes in Cancer[J]. 2020
+
 
 ## Packages
 
@@ -108,10 +136,11 @@ Here is the environment of R programming:
 #  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
 #  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
 #  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+# [100] utf8_1.2.2           rmarkdown_2.14       emo_0.0.0.9000      
+# [103] GetoptLong_1.0.5     usethis_2.1.3        data.table_1.14.2   
+# [106] callr_3.7.0          ModelMetrics_1.2.2.2 digest_0.6.29       
+# [109] stats4_4.0.3         signal_0.7-7         munsell_0.5.0       
+# [112] sessioninfo_1.2.2
 ```
 
 ## Flowchart

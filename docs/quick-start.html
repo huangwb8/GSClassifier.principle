@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-18" />
+<meta name="date" content="2022-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -546,13 +546,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="quick-start.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb56-2"><a href="quick-start.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb56-3"><a href="quick-start.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 7.536224e-04 0.561300665 4.014463e-06</span></span>
-<span id="cb56-4"><a href="quick-start.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 6.534264e-07 0.018167170 1.367368e-04</span></span>
-<span id="cb56-5"><a href="quick-start.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 1.400756e-06 0.001126488 2.927809e-01</span></span>
+<span id="cb56-3"><a href="quick-start.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.324531e-03 0.561300665 5.670284e-06</span></span>
+<span id="cb56-4"><a href="quick-start.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 4.014356e-07 0.018167170 1.480017e-04</span></span>
+<span id="cb56-5"><a href="quick-start.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 3.581963e-06 0.001126488 2.988818e-01</span></span>
 <span id="cb56-6"><a href="quick-start.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
-<span id="cb56-7"><a href="quick-start.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.1716592088 0.007000939 0.003320438</span></span>
-<span id="cb56-8"><a href="quick-start.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.4333397895 0.002839439 0.001842385</span></span>
-<span id="cb56-9"><a href="quick-start.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0001316109 0.007653435 0.004178567</span></span></code></pre></div>
+<span id="cb56-7"><a href="quick-start.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.1115811467 0.011658502 0.005704794</span></span>
+<span id="cb56-8"><a href="quick-start.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.4315013438 0.002128245 0.002443449</span></span>
+<span id="cb56-9"><a href="quick-start.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0001699042 0.005643848 0.005167157</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="quick-start.html#cb57-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb57-2"><a href="quick-start.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

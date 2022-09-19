@@ -104,6 +104,29 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 % English
 \usepackage{booktabs}
@@ -129,8 +152,6 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\usepackage[]{natbib}
-\bibliographystyle{plainnat}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
@@ -146,7 +167,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-18}
+\date{2022-09-20}
 
 \begin{document}
 \maketitle
@@ -354,7 +375,7 @@ With subtype vectors and raw matrices, \textbf{Top Scoring Pairs (TSP)}, the cor
 \hypertarget{model-establishment-and-validation}{%
 \subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
 
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{SubSet} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{SubModel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) \citep{RN345}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
+The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{SubSet} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{SubModel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) {[}\protect\hyperlink{ref-RN345}{1}{]}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
 
 The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, \textbf{the data of both internal and external validation cohort would not be used during model training} so as to avoid over-fitting.
 
@@ -369,7 +390,7 @@ In PAD project, \textbf{Model for individual}, the ensemble of submodels, is cal
 \hypertarget{tsp-intro}{%
 \subsection{Introduction}\label{tsp-intro}}
 
-Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}, also called \textbf{Relative Expression Orderings} (\textbf{REOs})) algorithm, which was previously described by Geman et al \citep{RN267}. \textbf{TSP} normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. \textbf{TSP} had been used in cancer research and effectively predicts cancer progression and ICIs response \citep{RN265, RN266, RN261}.
+Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}, also called \textbf{Relative Expression Orderings} (\textbf{REOs})) algorithm, which was previously described by Geman et al {[}\protect\hyperlink{ref-RN267}{2}{]}. \textbf{TSP} normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. \textbf{TSP} had been used in cancer research and effectively predicts cancer progression and ICIs response {[}\protect\hyperlink{ref-RN265}{3}--\protect\hyperlink{ref-RN261}{5}{]}.
 
 As show in Figure \ref{fig:tsp}, The TSP data in GSClassifier consists of three parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
@@ -951,7 +972,7 @@ Here is the environment of R programming:
 \hypertarget{missing-value-imputation-mvi}{%
 \section{Missing value imputation (MVI)}\label{missing-value-imputation-mvi}}
 
-Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process \citep{RN387, RN389, RN382}, \textbf{missing value} in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15\% \citep{RN392, RN386}. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \ref{fig:mvi01}), had been developed for \textbf{missing value imputation (MVI)} \citep{RN386}. Wang et al \citep{RN384} categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost \citep{xgboost} functions (\texttt{xgb.train}, \texttt{xgboost}, and \texttt{xgb.cv}) in GSClassifer, the missing value in expression matrix must be deleted or imputation.
+Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process {[}\protect\hyperlink{ref-RN387}{6}--\protect\hyperlink{ref-RN382}{8}{]}, \textbf{missing value} in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15\% {[}\protect\hyperlink{ref-RN392}{9},\protect\hyperlink{ref-RN386}{10}{]}. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \ref{fig:mvi01}), had been developed for \textbf{missing value imputation (MVI)} {[}\protect\hyperlink{ref-RN386}{10}{]}. Wang et al {[}\protect\hyperlink{ref-RN384}{11}{]} categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost {[}\protect\hyperlink{ref-xgboost}{12}{]} functions (\texttt{xgb.train}, \texttt{xgboost}, and \texttt{xgb.cv}) in GSClassifer, the missing value in expression matrix must be deleted or imputation.
 
 \begin{figure}
 
@@ -996,9 +1017,12 @@ As shown in Figure \ref{fig:mvi02}, the percentage of all samples in gastric can
   \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels=}\NormalTok{scales}\SpecialCharTok{::}\NormalTok{percent) }\SpecialCharTok{+} 
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Samples in gastric cancer cohorts\textquotesingle{}}\NormalTok{, }
        \AttributeTok{y =} \StringTok{\textquotesingle{}Percentage of missing value\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}
-    \AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{()}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{15}\NormalTok{),}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{)}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -1087,9 +1111,14 @@ Look at the new matrix via heatmap, where the clustering result is not obviously
 
 \begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-Due to missing value might damage the integrity of biological information, we explored \textbf{how much the number of missing value in one sample impacts subtype identification via PADi}. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC \citep{pROC} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
+Due to missing value might damage the integrity of biological information, we explored \textbf{how much the number of missing value in one sample impacts subtype identification via PADi}. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC {[}\protect\hyperlink{ref-pROC}{13}{]} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
 
-(i)Load the internal validation cohort:
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\tightlist
+\item
+  Load the internal validation cohort:
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1110,7 +1139,13 @@ Due to missing value might damage the integrity of biological information, we ex
 \end{Highlighting}
 \end{Shaded}
 
-(ii)Missing value tolerance analysis:
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Missing value tolerance analysis:
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1126,7 +1161,13 @@ Due to missing value might damage the integrity of biological information, we ex
 \end{Highlighting}
 \end{Shaded}
 
-(iii)multi-ROC analysis:
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  multi-ROC analysis:
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1152,7 +1193,11 @@ Due to missing value might damage the integrity of biological information, we ex
   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{12}\NormalTok{)) }\SpecialCharTok{+} 
   \FunctionTok{stat\_smooth}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x,}\AttributeTok{method =} \StringTok{\textquotesingle{}glm\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}No. of missing value\textquotesingle{}}\NormalTok{, }
-       \AttributeTok{y =} \StringTok{\textquotesingle{}Relative AUC in multi{-}ROC analysis\textquotesingle{}}\NormalTok{)}
+       \AttributeTok{y =} \StringTok{\textquotesingle{}Relative AUC in multi{-}ROC analysis\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{15}\NormalTok{),}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{)}
+\NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1172,7 +1217,7 @@ In conclusion, zero or quantile strategy could be applied for MVI before \textbf
 \hypertarget{batch-effect}{%
 \section{Batch effect}\label{batch-effect}}
 
-\textbf{TSP} was widely applied to control batch effects in transciptomic data \citep{RN369, RN367, RN368, RN364, RN363, RN362, RN366, RN365}. Still, we tested whether \textbf{TSP} is a robust method for batch effect control in real-world data. As demonstrated in Figure \ref{fig:be01}, the obvious batch effects across gastric cancer datsets were significantly reduced after \textbf{TSP} normalization.
+\textbf{TSP} was widely applied to control batch effects in transciptomic data {[}\protect\hyperlink{ref-RN369}{14}--\protect\hyperlink{ref-RN365}{21}{]}. Still, we tested whether \textbf{TSP} is a robust method for batch effect control in real-world data. As demonstrated in Figure \ref{fig:be01}, the obvious batch effects across gastric cancer datsets were significantly reduced after \textbf{TSP} normalization.
 
 \begin{figure}
 
@@ -1708,13 +1753,13 @@ Check the result:
 \begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(res\_pis)}
 \CommentTok{\#   SampleIDs BestCall BestCall\_Max            1           2            3}
-\CommentTok{\# 1 PB{-}16{-}002        2            2 6.719883e{-}04 0.561300665 4.767997e{-}06}
-\CommentTok{\# 2 PB{-}16{-}003        4            4 6.572277e{-}07 0.018167170 1.158324e{-}04}
-\CommentTok{\# 3 PB{-}16{-}004        3            3 5.316110e{-}06 0.001126488 2.887688e{-}01}
-\CommentTok{\#             4           5           6}
-\CommentTok{\# 1 0.195406221 0.009215117 0.003902150}
-\CommentTok{\# 2 0.490419880 0.002049010 0.001546862}
-\CommentTok{\# 3 0.000277056 0.004840261 0.005153296}
+\CommentTok{\# 1 PB{-}16{-}002        2            2 1.091628e{-}03 0.561300665 4.933220e{-}06}
+\CommentTok{\# 2 PB{-}16{-}003        4            4 4.521818e{-}07 0.018167170 1.798467e{-}04}
+\CommentTok{\# 3 PB{-}16{-}004        3            3 3.669034e{-}06 0.001126488 2.613345e{-}01}
+\CommentTok{\#              4           5           6}
+\CommentTok{\# 1 0.3915958405 0.010365332 0.005170196}
+\CommentTok{\# 2 0.3303076476 0.002095707 0.002244210}
+\CommentTok{\# 3 0.0002572642 0.007653435 0.006278016}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2521,6 +2566,75 @@ Also, we use a function called \texttt{convert} to do gene ID convertion.
 
 Note: the \texttt{luckyBase} package integrates lots of useful tiny functions, you could explore it sometimes.
 
-  \bibliography{book.bib}
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-RN345}{}}%
+1. Chen T, He T, Benesty M, et al. Xgboost: Extreme gradient boosting. 2015; 1:1--4
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN267}{}}%
+2. Geman D, d'Avignon C, Naiman DQ, et al. \href{https://doi.org/10.2202/1544-6115.1071}{Classifying gene expression profiles from pairwise mRNA comparisons}. Stat Appl Genet Mol Biol 2004; 3:Article19
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN265}{}}%
+3. Zhao H, Logothetis CJ, Gorlov IP. \href{https://doi.org/10.1038/pcan.2010.9}{Usefulness of the top-scoring pairs of genes for prediction of prostate cancer progression}. Prostate Cancer Prostatic Dis 2010; 13:252--9
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN266}{}}%
+4. Youssef YM, White NM, Grigull J, et al. \href{https://doi.org/10.1016/j.eururo.2011.01.004}{Accurate molecular classification of kidney cancer subtypes using microRNA signature}. Eur Urol 2011; 59:721--30
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN261}{}}%
+5. Auslander N, Zhang G, Lee JS, et al. \href{https://doi.org/10.1038/s41591-018-0157-9}{Robust prediction of response to immune checkpoint blockade therapy in metastatic melanoma}. Nat Med 2018; 24:1545--1549
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN387}{}}%
+6. Troyanskaya O, Cantor M, Sherlock G, et al. \href{https://doi.org/10.1093/bioinformatics/17.6.520}{Missing value estimation methods for DNA microarrays}. Bioinformatics 2001; 17:520--5
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN389}{}}%
+7. Arbeitman MN, Furlong EE, Imam F, et al. \href{https://doi.org/10.1126/science.1072152}{Gene expression during the life cycle of drosophila melanogaster}. Science 2002; 297:2270--5
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN382}{}}%
+8. Zhu X, Wang J, Sun B, et al. \href{https://doi.org/10.1186/s12859-021-04109-4}{An efficient ensemble method for missing value imputation in microarray gene expression data}. BMC Bioinformatics 2021; 22:188
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN392}{}}%
+9. Lin W-C, Tsai C-F. Missing value imputation: A review and analysis of the literature (2006--2017). 2020; 53:1487--1509
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN386}{}}%
+10. Hasan MK, Alam MA, Roy S, et al. Missing value imputation affects the performance of machine learning: A review and analysis of the literature (2010--2021). Informatics in Medicine Unlocked 2021; 27:100799
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN384}{}}%
+11. Wang A, Yang J, An N. Regularized sparse modelling for microarray missing value estimation. 2021; 9:16899--16913
+
+\leavevmode\vadjust pre{\hypertarget{ref-xgboost}{}}%
+12. Chen T, He T, Benesty M, et al. \href{https://CRAN.R-project.org/package=xgboost}{Xgboost: Extreme gradient boosting}. 2022;
+
+\leavevmode\vadjust pre{\hypertarget{ref-pROC}{}}%
+13. Robin X, Turck N, Hainard A, et al. pROC: An open-source package for r and s+ to analyze and compare ROC curves. BMC Bioinformatics 2011; 12:77
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN369}{}}%
+14. Zhu S, Kong W, Zhu J, et al. \href{https://doi.org/10.1093/bib/bbac344}{The genetic algorithm-aided three-stage ensemble learning method identified a robust survival risk score in patients with glioma}. Brief Bioinform 2022;
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN367}{}}%
+15. Tong M, Zheng W, Li H, et al. \href{https://doi.org/10.1038/oncsis.2016.51}{Multi-omics landscapes of colorectal cancer subtypes discriminated by an individualized prognostic signature for 5-fluorouracil-based chemotherapy}. Oncogenesis 2016; 5:e242
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN368}{}}%
+16. Qi L, Li Y, Qin Y, et al. \href{https://doi.org/10.1038/bjc.2016.370}{An individualised signature for predicting response with concordant survival benefit for lung adenocarcinoma patients receiving platinum-based chemotherapy}. Br J Cancer 2016; 115:1513--1519
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN364}{}}%
+17. Huang H, Zou Y, Zhang H, et al. \href{https://doi.org/10.1016/j.trsl.2020.02.004}{A qualitative transcriptional prognostic signature for patients with stage i-II pancreatic ductal adenocarcinoma}. Transl Res 2020; 219:30--44
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN363}{}}%
+18. Zheng H, Song K, Fu Y, et al. \href{https://doi.org/10.1093/bib/bbz174}{An absolute human stemness index associated with oncogenic dedifferentiation}. Brief Bioinform 2021; 22:2151--2160
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN362}{}}%
+19. Kong W, He L, Zhu J, et al. \href{https://doi.org/10.1038/s41375-022-01662-6}{An immunity and pyroptosis gene-pair signature predicts overall survival in acute myeloid leukemia}. Leukemia 2022;
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN366}{}}%
+20. Liu K, Geng Y, Wang L, et al. \href{https://doi.org/10.1002/1878-0261.13279}{Systematic exploration of the underlying mechanism of gemcitabine resistance in pancreatic adenocarcinoma}. Mol Oncol 2022; 16:3034--3051
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN365}{}}%
+21. Zheng H, Xie J, Song K, et al. \href{https://doi.org/10.1186/s13287-022-02803-5}{StemSC: A cross-dataset human stemness index for single-cell samples}. Stem Cell Res Ther 2022; 13:115
+
+\end{CSLReferences}
 
 \end{document}

@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-18" />
+<meta name="date" content="2022-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -379,10 +379,13 @@ Figure 2.1: Missing value imputation methods reviewed by Hasan et al.
 <span id="cb20-5"><a href="discussion.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span>percent) <span class="sc">+</span> </span>
 <span id="cb20-6"><a href="discussion.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Samples in gastric cancer cohorts&#39;</span>, </span>
 <span id="cb20-7"><a href="discussion.html#cb20-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;Percentage of missing value&#39;</span>) <span class="sc">+</span> </span>
-<span id="cb20-8"><a href="discussion.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb20-8"><a href="discussion.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb20-9"><a href="discussion.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb20-10"><a href="discussion.html#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb20-11"><a href="discussion.html#cb20-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb20-10"><a href="discussion.html#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-11"><a href="discussion.html#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-12"><a href="discussion.html#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb20-13"><a href="discussion.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb20-14"><a href="discussion.html#cb20-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:mvi02"></span>
 <img src="Discussion_files/figure-html/mvi02-1.png" alt="The distribution of missing value across gastric cancer samples." width="80%" />
 <p class="caption">
@@ -456,7 +459,9 @@ Add a flowchart for quantile algorithm
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="discussion.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(expr))), <span class="at">name =</span> <span class="st">&quot;Z-score&quot;</span>, <span class="at">column_title =</span> <span class="st">&quot;After MVI&quot;</span>)</span></code></pre></div>
 <p><img src="Discussion_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>Due to missing value might damage the integrity of biological information, we explored <strong>how much the number of missing value in one sample impacts subtype identification via PADi</strong>. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC <span class="citation">[<a href="references.html#ref-pROC" role="doc-biblioref">13</a>]</span> (masked data vs. MVI data). In <strong>GSClassifier</strong>, we developed a function called <strong>mv_tolerance</strong> to complete the task.</p>
-<p>(i)Load the internal validation cohort:</p>
+<ol style="list-style-type: lower-roman">
+<li>Load the internal validation cohort:</li>
+</ol>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="discussion.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Internal validation cohort</span></span>
 <span id="cb23-2"><a href="discussion.html#cb23-2" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
 <span id="cb23-3"><a href="discussion.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>)</span>
@@ -471,7 +476,9 @@ Add a flowchart for quantile algorithm
 <span id="cb23-12"><a href="discussion.html#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb23-13"><a href="discussion.html#cb23-13" aria-hidden="true" tabindex="-1"></a>validInform <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid</span>
 <span id="cb23-14"><a href="discussion.html#cb23-14" aria-hidden="true" tabindex="-1"></a>expr_pad_innervalid <span class="ot">&lt;-</span> expr_pad[,validInform<span class="sc">$</span>ID]</span></code></pre></div>
-<p>(ii)Missing value tolerance analysis:</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Missing value tolerance analysis:</li>
+</ol>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="discussion.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Time-consuming</span></span>
 <span id="cb24-2"><a href="discussion.html#cb24-2" aria-hidden="true" tabindex="-1"></a>mvt <span class="ot">&lt;-</span> <span class="fu">mv_tolerance</span>(</span>
 <span id="cb24-3"><a href="discussion.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> expr_pad_innervalid,</span>
@@ -481,7 +488,9 @@ Add a flowchart for quantile algorithm
 <span id="cb24-7"><a href="discussion.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">487</span>,</span>
 <span id="cb24-8"><a href="discussion.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> T</span>
 <span id="cb24-9"><a href="discussion.html#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>(iii)multi-ROC analysis:</p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>multi-ROC analysis:</li>
+</ol>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="discussion.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
 <span id="cb25-2"><a href="discussion.html#cb25-2" aria-hidden="true" tabindex="-1"></a>mvt_auc <span class="ot">&lt;-</span> mvt<span class="sc">$</span>multiAUC</span>
 <span id="cb25-3"><a href="discussion.html#cb25-3" aria-hidden="true" tabindex="-1"></a>mvt_auc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
@@ -499,7 +508,11 @@ Add a flowchart for quantile algorithm
 <span id="cb26-3"><a href="discussion.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)) <span class="sc">+</span> </span>
 <span id="cb26-4"><a href="discussion.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x,<span class="at">method =</span> <span class="st">&#39;glm&#39;</span>) <span class="sc">+</span></span>
 <span id="cb26-5"><a href="discussion.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;No. of missing value&#39;</span>, </span>
-<span id="cb26-6"><a href="discussion.html#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;Relative AUC in multi-ROC analysis&#39;</span>)</span></code></pre></div>
+<span id="cb26-6"><a href="discussion.html#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;Relative AUC in multi-ROC analysis&#39;</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="discussion.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb26-8"><a href="discussion.html#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb26-9"><a href="discussion.html#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb26-10"><a href="discussion.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:mvi03"></span>
 <img src="Discussion_files/figure-html/mvi03-1.png" alt="The association between the number of missing value and subtype identification performance." width="60%" />
 <p class="caption">

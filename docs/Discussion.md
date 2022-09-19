@@ -165,9 +165,12 @@ ggplot(data = expr_pad_na_df,
   scale_y_continuous(labels=scales::percent) + 
   labs(x = 'Samples in gastric cancer cohorts', 
        y = 'Percentage of missing value') + 
-  theme_bw() + 
+  theme_bw() +
   theme(
-    axis.text.x = element_blank()
+    axis.text.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_text(size = 15),
+    axis.text = element_text(size = 12)
   )
 ```
 
@@ -264,7 +267,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 Due to missing value might damage the integrity of biological information, we explored **how much the number of missing value in one sample impacts subtype identification via PADi**. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC [@pROC] (masked data vs. MVI data). In **GSClassifier**, we developed a function called **mv_tolerance** to complete the task.
 
-(i)Load the internal validation cohort:
+(i) Load the internal validation cohort:
 
 
 ```r
@@ -284,7 +287,7 @@ validInform <- modelInfo$Data$Valid
 expr_pad_innervalid <- expr_pad[,validInform$ID]
 ```
 
-(ii)Missing value tolerance analysis:
+(ii) Missing value tolerance analysis:
 
 
 ```r
@@ -301,7 +304,7 @@ mvt <- mv_tolerance(
 
 
 
-(iii)multi-ROC analysis:
+(iii) multi-ROC analysis:
 
 
 ```r
@@ -326,7 +329,11 @@ ggplot(mvt_auc_df, aes(x,y)) +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
   stat_smooth(formula = y ~ x,method = 'glm') +
   labs(x = 'No. of missing value', 
-       y = 'Relative AUC in multi-ROC analysis')
+       y = 'Relative AUC in multi-ROC analysis') +
+  theme(
+    axis.title = element_text(size = 15),
+    axis.text = element_text(size = 12)
+  )
 ```
 
 \begin{figure}

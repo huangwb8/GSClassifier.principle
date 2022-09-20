@@ -29,7 +29,7 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 -->
 
 
-## `r if(knitr::is_html_output()) emo::ji("sweat_drops")`Basic information {-}
+## `r if(knitr::is_html_output()) emo::ji("sweat_drops")`About {-}
 
 **The Priciple of GSClassifier** is a book for users of R package **GSClassifier** who want to know the most details. If you're looking for the PDF edition, you can find it at <a rel="pdf" href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.
 
@@ -53,11 +53,11 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 
 **GSClassifier** is released under the Apache-2.0 license. See [LICENSE](https://github.com/huangwb8/GSClassifier/blob/master/license.txt) for details.
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-
 The technical documentation, as a whole, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 The code contained in this book is simultaneously available under the [MIT license](https://opensource.org/licenses/MIT); this means that you are free to use it in your own packages, as long as you cite the source.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
 ## `r if(knitr::is_html_output()) emo::ji("+1")`Installation {-}
 
@@ -119,7 +119,7 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 + More friendly characteristics for developers and contributors
 + Web application for newbies of R programing
 
-## Other Projects {-}
+## `r if(knitr::is_html_output()) emo::ji("palm_tree")`Other Projects {-}
 
 You may also be interested in:
 

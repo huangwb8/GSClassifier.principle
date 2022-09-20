@@ -29,7 +29,7 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 -->
 
 
-## Basic information {-}
+## 💦About {-}
 
 **The Priciple of GSClassifier** is a book for users of R package **GSClassifier** who want to know the most details. If you're looking for the PDF edition, you can find it at <a rel="pdf" href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.
 
@@ -49,7 +49,7 @@ emoji: https://github.com/rstudio/blogdown/issues/171
   + [**luckyModel**](https://github.com/huangwb8/luckyModel): Model ensemble for third-party lucky series, such GSClassifier
   
 
-## License {-}
+## 💿License {-}
 
 **GSClassifier** is released under the Apache-2.0 license. See [LICENSE](https://github.com/huangwb8/GSClassifier/blob/master/license.txt) for details.
 
@@ -59,7 +59,7 @@ The technical documentation, as a whole, is licensed under a <a rel="license" hr
 
 The code contained in this book is simultaneously available under the [MIT license](https://opensource.org/licenses/MIT); this means that you are free to use it in your own packages, as long as you cite the source.
 
-## Installation {-}
+## 👍Installation {-}
 
 `RStudio` is one of the best Integrated Development Environments (IDE) in R programming. If you're struggling in R-GUI, it is recommanded to turn to [RStudio](https://www.rstudio.com/).
 
@@ -82,7 +82,7 @@ if (!requireNamespace("GSClassifier", quietly = TRUE))
 In the future, a stable `GSClassifier` version might be sent to [`CRAN`](https://cran.r-project.org/). Still beta.
 
 
-## [Mirror](https://gitee.com/huangwb8/GSClassifier) {-}
+## 👀[Mirror](https://gitee.com/huangwb8/GSClassifier) {-}
 
 For some special countries or regions, users could also try:
 
@@ -94,23 +94,23 @@ install.packages("https://gitee.com/huangwb8/luckyBase/repository/archive/Primar
 install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Primary?format=tar.gz", repos=NULL, method="libcurl")
 ```
 
-## Change log {-}
+## 📚Change log {-}
 
-### Version 0.1.9 {-}
++ Version 0.1.9
 
-+ Optimize function verbose
-+ Optimize for a routine scenario: one gene set and two subtypes
-+ Optimize the strategy of automatic parameters selection for modeling training with R package `caret`
-+ Interact with external models from the [luckyModel](https://github.com/huangwb8/luckyModel) package
+  + Optimize function verbose
+  + Optimize for a routine scenario: one gene set and two subtypes
+  + Optimize the strategy of automatic parameters selection for modeling training with R package `caret`
+  + Interact with external models from the [luckyModel](https://github.com/huangwb8/luckyModel) package
 
-### Version 0.1.8 {-}
++ Version 0.1.8 {-}
 
-+ Primary public version of `GSClassifier`
-+ Apache License, Version 2.0
-+ Friendly wiki-based tutorial
-+ Platform for developers
+  + Primary public version of `GSClassifier`
+  + Apache License, Version 2.0
+  + Friendly wiki-based tutorial
+  + Platform for developers
 
-## TODO {-}
+## 📆TODO {-}
 
 + More medical fields included, such as in Pan-cancer uitility
 + Advanced methods (such as artificial intelligence) for enhanced robustness
@@ -119,7 +119,7 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 + More friendly characteristics for developers and contributors
 + Web application for newbies of R programing
 
-## Other Projects {-}
+## 🌴Other Projects {-}
 
 You may also be interested in:
 

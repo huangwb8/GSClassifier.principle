@@ -70,9 +70,9 @@ Here is the environment of R programming:
 #   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
 #   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
 #   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
-#  [10] clue_0.3-57          rstudioapi_0.13      ggpubr_0.4.0        
-#  [13] listenv_0.8.0        remotes_2.4.2        prodlim_2019.11.13  
-#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
+#  [10] clue_0.3-57          rstudioapi_0.13      listenv_0.8.0       
+#  [13] ggpubr_0.4.0         remotes_2.4.2        lubridate_1.8.0     
+#  [16] prodlim_2019.11.13   fansi_1.0.3          codetools_0.2-18    
 #  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
 #  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
 #  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
@@ -81,43 +81,40 @@ Here is the environment of R programming:
 #  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
 #  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
 #  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.4.1         
-#  [46] nlme_3.1-149         iterators_1.0.14     timeDate_3043.102   
-#  [49] xfun_0.33            gower_1.0.0          stringr_1.4.0       
-#  [52] globals_0.15.1       ps_1.4.0             testthat_3.1.0      
-#  [55] lifecycle_1.0.1      devtools_2.4.3       rstatix_0.7.0       
-#  [58] future_1.26.1        MASS_7.3-53          scales_1.2.0        
-#  [61] ipred_0.9-12         parallel_4.0.3       RColorBrewer_1.1-3  
-#  [64] yaml_2.3.5           memoise_2.0.1        stringi_1.7.6       
-#  [67] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
-#  [70] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
-#  [73] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
-#  [76] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
-#  [79] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
-#  [82] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
-#  [85] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
-#  [88] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
-#  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
-#  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
-#  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+#  [43] carData_3.0-5        cellranger_1.1.0     jquerylib_0.1.4     
+#  [46] vctrs_0.4.1          nlme_3.1-149         iterators_1.0.14    
+#  [49] timeDate_3043.102    xfun_0.33            gower_1.0.0         
+#  [52] stringr_1.4.0        globals_0.15.1       ps_1.4.0            
+#  [55] testthat_3.1.0       lifecycle_1.0.1      devtools_2.4.3      
+#  [58] rstatix_0.7.0        future_1.26.1        MASS_7.3-53         
+#  [61] scales_1.2.0         ipred_0.9-12         parallel_4.0.3      
+#  [64] RColorBrewer_1.1-3   yaml_2.3.5           memoise_2.0.1       
+#  [67] sass_0.4.1           stringi_1.7.6        desc_1.4.1          
+#  [70] randomForest_4.6-14  foreach_1.5.2        hardhat_1.1.0       
+#  [73] pkgbuild_1.3.1       lava_1.6.10          shape_1.4.6         
+#  [76] tuneR_1.4.0          rlang_1.0.2          pkgconfig_2.0.3     
+#  [79] evaluate_0.15        lattice_0.20-41      purrr_0.3.4         
+#  [82] recipes_0.2.0        processx_3.7.0       tidyselect_1.1.2    
+#  [85] parallelly_1.32.0    plyr_1.8.7           magrittr_2.0.3      
+#  [88] bookdown_0.21        R6_2.5.1             generics_0.1.2      
+#  [91] DBI_1.1.3            pillar_1.7.0         withr_2.5.0         
+#  [94] survival_3.3-1       abind_1.4-5          nnet_7.3-17         
+#  [97] tibble_3.1.7         future.apply_1.9.0   crayon_1.5.1        
+# [100] car_3.1-0            xgboost_1.6.0.1      utf8_1.2.2          
+# [103] rmarkdown_2.14       GetoptLong_1.0.5     usethis_2.1.3       
+# [106] data.table_1.14.2    callr_3.7.0          ModelMetrics_1.2.2.2
+# [109] digest_0.6.29        stats4_4.0.3         signal_0.7-7        
+# [112] munsell_0.5.0        bslib_0.3.1          sessioninfo_1.2.2
 ```
 
 ## Flowchart
 
 The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.9\linewidth]{./fig/flowchart} 
-
-}
-
-\caption{The flow chart of GSClassifier}(\#fig:flowchart)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="./fig/flowchart.png" alt="The flow chart of GSClassifier" width="90%" />
+<p class="caption">(\#fig:flowchart)The flow chart of GSClassifier</p>
+</div>
 
 ### Data Processing
 
@@ -145,14 +142,10 @@ Genes expression of an individual is normalized during the model training and th
 
 As show in Figure \@ref(fig:tsp), The TSP data in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.85\linewidth]{./fig/TSP} 
-
-}
-
-\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="./fig/TSP.png" alt="The components of TSP (2 gene sets)" width="85%" />
+<p class="caption">(\#fig:tsp)The components of TSP (2 gene sets)</p>
+</div>
 
 ### Simulated Dataset
 
@@ -227,18 +220,14 @@ Look at the matrix via heatmap:
 Heatmap(t(scale(t(expr0))), name = "Z-score", column_title = "Before MVI")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-4-1} \end{center}
+<img src="Flowchart_files/figure-html/unnamed-chunk-4-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 ```r
 Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
+<img src="Flowchart_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" />
 
 This is an intersting dataset with features as following:
 
@@ -592,9 +581,7 @@ ggplot(tsp_df,aes(x=Var2,y=value,fill=Var2)) +
            fill = NULL) 
 ```
 
-
-
-\begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-16-1} \end{center}
+<img src="Flowchart_files/figure-html/unnamed-chunk-16-1.png" width="60%" style="display: block; margin: auto;" />
 
 
 

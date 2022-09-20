@@ -18,9 +18,6 @@ linkcolor: "blue"
 description: "The Principle of GSClassifier"
 ---
 
-
-`r if (knitr::is_latex_output()) '<!--'` 
-
 # Welcome {-}
 
 <!--
@@ -99,19 +96,19 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 
 ## `r if(knitr::is_html_output()) emo::ji("books")`Change log {-}
 
-### Version 0.1.9 {-}
++ Version 0.1.9
 
-+ Optimize function verbose
-+ Optimize for a routine scenario: one gene set and two subtypes
-+ Optimize the strategy of automatic parameters selection for modeling training with R package `caret`
-+ Interact with external models from the [luckyModel](https://github.com/huangwb8/luckyModel) package
+  + Optimize function verbose
+  + Optimize for a routine scenario: one gene set and two subtypes
+  + Optimize the strategy of automatic parameters selection for modeling training with R package `caret`
+  + Interact with external models from the [luckyModel](https://github.com/huangwb8/luckyModel) package
 
-### Version 0.1.8 {-}
++ Version 0.1.8 {-}
 
-+ Primary public version of `GSClassifier`
-+ Apache License, Version 2.0
-+ Friendly wiki-based tutorial
-+ Platform for developers
+  + Primary public version of `GSClassifier`
+  + Apache License, Version 2.0
+  + Friendly wiki-based tutorial
+  + Platform for developers
 
 ## `r if(knitr::is_html_output()) emo::ji("calendar")`TODO {-}
 
@@ -129,5 +126,3 @@ You may also be interested in:
 * __"[GSClassifier](https://github.com/huangwb8/GSClassifier)"__ A comprehensive classification tool based on pure transcriptomics for precision medicine.
 
 * __"[luckyModel](https://github.com/huangwb8/luckyModel)"__ Model ensemble for third-party lucky series, such GSClassifier.
-
-`r if (knitr::is_latex_output()) '-->'`

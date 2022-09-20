@@ -18,9 +18,6 @@ linkcolor: "blue"
 description: "The Principle of GSClassifier"
 ---
 
-
-<!-- 
-
 # Welcome {-}
 
 <!--
@@ -129,5 +126,3 @@ You may also be interested in:
 * __"[GSClassifier](https://github.com/huangwb8/GSClassifier)"__ A comprehensive classification tool based on pure transcriptomics for precision medicine.
 
 * __"[luckyModel](https://github.com/huangwb8/luckyModel)"__ Model ensemble for third-party lucky series, such GSClassifier.
-
--->

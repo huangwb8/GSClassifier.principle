@@ -9,14 +9,15 @@
 }
 \makeatother
 
-% PDF中的R代码自动换行
+% PDF中的R代码
 % R Markdown代码块内有没有办法实现代码/注释的自动换行？ https://d.cosx.org/d/422430-r-markdown
+% 可多了解一下minted包，据说高亮效果不错。How to enable LaTeX shell-escape in bookdown: https://stackoverflow.com/questions/62799280/how-to-enable-latex-shell-escape-in-bookdown
 \usepackage{fontspec}%字体的包
 \usepackage{listings}
 \usepackage{color}
 \lstset{
   language=R,
-  breaklines=true,
+  breaklines=true, % 允许自动换行
   backgroundcolor=\color{gray!12},
 	%basicstyle=\ttfamily\small,
 	basicstyle=\ttfamily,
@@ -25,10 +26,10 @@
 	stringstyle=\color{blue!50!red},
 	showstringspaces=false,
 	% captionpos=
-	numbers=left,
-	numberstyle=\footnotesize\color{gray},
-	numbersep=10pt,
-	stepnumber=2, %左边数字的步幅
+	numbers=none, %left
+	% numberstyle=\footnotesize\color{gray},
+	% numbersep=10pt,
+	% stepnumber=2, %左边数字的步幅
 	tabsize=4,
 	frame=TB %顶部和底部有两条竖线。
 	% frame=tblr

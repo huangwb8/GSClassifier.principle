@@ -102,14 +102,15 @@
 }
 \makeatother
 
-% PDF中的R代码自动换行
+% PDF中的R代码
 % R Markdown代码块内有没有办法实现代码/注释的自动换行？ https://d.cosx.org/d/422430-r-markdown
+% 可多了解一下minted包，据说高亮效果不错。How to enable LaTeX shell-escape in bookdown: https://stackoverflow.com/questions/62799280/how-to-enable-latex-shell-escape-in-bookdown
 \usepackage{fontspec}%字体的包
 \usepackage{listings}
 \usepackage{color}
 \lstset{
   language=R,
-  breaklines=true,
+  breaklines=true, % 允许自动换行
   backgroundcolor=\color{gray!12},
 	%basicstyle=\ttfamily\small,
 	basicstyle=\ttfamily,
@@ -118,10 +119,10 @@
 	stringstyle=\color{blue!50!red},
 	showstringspaces=false,
 	% captionpos=
-	numbers=left,
-	numberstyle=\footnotesize\color{gray},
-	numbersep=10pt,
-	stepnumber=2, %左边数字的步幅
+	numbers=none, %left
+	% numberstyle=\footnotesize\color{gray},
+	% numbersep=10pt,
+	% stepnumber=2, %左边数字的步幅
 	tabsize=4,
 	frame=TB %顶部和底部有两条竖线。
 	% frame=tblr
@@ -181,6 +182,10 @@
 \tableofcontents
 }
 \setstretch{1.5}
+\hypertarget{welcome}{%
+\chapter*{Welcome}\label{welcome}}
+\addcontentsline{toc}{chapter}{Welcome}
+
 \hypertarget{basic-information}{%
 \section*{Basic information}\label{basic-information}}
 \addcontentsline{toc}{section}{Basic information}
@@ -343,8 +348,6 @@ You may also be interested in:
 \item
   \textbf{``\href{https://github.com/huangwb8/luckyModel}{luckyModel}''} Model ensemble for third-party lucky series, such GSClassifier.
 \end{itemize}
-
---\textgreater{}
 
 \hypertarget{the-principle-of-gsclassifier}{%
 \chapter{The Principle of GSClassifier}\label{the-principle-of-gsclassifier}}
@@ -1754,13 +1757,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 8.535523e-04 0.561300665 8.789648e-06
-# 2 PB-16-003        4            4 3.404454e-07 0.018167170 1.006157e-04
-# 3 PB-16-004        3            3 4.243721e-06 0.001126488 4.011083e-01
-#              4           5           6
-# 1 0.1943050995 0.009215117 0.004592170
-# 2 0.4923216850 0.002543283 0.002636498
-# 3 0.0002498424 0.006606377 0.008101065
+# 1 PB-16-002        2            2 8.928682e-04 0.561300665 9.943818e-06
+# 2 PB-16-003        4            4 4.040183e-07 0.018167170 1.258724e-04
+# 3 PB-16-004        3            3 6.196300e-06 0.001126488 2.408393e-01
+#             4           5           6
+# 1 0.279268414 0.010949500 0.003348467
+# 2 0.499039710 0.002884648 0.001938546
+# 3 0.000298221 0.007653435 0.005676751
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:

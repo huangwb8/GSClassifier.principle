@@ -186,51 +186,26 @@
 \chapter*{Welcome}\label{welcome}}
 \addcontentsline{toc}{chapter}{Welcome}
 
-\hypertarget{basic-information}{%
-\section*{Basic information}\label{basic-information}}
-\addcontentsline{toc}{section}{Basic information}
+\hypertarget{about}{%
+\section*{About}\label{about}}
+\addcontentsline{toc}{section}{About}
 
 \textbf{The Priciple of GSClassifier} is a book for users of R package \textbf{GSClassifier} who want to know the most details. If you're looking for the PDF edition, you can find it at here.
 
-\begin{itemize}
-\tightlist
-\item
-  \href{https://github.com/huangwb8/GSClassifier}{\textbf{GSClassifier}} is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.
-\item
-  The inspiration of \textbf{GSClassifier} come from \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier}, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al {[}\protect\hyperlink{ref-RN160}{1},\protect\hyperlink{ref-RN315}{2}{]}.
-\item
-  Lots of surprising features in \textbf{GSClassifier} as follows:
+\href{https://github.com/huangwb8/GSClassifier}{\textbf{GSClassifier}} is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Optimized for just \passthrough{\lstinline!one sample!}
-  \item
-    Available for modeling and calling of brand-new \passthrough{\lstinline!GEPs-based subtypes!} in any diseases (cancers)
-  \item
-    No limitation of the amount of \passthrough{\lstinline!gene signatures!}(≥1) or \passthrough{\lstinline!subtypes!}(≥2)
-  \item
-    \passthrough{\lstinline!Normalization insensitive!} due to the use of the individual \passthrough{\lstinline!gene rank matrix!}
-  \item
-    More ensemble and repeatable modeling process
-  \item
-    More optimizations in the parallel computing
-  \item
-    New useful functions as supplements
-  \end{itemize}
-\item
-  \textbf{ATTENTION!} In the future, there might be third-party contributors in \passthrough{\lstinline!GSClassifier!} platform, with some useful models for specific usages. If you use models provided by these people, \textbf{you had better know more details as possible}, including \textbf{designs, data sources, destinations, training scripts and limitations} of models, expecially those from studies under peer-review.
-\item
-  \textbf{MORE PROJECTS}:
+The inspiration of \textbf{GSClassifier} come from \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier}, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al {[}\protect\hyperlink{ref-RN160}{1},\protect\hyperlink{ref-RN315}{2}{]}.
 
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{https://huangwb8.github.io/GSClassifier.principle/}{\textbf{The Principle of GSClassifier}}: A eBook with more details about GSClassifier package
-  \item
-    \href{https://github.com/huangwb8/luckyModel}{\textbf{luckyModel}}: Model ensemble for third-party lucky series, such GSClassifier
-  \end{itemize}
-\end{itemize}
+Lots of surprising features in \textbf{GSClassifier} as follows:
++ Optimized for just \passthrough{\lstinline!one sample!}
++ Available for modeling and calling of brand-new \passthrough{\lstinline!GEPs-based subtypes!} in any diseases (cancers)
++ No limitation of the amount of \passthrough{\lstinline!gene signatures!}(≥1) or \passthrough{\lstinline!subtypes!}(≥2)
++ \passthrough{\lstinline!Normalization insensitive!} due to the use of the individual \passthrough{\lstinline!gene rank matrix!}
++ More ensemble and repeatable modeling process
++ More optimizations in the parallel computing
++ New useful functions as supplements
+
+\textbf{ATTENTION!} In the future, there might be third-party contributors in \passthrough{\lstinline!GSClassifier!} platform, with some useful models for specific usages. If you use models provided by these people, \textbf{you had better know more details as possible}, including \textbf{designs, data sources, destinations, training scripts and limitations} of models, expecially those from studies under peer-review.
 
 \hypertarget{license}{%
 \section*{License}\label{license}}
@@ -1308,8 +1283,8 @@ Test
 \hypertarget{quick-start}{%
 \chapter{Quick start}\label{quick-start}}
 
-\hypertarget{about}{%
-\section{About}\label{about}}
+\hypertarget{about-1}{%
+\section{About}\label{about-1}}
 
 \begin{itemize}
 \tightlist
@@ -1761,13 +1736,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.408393e-03 0.561300665 7.702053e-06
-# 2 PB-16-003        4            4 3.122662e-07 0.018167170 1.729675e-04
-# 3 PB-16-004        3            3 7.094705e-06 0.001126488 3.381908e-01
-#              4           5           6
-# 1 0.2515413761 0.011658502 0.002520516
-# 2 0.3933367282 0.001982530 0.001801807
-# 3 0.0003865709 0.005597749 0.006433582
+# 1 PB-16-002        2            2 7.731285e-04 0.561300665 5.146555e-06
+# 2 PB-16-003        4            4 4.002980e-07 0.018167170 1.987034e-04
+# 3 PB-16-004        3            3 3.982580e-06 0.001126488 3.336276e-01
+#             4           5           6
+# 1 0.316244908 0.011658502 0.004667357
+# 2 0.452258140 0.001949992 0.001403720
+# 3 0.000171527 0.007858477 0.006734723
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -1911,8 +1886,8 @@ Enjoy \passthrough{\lstinline!GSClassifier!}!
 \hypertarget{model-establishment-via-gsclassifier}{%
 \chapter{Model establishment via GSClassifier}\label{model-establishment-via-gsclassifier}}
 
-\hypertarget{about-1}{%
-\section{About}\label{about-1}}
+\hypertarget{about-2}{%
+\section{About}\label{about-2}}
 
 Sometimes, researchers might have their own gene signatures and know how many subtypes they want to call before (based on some knowledges). Gratifyingly, comprehensive functions were also provided in \passthrough{\lstinline!GSClassifier!}. In this section, we would show how to build a \passthrough{\lstinline!GSClassifier!} model like \passthrough{\lstinline!PADi!}.
 
@@ -2294,8 +2269,8 @@ The usage of \passthrough{\lstinline!parCallEnsemble!} (for huge amount of sampl
 \hypertarget{suggestions-for-gsclassifier-model-developers}{%
 \chapter{Suggestions for GSClassifier model developers}\label{suggestions-for-gsclassifier-model-developers}}
 
-\hypertarget{about-2}{%
-\section{About}\label{about-2}}
+\hypertarget{about-3}{%
+\section{About}\label{about-3}}
 
 \begin{itemize}
 \item

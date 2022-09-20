@@ -71,10 +71,14 @@ PADi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSCl
 
 This picture shows the components of `PADi`:
 
-<div class="figure" style="text-align: center">
-<img src="./fig/GSClassifier-model.jpg" alt="Details of a GSClassifier model" width="90%" />
-<p class="caption">(\#fig:GSClassifierModel)Details of a GSClassifier model</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/GSClassifier-model} 
+
+}
+
+\caption{Details of a GSClassifier model}(\#fig:GSClassifierModel)
+\end{figure}
 
 As shown, a typical `GSClassifier` model is consist of four parts (with different colors in the picture):
 

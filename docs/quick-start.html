@@ -548,13 +548,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="quick-start.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb58-2"><a href="quick-start.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb58-3"><a href="quick-start.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.095038e-03 0.561300665 9.292735e-06</span></span>
-<span id="cb58-4"><a href="quick-start.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 3.159816e-07 0.018167170 1.579103e-04</span></span>
-<span id="cb58-5"><a href="quick-start.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 4.964900e-06 0.001126488 4.194008e-01</span></span>
+<span id="cb58-3"><a href="quick-start.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.293535e-03 0.561300665 6.225670e-06</span></span>
+<span id="cb58-4"><a href="quick-start.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 3.506371e-07 0.018167170 2.561278e-04</span></span>
+<span id="cb58-5"><a href="quick-start.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 5.323143e-06 0.001126488 2.852256e-01</span></span>
 <span id="cb58-6"><a href="quick-start.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
-<span id="cb58-7"><a href="quick-start.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.1263403408 0.009215117 0.005471010</span></span>
-<span id="cb58-8"><a href="quick-start.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.5154382586 0.002095707 0.002669774</span></span>
-<span id="cb58-9"><a href="quick-start.html#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0002102485 0.006895948 0.005169815</span></span></code></pre></div>
+<span id="cb58-7"><a href="quick-start.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.4265360683 0.007000939 0.003069826</span></span>
+<span id="cb58-8"><a href="quick-start.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.6049285531 0.002422559 0.001526422</span></span>
+<span id="cb58-9"><a href="quick-start.html#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0002310644 0.006241082 0.004487719</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="quick-start.html#cb59-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb59-2"><a href="quick-start.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

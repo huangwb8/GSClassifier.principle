@@ -13,9 +13,10 @@ bookdown::pdf_book:
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
+  pandoc_args: --listings
   # pandoc_args: [
-  #     "--bibliography=book.bib",
-  #     "--csl=briefings-in-bioinformatics.csl",
+  #     # "--bibliography=book.bib",
+  #     # "--csl=briefings-in-bioinformatics.csl",
   #   ]
   keep_tex: yes
   toc: TRUE

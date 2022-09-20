@@ -9,6 +9,45 @@
 }
 \makeatother
 
+% PDF中的R代码自动换行
+% R Markdown代码块内有没有办法实现代码/注释的自动换行？ https://d.cosx.org/d/422430-r-markdown
+\usepackage{fontspec}%字体的包
+\usepackage{listings}
+\usepackage{color}
+\lstset{
+  language=R,
+  breaklines=true,
+  backgroundcolor=\color{gray!12},
+	%basicstyle=\ttfamily\small,
+	basicstyle=\ttfamily,
+	commentstyle=\color{green!60!black},
+	keywordstyle=\color{magenta},
+	stringstyle=\color{blue!50!red},
+	showstringspaces=false,
+	% captionpos=
+	numbers=left,
+	numberstyle=\footnotesize\color{gray},
+	numbersep=10pt,
+	stepnumber=2, %左边数字的步幅
+	tabsize=4,
+	frame=TB %顶部和底部有两条竖线。
+	% frame=tblr
+	% frame=L,
+	% framerule=1pt,
+	% rulecolor=\color{red}
+}
+
+
+% \lstset{
+%   language=C++,
+%   keywordstyle = \color{blue}\bfseries,
+%   commentstyle=\color{green},
+%   tabsize = 4,
+%   %backgroundcolor=\color{bg}
+%   emph = {int,float,double,char},emphstyle=\color{fontdata},
+%   emph ={[2]const, typedef},emphstyle = {[2]\color{red}}
+% }
+
 % 中文
 % \usepackage{ctex}
 % \usepackage{amsthm,mathrsfs}

@@ -2,6 +2,7 @@
 
 # The Principle of GSClassifier
 
+Leave some introductions
 
 ## Packages
 
@@ -63,7 +64,7 @@ Here is the environment of R programming:
 # 
 # other attached packages:
 # [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.22  luckyBase_0.1.0     
+# [4] rpart_4.1.16         GSClassifier_0.1.24  luckyBase_0.1.0     
 # [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
 # 
 # loaded via a namespace (and not attached):
@@ -173,7 +174,7 @@ rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
 # Missing value imputation (MVI)
 expr <- na_fill(expr0, method = "quantile", seed = 447)
-#  Missing value imputation with quantile algorithm...
+#  Missing value imputation with quantile algorithm!
 
 # Subtype information
 # It depends on the application scenarios of GEPs

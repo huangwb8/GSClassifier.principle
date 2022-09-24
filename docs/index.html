@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-20" />
+<meta name="date" content="2022-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -240,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">The Principle of R Package GSClassifier</h1>
 <p class="author"><em>Weibin Huang</em></p>
-<p class="date"><em>2022-09-20</em></p>
+<p class="date"><em>2022-09-24</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome</h1>
@@ -253,29 +253,32 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 -->
 <div id="about" class="section level2 unnumbered">
 <h2>💦About</h2>
-<p><strong>The Priciple of GSClassifier</strong> is a book for users of R package <strong>GSClassifier</strong> who want to know the most details. If you’re looking for the PDF edition, you can find it at <a rel="pdf" href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.</p>
-<p><a href="https://github.com/huangwb8/GSClassifier"><strong>GSClassifier</strong></a> is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.</p>
-<p>The inspiration of <strong>GSClassifier</strong> come from <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a>, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al <span class="citation">[<a href="references.html#ref-RN160" role="doc-biblioref">1</a>,<a href="references.html#ref-RN315" role="doc-biblioref">2</a>]</span>.</p>
-<p>Lots of surprising features in <strong>GSClassifier</strong> as follows:
-+ Optimized for just <code>one sample</code>
-+ Available for modeling and calling of brand-new <code>GEPs-based subtypes</code> in any diseases (cancers)
-+ No limitation of the amount of <code>gene signatures</code>(≥1) or <code>subtypes</code>(≥2)
-+ <code>Normalization insensitive</code> due to the use of the individual <code>gene rank matrix</code>
-+ More ensemble and repeatable modeling process
-+ More optimizations in the parallel computing
-+ New useful functions as supplements</p>
+<p><strong>The Priciple of GSClassifier</strong> is a book for users of R package <strong>GSClassifier</strong> who want to know the most details. If you’re looking for the PDF edition, you can find it at <a href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.</p>
+<p><a href="https://github.com/huangwb8/GSClassifier"><strong>GSClassifier</strong></a> is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.The inspiration of <strong>GSClassifier</strong> come from <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a>, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al <span class="citation">[<a href="references.html#ref-RN160" role="doc-biblioref">1</a>,<a href="references.html#ref-RN315" role="doc-biblioref">2</a>]</span>.</p>
+<p>Lots of surprising features in <strong>GSClassifier</strong> as follows:</p>
+<ul>
+<li><p>Optimized for just <code>one sample</code></p></li>
+<li><p>Available for modeling and calling of brand-new <code>GEPs-based subtypes</code> in any diseases (cancers)</p></li>
+<li><p>No limitation of the amount of <code>gene signatures</code>(≥1) or <code>subtypes</code>(≥2)</p></li>
+<li><p><code>Normalization insensitive</code> due to the use of the individual <code>gene rank matrix</code></p></li>
+<li><p>More ensemble and repeatable modeling process</p></li>
+<li><p>More optimizations in the parallel computing</p></li>
+<li><p>New useful functions as supplements</p></li>
+</ul>
 <p><strong>ATTENTION!</strong> In the future, there might be third-party contributors in <code>GSClassifier</code> platform, with some useful models for specific usages. If you use models provided by these people, <strong>you had better know more details as possible</strong>, including <strong>designs, data sources, destinations, training scripts and limitations</strong> of models, expecially those from studies under peer-review.</p>
 </div>
 <div id="license" class="section level2 unnumbered">
 <h2>💿License</h2>
-<p><strong>GSClassifier</strong> is released under the Apache-2.0 license. See <a href="https://github.com/huangwb8/GSClassifier/blob/master/license.txt">LICENSE</a> for details.</p>
-<p>The technical documentation, as a whole, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
-<p>The code contained in this book is simultaneously available under the <a href="https://opensource.org/licenses/MIT">MIT license</a>; this means that you are free to use it in your own packages, as long as you cite the source.</p>
+<ul>
+<li><p><strong>GSClassifier</strong> is released under the Apache-2.0 license. See <a href="https://github.com/huangwb8/GSClassifier/blob/master/license.txt">LICENSE</a> for details.</p></li>
+<li><p>The technical documentation, as a whole, is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-
+NonCommercial-ShareAlike 4.0 International License</a>. The code contained in this book is simultaneously available under the <a href="https://opensource.org/licenses/MIT">MIT license</a>; this means that you are free to use it in your own packages, as long as you cite the source.</p></li>
+</ul>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></p>
 </div>
 <div id="installation" class="section level2 unnumbered">
 <h2>👍Installation</h2>
-<p><code>RStudio</code> is one of the best Integrated Development Environments (IDE) in R programming. If you’re struggling in R-GUI, it is recommanded to turn to <a href="https://www.rstudio.com/">RStudio</a>.</p>
+<p><code>RStudio</code> is one of the best Integrated Development Environments (IDE) in R programming. If you’re struggling in R-GUI, it is recommanded to turn to <a href="https://www.rstudio.com/">RStudio (Posit)</a>.</p>
 <p>For installation of <strong>GSClassifier</strong>, please run these commands in an R environment:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install &quot;devtools&quot; package</span></span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
@@ -304,36 +307,36 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 <ul>
 <li><p>Version 0.1.9</p>
 <ul>
-<li>Optimize function verbose</li>
-<li>Optimize for a routine scenario: one gene set and two subtypes</li>
-<li>Optimize the strategy of automatic parameters selection for modeling training with R package <code>caret</code></li>
-<li>Interact with external models from the <a href="https://github.com/huangwb8/luckyModel">luckyModel</a> package</li>
+<li><p>Optimize function verbose</p></li>
+<li><p>Optimize for a routine scenario: one gene set and two subtypes</p></li>
+<li><p>Optimize the strategy of automatic parameters selection for modeling training with R package <code>caret</code></p></li>
+<li><p>Interact with external models from the <a href="https://github.com/huangwb8/luckyModel">luckyModel</a> package</p></li>
 </ul></li>
-<li><p>Version 0.1.8 {-}</p>
+<li><p>Version 0.1.8</p>
 <ul>
-<li>Primary public version of <code>GSClassifier</code></li>
-<li>Apache License, Version 2.0</li>
-<li>Friendly wiki-based tutorial</li>
-<li>Platform for developers</li>
+<li><p>Primary public version of <code>GSClassifier</code></p></li>
+<li><p>Apache License, Version 2.0</p></li>
+<li><p>Friendly wiki-based tutorial</p></li>
+<li><p>Platform for developers</p></li>
 </ul></li>
 </ul>
 </div>
 <div id="todo" class="section level2 unnumbered">
 <h2>📆TODO</h2>
 <ul>
-<li>More medical fields included, such as in Pan-cancer uitility</li>
-<li>Advanced methods (such as artificial intelligence) for enhanced robustness</li>
-<li>Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledges</li>
-<li>Multi-omics exploration and support</li>
-<li>More friendly characteristics for developers and contributors</li>
-<li>Web application for newbies of R programing</li>
+<li><p>More medical fields included, such as in Pan-cancer uitility</p></li>
+<li><p>Advanced methods (such as artificial intelligence) for enhanced robustness</p></li>
+<li><p>Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledges</p></li>
+<li><p>Multi-omics exploration and support</p></li>
+<li><p>More friendly characteristics for developers and contributors</p></li>
+<li><p>Web application for newbies of R programing</p></li>
 </ul>
 </div>
 <div id="other-projects" class="section level2 unnumbered">
 <h2>🌴Other Projects</h2>
 <p>You may also be interested in:</p>
 <ul>
-<li><p><strong>“<a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a>”</strong> A comprehensive classification tool based on pure transcriptomics for precision medicine.</p></li>
+<li><p><strong>“<a href="https://github.com/huangwb8/luckyBase">luckyBase</a>”</strong> The base functions of lucky series.</p></li>
 <li><p><strong>“<a href="https://github.com/huangwb8/luckyModel">luckyModel</a>”</strong> Model ensemble for third-party lucky series, such GSClassifier.</p></li>
 </ul>
 

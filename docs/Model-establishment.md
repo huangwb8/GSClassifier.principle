@@ -407,9 +407,7 @@ The usage of `parCallEnsemble` (for huge amount of samples) is similar. Empirica
 
 ## Number of SubModel {#topicSubmodel}
 
-In the latest version of **PADi**, we trained 100 **SubModel**s for subtype calling. 
-
-we also trained some models with different training cohorts (200 models) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort) of sub-models. Our results showed that **the performance of these models is similar in the “Kim2018” cohort** (Figure \@ref(fig:mn01) and \@ref(fig:mn02)).
+In the latest version of **PADi**, we trained 100 **SubModel**s for subtype calling. We also trained some models with different training cohorts (200 models, Figure \@ref(fig:mn01)) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort, Figure \@ref(fig:mn02)) of sub-models. Our results showed that **the performance of these models is similar in the “Kim2018” cohort**.
 
 \begin{figure}
 

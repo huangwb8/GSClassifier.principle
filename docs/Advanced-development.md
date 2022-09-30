@@ -16,7 +16,7 @@ First, load the package
 
 ```r
 library(GSClassifier)
-# 载入需要的程辑包：luckyBase
+# Loading required package: luckyBase
 ```
 
 ## Available models

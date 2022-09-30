@@ -346,13 +346,10 @@ ggplot(mvt_auc_df, aes(x,y)) +
 \end{figure}
 
 As showed in Figure \@ref(fig:mvi03), there is linear negative correlation between the number of missing value (mising rate ranges from 6.25% to 37.5%) and subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no mising value in PIAM/PIDG of the 'Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via **PADi**. Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision.
-
 <!--
 Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision. 
--->
-
 Moreover, we explored **if rescue of missing value would help improving the performance of PADi**. 
-
+-->
 
 In conclusion, zero or quantile strategy could be applied for MVI before **GSClassifier** model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of **GSClassifier**. Nonetheless, due to low-input GEPs used in **PADi** model (No. of Gene=32), it's easy to avoid missing value in clinical practice.
 
@@ -408,7 +405,7 @@ For PAD subtypes, it’s easy to determine the subtype number as 4. First, PAD s
 
 Also, there’s another more simple situation—determining the subtype number with only one GEP, where 2 (high/low) or 3 (low/moderate/high) deserve to be tried. However, with the number of GEPs increasing, the situation would become more complex. Regrettably, GSClassifier can not help determine what subtype number should be used; GSClassifier only promises a robust model no matter how many GEPs or subtypes. **There’s no gold standard for subtype number selection, which is more like art instead of math**. 
 
-Nevertheless, there’re several suggestions we can follow for best practice. First, the R package “**ConsensusClusterPlus**” [@RN421, @RN422, @RN423, @RN424] can help figure out consensus clustering for transcriptomic data, which provides visualization (consensus matrices, consensus cumulative distribution function plot, delta area plot, tracking plot, and so on) for clustering quality control. Second, **paying more attention to the biological problem usually gives extra or even crucial clues for the subtype number decision**.
+Nevertheless, there’re several suggestions we can follow for best practice. First, the R package “**ConsensusClusterPlus**” [@RN421;@RN422;@RN423;@RN424] can help figure out consensus clustering for transcriptomic data, which provides visualization (consensus matrices, consensus cumulative distribution function plot, delta area plot, tracking plot, and so on) for clustering quality control. Second, **paying more attention to the biological problem usually gives extra or even crucial clues for the subtype number decision**.
 
 <!--
 

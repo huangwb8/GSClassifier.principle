@@ -1247,8 +1247,6 @@ ggplot(mvt_auc_df, aes(x,y)) +
 
 As showed in Figure \ref{fig:mvi03}, there is linear negative correlation between the number of missing value (mising rate ranges from 6.25\% to 37.5\%) and subtype identification performance of \textbf{PADi} model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of \textbf{PADi}. By the way, there is no mising value in PIAM/PIDG of the `Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via \textbf{PADi}. Nonetheless, we still used \textbf{zero strategy} during subtype identification of \textbf{PADi} if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision.
 
-Moreover, we explored \textbf{if rescue of missing value would help improving the performance of PADi}.
-
 In conclusion, zero or quantile strategy could be applied for MVI before \textbf{GSClassifier} model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of \textbf{GSClassifier}. Nonetheless, due to low-input GEPs used in \textbf{PADi} model (No.~of Gene=32), it's easy to avoid missing value in clinical practice.
 
 \hypertarget{batch-effect}{%
@@ -1283,7 +1281,7 @@ For PAD subtypes, it's easy to determine the subtype number as 4. First, PAD sub
 
 Also, there's another more simple situation---determining the subtype number with only one GEP, where 2 (high/low) or 3 (low/moderate/high) deserve to be tried. However, with the number of GEPs increasing, the situation would become more complex. Regrettably, GSClassifier can not help determine what subtype number should be used; GSClassifier only promises a robust model no matter how many GEPs or subtypes. \textbf{There's no gold standard for subtype number selection, which is more like art instead of math}.
 
-Nevertheless, there're several suggestions we can follow for best practice. First, the R package ``\textbf{ConsensusClusterPlus}'' {[}\protect\hyperlink{ref-RN424}{27}{]} can help figure out consensus clustering for transcriptomic data, which provides visualization (consensus matrices, consensus cumulative distribution function plot, delta area plot, tracking plot, and so on) for clustering quality control. Second, \textbf{paying more attention to the biological problem usually gives extra or even crucial clues for the subtype number decision}.
+Nevertheless, there're several suggestions we can follow for best practice. First, the R package ``\textbf{ConsensusClusterPlus}'' {[}\protect\hyperlink{ref-RN421}{24}--\protect\hyperlink{ref-RN424}{27}{]} can help figure out consensus clustering for transcriptomic data, which provides visualization (consensus matrices, consensus cumulative distribution function plot, delta area plot, tracking plot, and so on) for clustering quality control. Second, \textbf{paying more attention to the biological problem usually gives extra or even crucial clues for the subtype number decision}.
 
 \hypertarget{quick-start}{%
 \chapter{Quick start}\label{quick-start}}
@@ -1319,7 +1317,7 @@ if (!requireNamespace("GSClassifier", quietly = TRUE))
 
 # Load needed packages
 library(GSClassifier)
-# 载入需要的程辑包：luckyBase
+# Loading required package: luckyBase
 \end{lstlisting}
 
 \hypertarget{data}{%
@@ -1758,13 +1756,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.948102e-03 0.561300665 6.344361e-06
-# 2 PB-16-003        4            4 4.655444e-07 0.018167170 2.167503e-04
-# 3 PB-16-004        3            3 1.769171e-06 0.001126488 3.499345e-01
-#             4           5           6
-# 1 0.199184485 0.010949500 0.003233749
-# 2 0.491587177 0.002128245 0.002547915
-# 3 0.000189898 0.005802790 0.006511572
+# 1 PB-16-002        2            2 9.977439e-04 0.561300665 8.999669e-06
+# 2 PB-16-003        4            4 2.217522e-07 0.018167170 9.214463e-05
+# 3 PB-16-004        3            3 4.604511e-06 0.001126488 3.054354e-01
+#              4           5           6
+# 1 0.2264581472 0.010949500 0.007155943
+# 2 0.4238017648 0.002510745 0.002331842
+# 3 0.0002464288 0.005643848 0.007631700
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -2299,9 +2297,7 @@ The usage of \passthrough{\lstinline!parCallEnsemble!} (for huge amount of sampl
 \hypertarget{topicSubmodel}{%
 \section{Number of SubModel}\label{topicSubmodel}}
 
-In the latest version of \textbf{PADi}, we trained 100 \textbf{SubModel}s for subtype calling.
-
-we also trained some models with different training cohorts (200 models) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort) of sub-models. Our results showed that \textbf{the performance of these models is similar in the ``Kim2018'' cohort} (Figure \ref{fig:mn01} and \ref{fig:mn02}).
+In the latest version of \textbf{PADi}, we trained 100 \textbf{SubModel}s for subtype calling. We also trained some models with different training cohorts (200 models, Figure \ref{fig:mn01}) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort, Figure \ref{fig:mn02}) of sub-models. Our results showed that \textbf{the performance of these models is similar in the ``Kim2018'' cohort}.
 
 \begin{figure}
 
@@ -2372,7 +2368,7 @@ First, load the package
 
 \begin{lstlisting}[language=R]
 library(GSClassifier)
-# 载入需要的程辑包：luckyBase
+# Loading required package: luckyBase
 \end{lstlisting}
 
 \hypertarget{available-models}{%

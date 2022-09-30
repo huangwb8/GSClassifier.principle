@@ -339,7 +339,6 @@ Leave some introductions
 \section{Packages}\label{packages}}
 
 \begin{lstlisting}[language=R]
-
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -454,7 +453,7 @@ The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 \hypertarget{data-processing}{%
 \subsection{Data Processing}\label{data-processing}}
 
-For each dataset, RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{batch-effect}.
+For each dataset, RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype Vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{batch-effect}.
 
 There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For \textbf{Pan-immune Activation and Dysfunction (PAD)} subtypes, the GEPs, \textbf{Pan-Immune Activation Module (PIAM)} and \textbf{Pan-Immune Dysfunction Genes (PIDG)}, are biologically associated and suitable for calling four sutbypes (PIAM\textsuperscript{high}PIDG\textsuperscript{high}, PIAM\textsuperscript{high}PIDG\textsuperscript{low}, PIAM\textsuperscript{low}PIDG\textsuperscript{high}, and PIAM\textsuperscript{low}PIDG\textsuperscript{low}). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
 
@@ -590,9 +589,7 @@ First, we binned genes with diffrent quantile intervals so that the distribution
 Take \textbf{Sample4} as an example:
 
 \begin{lstlisting}[language=R]
-
 # Data of Sample4
-
 x <- expr[,4]
 
 # Create quantiles  
@@ -696,7 +693,6 @@ print(testRes)
 In practice, we use \textbf{ptail} to select differential genes based on rank diffrences. \textbf{Smaller ptail is, less gene kept}. Here, we just set \textbf{ptail=0.4}:
 
 \begin{lstlisting}[language=R]
-
 # ptail is a numeber ranging (0,0.5].
 ptail = 0.4
 
@@ -844,7 +840,6 @@ print(resMat)
 In \textbf{GSClassifier}, we established \textbf{makeSetData} to evaluate set difference across samples:
 
 \begin{lstlisting}[language=R]
-
 # Gene set difference across samples
 geneset_interaction <- GSClassifier:::makeSetData(expr_sub, geneSet)
 
@@ -861,7 +856,6 @@ We have known that the subtype of \textbf{Sample 1-3} differs from that of \text
 Based on the structure of TSP in Figure \ref{fig:tsp}, TSP matrix of the simulated dataset should be :
 
 \begin{lstlisting}[language=R]
-
 # TSP matrix
 tsp <- rbind(
   
@@ -907,7 +901,6 @@ print(tsp)
 Have a look at the distribution:
 
 \begin{lstlisting}[language=R]
-
 # Data
 tsp_df <- reshape2::melt(tsp)
 
@@ -929,7 +922,6 @@ In this section, we would discuss some key topics about \textbf{GSClassifier}, i
 \section{Packages}\label{packages-1}}
 
 \begin{lstlisting}[language=R]
-
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -1231,6 +1223,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 \end{lstlisting}
 
 \begin{lstlisting}[language=R]
+# Plot
 ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
@@ -1308,14 +1301,33 @@ Nevertheless, there're several suggestions we can follow for best practice. Firs
   Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.
 \end{itemize}
 
+\hypertarget{package}{%
+\section{Package}\label{package}}
+
+\begin{lstlisting}[language=R]
+# Install "devtools" package
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("devtools")
+
+# Install dependencies
+if (!requireNamespace("luckyBase", quietly = TRUE))
+  devtools::install_github("huangwb8/luckyBase")
+
+# Install the "GSClassifier" package
+if (!requireNamespace("GSClassifier", quietly = TRUE))
+  devtools::install_github("huangwb8/GSClassifier")
+
+# Load needed packages
+library(GSClassifier)
+# 载入需要的程辑包：luckyBase
+\end{lstlisting}
+
 \hypertarget{data}{%
 \section{Data}\label{data}}
 
 To lower the learning cost of \passthrough{\lstinline!GSClassifier!}, we provides some test data:
 
 \begin{lstlisting}[language=R]
-library(GSClassifier)
-# 载入需要的程辑包：luckyBase
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
 \end{lstlisting}
 
@@ -1380,7 +1392,7 @@ res_pad <- PAD(
 )
 \end{lstlisting}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Quick-start_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Quick-start_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 \begin{lstlisting}
 # Use default PIAM... 
@@ -1419,9 +1431,8 @@ In this section, we would showed how to use \passthrough{\lstinline!PADi!} serie
 \subsection{Preparation of the test data}\label{preparation-of-the-test-data-1}}
 
 \begin{lstlisting}[language=R]
-
- X <- testData$Kim2018_3
- head(X)
+X <- testData$Kim2018_3
+head(X)
 #                   PB-16-002   PB-16-003   PB-16-004
 # ENSG00000121410  0.07075272 -2.08976724 -1.43569557
 # ENSG00000148584 -1.49631022 -0.23917056  0.94827471
@@ -1706,7 +1717,6 @@ GSClassifier_Data()
 Let's use our test data to do this:
 
 \begin{lstlisting}[language=R]
-
 X <- testData$Kim2018_3
 symbol <- convert(rownames(X))
 rownames(X) <- symbol
@@ -1748,13 +1758,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.188818e-03 0.561300665 5.644526e-06
-# 2 PB-16-003        4            4 3.850510e-07 0.018167170 1.061278e-04
-# 3 PB-16-004        3            3 2.023546e-06 0.001126488 3.085300e-01
-#              4           5           6
-# 1 0.1441195607 0.009215117 0.004637442
-# 2 0.4797146618 0.002543283 0.001036004
-# 3 0.0001895223 0.007044669 0.006298919
+# 1 PB-16-002        2            2 1.948102e-03 0.561300665 6.344361e-06
+# 2 PB-16-003        4            4 4.655444e-07 0.018167170 2.167503e-04
+# 3 PB-16-004        3            3 1.769171e-06 0.001126488 3.499345e-01
+#             4           5           6
+# 1 0.199184485 0.010949500 0.003233749
+# 2 0.491587177 0.002128245 0.002547915
+# 3 0.000189898 0.005802790 0.006511572
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -1906,15 +1916,18 @@ Sometimes, researchers might have their own gene signatures and know how many su
 \hypertarget{data-preparation}{%
 \section{Data preparation}\label{data-preparation}}
 
-\begin{quote}
-Note: The test data is only for the demonstration of the modeling
-\end{quote}
-
 Load packages:
+
+\begin{lstlisting}[language=R]
+library(GSClassifier)
+library(plyr)
+library(dplyr)
+\end{lstlisting}
 
 Load data:
 
 \begin{lstlisting}[language=R]
+# The test data is only for the demonstration of the modeling
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
 expr <- testData$PanSTAD_expr_part
 design <- testData$PanSTAD_phenotype_part
@@ -1936,11 +1949,13 @@ Check the result \passthrough{\lstinline!modelInfo!}:
 
 \begin{lstlisting}[language=R]
 names(modelInfo)
+# [1] "Repeat" "Data"
+\end{lstlisting}
 
+Explore the training cohort:
+
+\begin{lstlisting}[language=R]
 head(modelInfo$Data$Train)
-
-head(modelInfo$Data$Valid)
-# [1] "Repeat" "Data"  
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
 # GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550
 # GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550
@@ -1948,6 +1963,12 @@ head(modelInfo$Data$Valid)
 # GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550
 # GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550
 # GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550
+\end{lstlisting}
+
+Explore the internal validation cohort:
+
+\begin{lstlisting}[language=R]
+head(modelInfo$Data$Valid)
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
 # GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947
 # GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947
@@ -1960,11 +1981,11 @@ head(modelInfo$Data$Valid)
 Get training data \passthrough{\lstinline!Xs!} and \passthrough{\lstinline!Ys!}:
 
 \begin{lstlisting}[language=R]
-  # Training data
-  Xs <- expr[,modelInfo$Data$Train$ID]
-  y <- modelInfo$Data$Train
-  y <- y[colnames(Xs),]
-  Ys <- ifelse(y$PAD_subtype == 'PAD-I',1,ifelse(y$PAD_subtype == 'PAD-II',2,ifelse(y$PAD_subtype == 'PAD-III',3,ifelse(y$PAD_subtype == 'PAD-IV',4,NA)))); table(Ys)/length(Ys)
+# Training data
+Xs <- expr[,modelInfo$Data$Train$ID]
+y <- modelInfo$Data$Train
+y <- y[colnames(Xs),]
+Ys <- ifelse(y$PAD_subtype == 'PAD-I',1,ifelse(y$PAD_subtype == 'PAD-II',2,ifelse(y$PAD_subtype == 'PAD-III',3,ifelse(y$PAD_subtype == 'PAD-IV',4,NA)))); table(Ys)/length(Ys)
 # Ys
 #         1         2         3         4 
 # 0.1010169 0.2474576 0.1694915 0.4820339
@@ -1998,7 +2019,6 @@ Note: When you convert your phenotype into numeric, \textbf{You CANNOT USE A ZER
 Other parameteres for modeling:
 
 \begin{lstlisting}[language=R]
-
 # Build 20 models
 n=20 
 
@@ -2088,7 +2108,6 @@ print(geneSet)
 Just fit the model like:
 
 \begin{lstlisting}
-
 if(!auto){
   
   # Self-defined
@@ -2139,7 +2158,8 @@ if(!auto){
   # 1.10s  2.60s    2311.55s
 }
 
-mymusic() # Remind me with a music when the process completed
+# Remind me with a music when the process completed
+mymusic() 
 \end{lstlisting}
 
 You should save it for convenience:
@@ -2209,9 +2229,7 @@ scaller.train <- list(
 \hypertarget{assemble-your-model}{%
 \subsection{Assemble your model}\label{assemble-your-model}}
 
-\begin{quote}
 For more information of \passthrough{\lstinline!geneAnnotation!}, you could see \href{https://github.com/huangwb8/GSClassifier/wiki/Advanced-development\#Gene-Annotation}{Advanced development: Gene Annotation} section for assistance.
-\end{quote}
 
 Here we give an example:
 
@@ -2276,7 +2294,7 @@ res_i = callEnsemble(
 )
 \end{lstlisting}
 
-The usage of \passthrough{\lstinline!parCallEnsemble!} (for huge amount of samples) is similar.
+The usage of \passthrough{\lstinline!parCallEnsemble!} (for huge amount of samples) is similar. Empirically, \passthrough{\lstinline!parCallEnsemble!} can not perform better than \passthrough{\lstinline!callEnsemble!} in a small cohort for the process of xgboost would take advantage of multiple CPU cores.
 
 \hypertarget{topicSubmodel}{%
 \section{Number of SubModel}\label{topicSubmodel}}
@@ -2296,7 +2314,7 @@ we also trained some models with different training cohorts (200 models) or with
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{./fig/model-no-02} 
+{\centering \includegraphics[width=0.5\linewidth]{./fig/model-no-02} 
 
 }
 
@@ -2309,7 +2327,6 @@ we also trained some models with different training cohorts (200 models) or with
 Here're some key parameters about how the latest PADi was trained.
 
 \begin{lstlisting}[language=R]
-
 # Build 100 models
 n = 100
 
@@ -2335,6 +2352,8 @@ params = list(max_depth = 10,
               nfold=5)
 caret.seed = NULL
 \end{lstlisting}
+
+Enjoy \textbf{GSClassifier}!
 
 \hypertarget{suggestions-for-gsclassifier-model-developers}{%
 \chapter{Suggestions for GSClassifier model developers}\label{suggestions-for-gsclassifier-model-developers}}

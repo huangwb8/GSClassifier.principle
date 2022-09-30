@@ -11,16 +11,21 @@ Sometimes, researchers might have their own gene signatures and know how many su
 
 ## Data preparation
 
-> Note: The test data is only for the demonstration of the modeling
 
 Load packages: 
 
 
+```r
+library(GSClassifier)
+library(plyr)
+library(dplyr)
+```
 
 Load data: 
 
 
 ```r
+# The test data is only for the demonstration of the modeling
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
 expr <- testData$PanSTAD_expr_part
 design <- testData$PanSTAD_phenotype_part
@@ -44,11 +49,14 @@ Check the result `modelInfo`:
 
 ```r
 names(modelInfo)
+# [1] "Repeat" "Data"
+```
 
+Explore the training cohort:
+
+
+```r
 head(modelInfo$Data$Train)
-
-head(modelInfo$Data$Valid)
-# [1] "Repeat" "Data"  
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
 # GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550
 # GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550
@@ -56,6 +64,13 @@ head(modelInfo$Data$Valid)
 # GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550
 # GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550
 # GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550
+```
+
+Explore the internal validation cohort:
+
+
+```r
+head(modelInfo$Data$Valid)
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
 # GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947
 # GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947
@@ -69,16 +84,15 @@ Get training data `Xs` and `Ys`:
 
 
 ```r
-  # Training data
-  Xs <- expr[,modelInfo$Data$Train$ID]
-  y <- modelInfo$Data$Train
-  y <- y[colnames(Xs),]
-  Ys <- ifelse(y$PAD_subtype == 'PAD-I',1,ifelse(y$PAD_subtype == 'PAD-II',2,ifelse(y$PAD_subtype == 'PAD-III',3,ifelse(y$PAD_subtype == 'PAD-IV',4,NA)))); table(Ys)/length(Ys)
+# Training data
+Xs <- expr[,modelInfo$Data$Train$ID]
+y <- modelInfo$Data$Train
+y <- y[colnames(Xs),]
+Ys <- ifelse(y$PAD_subtype == 'PAD-I',1,ifelse(y$PAD_subtype == 'PAD-II',2,ifelse(y$PAD_subtype == 'PAD-III',3,ifelse(y$PAD_subtype == 'PAD-IV',4,NA)))); table(Ys)/length(Ys)
 # Ys
 #         1         2         3         4 
 # 0.1010169 0.2474576 0.1694915 0.4820339
 ```
-
 
 Get the number of subtype:
 
@@ -111,7 +125,6 @@ Other parameteres for modeling:
 
 
 ```r
-
 # Build 20 models
 n=20 
 
@@ -204,7 +217,6 @@ print(geneSet)
 Just fit the model like: 
 
 ```
-
 if(!auto){
   
   # Self-defined
@@ -255,8 +267,8 @@ if(!auto){
   # 1.10s  2.60s    2311.55s
 }
 
-mymusic() # Remind me with a music when the process completed
-
+# Remind me with a music when the process completed
+mymusic() 
 ```
 
 You should save it for convenience:
@@ -321,13 +333,11 @@ scaller.train <- list(
       ), 
       Model = bst
     )
-
 ```
-
 
 ### Assemble your model
 
-> For more information of `geneAnnotation`, you could see [Advanced development: Gene Annotation](https://github.com/huangwb8/GSClassifier/wiki/Advanced-development#Gene-Annotation) section for assistance.
+For more information of `geneAnnotation`, you could see [Advanced development: Gene Annotation](https://github.com/huangwb8/GSClassifier/wiki/Advanced-development#Gene-Annotation) section for assistance.
 
 Here we give an example: 
 
@@ -345,14 +355,12 @@ l.train[['geneAnnotation']] <- <Your gene annotation>
 
 # Your gene sets
 l.train[['geneSet']] <- geneSet
-
 ```
 
 Finally, save it for downstream analysis
 
 ```
 saveRDS(l.train,'<Your path>/train.rds')
-
 ```
 
 About model constributions, you can go `Advanced development` in  [here](https://github.com/huangwb8/GSClassifier/wiki/Advanced-development) or [here](http://htmlpreview.github.io/?https://raw.githubusercontent.com/wiki/huangwb8/GSClassifier/Advanced-development.html) for more information.
@@ -395,7 +403,7 @@ res_i = callEnsemble(
 
 ```
 
-The usage of `parCallEnsemble` (for huge amount of samples) is similar.
+The usage of `parCallEnsemble` (for huge amount of samples) is similar. Empirically, `parCallEnsemble` can not perform better than `callEnsemble` in a small cohort for the process of xgboost would take advantage of multiple CPU cores.
 
 ## Number of SubModel {#topicSubmodel}
 
@@ -414,7 +422,7 @@ we also trained some models with different training cohorts (200 models) or with
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{./fig/model-no-02} 
+{\centering \includegraphics[width=0.5\linewidth]{./fig/model-no-02} 
 
 }
 
@@ -427,7 +435,6 @@ Here're some key parameters about how the latest PADi was trained.
 
 
 ```r
-
 # Build 100 models
 n = 100
 
@@ -454,4 +461,4 @@ params = list(max_depth = 10,
 caret.seed = NULL
 ```
 
-
+Enjoy **GSClassifier**!

@@ -12,14 +12,33 @@
 + Gibbs\' `PanCancer immune subtypes` based on five gene signatures (485 genes) could also be called in `GSClassifier`, with a pre-trained model from the [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier) package. If you use their jobs, please cite: [references](https://github.com/huangwb8/GSClassifier/wiki/Introduction#Reference).
 + Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.
 
+## Package
+
+
+```r
+# Install "devtools" package
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("devtools")
+
+# Install dependencies
+if (!requireNamespace("luckyBase", quietly = TRUE))
+  devtools::install_github("huangwb8/luckyBase")
+
+# Install the "GSClassifier" package
+if (!requireNamespace("GSClassifier", quietly = TRUE))
+  devtools::install_github("huangwb8/GSClassifier")
+
+# Load needed packages
+library(GSClassifier)
+# 载入需要的程辑包：luckyBase
+```
+
 ## Data
 
 To lower the learning cost of `GSClassifier`, we provides some test data: 
 
 
 ```r
-library(GSClassifier)
-# 载入需要的程辑包：luckyBase
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
 ```
 
@@ -89,7 +108,7 @@ res_pad <- PAD(
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Quick-start_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Quick-start_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 ```
 # Use default PIAM... 
@@ -121,9 +140,8 @@ In this section, we would showed how to use `PADi` series: `PADi`, `callEnsemble
 
 
 ```r
-
- X <- testData$Kim2018_3
- head(X)
+X <- testData$Kim2018_3
+head(X)
 #                   PB-16-002   PB-16-003   PB-16-004
 # ENSG00000121410  0.07075272 -2.08976724 -1.43569557
 # ENSG00000148584 -1.49631022 -0.23917056  0.94827471
@@ -423,7 +441,6 @@ Let's use our test data to do this:
 
 
 ```r
-
 X <- testData$Kim2018_3
 symbol <- convert(rownames(X))
 rownames(X) <- symbol
@@ -468,13 +485,13 @@ Check the result:
 ```r
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.188818e-03 0.561300665 5.644526e-06
-# 2 PB-16-003        4            4 3.850510e-07 0.018167170 1.061278e-04
-# 3 PB-16-004        3            3 2.023546e-06 0.001126488 3.085300e-01
-#              4           5           6
-# 1 0.1441195607 0.009215117 0.004637442
-# 2 0.4797146618 0.002543283 0.001036004
-# 3 0.0001895223 0.007044669 0.006298919
+# 1 PB-16-002        2            2 1.948102e-03 0.561300665 6.344361e-06
+# 2 PB-16-003        4            4 4.655444e-07 0.018167170 2.167503e-04
+# 3 PB-16-004        3            3 1.769171e-06 0.001126488 3.499345e-01
+#             4           5           6
+# 1 0.199184485 0.010949500 0.003233749
+# 2 0.491587177 0.002128245 0.002547915
+# 3 0.000189898 0.005802790 0.006511572
 ```
 
 

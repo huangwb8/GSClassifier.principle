@@ -8,7 +8,6 @@ In this section, we would discuss some key topics about **GSClassifier**, includ
 
 
 ```r
-
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -324,6 +323,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 
 
 ```r
+# Plot
 ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 

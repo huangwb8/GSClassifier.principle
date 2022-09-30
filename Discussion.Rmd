@@ -9,7 +9,6 @@ In this section, we would discuss some key topics about **GSClassifier**, includ
 ## Packages
 
 ```{r}
-
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -40,7 +39,6 @@ packages_needed <- c(
   "reshape2",
   "ggplot2")
 for(i in packages_needed){p_load(char=i)}
-
 ```
 
 Here is the environment of R programming:
@@ -223,6 +221,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 ```
 
 ```{r mvi03, fig.cap='The association between the number of missing value and subtype identification performance.', out.width='60%', fig.asp=.75, fig.align='center'}
+# Plot
 ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 

@@ -8,7 +8,6 @@ Leave some introductions
 
 
 ```r
-
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -122,7 +121,7 @@ The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
 ### Data Processing
 
-For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(batch-effect).
+For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype Vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(batch-effect).
 
 There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
 
@@ -257,9 +256,7 @@ Take **Sample4** as an example:
 
 
 ```r
-
 # Data of Sample4
-
 x <- expr[,4]
 
 # Create quantiles  
@@ -367,7 +364,6 @@ In practice, we use **ptail** to select differential genes based on rank diffren
 
 
 ```r
-
 # ptail is a numeber ranging (0,0.5].
 ptail = 0.4
 
@@ -517,7 +513,6 @@ In **GSClassifier**, we established **makeSetData** to evaluate set difference a
 
 
 ```r
-
 # Gene set difference across samples
 geneset_interaction <- GSClassifier:::makeSetData(expr_sub, geneSet)
 
@@ -535,7 +530,6 @@ Based on the structure of TSP in Figure \@ref(fig:tsp), TSP matrix of the simula
 
 
 ```r
-
 # TSP matrix
 tsp <- rbind(
   
@@ -582,7 +576,6 @@ Have a look at the distribution:
 
 
 ```r
-
 # Data
 tsp_df <- reshape2::melt(tsp)
 

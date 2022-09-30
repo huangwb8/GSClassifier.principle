@@ -171,7 +171,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-24}
+\date{2022-09-30}
 
 \begin{document}
 \maketitle
@@ -394,7 +394,7 @@ Here is the environment of R programming:
 # 
 # other attached packages:
 # [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.24  luckyBase_0.1.0     
+# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
 # [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
 # 
 # loaded via a namespace (and not attached):
@@ -408,7 +408,7 @@ Here is the environment of R programming:
 #  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
 #  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
 #  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.2-18       
+#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
 #  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
 #  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
 #  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
@@ -984,7 +984,7 @@ Here is the environment of R programming:
 # 
 # other attached packages:
 # [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.24  luckyBase_0.1.0     
+# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
 # [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
 # 
 # loaded via a namespace (and not attached):
@@ -998,7 +998,7 @@ Here is the environment of R programming:
 #  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
 #  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
 #  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.2-18       
+#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
 #  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
 #  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
 #  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
@@ -1283,13 +1283,14 @@ In order to confirmed the association between \textbf{gene counts} in modeling a
 \caption{Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.}\label{fig:be02}
 \end{figure}
 
-\hypertarget{hyperparameters}{%
-\section{Hyperparameters}\label{hyperparameters}}
+\hypertarget{subtype-number}{%
+\section{Subtype number}\label{subtype-number}}
 
-\hypertarget{topicSubmodel}{%
-\subsection{Number of SubModel}\label{topicSubmodel}}
+For PAD subtypes, it's easy to determine the subtype number as 4. First, PAD subtypes are identified via 2 simple GEPs. The binary status (high/low expression) of 2 GEPs consists of a 2×2 matrix and hence the subtype number is exactly 4. Second, four PAD subtypes displayed different genetic/epigenetic alterations and clinical features (survival and ICI response), indicating that it's biologically meaningful to distinguish gastric cancer into 4 immune subtypes. Third, clinicians are familiar with four subtypes, for the subtype number of the classical TNM stage in clinical oncology is 4 (Stage I to IV).
 
-Test
+Also, there's another more simple situation---determining the subtype number with only one GEP, where 2 (high/low) or 3 (low/moderate/high) deserve to be tried. However, with the number of GEPs increasing, the situation would become more complex. Regrettably, GSClassifier can not help determine what subtype number should be used; GSClassifier only promises a robust model no matter how many GEPs or subtypes. \textbf{There's no gold standard for subtype number selection, which is more like art instead of math}.
+
+Nevertheless, there're several suggestions we can follow for best practice. First, the R package ``\textbf{ConsensusClusterPlus}'' {[}\protect\hyperlink{ref-RN424}{27}{]} can help figure out consensus clustering for transcriptomic data, which provides visualization (consensus matrices, consensus cumulative distribution function plot, delta area plot, tracking plot, and so on) for clustering quality control. Second, \textbf{paying more attention to the biological problem usually gives extra or even crucial clues for the subtype number decision}.
 
 \hypertarget{quick-start}{%
 \chapter{Quick start}\label{quick-start}}
@@ -1747,13 +1748,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.310328e-03 0.561300665 3.774656e-06
-# 2 PB-16-003        4            4 4.871198e-07 0.018167170 8.224468e-05
-# 3 PB-16-004        3            3 5.167504e-06 0.001126488 3.979847e-01
+# 1 PB-16-002        2            2 1.188818e-03 0.561300665 5.644526e-06
+# 2 PB-16-003        4            4 3.850510e-07 0.018167170 1.061278e-04
+# 3 PB-16-004        3            3 2.023546e-06 0.001126488 3.085300e-01
 #              4           5           6
-# 1 0.2116912082 0.007000939 0.004592170
-# 2 0.4444785118 0.002137196 0.001838583
-# 3 0.0002455971 0.007858477 0.007305161
+# 1 0.1441195607 0.009215117 0.004637442
+# 2 0.4797146618 0.002543283 0.001036004
+# 3 0.0001895223 0.007044669 0.006298919
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -2277,6 +2278,64 @@ res_i = callEnsemble(
 
 The usage of \passthrough{\lstinline!parCallEnsemble!} (for huge amount of samples) is similar.
 
+\hypertarget{topicSubmodel}{%
+\section{Number of SubModel}\label{topicSubmodel}}
+
+In the latest version of \textbf{PADi}, we trained 100 \textbf{SubModel}s for subtype calling.
+
+we also trained some models with different training cohorts (200 models) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort) of sub-models. Our results showed that \textbf{the performance of these models is similar in the ``Kim2018'' cohort} (Figure \ref{fig:mn01} and \ref{fig:mn02}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/model-no-01} 
+
+}
+
+\caption{Performance of PADi models in “Kim2018” cohort with 200 different training seeds. Each row is the data of a seed. Each column is a sample from the “Kim2018” cohort.}\label{fig:mn01}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/model-no-02} 
+
+}
+
+\caption{Performance of PADi models in “Kim2018” cohort with different numbers of SubModel. The x-axis is the number of SubModels, and the y-axis is the AUC of ROC analysis for ICI response prediction.}\label{fig:mn02}
+\end{figure}
+
+\hypertarget{padiPara}{%
+\section{Parameters for PADi training}\label{padiPara}}
+
+Here're some key parameters about how the latest PADi was trained.
+
+\begin{lstlisting}[language=R]
+
+# Build 100 models
+n = 100
+
+# In every model, 70% samples in the training cohort would be selected.
+sampSize = 0.7
+
+# Seed for sampling
+sampSeed = 2020
+na.fill.seed = 443
+
+# A vector for gene rank estimation
+breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
+
+# Use 80% most variable gene & gene-pairs for modeling
+ptail = 0.8/2
+
+# Automatical selection of parameters for xGboost
+# self-defined params. Fast.
+params = list(max_depth = 10,
+              eta = 0.5,
+              nrounds = 100,
+              nthread = 10,
+              nfold=5)
+caret.seed = NULL
+\end{lstlisting}
+
 \hypertarget{suggestions-for-gsclassifier-model-developers}{%
 \chapter{Suggestions for GSClassifier model developers}\label{suggestions-for-gsclassifier-model-developers}}
 
@@ -2587,6 +2646,18 @@ Note: the \passthrough{\lstinline!luckyBase!} package integrates lots of useful 
 
 \leavevmode\vadjust pre{\hypertarget{ref-RN365}{}}%
 23. Zheng H, Xie J, Song K, et al. \href{https://doi.org/10.1186/s13287-022-02803-5}{StemSC: A cross-dataset human stemness index for single-cell samples}. Stem Cell Res Ther 2022; 13:115
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN421}{}}%
+24. Monti S, Tamayo P, Mesirov J, et al. Consensus clustering: A resampling-based method for class discovery and visualization of gene expression microarray data. 2003; 52:91--118
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN422}{}}%
+25. Wilkerson MD, Hayes DN. ConsensusClusterPlus: A class discovery tool with confidence assessments and item tracking. 2010; 26:1572--1573
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN423}{}}%
+26. Hayes DN, Monti S, Parmigiani G, et al. Gene expression profiling reveals reproducible human lung adenocarcinoma subtypes in multiple independent patient cohorts. 2006; 24:5079--5090
+
+\leavevmode\vadjust pre{\hypertarget{ref-RN424}{}}%
+27. Verhaak RG, Hoadley KA, Purdom E, et al. Integrated genomic analysis identifies clinically relevant subtypes of glioblastoma characterized by abnormalities in PDGFRA, IDH1, EGFR, and NF1. 2010; 17:98--110
 
 \end{CSLReferences}
 

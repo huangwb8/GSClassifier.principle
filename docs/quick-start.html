@@ -24,7 +24,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-24" />
+<meta name="date" content="2022-09-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,10 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="discussion.html#packages-1" id="toc-packages-1"><span class="toc-section-number">2.1</span> Packages</a></li>
 <li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.2</span> Missing value imputation (MVI)</a></li>
 <li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.3</span> Batch effect</a></li>
-<li><a href="discussion.html#hyperparameters" id="toc-hyperparameters"><span class="toc-section-number">2.4</span> Hyperparameters</a>
-<ul>
-<li><a href="discussion.html#topicSubmodel" id="toc-topicSubmodel"><span class="toc-section-number">2.4.1</span> Number of SubModel</a></li>
-</ul></li>
+<li><a href="discussion.html#subtype-number" id="toc-subtype-number"><span class="toc-section-number">2.4</span> Subtype number</a></li>
 </ul></li>
 <li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
 <ul>
@@ -206,6 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="model-establishment-via-gsclassifier.html#of-note-2" id="toc-of-note-2"><span class="toc-section-number">4.3.4</span> Of note</a></li>
 </ul></li>
 <li><a href="model-establishment-via-gsclassifier.html#calling-subtypes" id="toc-calling-subtypes"><span class="toc-section-number">4.4</span> Calling subtypes</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#topicSubmodel" id="toc-topicSubmodel"><span class="toc-section-number">4.5</span> Number of SubModel</a></li>
+<li><a href="model-establishment-via-gsclassifier.html#padiPara" id="toc-padiPara"><span class="toc-section-number">4.6</span> Parameters for PADi training</a></li>
 </ul></li>
 <li><a href="suggestions-for-gsclassifier-model-developers.html#suggestions-for-gsclassifier-model-developers" id="toc-suggestions-for-gsclassifier-model-developers"><span class="toc-section-number">5</span> Suggestions for GSClassifier model developers</a>
 <ul>
@@ -548,13 +547,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="quick-start.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb58-2"><a href="quick-start.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb58-3"><a href="quick-start.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.634928e-03 0.561300665 5.705414e-06</span></span>
-<span id="cb58-4"><a href="quick-start.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 2.389783e-07 0.018167170 1.763157e-04</span></span>
-<span id="cb58-5"><a href="quick-start.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 4.191432e-06 0.001126488 3.621989e-01</span></span>
-<span id="cb58-6"><a href="quick-start.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
-<span id="cb58-7"><a href="quick-start.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 1.793336e-01 0.011658502 0.002618050</span></span>
-<span id="cb58-8"><a href="quick-start.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 3.185009e-01 0.002095707 0.001721544</span></span>
-<span id="cb58-9"><a href="quick-start.html#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 9.530319e-05 0.007653435 0.005270626</span></span></code></pre></div>
+<span id="cb58-3"><a href="quick-start.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.276365e-03 0.561300665 5.829922e-06</span></span>
+<span id="cb58-4"><a href="quick-start.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 5.677076e-07 0.018167170 2.045679e-04</span></span>
+<span id="cb58-5"><a href="quick-start.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 4.357709e-06 0.001126488 3.189067e-01</span></span>
+<span id="cb58-6"><a href="quick-start.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5            6</span></span>
+<span id="cb58-7"><a href="quick-start.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.1499929354 0.006430760 0.0024917993</span></span>
+<span id="cb58-8"><a href="quick-start.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.4304890782 0.002282911 0.0009585772</span></span>
+<span id="cb58-9"><a href="quick-start.html#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0003032119 0.007653435 0.0039348695</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="quick-start.html#cb59-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb59-2"><a href="quick-start.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

@@ -64,7 +64,7 @@ Here is the environment of R programming:
 # 
 # other attached packages:
 # [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.24  luckyBase_0.1.0     
+# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
 # [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
 # 
 # loaded via a namespace (and not attached):
@@ -78,7 +78,7 @@ Here is the environment of R programming:
 #  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
 #  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
 #  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.2-18       
+#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
 #  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
 #  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
 #  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        

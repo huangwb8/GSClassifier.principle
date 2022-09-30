@@ -64,7 +64,7 @@ Here is the environment of R programming:
 # 
 # other attached packages:
 # [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.24  luckyBase_0.1.0     
+# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
 # [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
 # 
 # loaded via a namespace (and not attached):
@@ -78,7 +78,7 @@ Here is the environment of R programming:
 #  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
 #  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
 #  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.2-18       
+#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
 #  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
 #  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
 #  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
@@ -402,9 +402,18 @@ Batch effect reduction of TSP could be explained in three parts:
 + **Pair/set difference**.
 -->
 
-## Hyperparameters
+## Subtype number
+
+For PAD subtypes, it’s easy to determine the subtype number as 4. First, PAD subtypes are identified via 2 simple GEPs. The binary status (high/low expression) of 2 GEPs consists of a 2×2 matrix and hence the subtype number is exactly 4. Second, four PAD subtypes displayed different genetic/epigenetic alterations and clinical features (survival and ICI response), indicating that it’s biologically meaningful to distinguish gastric cancer into 4 immune subtypes. Third, clinicians are familiar with four subtypes, for the subtype number of the classical TNM stage in clinical oncology is 4 (Stage I to IV).
+
+Also, there’s another more simple situation—determining the subtype number with only one GEP, where 2 (high/low) or 3 (low/moderate/high) deserve to be tried. However, with the number of GEPs increasing, the situation would become more complex. Regrettably, GSClassifier can not help determine what subtype number should be used; GSClassifier only promises a robust model no matter how many GEPs or subtypes. **There’s no gold standard for subtype number selection, which is more like art instead of math**. 
+
+Nevertheless, there’re several suggestions we can follow for best practice. First, the R package “**ConsensusClusterPlus**” [@RN421, @RN422, @RN423, @RN424] can help figure out consensus clustering for transcriptomic data, which provides visualization (consensus matrices, consensus cumulative distribution function plot, delta area plot, tracking plot, and so on) for clustering quality control. Second, **paying more attention to the biological problem usually gives extra or even crucial clues for the subtype number decision**.
 
 <!--
+
+## Hyperparameters
+
 + modelData(): Prop, seed
 
 + fitEnsembleModel():
@@ -436,12 +445,6 @@ Batch effect reduction of TSP could be explained in three parts:
   subsample ：子样本数据占整个观测的比例，默认值为1（100%）。
   max_depth ：单个树的最大深度。
 -->
-
-
-### Number of SubModel {#topicSubmodel}
-
-
-Test
 
 
 

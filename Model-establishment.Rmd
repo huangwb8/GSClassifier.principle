@@ -377,4 +377,50 @@ res_i = callEnsemble(
 
 The usage of `parCallEnsemble` (for huge amount of samples) is similar.
 
+## Number of SubModel {#topicSubmodel}
+
+In the latest version of **PADi**, we trained 100 **SubModel**s for subtype calling. 
+
+we also trained some models with different training cohorts (200 models) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort) of sub-models. Our results showed that **the performance of these models is similar in the “Kim2018” cohort** (Figure \@ref(fig:mn01) and \@ref(fig:mn02)).
+
+```{r echo=FALSE, mn01, fig.cap='Performance of PADi models in “Kim2018” cohort with 200 different training seeds. Each row is the data of a seed. Each column is a sample from the “Kim2018” cohort.', out.width='90%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics(rep("./fig/model-no-01.png", 1))
+```
+
+```{r echo=FALSE, mn02, fig.cap='Performance of PADi models in “Kim2018” cohort with different numbers of SubModel. The x-axis is the number of SubModels, and the y-axis is the AUC of ROC analysis for ICI response prediction.', out.width='90%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics(rep("./fig/model-no-02.png", 1))
+```
+
+## Parameters for PADi training {#padiPara}
+
+Here're some key parameters about how the latest PADi was trained.
+
+```{r eval=FALSE}
+
+# Build 100 models
+n = 100
+
+# In every model, 70% samples in the training cohort would be selected.
+sampSize = 0.7
+
+# Seed for sampling
+sampSeed = 2020
+na.fill.seed = 443
+
+# A vector for gene rank estimation
+breakVec = c(0, 0.25, 0.5, 0.75, 1.0)
+
+# Use 80% most variable gene & gene-pairs for modeling
+ptail = 0.8/2
+
+# Automatical selection of parameters for xGboost
+# self-defined params. Fast.
+params = list(max_depth = 10,
+              eta = 0.5,
+              nrounds = 100,
+              nthread = 10,
+              nfold=5)
+caret.seed = NULL
+```
+
 

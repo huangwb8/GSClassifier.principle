@@ -9,8 +9,8 @@
 ## About
 
 + Although with bright prospects in Pan-disease analysis, [GSClassifier](https://github.com/huangwb8/GSClassifier) was primarily developed for clinic-friendly immune subtypes of gastric cancer (GC). Currently, only `PAD` subtypes and `PADi` for GC were supported. We would try to support more cancer types in the future as possible. More details in [Plans in the future](https://github.com/huangwb8/GSClassifier/wiki/Plans-in-the-future) section.
-+ Gibbs\' `PanCancer immune subtypes` based on five gene signatures (485 genes) could also be called in `GSClassifier`, with a pre-trained model from the [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier) package. If you use their jobs, please cite: [references](https://github.com/huangwb8/GSClassifier/wiki/Introduction#Reference).
-+ Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.
++ Gibbs\' `PanCancer immune subtypes` based on five gene signatures (485 genes) could also be called in `GSClassifier`, with a pre-trained model from the [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier) package. If you use their jobs, please cite [these papers](https://github.com/huangwb8/GSClassifier/wiki/Introduction#Reference).
++ Particularly, all normal tissues should be eliminated before subtype identificaiton for cancer research.
 
 ## Package
 
@@ -35,7 +35,7 @@ library(GSClassifier)
 
 ## Data
 
-To lower the learning cost of `GSClassifier`, we provides some test data: 
+To lower the learning cost of `GSClassifier`, we provide some test data: 
 
 
 ```r
@@ -55,7 +55,7 @@ names(testData)
 
 ### Preparation of the test data
 
-load phenotype data:
+Load phenotype data:
 
 
 ```r
@@ -68,7 +68,7 @@ table(design$Dataset)
 #       111        70       300        32       433       372
 ```
 
-load target sample IDs in `GSE54129` cohort:
+Load target sample IDs in `GSE54129` cohort:
 
 
 ```r
@@ -120,9 +120,9 @@ res_pad <- PAD(
 
 ### Of note
 
-+ It's strongly recommanded that the gene type of `expr` should be alway the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for examples).
++ It's strongly recommended that the gene type of `expr` should be always the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for example).
 
-+ `PAD` function is only for datasets with lots of samples for its classification depends on population-based unsupervised clusting. `PAD` is population-dependent and non-personalized.
++ `PAD` function is only for datasets with lots of samples for its classification depends on population-based unsupervised clustering. `PAD` is population-dependent and non-personalized.
 
 + Beta characteristics: You could try random forest classification based on the `randomForest` package or methods in `stats::hclust`. 
 
@@ -130,11 +130,11 @@ res_pad <- PAD(
 
 + In `GSClassifier`, `PADi` is a pre-trained out-of-the-box model for GC personalized PAD subtypes calling.
 
-+ During the sutype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, **you don't have to do batch normalization** even though the data (the `X` input) come from multiple cohorts or platform.
++ During the subtype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, **you don't have to do batch normalization** even though the data (the `X` input) come from multiple cohorts or platforms.
 
 + More limitations were discussed in our paper that you had better know.
 
-In this section, we would showed how to use `PADi` series: `PADi`, `callEnsemble`, and `parCallEnsemble` functions.
+In this section, we would show how to use `PADi` function series: `PADi`, `callEnsemble`, and `parCallEnsemble` functions.
 
 ### Preparation of the test data
 
@@ -207,7 +207,7 @@ head(res_padi)
 
 ### Parallel strategy for PADi
 
-+ Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, the parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of `GSClassifier` package.
++ Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of the `GSClassifier` package.
 
 + The parameter `numCores` was used to control the No. of CPU for computing (which depends on your CPU capacity).
 
@@ -233,7 +233,7 @@ res_padi <- parCallEnsemble(
 
 ### Single sample subtype calling
 
-In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of `PADi` series.
+In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of the `PADi` series.
 
 Supposed that there is a GC patient, its information should be:
 
@@ -304,7 +304,7 @@ head(res_padi)
 
 ### Of note
 
-+ In the results of `PADi`, two types of subtypes (`BestCall` and `BestCall_Max`) were integrated. `BestCall` was predicted based on a xgboost-trained model based on prior knowlege of `PAD` subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while `BestCall_Max` was predicted via maximum strategy. You should use THE SAME ONE in a specific practice no matter which one you use.
++ In the results of `PADi`, two types of subtypes (`BestCall` and `BestCall_Max`) were integrated. `BestCall` was predicted via an **xgboost** model based on prior knowledge of `PAD` subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while `BestCall_Max` was predicted via maximum strategy. Empirically, `BestCall` seemed to be a better choice.
 
 + `PADi` is individual-dependent and personalized, which means that the result of subtype calling would not be influenced by the data of others.
 
@@ -313,7 +313,7 @@ head(res_padi)
 
 In the future, there might be lots of models available as a resource of `GSClassifier`, such as [luckyModel](https://github.com/huangwb8/luckyModel). Here we show how `luckyModel` support `GSClassifier`.
 
-First, intall and load `luckyModel`:
+First, install and load `luckyModel`:
 
 
 ```r
@@ -340,7 +340,7 @@ list_model(project='GSClassifier')
 #   *Gibbs_PanCancerImmuneSubtype_v20190731
 #   *HWB_PAD_v20200110
 ```
-Here, `HWB_PAD_v20200110` is a standard name of `PADi`. They are exactly the same. 
+Here, `HWB_PAD_v20200110` is a standard name of `PADi`. They are the same. 
 
 Taking `PADi` as an example, we here show how to use an external model from `luckyModel`. First, load a model:
 
@@ -485,13 +485,13 @@ Check the result:
 ```r
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 6.299313e-04 0.561300665 1.142533e-05
-# 2 PB-16-003        4            4 2.980566e-07 0.018167170 1.766023e-04
-# 3 PB-16-004        3            3 8.586486e-06 0.001126488 3.211626e-01
+# 1 PB-16-002        2            2 1.201977e-03 0.561300665 7.722591e-06
+# 2 PB-16-003        4            4 3.865409e-07 0.018167170 1.611360e-04
+# 3 PB-16-004        3            3 5.132416e-06 0.001126488 2.040241e-01
 #              4           5           6
-# 1 0.1754801348 0.006115407 0.004148575
-# 2 0.3647226840 0.002709578 0.002669812
-# 3 0.0001703749 0.008878804 0.010563443
+# 1 0.2287567332 0.006611313 0.007155943
+# 2 0.5243493021 0.001982530 0.001759832
+# 3 0.0001839146 0.006606377 0.009214447
 ```
 
 

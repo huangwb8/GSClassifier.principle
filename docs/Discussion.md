@@ -120,7 +120,7 @@ Missing Value Imputation (MVI);
 + Experiments: leave genes out of validation cohorts and then test the performance of **GSClassifier**-PADi.
 -->
 
-Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process [@RN387; @RN389; @RN382], **missing value** in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15% [@RN392; @RN386]. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \@ref(fig:mvi01)), had been developed for **missing value imputation (MVI)** [@RN386]. Wang et al [@RN384] categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost [@xgboost] functions (`xgb.train`, `xgboost`, and `xgb.cv`) in GSClassifer, the missing value in expression matrix must be deleted or imputation.
+Due to reasons like weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution, or systematic errors during the laboratory process [@RN387; @RN389; @RN382], **missing value** in high-input genetic data is common. Generally, tiny missing values could be just dealt with case deletion, while the biological discovery might be damaged when the missing rate tops 15% [@RN392; @RN386]. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \@ref(fig:mvi01)), had been developed for **missing value imputation (MVI)** [@RN386]. Wang et al [@RN384] categorized MVI methods into simple (zeros or average), biology knowledge-, global learning-, local learning-, and hybrid-based methods. In order to satisfy the working conditions of **xgboost** [@xgboost] functions (`xgb.train`, `xgboost`, and `xgb.cv`) in GSClassifer, missing values in the expression matrix must be deleted or imputation.
 
 \begin{figure}
 
@@ -131,7 +131,7 @@ Due to reasons like low expression/weak signal, contamination of microarray surf
 \caption{Missing value imputation methods reviewed by Hasan et al.}(\#fig:mvi01)
 \end{figure}
 
-In **PAD** project, several strategies were applied to reduce the impact of missing values as possible. First, both **PIAM** and **PIDG** in **PAD** project were curated GEPs that were not be missing in over 80% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.
+In **PAD** project, several strategies were applied to reduce the impact of missing values as possible. First, both **PIAM** and **PIDG** in **PAD** project were curated GEPs that were not missing in over 80% of gastric cancer datasets. Here we showed the actual distribution of missing values across samples in gastric cancer datasets we used.
 
 
 ```r
@@ -182,9 +182,9 @@ ggplot(data = expr_pad_na_df,
 \caption{The distribution of missing value across gastric cancer samples.}(\#fig:mvi02)
 \end{figure}
 
-Second, we did conduct some MVI strategy to deal with data before model training in **GSClassifier**. Due to the low missing rate of our experimental data, we just **set missing value as zero** during model training and subtype identification in the early version of PADi (**PAD.train.v20200110**). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
+Second, we did conduct some MVI strategies to deal with data before model training in **GSClassifier**. Due to the low missing rate of our experimental data, we just **set missing values as zero** during model training and subtype identification in the early version of PADi (**PAD.train.v20200110**). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
 
-In the new version of PADi (**PAD.train.v20220917**), we designed the so-called **quantile** algorithm for random MVI during **PADi** model training, which also seemed to work well for PADi model training.
+In the latest version of PADi (**PAD.train.v20220916**), we designed the so-called **quantile** algorithm for random MVI during **PADi** model training, which also seemed to work well for PADi model training.
 
 <!--
 
@@ -253,7 +253,7 @@ print(expr)
 # Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14
 ```
 
-Look at the new matrix via heatmap, where the clustering result is not obviously disturbed after MVI:
+Look at the new matrix via heatmap, where the clustering result is not  significantly disturbed after MVI:
 
 
 ```r
@@ -264,7 +264,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 \begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-Due to missing value might damage the integrity of biological information, we explored **how much the number of missing value in one sample impacts subtype identification via PADi**. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC [@pROC] (masked data vs. MVI data). In **GSClassifier**, we developed a function called **mv_tolerance** to complete the task.
+Because missing values might damage the integrity of biological information, we explored **how much the number of missing values in one sample impacts subtype identification via PADi**. The steps are as follows: (i) we used the "quantile" algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportions of genes as zero expression; (iii) we calculated the relative multi-ROC [@pROC] (masked data vs. MVI data). In **GSClassifier**, we developed a function called **mv_tolerance** to complete the task.
 
 (i) Load the internal validation cohort:
 
@@ -345,13 +345,13 @@ ggplot(mvt_auc_df, aes(x,y)) +
 \caption{The association between the number of missing value and subtype identification performance.}(\#fig:mvi03)
 \end{figure}
 
-As showed in Figure \@ref(fig:mvi03), there is linear negative correlation between the number of missing value (mising rate ranges from 6.25% to 37.5%) and subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no mising value in PIAM/PIDG of the 'Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via **PADi**. Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision.
+As shown in Figure \@ref(fig:mvi03), there is a linear negative correlation between the number of missing values (missing rate ranges from 6.25% to 37.5%) and the subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no missing value in PIAM/PIDG of the 'Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via **PADi**. Nonetheless, we still used the **zero strategy** during subtype identification of **PADi** if any missing values exist, because randomization might make the result unstable, which is not suitable for clinical decision.
 <!--
 Nonetheless, we still used **zero strategy** during subtype identification of **PADi** if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision. 
 Moreover, we explored **if rescue of missing value would help improving the performance of PADi**. 
 -->
 
-In conclusion, zero or quantile strategy could be applied for MVI before **GSClassifier** model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of **GSClassifier**. Nonetheless, due to low-input GEPs used in **PADi** model (No. of Gene=32), it's easy to avoid missing value in clinical practice.
+In conclusion, the zero or "quantile" strategy could be applied for MVI before **GSClassifier** model training. However, missing values should be avoided as possible in subtype identification for missing values could damage the performance of **GSClassifier** models. Nonetheless, due to low-input GEPs used in **PADi** model (No. of Gene=32), it's easy to avoid missing value in clinical practice.
 
 ## Batch effect {#batch-effect}
 
@@ -368,7 +368,7 @@ Batch effect control & gene number
 -->
 
 
-**TSP** was widely applied to control batch effects in transciptomic data [@RN369; @RN367; @RN368; @RN364; @RN363; @RN362; @RN366; @RN365]. Still, we tested whether **TSP** is a robust method for batch effect control in real-world data. As demonstrated in Figure \@ref(fig:be01), the obvious batch effects across gastric cancer datsets were significantly reduced after **TSP** normalization.
+**TSP** was widely applied to control batch effects in transcriptomic data [@RN369; @RN367; @RN368; @RN364; @RN363; @RN362; @RN366; @RN365]. Still, we tested whether **TSP** is a robust method for batch effect control in real-world data. As demonstrated in Figure \@ref(fig:be01), the obvious batch effects across gastric cancer datasets were significantly reduced after **TSP** normalization.
 
 \begin{figure}
 
@@ -379,7 +379,7 @@ Batch effect control & gene number
 \caption{Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.}(\#fig:be01)
 \end{figure}
 
-In order to confirmed the association between **gene counts** in modeling and batch effect control via **TSP** normalization, we selected random genes with counts ranging 4, 8, 20, 40, and 80 for TSP matrix establishment. As shown in Figure \@ref(fig:be02), **TSP** normalization works greatly in different gene counts for batch effect control compared with raw expression matrix.
+To confirm the association between **gene counts** in modeling and batch effect control via **TSP** normalization, we selected random genes with counts ranging from 4 to 80 for TSP matrix establishment. As shown in Figure \@ref(fig:be02), **TSP** normalization works greatly in different gene counts for batch effect control compared with the raw expression matrix.
 
 \begin{figure}
 
@@ -442,20 +442,4 @@ Nevertheless, there’re several suggestions we can follow for best practice. Fi
   subsample ：子样本数据占整个观测的比例，默认值为1（100%）。
   max_depth ：单个树的最大深度。
 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

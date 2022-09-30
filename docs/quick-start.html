@@ -243,8 +243,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> About</h2>
 <ul>
 <li>Although with bright prospects in Pan-disease analysis, <a href="https://github.com/huangwb8/GSClassifier">GSClassifier</a> was primarily developed for clinic-friendly immune subtypes of gastric cancer (GC). Currently, only <code>PAD</code> subtypes and <code>PADi</code> for GC were supported. We would try to support more cancer types in the future as possible. More details in <a href="https://github.com/huangwb8/GSClassifier/wiki/Plans-in-the-future">Plans in the future</a> section.</li>
-<li>Gibbs' <code>PanCancer immune subtypes</code> based on five gene signatures (485 genes) could also be called in <code>GSClassifier</code>, with a pre-trained model from the <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a> package. If you use their jobs, please cite: <a href="https://github.com/huangwb8/GSClassifier/wiki/Introduction#Reference">references</a>.</li>
-<li>Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.</li>
+<li>Gibbs' <code>PanCancer immune subtypes</code> based on five gene signatures (485 genes) could also be called in <code>GSClassifier</code>, with a pre-trained model from the <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a> package. If you use their jobs, please cite <a href="https://github.com/huangwb8/GSClassifier/wiki/Introduction#Reference">these papers</a>.</li>
+<li>Particularly, all normal tissues should be eliminated before subtype identificaiton for cancer research.</li>
 </ul>
 </div>
 <div id="package" class="section level2" number="3.2">
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Data</h2>
-<p>To lower the learning cost of <code>GSClassifier</code>, we provides some test data:</p>
+<p>To lower the learning cost of <code>GSClassifier</code>, we provide some test data:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="quick-start.html#cb30-1" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span></code></pre></div>
 <p>Explore the <code>testData</code>:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="quick-start.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(testData)</span>
@@ -277,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.4</span> PAD</h2>
 <div id="preparation-of-the-test-data" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Preparation of the test data</h3>
-<p>load phenotype data:</p>
+<p>Load phenotype data:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="quick-start.html#cb32-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_phenotype_part</span>
 <span id="cb32-2"><a href="quick-start.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(design<span class="sc">$</span>Dataset)</span>
 <span id="cb32-3"><a href="quick-start.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
@@ -285,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-5"><a href="quick-start.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">#        65        39       192        43        96       108       134        94 </span></span>
 <span id="cb32-6"><a href="quick-start.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  GSE54129  GSE57303  GSE62254  GSE65801  GSE84437 TCGA-STAD </span></span>
 <span id="cb32-7"><a href="quick-start.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       111        70       300        32       433       372</span></span></code></pre></div>
-<p>load target sample IDs in <code>GSE54129</code> cohort:</p>
+<p>Load target sample IDs in <code>GSE54129</code> cohort:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="quick-start.html#cb33-1" aria-hidden="true" tabindex="-1"></a>target_ID <span class="ot">&lt;-</span> design<span class="sc">$</span>ID[design<span class="sc">$</span>Dataset <span class="sc">%in%</span> <span class="st">&#39;GSE54129&#39;</span>]</span>
 <span id="cb33-2"><a href="quick-start.html#cb33-2" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part[,target_ID]</span>
 <span id="cb33-3"><a href="quick-start.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(expr[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
@@ -323,8 +323,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="of-note" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Of note</h3>
 <ul>
-<li><p>It’s strongly recommanded that the gene type of <code>expr</code> should be alway the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for examples).</p></li>
-<li><p><code>PAD</code> function is only for datasets with lots of samples for its classification depends on population-based unsupervised clusting. <code>PAD</code> is population-dependent and non-personalized.</p></li>
+<li><p>It’s strongly recommended that the gene type of <code>expr</code> should be always the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for example).</p></li>
+<li><p><code>PAD</code> function is only for datasets with lots of samples for its classification depends on population-based unsupervised clustering. <code>PAD</code> is population-dependent and non-personalized.</p></li>
 <li><p>Beta characteristics: You could try random forest classification based on the <code>randomForest</code> package or methods in <code>stats::hclust</code>.</p></li>
 </ul>
 </div>
@@ -333,10 +333,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.5</span> PADi</h2>
 <ul>
 <li><p>In <code>GSClassifier</code>, <code>PADi</code> is a pre-trained out-of-the-box model for GC personalized PAD subtypes calling.</p></li>
-<li><p>During the sutype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, <strong>you don’t have to do batch normalization</strong> even though the data (the <code>X</code> input) come from multiple cohorts or platform.</p></li>
+<li><p>During the subtype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, <strong>you don’t have to do batch normalization</strong> even though the data (the <code>X</code> input) come from multiple cohorts or platforms.</p></li>
 <li><p>More limitations were discussed in our paper that you had better know.</p></li>
 </ul>
-<p>In this section, we would showed how to use <code>PADi</code> series: <code>PADi</code>, <code>callEnsemble</code>, and <code>parCallEnsemble</code> functions.</p>
+<p>In this section, we would show how to use <code>PADi</code> function series: <code>PADi</code>, <code>callEnsemble</code>, and <code>parCallEnsemble</code> functions.</p>
 <div id="preparation-of-the-test-data-1" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Preparation of the test data</h3>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="quick-start.html#cb36-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> testData<span class="sc">$</span>Kim2018_3</span>
@@ -384,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="parallel-strategy-for-padi" class="section level3" number="3.5.4">
 <h3><span class="header-section-number">3.5.4</span> Parallel strategy for PADi</h3>
 <ul>
-<li><p>Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, the parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of <code>GSClassifier</code> package.</p></li>
+<li><p>Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of the <code>GSClassifier</code> package.</p></li>
 <li><p>The parameter <code>numCores</code> was used to control the No. of CPU for computing (which depends on your CPU capacity).</p></li>
 </ul>
 <pre><code># No run for the tiny test data. With errors.
@@ -406,7 +406,7 @@ res_padi &lt;- parCallEnsemble(
 </div>
 <div id="single-sample-subtype-calling" class="section level3" number="3.5.5">
 <h3><span class="header-section-number">3.5.5</span> Single sample subtype calling</h3>
-<p>In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of <code>PADi</code> series.</p>
+<p>In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of the <code>PADi</code> series.</p>
 <p>Supposed that there is a GC patient, its information should be:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="quick-start.html#cb42-1" aria-hidden="true" tabindex="-1"></a>X_ind <span class="ot">&lt;-</span> X[,<span class="dv">1</span>]; <span class="fu">names</span>(X_ind) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(X)</span>
 <span id="cb42-2"><a href="quick-start.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X_ind)</span>
@@ -448,7 +448,7 @@ res_padi &lt;- parCallEnsemble(
 <div id="of-note-1" class="section level3" number="3.5.6">
 <h3><span class="header-section-number">3.5.6</span> Of note</h3>
 <ul>
-<li><p>In the results of <code>PADi</code>, two types of subtypes (<code>BestCall</code> and <code>BestCall_Max</code>) were integrated. <code>BestCall</code> was predicted based on a xgboost-trained model based on prior knowlege of <code>PAD</code> subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while <code>BestCall_Max</code> was predicted via maximum strategy. You should use THE SAME ONE in a specific practice no matter which one you use.</p></li>
+<li><p>In the results of <code>PADi</code>, two types of subtypes (<code>BestCall</code> and <code>BestCall_Max</code>) were integrated. <code>BestCall</code> was predicted via an <strong>xgboost</strong> model based on prior knowledge of <code>PAD</code> subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while <code>BestCall_Max</code> was predicted via maximum strategy. Empirically, <code>BestCall</code> seemed to be a better choice.</p></li>
 <li><p><code>PADi</code> is individual-dependent and personalized, which means that the result of subtype calling would not be influenced by the data of others.</p></li>
 </ul>
 </div>
@@ -456,7 +456,7 @@ res_padi &lt;- parCallEnsemble(
 <div id="use-external-models-from-luckymodel-package" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Use external models from luckyModel package</h2>
 <p>In the future, there might be lots of models available as a resource of <code>GSClassifier</code>, such as <a href="https://github.com/huangwb8/luckyModel">luckyModel</a>. Here we show how <code>luckyModel</code> support <code>GSClassifier</code>.</p>
-<p>First, intall and load <code>luckyModel</code>:</p>
+<p>First, install and load <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="quick-start.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install luckyModel</span></span>
 <span id="cb47-2"><a href="quick-start.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;luckyModel&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb47-3"><a href="quick-start.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;huangwb8/luckyModel&quot;</span>)</span>
@@ -469,7 +469,7 @@ res_padi &lt;- parCallEnsemble(
 <span id="cb49-2"><a href="quick-start.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available models in GSClassifier:</span></span>
 <span id="cb49-3"><a href="quick-start.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   *Gibbs_PanCancerImmuneSubtype_v20190731</span></span>
 <span id="cb49-4"><a href="quick-start.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   *HWB_PAD_v20200110</span></span></code></pre></div>
-<p>Here, <code>HWB_PAD_v20200110</code> is a standard name of <code>PADi</code>. They are exactly the same.</p>
+<p>Here, <code>HWB_PAD_v20200110</code> is a standard name of <code>PADi</code>. They are the same.</p>
 <p>Taking <code>PADi</code> as an example, we here show how to use an external model from <code>luckyModel</code>. First, load a model:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="quick-start.html#cb50-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(<span class="at">project =</span> <span class="st">&#39;GSClassifier&#39;</span>,</span>
 <span id="cb50-2"><a href="quick-start.html#cb50-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">developer=</span><span class="st">&#39;HWB&#39;</span>,</span>
@@ -562,13 +562,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="quick-start.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb59-2"><a href="quick-start.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb59-3"><a href="quick-start.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 2.355584e-03 0.561300665 5.383651e-06</span></span>
-<span id="cb59-4"><a href="quick-start.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 3.547607e-07 0.018167170 1.544256e-04</span></span>
-<span id="cb59-5"><a href="quick-start.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 4.872781e-06 0.001126488 2.904528e-01</span></span>
-<span id="cb59-6"><a href="quick-start.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
-<span id="cb59-7"><a href="quick-start.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.2872834802 0.009215117 0.003811775</span></span>
-<span id="cb59-8"><a href="quick-start.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.2880681455 0.002455097 0.001422522</span></span>
-<span id="cb59-9"><a href="quick-start.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0001678691 0.007653435 0.008210321</span></span></code></pre></div>
+<span id="cb59-3"><a href="quick-start.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.136198e-03 0.561300665 1.114968e-05</span></span>
+<span id="cb59-4"><a href="quick-start.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 6.261559e-07 0.018167170 6.067288e-05</span></span>
+<span id="cb59-5"><a href="quick-start.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 3.970684e-06 0.001126488 3.094811e-01</span></span>
+<span id="cb59-6"><a href="quick-start.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             4           5           6</span></span>
+<span id="cb59-7"><a href="quick-start.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.250004470 0.009215117 0.006368788</span></span>
+<span id="cb59-8"><a href="quick-start.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.423785776 0.002194726 0.002270643</span></span>
+<span id="cb59-9"><a href="quick-start.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.000163415 0.005643848 0.007284309</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="quick-start.html#cb60-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb60-2"><a href="quick-start.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

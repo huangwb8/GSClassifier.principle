@@ -7,9 +7,9 @@
 
 ## About
 
-+ The book `R packages` is a straightaway and useful reference book for R developers. The free-access website of `R packages` is [https://r-pkgs.org/](https://r-pkgs.org/). As a developer of R, if you haven't hear about it, it's strongly recommanded to just read it. Hadley Wickham, the main author of the book, is an active R developer and have led some master works like `ggplot2` and `plyr`.
++ The book `R packages` is a straightaway and useful reference book for R developers. The free-access website for `R packages` is [https://r-pkgs.org/](https://r-pkgs.org/). As a developer of R, if you haven't heard about it, it's strongly recommended to just read it. Hadley Wickham, the main author of the book, is an active R developer and has led some masterworks like `ggplot2` and `plyr`.
 
-+ With `GSClassifier` package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interesting in sharing your model, `GSClassifier` also provides a simple methodology for this vision. In this section, let's see how to achieve it!
++ With `GSClassifier` package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interested in sharing your model, `GSClassifier` also provides a simple methodology for this vision. In this section, let's see how to achieve it!
 
 First, load the package
 
@@ -21,7 +21,7 @@ library(GSClassifier)
 
 ## Available models
 
-With `GSClassifier_Data()`, all models supported in the current `GSClassifier` package would showed.
+With `GSClassifier_Data()`, all models supported in the current `GSClassifier` package would be shown.
 
 
 ```r
@@ -61,7 +61,7 @@ GSClassifier_Data(model = F)
 
 ## Components of a GSClassifier model
 
-Currently, a GSClassifier model and related product environments is designed as a `list` object. Let's take `PAD.train_20210110`(also called `PADi`) as an example.
+Currently, a GSClassifier model and related product environments are designed as a `list` object. Let's take `PAD.train_20210110`(also called `PADi`) as an example.
 
 
 ```r
@@ -116,11 +116,11 @@ More tutorials for model establishment, please go to [markdown tutorial](https:/
 
 ## Submit models to luckyModel package 
 
-Considering most users of `GSClassifier` might have no need for lots of models, We divided the model storage feature into an new ensembl package called [**luckyModel**](https://github.com/huangwb8/luckyModel). Don't worry, the usage is very easy!
+Considering most users of `GSClassifier` might not need lots of models, We divided the model storage feature into a new ensemble package called [**luckyModel**](https://github.com/huangwb8/luckyModel). Don't worry, the usage is very easy!
 
-If you want to summit your model, you should apply for a contributor of `luckyModel` first. Then, just send the model (`.rds`) into the `inst/extdata/<project>` path of `luckyModel`. After audit, your branch would be accepted and available for the users. 
+If you want to submit your model, you should apply for a contributor of `luckyModel` first. Then, just send the model (`.rds`) into the `inst/extdata/<project>` path of `luckyModel`. After an audit, your branch would be accepted and available for the users. 
 
-The name of your model must be the format as following:
+The name of your model must be the format as follows:
 
 ```
 # <project>
@@ -132,7 +132,7 @@ HWB_PAD_v20211201.rds
 
 ## Repeatablility of models
 
-For repeatablility, you had better submit a `.zip` or `.tar.gz` file that containing the information of your model. Here are some suggestions:  
+For repeatability, you had better submit a `.zip` or `.tar.gz` file containing the information of your model. Here are some suggestions:  
 
 + `<creator>_<model>_v<yyyymmdd>.md`
 
@@ -150,7 +150,7 @@ For repeatablility, you had better submit a `.zip` or `.tar.gz` file that contai
 
 + `Data-of-<creator>_<model>_v<yyyymmdd>.rds` (Optional): Due to huge size of omics data, it's OK for you not to submit the raw data.
 
-:cupid: Welcome your contributions!
+Welcome your contributions!
 
 ## Gene Annotation
 

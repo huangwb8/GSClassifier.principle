@@ -253,32 +253,32 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 -->
 <div id="about" class="section level2 unnumbered">
 <h2>💦About</h2>
-<p><strong>The Priciple of GSClassifier</strong> is a book for users of R package <strong>GSClassifier</strong> who want to know the most details. If you’re looking for the PDF edition, you can find it at <a href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.</p>
-<p><a href="https://github.com/huangwb8/GSClassifier"><strong>GSClassifier</strong></a> is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.The inspiration of <strong>GSClassifier</strong> come from <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a>, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al <span class="citation">[<a href="references.html#ref-RN160" role="doc-biblioref">1</a>,<a href="references.html#ref-RN315" role="doc-biblioref">2</a>]</span>.</p>
-<p>Lots of surprising features in <strong>GSClassifier</strong> as follows:</p>
+<p><strong>The Priciple of GSClassifier</strong> is a book for users of the R package <strong>GSClassifier</strong> who want to know the most details. If you’re looking for the PDF edition, you can find it <a href="https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf">here</a>.</p>
+<p><a href="https://github.com/huangwb8/GSClassifier"><strong>GSClassifier</strong></a> is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis. The inspiration for <strong>GSClassifier</strong> comes from <a href="https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier">ImmuneSubtypeClassifier</a>, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al <span class="citation">[<a href="references.html#ref-RN160" role="doc-biblioref">1</a>,<a href="references.html#ref-RN315" role="doc-biblioref">2</a>]</span>.</p>
+<p>Lots of surprising features in <strong>GSClassifier</strong> are as follows:</p>
 <ul>
 <li><p>Optimized for just <code>one sample</code></p></li>
 <li><p>Available for modeling and calling of brand-new <code>GEPs-based subtypes</code> in any diseases (cancers)</p></li>
-<li><p>No limitation of the amount of <code>gene signatures</code>(≥1) or <code>subtypes</code>(≥2)</p></li>
-<li><p><code>Normalization insensitive</code> due to the use of the individual <code>gene rank matrix</code></p></li>
+<li><p>No limitation of the number of <code>gene signatures</code>(≥1) or <code>subtypes</code>(≥2)</p></li>
+<li><p><code>Insensitive normalization</code> due to the use of the individual <code>gene rank matrix</code></p></li>
 <li><p>More ensemble and repeatable modeling process</p></li>
 <li><p>More optimizations in the parallel computing</p></li>
 <li><p>New useful functions as supplements</p></li>
 </ul>
-<p><strong>ATTENTION!</strong> In the future, there might be third-party contributors in <code>GSClassifier</code> platform, with some useful models for specific usages. If you use models provided by these people, <strong>you had better know more details as possible</strong>, including <strong>designs, data sources, destinations, training scripts and limitations</strong> of models, expecially those from studies under peer-review.</p>
+<p><strong>ATTENTION!</strong> In the future, there might be third-party contributors in <code>GSClassifier</code> platform, with some useful models for specific usages. If you use models provided by these people, <strong>you had better know more details as possible</strong>, including <strong>designs, data sources, destinations, training scripts, and limitations</strong> of models, especially those from studies under peer review.</p>
 </div>
 <div id="license" class="section level2 unnumbered">
 <h2>💿License</h2>
 <ul>
 <li><p><strong>GSClassifier</strong> is released under the Apache-2.0 license. See <a href="https://github.com/huangwb8/GSClassifier/blob/master/license.txt">LICENSE</a> for details.</p></li>
 <li><p>The technical documentation, as a whole, is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-
-NonCommercial-ShareAlike 4.0 International License</a>. The code contained in this book is simultaneously available under the <a href="https://opensource.org/licenses/MIT">MIT license</a>; this means that you are free to use it in your own packages, as long as you cite the source.</p></li>
+NonCommercial-ShareAlike 4.0 International License</a>. The code contained in this book is simultaneously available under the <a href="https://opensource.org/licenses/MIT">MIT license</a>; this means that you are free to use it in your packages, as long as you cite the source.</p></li>
 </ul>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></p>
 </div>
 <div id="installation" class="section level2 unnumbered">
 <h2>👍Installation</h2>
-<p><code>RStudio</code> is one of the best Integrated Development Environments (IDE) in R programming. If you’re struggling in R-GUI, it is recommanded to turn to <a href="https://www.rstudio.com/">RStudio (Posit)</a>.</p>
+<p><strong>RStudio/Posit</strong> is one of the best Integrated Development Environments (IDE) in R programming. If you’re struggling in R-GUI, it is recommended to turn to <a href="https://www.rstudio.com/">RStudio/Posit</a>.</p>
 <p>For installation of <strong>GSClassifier</strong>, please run these commands in an R environment:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install &quot;devtools&quot; package</span></span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
@@ -324,12 +324,12 @@ NonCommercial-ShareAlike 4.0 International License</a>. The code contained in th
 <div id="todo" class="section level2 unnumbered">
 <h2>📆TODO</h2>
 <ul>
-<li><p>More medical fields included, such as in Pan-cancer uitility</p></li>
+<li><p>More medical fields included, such as in the pan-cancer utility</p></li>
 <li><p>Advanced methods (such as artificial intelligence) for enhanced robustness</p></li>
-<li><p>Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledges</p></li>
+<li><p>Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledge</p></li>
 <li><p>Multi-omics exploration and support</p></li>
 <li><p>More friendly characteristics for developers and contributors</p></li>
-<li><p>Web application for newbies of R programing</p></li>
+<li><p>Web application for newbies to R programming</p></li>
 </ul>
 </div>
 <div id="other-projects" class="section level2 unnumbered">

@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> Model establishment via GSClassifier</h1>
 <div id="about-2" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> About</h2>
-<p>Sometimes, researchers might have their own gene signatures and know how many subtypes they want to call before (based on some knowledges). Gratifyingly, comprehensive functions were also provided in <code>GSClassifier</code>. In this section, we would show how to build a <code>GSClassifier</code> model like <code>PADi</code>.</p>
+<p>Sometimes, researchers might have their gene signatures and know how many subtypes they want to call before (based on some knowledge). Gratifyingly, comprehensive functions were also provided in <code>GSClassifier</code>. In this section, we would show how to build a <code>GSClassifier</code> model like <code>PADi</code>.</p>
 </div>
 <div id="data-preparation" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Data preparation</h2>
@@ -440,7 +440,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 mymusic() </code></pre>
 <p>You should save it for convenience:</p>
 <pre><code>saveRDS(res,&#39;&lt;your path&gt;/train_ens.rds&#39;)</code></pre>
-<p>Although a <code>auto-parameter strategy</code> was provided in<code>GSClassifier</code>, it’s unknown for this method to improve your model performance to what extent. You can just try. It’s not a prior recommendation. In generall, setting <code>auto=F</code> in this script could be more cost-effective. Empirically, the speed of <code>caret::train</code> depends on single-core performance of the CPU instead of the core number.</p>
+<p>Although an <code>auto-parameter strategy</code> (hyperparameter tuning) was provided in<code>GSClassifier</code>, it’s unknown whether this method could significantly improve your model performance. You can just try. It’s not a prior recommendation. Generally, setting <code>auto=F</code> in this script could be more cost-effective. Empirically, the speed of <code>caret::train</code> depends on the single-core performance of the CPU instead of the core number.</p>
 </div>
 <div id="scaller-for-the-best-call" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Scaller for the best call</h3>
@@ -496,7 +496,7 @@ scaller.train &lt;- list(
 </div>
 <div id="assemble-your-model" class="section level3" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Assemble your model</h3>
-<p>For more information of <code>geneAnnotation</code>, you could see <a href="https://github.com/huangwb8/GSClassifier/wiki/Advanced-development#Gene-Annotation">Advanced development: Gene Annotation</a> section for assistance.</p>
+<p>For more information of <code>geneAnnotation</code>, you could see the <a href="https://huangwb8.github.io/GSClassifier.principle/suggestions-for-gsclassifier-model-developers.html#gene-annotation">Suggestions for GSClassifier model developers: Gene Annotation</a> section for assistance.</p>
 <p>Here we give an example:</p>
 <pre><code>l.train &lt;- list()
 
@@ -543,7 +543,7 @@ res_i = callEnsemble(
   verbose = T
 )
 </code></pre>
-<p>The usage of <code>parCallEnsemble</code> (for huge amount of samples) is similar. Empirically, <code>parCallEnsemble</code> can not perform better than <code>callEnsemble</code> in a small cohort for the process of xgboost would take advantage of multiple CPU cores.</p>
+<p>The usage of <code>parCallEnsemble</code> (for a huge amount of samples) is similar. Empirically, <code>parCallEnsemble</code> can not perform better than <code>callEnsemble</code> in a small cohort for the process of xgboost would take advantage of multiple CPU cores.</p>
 </div>
 <div id="topicSubmodel" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Number of SubModel</h2>

@@ -242,8 +242,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="about-3" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> About</h2>
 <ul>
-<li><p>The book <code>R packages</code> is a straightaway and useful reference book for R developers. The free-access website of <code>R packages</code> is <a href="https://r-pkgs.org/">https://r-pkgs.org/</a>. As a developer of R, if you haven’t hear about it, it’s strongly recommanded to just read it. Hadley Wickham, the main author of the book, is an active R developer and have led some master works like <code>ggplot2</code> and <code>plyr</code>.</p></li>
-<li><p>With <code>GSClassifier</code> package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interesting in sharing your model, <code>GSClassifier</code> also provides a simple methodology for this vision. In this section, let’s see how to achieve it!</p></li>
+<li><p>The book <code>R packages</code> is a straightaway and useful reference book for R developers. The free-access website for <code>R packages</code> is <a href="https://r-pkgs.org/">https://r-pkgs.org/</a>. As a developer of R, if you haven’t heard about it, it’s strongly recommended to just read it. Hadley Wickham, the main author of the book, is an active R developer and has led some masterworks like <code>ggplot2</code> and <code>plyr</code>.</p></li>
+<li><p>With <code>GSClassifier</code> package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interested in sharing your model, <code>GSClassifier</code> also provides a simple methodology for this vision. In this section, let’s see how to achieve it!</p></li>
 </ul>
 <p>First, load the package</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GSClassifier)</span>
@@ -251,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="available-models" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Available models</h2>
-<p>With <code>GSClassifier_Data()</code>, all models supported in the current <code>GSClassifier</code> package would showed.</p>
+<p>With <code>GSClassifier_Data()</code>, all models supported in the current <code>GSClassifier</code> package would be shown.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GSClassifier_Data</span>()</span>
 <span id="cb86-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available data:</span></span>
 <span id="cb86-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage example:</span></span>
@@ -276,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="components-of-a-gsclassifier-model" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Components of a GSClassifier model</h2>
-<p>Currently, a GSClassifier model and related product environments is designed as a <code>list</code> object. Let’s take <code>PAD.train_20210110</code>(also called <code>PADi</code>) as an example.</p>
+<p>Currently, a GSClassifier model and related product environments are designed as a <code>list</code> object. Let’s take <code>PAD.train_20210110</code>(also called <code>PADi</code>) as an example.</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb89-1" aria-hidden="true" tabindex="-1"></a>PADi <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>)) </span></code></pre></div>
 <p>This picture shows the components of <code>PADi</code>:</p>
 <div class="figure" style="text-align: center"><span id="fig:GSClassifierModel"></span>
@@ -321,9 +321,9 @@ saveRDS(model, &#39;your-model.rds&#39;)
 </div>
 <div id="submit-models-to-luckymodel-package" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Submit models to luckyModel package</h2>
-<p>Considering most users of <code>GSClassifier</code> might have no need for lots of models, We divided the model storage feature into an new ensembl package called <a href="https://github.com/huangwb8/luckyModel"><strong>luckyModel</strong></a>. Don’t worry, the usage is very easy!</p>
-<p>If you want to summit your model, you should apply for a contributor of <code>luckyModel</code> first. Then, just send the model (<code>.rds</code>) into the <code>inst/extdata/&lt;project&gt;</code> path of <code>luckyModel</code>. After audit, your branch would be accepted and available for the users.</p>
-<p>The name of your model must be the format as following:</p>
+<p>Considering most users of <code>GSClassifier</code> might not need lots of models, We divided the model storage feature into a new ensemble package called <a href="https://github.com/huangwb8/luckyModel"><strong>luckyModel</strong></a>. Don’t worry, the usage is very easy!</p>
+<p>If you want to submit your model, you should apply for a contributor of <code>luckyModel</code> first. Then, just send the model (<code>.rds</code>) into the <code>inst/extdata/&lt;project&gt;</code> path of <code>luckyModel</code>. After an audit, your branch would be accepted and available for the users.</p>
+<p>The name of your model must be the format as follows:</p>
 <pre><code># &lt;project&gt;
 GSClassifier
 
@@ -332,7 +332,7 @@ HWB_PAD_v20211201.rds</code></pre>
 </div>
 <div id="repeatablility-of-models" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Repeatablility of models</h2>
-<p>For repeatablility, you had better submit a <code>.zip</code> or <code>.tar.gz</code> file that containing the information of your model. Here are some suggestions:</p>
+<p>For repeatability, you had better submit a <code>.zip</code> or <code>.tar.gz</code> file containing the information of your model. Here are some suggestions:</p>
 <ul>
 <li><p><code>&lt;creator&gt;_&lt;model&gt;_v&lt;yyyymmdd&gt;.md</code></p>
 <ul>
@@ -345,7 +345,7 @@ HWB_PAD_v20211201.rds</code></pre>
 <li><p><code>&lt;creator&gt;_&lt;model&gt;_v&lt;yyyymmdd&gt;.R</code>: The code you used for model training and validating.</p></li>
 <li><p><code>Data-of-&lt;creator&gt;_&lt;model&gt;_v&lt;yyyymmdd&gt;.rds</code> (Optional): Due to huge size of omics data, it’s OK for you not to submit the raw data.</p></li>
 </ul>
-<p>:cupid: Welcome your contributions!</p>
+<p>Welcome your contributions!</p>
 </div>
 <div id="gene-annotation" class="section level2" number="5.6">
 <h2><span class="header-section-number">5.6</span> Gene Annotation</h2>

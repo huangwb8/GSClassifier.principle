@@ -6,7 +6,7 @@
 
 ## About
 
-Sometimes, researchers might have their own gene signatures and know how many subtypes they want to call before (based on some knowledges). Gratifyingly, comprehensive functions were also provided in `GSClassifier`. In this section, we would show how to build a `GSClassifier` model like `PADi`.
+Sometimes, researchers might have their gene signatures and know how many subtypes they want to call before (based on some knowledge). Gratifyingly, comprehensive functions were also provided in `GSClassifier`. In this section, we would show how to build a `GSClassifier` model like `PADi`.
 
 
 ## Data preparation
@@ -277,7 +277,7 @@ You should save it for convenience:
 saveRDS(res,'<your path>/train_ens.rds')
 ```
 
-Although a `auto-parameter strategy` was provided in`GSClassifier`, it's unknown for this method to improve your model performance to what extent. You can just try. It's not a prior recommendation. In generall, setting `auto=F` in this script could be more cost-effective. Empirically, the speed of `caret::train` depends on single-core performance of the CPU instead of the core number.
+Although an `auto-parameter strategy` (hyperparameter tuning) was provided in`GSClassifier`, it's unknown whether this method could significantly improve your model performance. You can just try. It's not a prior recommendation. Generally, setting `auto=F` in this script could be more cost-effective. Empirically, the speed of `caret::train` depends on the single-core performance of the CPU instead of the core number.
 
 
 ### Scaller for the best call
@@ -337,7 +337,7 @@ scaller.train <- list(
 
 ### Assemble your model
 
-For more information of `geneAnnotation`, you could see [Advanced development: Gene Annotation](https://github.com/huangwb8/GSClassifier/wiki/Advanced-development#Gene-Annotation) section for assistance.
+For more information of `geneAnnotation`, you could see the [Suggestions for GSClassifier model developers: Gene Annotation](https://huangwb8.github.io/GSClassifier.principle/suggestions-for-gsclassifier-model-developers.html#gene-annotation) section for assistance.
 
 Here we give an example: 
 
@@ -403,7 +403,7 @@ res_i = callEnsemble(
 
 ```
 
-The usage of `parCallEnsemble` (for huge amount of samples) is similar. Empirically, `parCallEnsemble` can not perform better than `callEnsemble` in a small cohort for the process of xgboost would take advantage of multiple CPU cores.
+The usage of `parCallEnsemble` (for a huge amount of samples) is similar. Empirically, `parCallEnsemble` can not perform better than `callEnsemble` in a small cohort for the process of xgboost would take advantage of multiple CPU cores.
 
 ## Number of SubModel {#topicSubmodel}
 

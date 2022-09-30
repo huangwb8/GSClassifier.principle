@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  30 SEP 2022 10:57
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  30 SEP 2022 12:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1175,7 +1175,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [11]
 File: ./fig/flowchart.png Graphic file (type bmp)
 <./fig/flowchart.png>
-[12] [13] [14]
+[12] [13]
+Underfull \hbox (badness 1424) in paragraph at lines 458--459
+\TU/lmr/bx/n/12 Activation Module (PIAM) \TU/lmr/m/n/12 and \TU/lmr/bx/n/12 Pan
+-Immune Dysfunction Genes (PIDG)\TU/lmr/m/n/12 ,
+ []
+
+[14]
 File: ./fig/TSP.png Graphic file (type bmp)
 <./fig/TSP.png>
 [15]
@@ -1281,7 +1287,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [73] [74] [75]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[76] [77] [78]
+[76]
+Underfull \hbox (badness 10000) in paragraph at lines 2169--2170
+[]\TU/lmr/m/n/12 Although an [][][][][][][][][][][][] (hyperparameter tuning) w
+as provided
+ []
+
+[77] [78]
 Underfull \vbox (badness 6110) has occurred while \output is active []
 
 [79] [80] [81]
@@ -1316,12 +1328,12 @@ Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2679.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2679.
  ) 
 Here is how much of TeX's memory you used:
- 30440 strings out of 492922
- 544981 string characters out of 6130480
+ 30439 strings out of 492922
+ 544969 string characters out of 6130480
  930387 words of memory out of 5000000
- 34171 multiletter control sequences out of 15000+600000
+ 34170 multiletter control sequences out of 15000+600000
  538726 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,6n,115p,1319b,1765s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,6n,115p,1320b,1765s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on GSClassifier.principle.pdf (95 pages).

@@ -190,11 +190,11 @@
 \section*{About}\label{about}}
 \addcontentsline{toc}{section}{About}
 
-\textbf{The Priciple of GSClassifier} is a book for users of R package \textbf{GSClassifier} who want to know the most details. If you're looking for the PDF edition, you can find it at \href{https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf}{here}.
+\textbf{The Priciple of GSClassifier} is a book for users of the R package \textbf{GSClassifier} who want to know the most details. If you're looking for the PDF edition, you can find it \href{https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf}{here}.
 
-\href{https://github.com/huangwb8/GSClassifier}{\textbf{GSClassifier}} is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.The inspiration of \textbf{GSClassifier} come from \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier}, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al {[}\protect\hyperlink{ref-RN160}{1},\protect\hyperlink{ref-RN315}{2}{]}.
+\href{https://github.com/huangwb8/GSClassifier}{\textbf{GSClassifier}} is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis. The inspiration for \textbf{GSClassifier} comes from \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier}, an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al {[}\protect\hyperlink{ref-RN160}{1},\protect\hyperlink{ref-RN315}{2}{]}.
 
-Lots of surprising features in \textbf{GSClassifier} as follows:
+Lots of surprising features in \textbf{GSClassifier} are as follows:
 
 \begin{itemize}
 \item
@@ -202,9 +202,9 @@ Lots of surprising features in \textbf{GSClassifier} as follows:
 \item
   Available for modeling and calling of brand-new \passthrough{\lstinline!GEPs-based subtypes!} in any diseases (cancers)
 \item
-  No limitation of the amount of \passthrough{\lstinline!gene signatures!}(≥1) or \passthrough{\lstinline!subtypes!}(≥2)
+  No limitation of the number of \passthrough{\lstinline!gene signatures!}(≥1) or \passthrough{\lstinline!subtypes!}(≥2)
 \item
-  \passthrough{\lstinline!Normalization insensitive!} due to the use of the individual \passthrough{\lstinline!gene rank matrix!}
+  \passthrough{\lstinline!Insensitive normalization!} due to the use of the individual \passthrough{\lstinline!gene rank matrix!}
 \item
   More ensemble and repeatable modeling process
 \item
@@ -213,7 +213,7 @@ Lots of surprising features in \textbf{GSClassifier} as follows:
   New useful functions as supplements
 \end{itemize}
 
-\textbf{ATTENTION!} In the future, there might be third-party contributors in \passthrough{\lstinline!GSClassifier!} platform, with some useful models for specific usages. If you use models provided by these people, \textbf{you had better know more details as possible}, including \textbf{designs, data sources, destinations, training scripts and limitations} of models, expecially those from studies under peer-review.
+\textbf{ATTENTION!} In the future, there might be third-party contributors in \passthrough{\lstinline!GSClassifier!} platform, with some useful models for specific usages. If you use models provided by these people, \textbf{you had better know more details as possible}, including \textbf{designs, data sources, destinations, training scripts, and limitations} of models, especially those from studies under peer review.
 
 \hypertarget{license}{%
 \section*{License}\label{license}}
@@ -224,14 +224,14 @@ Lots of surprising features in \textbf{GSClassifier} as follows:
   \textbf{GSClassifier} is released under the Apache-2.0 license. See \href{https://github.com/huangwb8/GSClassifier/blob/master/license.txt}{LICENSE} for details.
 \item
   The technical documentation, as a whole, is licensed under a \href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{Creative Commons Attribution-
-  NonCommercial-ShareAlike 4.0 International License}. The code contained in this book is simultaneously available under the \href{https://opensource.org/licenses/MIT}{MIT license}; this means that you are free to use it in your own packages, as long as you cite the source.
+  NonCommercial-ShareAlike 4.0 International License}. The code contained in this book is simultaneously available under the \href{https://opensource.org/licenses/MIT}{MIT license}; this means that you are free to use it in your packages, as long as you cite the source.
 \end{itemize}
 
 \hypertarget{installation}{%
 \section*{Installation}\label{installation}}
 \addcontentsline{toc}{section}{Installation}
 
-\passthrough{\lstinline!RStudio!} is one of the best Integrated Development Environments (IDE) in R programming. If you're struggling in R-GUI, it is recommanded to turn to \href{https://www.rstudio.com/}{RStudio (Posit)}.
+\textbf{RStudio/Posit} is one of the best Integrated Development Environments (IDE) in R programming. If you're struggling in R-GUI, it is recommended to turn to \href{https://www.rstudio.com/}{RStudio/Posit}.
 
 For installation of \textbf{GSClassifier}, please run these commands in an R environment:
 
@@ -304,17 +304,17 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 
 \begin{itemize}
 \item
-  More medical fields included, such as in Pan-cancer uitility
+  More medical fields included, such as in the pan-cancer utility
 \item
   Advanced methods (such as artificial intelligence) for enhanced robustness
 \item
-  Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledges
+  Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledge
 \item
   Multi-omics exploration and support
 \item
   More friendly characteristics for developers and contributors
 \item
-  Web application for newbies of R programing
+  Web application for newbies to R programming
 \end{itemize}
 
 \hypertarget{other-projects}{%
@@ -453,23 +453,23 @@ The flowchart of \textbf{GSClassifier} is showed in Figure \ref{fig:flowchart}.
 \hypertarget{data-processing}{%
 \subsection{Data Processing}\label{data-processing}}
 
-For each dataset, RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype Vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{batch-effect}.
+For each dataset, the RNA expression matrix would be normalized internally (\textbf{Raw Matrix}) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \ref{fig:flowchart}, the \textbf{Subtype Vector} is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \ref{batch-effect}.
 
-There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For \textbf{Pan-immune Activation and Dysfunction (PAD)} subtypes, the GEPs, \textbf{Pan-Immune Activation Module (PIAM)} and \textbf{Pan-Immune Dysfunction Genes (PIDG)}, are biologically associated and suitable for calling four sutbypes (PIAM\textsuperscript{high}PIDG\textsuperscript{high}, PIAM\textsuperscript{high}PIDG\textsuperscript{low}, PIAM\textsuperscript{low}PIDG\textsuperscript{high}, and PIAM\textsuperscript{low}PIDG\textsuperscript{low}). Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs), the biological significance, or the ideas of researchers. For \textbf{Pan-immune Activation and Dysfunction (PAD)} subtypes, the GEPs, \textbf{Pan-Immune Activation Module (PIAM)} and \textbf{Pan-Immune Dysfunction Genes (PIDG)}, are biologically associated and suitable for calling four subtypes (PIAM\textsuperscript{high}PIDG\textsuperscript{high}, PIAM\textsuperscript{high}PIDG\textsuperscript{low}, PIAM\textsuperscript{low}PIDG\textsuperscript{high}, and PIAM\textsuperscript{low}PIDG\textsuperscript{low}). Theoretically, we can also use a category strategy like low/medium/high, but more evidence or motivations are lacking for chasing such a complex model.
 
 With subtype vectors and raw matrices, \textbf{Top Scoring Pairs (TSP)}, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP normalization are summarized in \ref{topicTSP}.
 
 \hypertarget{model-establishment-and-validation}{%
 \subsection{Model Establishment and Validation}\label{model-establishment-and-validation}}
 
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{SubSet} (70\% of the training cohort in PAD project) would be further selected randomly to build a \textbf{SubModel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) {[}\protect\hyperlink{ref-RN345}{3}{]}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
+The TSP matrix would be divided into the training cohort and the internal validation cohort. In the PAD project, the rate of samples (training vs.~test) is \textbf{7:3}. Next, each \textbf{SubSet} (70\% of the training cohort) would be further selected randomly to build a \textbf{SubModel} via cross-validation Extreme Gradient Boosting algorithm (\textbf{xgboost::xgb.cv} function) {[}\protect\hyperlink{ref-RN345}{3}{]}. The number of submodels is suggested over 20 (more details in \ref{topicSubmodel}).
 
-The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, \textbf{the data of both internal and external validation cohort would not be used during model training} so as to avoid over-fitting.
+The internal validation cohort and external validation cohort (if any) would be used to test the performance of the trained model. By the way, \textbf{the data of both internal and external validation cohorts would not be used during model training} to avoid over-fitting.
 
 \hypertarget{model-application}{%
 \subsection{Model Application}\label{model-application}}
 
-In PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``PAD for individual'' (\textbf{PADi}). Supposed raw RNA expression of a sample was given. As showed in \ref{fig:flowchart} and \ref{fig:tsp}, \textbf{GSClassifier} would turn raw RNA expression into a TSP vector, which would be as a input to \textbf{Model for individual}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest \textbf{Model for individual} (\textbf{PADi}, etc) as personalized model.
+In the PAD project, \textbf{Model for individual}, the ensemble of submodels, is called ``PAD for individual'' (\textbf{PADi}). Supposed raw RNA expression of a sample was given. As shown in \ref{fig:flowchart} and \ref{fig:tsp}, \textbf{GSClassifier} would turn raw RNA expression into a TSP vector, which would be as an input to \textbf{Model for individual}. Then, \textbf{GSClassifier} would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest \textbf{Model for individual} (\textbf{PADi}, etc) as personalized model.
 
 \hypertarget{topicTSP}{%
 \section{Top scoring pairs}\label{topicTSP}}
@@ -479,7 +479,7 @@ In PAD project, \textbf{Model for individual}, the ensemble of submodels, is cal
 
 Genes expression of an individual is normalized during the model training and the subtype identification via \textbf{Top Scoring Pairs} (\textbf{TSP}, also called \textbf{Relative Expression Orderings} (\textbf{REOs})) algorithm, which was previously described by Geman et al {[}\protect\hyperlink{ref-RN267}{4}{]}. \textbf{TSP} normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. \textbf{TSP} had been used in cancer research and effectively predicts cancer progression and ICIs response {[}\protect\hyperlink{ref-RN265}{5}--\protect\hyperlink{ref-RN261}{7}{]}.
 
-As show in Figure \ref{fig:tsp}, The TSP data in GSClassifier consists of three parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+As shown in Figure \ref{fig:tsp}, The TSP data in GSClassifier consists of three parts: \textbf{binned expression}, \textbf{pair difference}, and \textbf{set difference}. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 \begin{figure}
 
@@ -570,13 +570,13 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 \begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-This is an intersting dataset with features as following:
+This is an interesting dataset with features as follows:
 
 \begin{itemize}
 \item
-  \textbf{Distinguished gene sets}: The expression profile between \textbf{Gene 1-3} and \textbf{Gene 4-6} is obviously different arross samples. Thus, these gene sets might represent different biology meaning.
+  \textbf{Distinguished gene sets}: The expression profile between \textbf{Gene 1-3} and \textbf{Gene 4-6} is different across samples. Thus, these gene sets might represent different biological significance.
 \item
-  \textbf{Stable gene}: The expression level and rank of \textbf{Gene 7} seemed to be similar across samples. Thus, \textbf{Gene 7} might not be a robust marker for subtype modeling. Thus, it could help us to understand how filtering of \textbf{GSClassifier} works.
+  \textbf{Stable gene}: The expression level and rank of \textbf{Gene 7} seemed to be similar across samples. Thus, \textbf{Gene 7} might not be a robust marker for subtype modeling. Thus, it could help us to understand how the filtering of \textbf{GSClassifier} works.
 \item
   \textbf{Expression heterogeneity \& rank homogeneity}: Take \textbf{Sample1} and \textbf{Sample3} as examples. The expression of \textbf{Gene 1-6} in \textbf{Sample3} seemed to be higher than those of \textbf{Sample1}. However, the expression of \textbf{Gene 1-3} is higher than \textbf{Gene 4-6} in both \textbf{Sample1} and \textbf{Sample3}, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 \end{itemize}
@@ -584,7 +584,7 @@ This is an intersting dataset with features as following:
 \hypertarget{binned-expression}{%
 \subsection{Binned expression}\label{binned-expression}}
 
-First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
+First, we binned genes with different quantile intervals so that the distribution of rank information could be more consistent across samples.
 
 Take \textbf{Sample4} as an example:
 
@@ -644,9 +644,9 @@ print(expr_binned)
 # Gene7       1       1       1       1       1       1
 \end{lstlisting}
 
-In this simulated dataset, \textbf{Gene7} is a gene whose expression is always the lowest across all samples. In other words, the rank of \textbf{Gene7} is stable or invariable across samples so that it's not robust for identification of differentail subtypes.
+In this simulated dataset, \textbf{Gene7} is a gene whose expression is always the lowest across all samples. In other words, the rank of \textbf{Gene7} is stable or invariable across samples so it's not robust for the identification of differential subtypes.
 
-Except binned expression, we also calculated pair difference later. Due to the number of gene pair is \(C_{2 \atop n}\), the removement of genes like \textbf{Gene7} before modeling could really reduce the complexibility and save computing resources. In all, genes with low rank difference should be dropped out in some extent in \textbf{GSClassifier}.
+Except for binned expression, we also calculated pair difference later. Because the number of gene pairs is \(C_{2 \atop n}\), the exclusion of genes like \textbf{Gene7} before modeling could reduce the complexity and save computing resources. In all, genes with low-rank differences should be dropped out to some extent in \textbf{GSClassifier}.
 
 First, We use \textbf{base::rank} to return the sample ranks of the values in a vector:
 
@@ -688,7 +688,7 @@ print(testRes)
 # -2.666667 -2.500000 -4.333333  3.166667  2.500000  3.833333  0.000000
 \end{lstlisting}
 
-\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence. By the way, \textbf{Gene 1-3} have the same direction (\textless0), so do \textbf{Gene 4-6} (\textgreater0), which indicates the nature of clustering based on these two gene sets.
+\textbf{Gene7} is the one with the lowest absolute value (0) of rank diffrence. By the way, \textbf{Gene 1-3} have the same direction (\textless0), and so does \textbf{Gene 4-6} (\textgreater0), which indicates the nature of clustering based on these two gene sets.
 
 In practice, we use \textbf{ptail} to select differential genes based on rank diffrences. \textbf{Smaller ptail is, less gene kept}. Here, we just set \textbf{ptail=0.4}:
 
@@ -719,7 +719,7 @@ Hence, \textbf{Gene7} was filtered and excluded in the following analysis. By th
 \hypertarget{pair-difference}{%
 \subsection{Pair difference}\label{pair-difference}}
 
-In GSClassifier, we use a ensemble function \textbf{featureSelection} to select data for pair difference scoring.
+In GSClassifier, we use an ensemble function \textbf{featureSelection} to select data for pair difference scoring.
 
 \begin{lstlisting}[language=R]
 expr_feat <- featureSelection(expr, Ybin,
@@ -748,7 +748,7 @@ print(gene_bigRank)
 # [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
 \end{lstlisting}
 
-In GSClassifier, we use function \textbf{makeGenePairs} to calculate s
+In GSClassifier, we use function \textbf{makeGenePairs} to calculate pair differences:
 
 \begin{lstlisting}[language=R]
 gene_bigRank_pairs <- GSClassifier:::makeGenePairs(
@@ -773,12 +773,12 @@ print(gene_bigRank_pairs)
 # Gene5:Gene6       0       1       1       0       1       0
 \end{lstlisting}
 
-Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between \textbf{Sample 1-3} and \textbf{Sample 4-6} is obivous, revealing the robustness of pair difference for subtype identification.
+Take \textbf{Gene1:Gene4} of \textbf{Sample1} as an example. \(Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0\), so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the scoring differences of gene pairs between \textbf{Sample 1-3} and \textbf{Sample 4-6} are obvious, revealing the robustness of pair difference for subtype identification.
 
 \hypertarget{set-difference}{%
 \subsection{Set difference}\label{set-difference}}
 
-In \textbf{GSClassifier}, \textbf{Set difference} is defined as a weight average of gene-geneset rank difference.
+In \textbf{GSClassifier}, \textbf{set difference} is defined as a weight average of gene-geneset rank difference.
 
 \begin{lstlisting}[language=R]
 # No. of gene sets
@@ -851,9 +851,9 @@ print(resMat)
 # s1s2       1       1       1       0       0       0
 \end{lstlisting}
 
-We have known that the subtype of \textbf{Sample 1-3} differs from that of \textbf{Sample 4-6}, which revealed the robustness of set difference for subtype indentification.
+We have known that the subtype of \textbf{Sample 1-3} differs from that of \textbf{Sample 4-6}, which revealed the robustness of set differences for subtype identification.
 
-Based on the structure of TSP in Figure \ref{fig:tsp}, TSP matrix of the simulated dataset should be :
+Based on the structure of TSP in Figure \ref{fig:tsp}, the TSP matrix of the simulated dataset should be :
 
 \begin{lstlisting}[language=R]
 # TSP matrix
@@ -1022,7 +1022,7 @@ Here is the environment of R programming:
 \hypertarget{missing-value-imputation-mvi}{%
 \section{Missing value imputation (MVI)}\label{missing-value-imputation-mvi}}
 
-Due to reasons like low expression/weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution or systematic errors during the laboratory process {[}\protect\hyperlink{ref-RN387}{8}--\protect\hyperlink{ref-RN382}{10}{]}, \textbf{missing value} in high-imput genetic data is common. Generally, tiny missing value could be just dealed with case deletion, while the biological discovery might be damaged when the missing rate tops 15\% {[}\protect\hyperlink{ref-RN392}{11},\protect\hyperlink{ref-RN386}{12}{]}. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \ref{fig:mvi01}), had been developed for \textbf{missing value imputation (MVI)} {[}\protect\hyperlink{ref-RN386}{12}{]}. Wang et al {[}\protect\hyperlink{ref-RN384}{13}{]} categorized MVI methods into simple (zeros or average),biology knowledge-, global learning-, local learning-, hybrid-based methods. In order to satisfy the working conditions of xgboost {[}\protect\hyperlink{ref-xgboost}{14}{]} functions (\passthrough{\lstinline!xgb.train!}, \passthrough{\lstinline!xgboost!}, and \passthrough{\lstinline!xgb.cv!}) in GSClassifer, the missing value in expression matrix must be deleted or imputation.
+Due to reasons like weak signal, contamination of microarray surfaces, inappropriate manual operations, insufficient resolution, or systematic errors during the laboratory process {[}\protect\hyperlink{ref-RN387}{8}--\protect\hyperlink{ref-RN382}{10}{]}, \textbf{missing value} in high-input genetic data is common. Generally, tiny missing values could be just dealt with case deletion, while the biological discovery might be damaged when the missing rate tops 15\% {[}\protect\hyperlink{ref-RN392}{11},\protect\hyperlink{ref-RN386}{12}{]}. Currently, lots of methods, including statistic-based or machine learning-based methods (Figure \ref{fig:mvi01}), had been developed for \textbf{missing value imputation (MVI)} {[}\protect\hyperlink{ref-RN386}{12}{]}. Wang et al {[}\protect\hyperlink{ref-RN384}{13}{]} categorized MVI methods into simple (zeros or average), biology knowledge-, global learning-, local learning-, and hybrid-based methods. In order to satisfy the working conditions of \textbf{xgboost} {[}\protect\hyperlink{ref-xgboost}{14}{]} functions (\passthrough{\lstinline!xgb.train!}, \passthrough{\lstinline!xgboost!}, and \passthrough{\lstinline!xgb.cv!}) in GSClassifer, missing values in the expression matrix must be deleted or imputation.
 
 \begin{figure}
 
@@ -1033,7 +1033,7 @@ Due to reasons like low expression/weak signal, contamination of microarray surf
 \caption{Missing value imputation methods reviewed by Hasan et al.}\label{fig:mvi01}
 \end{figure}
 
-In \textbf{PAD} project, several strategies were applied to reduce the impact of missing values as possible. First, both \textbf{PIAM} and \textbf{PIDG} in \textbf{PAD} project were curated GEPs that were not be missing in over 80\% gastric cancer datasets. Here we showed the actual distribution of missing value across samples in gastric cancer datasets we used.
+In \textbf{PAD} project, several strategies were applied to reduce the impact of missing values as possible. First, both \textbf{PIAM} and \textbf{PIDG} in \textbf{PAD} project were curated GEPs that were not missing in over 80\% of gastric cancer datasets. Here we showed the actual distribution of missing values across samples in gastric cancer datasets we used.
 
 \begin{lstlisting}[language=R]
 # Data
@@ -1082,9 +1082,9 @@ ggplot(data = expr_pad_na_df,
 \caption{The distribution of missing value across gastric cancer samples.}\label{fig:mvi02}
 \end{figure}
 
-Second, we did conduct some MVI strategy to deal with data before model training in \textbf{GSClassifier}. Due to the low missing rate of our experimental data, we just \textbf{set missing value as zero} during model training and subtype identification in the early version of PADi (\textbf{PAD.train.v20200110}). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
+Second, we did conduct some MVI strategies to deal with data before model training in \textbf{GSClassifier}. Due to the low missing rate of our experimental data, we just \textbf{set missing values as zero} during model training and subtype identification in the early version of PADi (\textbf{PAD.train.v20200110}). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
 
-In the new version of PADi (\textbf{PAD.train.v20220917}), we designed the so-called \textbf{quantile} algorithm for random MVI during \textbf{PADi} model training, which also seemed to work well for PADi model training.
+In the latest version of PADi (\textbf{PAD.train.v20220916}), we designed the so-called \textbf{quantile} algorithm for random MVI during \textbf{PADi} model training, which also seemed to work well for PADi model training.
 
 Here, we demonstrated the principle of \textbf{quantile} algorithm in the simulated dataset:
 
@@ -1145,7 +1145,7 @@ print(expr)
 # Gene7    0.10    0.12    0.09 0.11000 0.12000    0.14
 \end{lstlisting}
 
-Look at the new matrix via heatmap, where the clustering result is not obviously disturbed after MVI:
+Look at the new matrix via heatmap, where the clustering result is not significantly disturbed after MVI:
 
 \begin{lstlisting}[language=R]
 Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
@@ -1153,7 +1153,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 \begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-Due to missing value might damage the integrity of biological information, we explored \textbf{how much the number of missing value in one sample impacts subtype identification via PADi}. The steps are as following: (i) we used quantile algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportion of genes as zero expression; (iii) we calculated the relative multi-ROC {[}\protect\hyperlink{ref-pROC}{15}{]} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
+Because missing values might damage the integrity of biological information, we explored \textbf{how much the number of missing values in one sample impacts subtype identification via PADi}. The steps are as follows: (i) we used the ``quantile'' algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportions of genes as zero expression; (iii) we calculated the relative multi-ROC {[}\protect\hyperlink{ref-pROC}{15}{]} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
 
 \begin{enumerate}
 \def\labelenumi{(\roman{enumi})}
@@ -1245,14 +1245,14 @@ ggplot(mvt_auc_df, aes(x,y)) +
 \caption{The association between the number of missing value and subtype identification performance.}\label{fig:mvi03}
 \end{figure}
 
-As showed in Figure \ref{fig:mvi03}, there is linear negative correlation between the number of missing value (mising rate ranges from 6.25\% to 37.5\%) and subtype identification performance of \textbf{PADi} model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of \textbf{PADi}. By the way, there is no mising value in PIAM/PIDG of the `Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via \textbf{PADi}. Nonetheless, we still used \textbf{zero strategy} during subtype identification of \textbf{PADi} if any missing value exist, because randomization might make the result unstable, which is not suitable for clinical decision.
+As shown in Figure \ref{fig:mvi03}, there is a linear negative correlation between the number of missing values (missing rate ranges from 6.25\% to 37.5\%) and the subtype identification performance of \textbf{PADi} model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of \textbf{PADi}. By the way, there is no missing value in PIAM/PIDG of the `Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via \textbf{PADi}. Nonetheless, we still used the \textbf{zero strategy} during subtype identification of \textbf{PADi} if any missing values exist, because randomization might make the result unstable, which is not suitable for clinical decision.
 
-In conclusion, zero or quantile strategy could be applied for MVI before \textbf{GSClassifier} model training. However, missing value should be avoided as possible in subtype identification for missing value really damage the performance of \textbf{GSClassifier}. Nonetheless, due to low-input GEPs used in \textbf{PADi} model (No.~of Gene=32), it's easy to avoid missing value in clinical practice.
+In conclusion, the zero or ``quantile'' strategy could be applied for MVI before \textbf{GSClassifier} model training. However, missing values should be avoided as possible in subtype identification for missing values could damage the performance of \textbf{GSClassifier} models. Nonetheless, due to low-input GEPs used in \textbf{PADi} model (No.~of Gene=32), it's easy to avoid missing value in clinical practice.
 
 \hypertarget{batch-effect}{%
 \section{Batch effect}\label{batch-effect}}
 
-\textbf{TSP} was widely applied to control batch effects in transciptomic data {[}\protect\hyperlink{ref-RN369}{16}--\protect\hyperlink{ref-RN365}{23}{]}. Still, we tested whether \textbf{TSP} is a robust method for batch effect control in real-world data. As demonstrated in Figure \ref{fig:be01}, the obvious batch effects across gastric cancer datsets were significantly reduced after \textbf{TSP} normalization.
+\textbf{TSP} was widely applied to control batch effects in transcriptomic data {[}\protect\hyperlink{ref-RN369}{16}--\protect\hyperlink{ref-RN365}{23}{]}. Still, we tested whether \textbf{TSP} is a robust method for batch effect control in real-world data. As demonstrated in Figure \ref{fig:be01}, the obvious batch effects across gastric cancer datasets were significantly reduced after \textbf{TSP} normalization.
 
 \begin{figure}
 
@@ -1263,7 +1263,7 @@ In conclusion, zero or quantile strategy could be applied for MVI before \textbf
 \caption{Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.}\label{fig:be01}
 \end{figure}
 
-In order to confirmed the association between \textbf{gene counts} in modeling and batch effect control via \textbf{TSP} normalization, we selected random genes with counts ranging 4, 8, 20, 40, and 80 for TSP matrix establishment. As shown in Figure \ref{fig:be02}, \textbf{TSP} normalization works greatly in different gene counts for batch effect control compared with raw expression matrix.
+To confirm the association between \textbf{gene counts} in modeling and batch effect control via \textbf{TSP} normalization, we selected random genes with counts ranging from 4 to 80 for TSP matrix establishment. As shown in Figure \ref{fig:be02}, \textbf{TSP} normalization works greatly in different gene counts for batch effect control compared with the raw expression matrix.
 
 \begin{figure}
 
@@ -1294,9 +1294,9 @@ Nevertheless, there're several suggestions we can follow for best practice. Firs
 \item
   Although with bright prospects in Pan-disease analysis, \href{https://github.com/huangwb8/GSClassifier}{GSClassifier} was primarily developed for clinic-friendly immune subtypes of gastric cancer (GC). Currently, only \passthrough{\lstinline!PAD!} subtypes and \passthrough{\lstinline!PADi!} for GC were supported. We would try to support more cancer types in the future as possible. More details in \href{https://github.com/huangwb8/GSClassifier/wiki/Plans-in-the-future}{Plans in the future} section.
 \item
-  Gibbs' \passthrough{\lstinline!PanCancer immune subtypes!} based on five gene signatures (485 genes) could also be called in \passthrough{\lstinline!GSClassifier!}, with a pre-trained model from the \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier} package. If you use their jobs, please cite: \href{https://github.com/huangwb8/GSClassifier/wiki/Introduction\#Reference}{references}.
+  Gibbs' \passthrough{\lstinline!PanCancer immune subtypes!} based on five gene signatures (485 genes) could also be called in \passthrough{\lstinline!GSClassifier!}, with a pre-trained model from the \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier} package. If you use their jobs, please cite \href{https://github.com/huangwb8/GSClassifier/wiki/Introduction\#Reference}{these papers}.
 \item
-  Particularly, all normal tissues should be eliminated before subtypes calling for cancer research.
+  Particularly, all normal tissues should be eliminated before subtype identificaiton for cancer research.
 \end{itemize}
 
 \hypertarget{package}{%
@@ -1323,7 +1323,7 @@ library(GSClassifier)
 \hypertarget{data}{%
 \section{Data}\label{data}}
 
-To lower the learning cost of \passthrough{\lstinline!GSClassifier!}, we provides some test data:
+To lower the learning cost of \passthrough{\lstinline!GSClassifier!}, we provide some test data:
 
 \begin{lstlisting}[language=R]
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
@@ -1342,7 +1342,7 @@ names(testData)
 \hypertarget{preparation-of-the-test-data}{%
 \subsection{Preparation of the test data}\label{preparation-of-the-test-data}}
 
-load phenotype data:
+Load phenotype data:
 
 \begin{lstlisting}[language=R]
 design <- testData$PanSTAD_phenotype_part
@@ -1354,7 +1354,7 @@ table(design$Dataset)
 #       111        70       300        32       433       372
 \end{lstlisting}
 
-load target sample IDs in \passthrough{\lstinline!GSE54129!} cohort:
+Load target sample IDs in \passthrough{\lstinline!GSE54129!} cohort:
 
 \begin{lstlisting}[language=R]
 target_ID <- design$ID[design$Dataset %in% 'GSE54129']
@@ -1404,9 +1404,9 @@ res_pad <- PAD(
 
 \begin{itemize}
 \item
-  It's strongly recommanded that the gene type of \passthrough{\lstinline!expr!} should be alway the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for examples).
+  It's strongly recommended that the gene type of \passthrough{\lstinline!expr!} should be always the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for example).
 \item
-  \passthrough{\lstinline!PAD!} function is only for datasets with lots of samples for its classification depends on population-based unsupervised clusting. \passthrough{\lstinline!PAD!} is population-dependent and non-personalized.
+  \passthrough{\lstinline!PAD!} function is only for datasets with lots of samples for its classification depends on population-based unsupervised clustering. \passthrough{\lstinline!PAD!} is population-dependent and non-personalized.
 \item
   Beta characteristics: You could try random forest classification based on the \passthrough{\lstinline!randomForest!} package or methods in \passthrough{\lstinline!stats::hclust!}.
 \end{itemize}
@@ -1418,12 +1418,12 @@ res_pad <- PAD(
 \item
   In \passthrough{\lstinline!GSClassifier!}, \passthrough{\lstinline!PADi!} is a pre-trained out-of-the-box model for GC personalized PAD subtypes calling.
 \item
-  During the sutype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, \textbf{you don't have to do batch normalization} even though the data (the \passthrough{\lstinline!X!} input) come from multiple cohorts or platform.
+  During the subtype calling, the gene rank relations based on individuals instead of the relative values across samples would be used. Thus, \textbf{you don't have to do batch normalization} even though the data (the \passthrough{\lstinline!X!} input) come from multiple cohorts or platforms.
 \item
   More limitations were discussed in our paper that you had better know.
 \end{itemize}
 
-In this section, we would showed how to use \passthrough{\lstinline!PADi!} series: \passthrough{\lstinline!PADi!}, \passthrough{\lstinline!callEnsemble!}, and \passthrough{\lstinline!parCallEnsemble!} functions.
+In this section, we would show how to use \passthrough{\lstinline!PADi!} function series: \passthrough{\lstinline!PADi!}, \passthrough{\lstinline!callEnsemble!}, and \passthrough{\lstinline!parCallEnsemble!} functions.
 
 \hypertarget{preparation-of-the-test-data-1}{%
 \subsection{Preparation of the test data}\label{preparation-of-the-test-data-1}}
@@ -1494,7 +1494,7 @@ head(res_padi)
 
 \begin{itemize}
 \item
-  Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, the parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of \passthrough{\lstinline!GSClassifier!} package.
+  Sometimes, the number of patients for subtype callings could be huge (hundreds or even tens of thousands). Thus, parallel computing (Windows or Linux pass; not tested in Mac or other OS) was also developed in the current version of the \passthrough{\lstinline!GSClassifier!} package.
 \item
   The parameter \passthrough{\lstinline!numCores!} was used to control the No.~of CPU for computing (which depends on your CPU capacity).
 \end{itemize}
@@ -1521,7 +1521,7 @@ res_padi <- parCallEnsemble(
 \hypertarget{single-sample-subtype-calling}{%
 \subsection{Single sample subtype calling}\label{single-sample-subtype-calling}}
 
-In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of \passthrough{\lstinline!PADi!} series.
+In clinical practice, the single sample subtype calling might be one of the most common scenarios and is also supported by functions of the \passthrough{\lstinline!PADi!} series.
 
 Supposed that there is a GC patient, its information should be:
 
@@ -1586,7 +1586,7 @@ head(res_padi)
 
 \begin{itemize}
 \item
-  In the results of \passthrough{\lstinline!PADi!}, two types of subtypes (\passthrough{\lstinline!BestCall!} and \passthrough{\lstinline!BestCall\_Max!}) were integrated. \passthrough{\lstinline!BestCall!} was predicted based on a xgboost-trained model based on prior knowlege of \passthrough{\lstinline!PAD!} subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while \passthrough{\lstinline!BestCall\_Max!} was predicted via maximum strategy. You should use THE SAME ONE in a specific practice no matter which one you use.
+  In the results of \passthrough{\lstinline!PADi!}, two types of subtypes (\passthrough{\lstinline!BestCall!} and \passthrough{\lstinline!BestCall\_Max!}) were integrated. \passthrough{\lstinline!BestCall!} was predicted via an \textbf{xgboost} model based on prior knowledge of \passthrough{\lstinline!PAD!} subtypes and the possibility matrix (columns 4 to 7 of four-subtype calling, for example), while \passthrough{\lstinline!BestCall\_Max!} was predicted via maximum strategy. Empirically, \passthrough{\lstinline!BestCall!} seemed to be a better choice.
 \item
   \passthrough{\lstinline!PADi!} is individual-dependent and personalized, which means that the result of subtype calling would not be influenced by the data of others.
 \end{itemize}
@@ -1596,7 +1596,7 @@ head(res_padi)
 
 In the future, there might be lots of models available as a resource of \passthrough{\lstinline!GSClassifier!}, such as \href{https://github.com/huangwb8/luckyModel}{luckyModel}. Here we show how \passthrough{\lstinline!luckyModel!} support \passthrough{\lstinline!GSClassifier!}.
 
-First, intall and load \passthrough{\lstinline!luckyModel!}:
+First, install and load \passthrough{\lstinline!luckyModel!}:
 
 \begin{lstlisting}[language=R]
 # Install luckyModel
@@ -1621,7 +1621,7 @@ list_model(project='GSClassifier')
 #   *HWB_PAD_v20200110
 \end{lstlisting}
 
-Here, \passthrough{\lstinline!HWB\_PAD\_v20200110!} is a standard name of \passthrough{\lstinline!PADi!}. They are exactly the same.
+Here, \passthrough{\lstinline!HWB\_PAD\_v20200110!} is a standard name of \passthrough{\lstinline!PADi!}. They are the same.
 
 Taking \passthrough{\lstinline!PADi!} as an example, we here show how to use an external model from \passthrough{\lstinline!luckyModel!}. First, load a model:
 
@@ -1756,13 +1756,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 6.299313e-04 0.561300665 1.142533e-05
-# 2 PB-16-003        4            4 2.980566e-07 0.018167170 1.766023e-04
-# 3 PB-16-004        3            3 8.586486e-06 0.001126488 3.211626e-01
+# 1 PB-16-002        2            2 1.201977e-03 0.561300665 7.722591e-06
+# 2 PB-16-003        4            4 3.865409e-07 0.018167170 1.611360e-04
+# 3 PB-16-004        3            3 5.132416e-06 0.001126488 2.040241e-01
 #              4           5           6
-# 1 0.1754801348 0.006115407 0.004148575
-# 2 0.3647226840 0.002709578 0.002669812
-# 3 0.0001703749 0.008878804 0.010563443
+# 1 0.2287567332 0.006611313 0.007155943
+# 2 0.5243493021 0.001982530 0.001759832
+# 3 0.0001839146 0.006606377 0.009214447
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -1909,7 +1909,7 @@ Enjoy \passthrough{\lstinline!GSClassifier!}!
 \hypertarget{about-2}{%
 \section{About}\label{about-2}}
 
-Sometimes, researchers might have their own gene signatures and know how many subtypes they want to call before (based on some knowledges). Gratifyingly, comprehensive functions were also provided in \passthrough{\lstinline!GSClassifier!}. In this section, we would show how to build a \passthrough{\lstinline!GSClassifier!} model like \passthrough{\lstinline!PADi!}.
+Sometimes, researchers might have their gene signatures and know how many subtypes they want to call before (based on some knowledge). Gratifyingly, comprehensive functions were also provided in \passthrough{\lstinline!GSClassifier!}. In this section, we would show how to build a \passthrough{\lstinline!GSClassifier!} model like \passthrough{\lstinline!PADi!}.
 
 \hypertarget{data-preparation}{%
 \section{Data preparation}\label{data-preparation}}
@@ -2166,7 +2166,7 @@ You should save it for convenience:
 saveRDS(res,'<your path>/train_ens.rds')
 \end{lstlisting}
 
-Although a \passthrough{\lstinline!auto-parameter strategy!} was provided in\passthrough{\lstinline!GSClassifier!}, it's unknown for this method to improve your model performance to what extent. You can just try. It's not a prior recommendation. In generall, setting \passthrough{\lstinline!auto=F!} in this script could be more cost-effective. Empirically, the speed of \passthrough{\lstinline!caret::train!} depends on single-core performance of the CPU instead of the core number.
+Although an \passthrough{\lstinline!auto-parameter strategy!} (hyperparameter tuning) was provided in\passthrough{\lstinline!GSClassifier!}, it's unknown whether this method could significantly improve your model performance. You can just try. It's not a prior recommendation. Generally, setting \passthrough{\lstinline!auto=F!} in this script could be more cost-effective. Empirically, the speed of \passthrough{\lstinline!caret::train!} depends on the single-core performance of the CPU instead of the core number.
 
 \hypertarget{scaller-for-the-best-call}{%
 \subsection{Scaller for the best call}\label{scaller-for-the-best-call}}
@@ -2227,7 +2227,7 @@ scaller.train <- list(
 \hypertarget{assemble-your-model}{%
 \subsection{Assemble your model}\label{assemble-your-model}}
 
-For more information of \passthrough{\lstinline!geneAnnotation!}, you could see \href{https://github.com/huangwb8/GSClassifier/wiki/Advanced-development\#Gene-Annotation}{Advanced development: Gene Annotation} section for assistance.
+For more information of \passthrough{\lstinline!geneAnnotation!}, you could see the \href{https://huangwb8.github.io/GSClassifier.principle/suggestions-for-gsclassifier-model-developers.html\#gene-annotation}{Suggestions for GSClassifier model developers: Gene Annotation} section for assistance.
 
 Here we give an example:
 
@@ -2292,7 +2292,7 @@ res_i = callEnsemble(
 )
 \end{lstlisting}
 
-The usage of \passthrough{\lstinline!parCallEnsemble!} (for huge amount of samples) is similar. Empirically, \passthrough{\lstinline!parCallEnsemble!} can not perform better than \passthrough{\lstinline!callEnsemble!} in a small cohort for the process of xgboost would take advantage of multiple CPU cores.
+The usage of \passthrough{\lstinline!parCallEnsemble!} (for a huge amount of samples) is similar. Empirically, \passthrough{\lstinline!parCallEnsemble!} can not perform better than \passthrough{\lstinline!callEnsemble!} in a small cohort for the process of xgboost would take advantage of multiple CPU cores.
 
 \hypertarget{topicSubmodel}{%
 \section{Number of SubModel}\label{topicSubmodel}}
@@ -2359,9 +2359,9 @@ Enjoy \textbf{GSClassifier}!
 
 \begin{itemize}
 \item
-  The book \passthrough{\lstinline!R packages!} is a straightaway and useful reference book for R developers. The free-access website of \passthrough{\lstinline!R packages!} is \url{https://r-pkgs.org/}. As a developer of R, if you haven't hear about it, it's strongly recommanded to just read it. Hadley Wickham, the main author of the book, is an active R developer and have led some master works like \passthrough{\lstinline!ggplot2!} and \passthrough{\lstinline!plyr!}.
+  The book \passthrough{\lstinline!R packages!} is a straightaway and useful reference book for R developers. The free-access website for \passthrough{\lstinline!R packages!} is \url{https://r-pkgs.org/}. As a developer of R, if you haven't heard about it, it's strongly recommended to just read it. Hadley Wickham, the main author of the book, is an active R developer and has led some masterworks like \passthrough{\lstinline!ggplot2!} and \passthrough{\lstinline!plyr!}.
 \item
-  With \passthrough{\lstinline!GSClassifier!} package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interesting in sharing your model, \passthrough{\lstinline!GSClassifier!} also provides a simple methodology for this vision. In this section, let's see how to achieve it!
+  With \passthrough{\lstinline!GSClassifier!} package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interested in sharing your model, \passthrough{\lstinline!GSClassifier!} also provides a simple methodology for this vision. In this section, let's see how to achieve it!
 \end{itemize}
 
 First, load the package
@@ -2374,7 +2374,7 @@ library(GSClassifier)
 \hypertarget{available-models}{%
 \section{Available models}\label{available-models}}
 
-With \passthrough{\lstinline!GSClassifier\_Data()!}, all models supported in the current \passthrough{\lstinline!GSClassifier!} package would showed.
+With \passthrough{\lstinline!GSClassifier\_Data()!}, all models supported in the current \passthrough{\lstinline!GSClassifier!} package would be shown.
 
 \begin{lstlisting}[language=R]
 GSClassifier_Data()
@@ -2411,7 +2411,7 @@ GSClassifier_Data(model = F)
 \hypertarget{components-of-a-gsclassifier-model}{%
 \section{Components of a GSClassifier model}\label{components-of-a-gsclassifier-model}}
 
-Currently, a GSClassifier model and related product environments is designed as a \passthrough{\lstinline!list!} object. Let's take \passthrough{\lstinline!PAD.train\_20210110!}(also called \passthrough{\lstinline!PADi!}) as an example.
+Currently, a GSClassifier model and related product environments are designed as a \passthrough{\lstinline!list!} object. Let's take \passthrough{\lstinline!PAD.train\_20210110!}(also called \passthrough{\lstinline!PADi!}) as an example.
 
 \begin{lstlisting}[language=R]
 PADi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier")) 
@@ -2483,11 +2483,11 @@ More tutorials for model establishment, please go to \href{https://github.com/hu
 \hypertarget{submit-models-to-luckymodel-package}{%
 \section{Submit models to luckyModel package}\label{submit-models-to-luckymodel-package}}
 
-Considering most users of \passthrough{\lstinline!GSClassifier!} might have no need for lots of models, We divided the model storage feature into an new ensembl package called \href{https://github.com/huangwb8/luckyModel}{\textbf{luckyModel}}. Don't worry, the usage is very easy!
+Considering most users of \passthrough{\lstinline!GSClassifier!} might not need lots of models, We divided the model storage feature into a new ensemble package called \href{https://github.com/huangwb8/luckyModel}{\textbf{luckyModel}}. Don't worry, the usage is very easy!
 
-If you want to summit your model, you should apply for a contributor of \passthrough{\lstinline!luckyModel!} first. Then, just send the model (\passthrough{\lstinline!.rds!}) into the \passthrough{\lstinline!inst/extdata/<project>!} path of \passthrough{\lstinline!luckyModel!}. After audit, your branch would be accepted and available for the users.
+If you want to submit your model, you should apply for a contributor of \passthrough{\lstinline!luckyModel!} first. Then, just send the model (\passthrough{\lstinline!.rds!}) into the \passthrough{\lstinline!inst/extdata/<project>!} path of \passthrough{\lstinline!luckyModel!}. After an audit, your branch would be accepted and available for the users.
 
-The name of your model must be the format as following:
+The name of your model must be the format as follows:
 
 \begin{lstlisting}
 # <project>
@@ -2500,7 +2500,7 @@ HWB_PAD_v20211201.rds
 \hypertarget{repeatablility-of-models}{%
 \section{Repeatablility of models}\label{repeatablility-of-models}}
 
-For repeatablility, you had better submit a \passthrough{\lstinline!.zip!} or \passthrough{\lstinline!.tar.gz!} file that containing the information of your model. Here are some suggestions:
+For repeatability, you had better submit a \passthrough{\lstinline!.zip!} or \passthrough{\lstinline!.tar.gz!} file containing the information of your model. Here are some suggestions:
 
 \begin{itemize}
 \item
@@ -2524,7 +2524,7 @@ For repeatablility, you had better submit a \passthrough{\lstinline!.zip!} or \p
   \passthrough{\lstinline!Data-of-<creator>\_<model>\_v<yyyymmdd>.rds!} (Optional): Due to huge size of omics data, it's OK for you not to submit the raw data.
 \end{itemize}
 
-:cupid: Welcome your contributions!
+Welcome your contributions!
 
 \hypertarget{gene-annotation}{%
 \section{Gene Annotation}\label{gene-annotation}}

@@ -31,19 +31,19 @@ emoji: https://github.com/rstudio/blogdown/issues/171
 
 ## About {-}
 
-**The Priciple of GSClassifier** is a book for users of R package **GSClassifier** who want to know the most details. If you're looking for the PDF edition, you can find it at [here](https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf).
+**The Priciple of GSClassifier** is a book for users of the R package **GSClassifier** who want to know the most details. If you're looking for the PDF edition, you can find it  [here](https://github.com/huangwb8/GSClassifier.principle/blob/master/docs/GSClassifier.principle.pdf).
 
-[**GSClassifier**](https://github.com/huangwb8/GSClassifier) is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis.The inspiration of **GSClassifier** come from [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier), an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al [@RN160; @RN315].
+[**GSClassifier**](https://github.com/huangwb8/GSClassifier) is an R-based comprehensive classification tool for subtypes modeling and personalized calling based on pure transcriptomics. It could be used for precision medicine, such as cancer diagnosis. The inspiration for **GSClassifier** comes from [ImmuneSubtypeClassifier](https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier), an R package for classification of PanCancer immune subtypes based on the work of Gibbs et al [@RN160; @RN315].
 
-Lots of surprising features in **GSClassifier** as follows: 
+Lots of surprising features in **GSClassifier** are as follows: 
 
 + Optimized for just `one sample`
 
 + Available for modeling and calling of brand-new `GEPs-based subtypes` in any diseases (cancers)
 
-+ No limitation of the amount of `gene signatures`(≥1) or `subtypes`(≥2)
++ No limitation of the number of `gene signatures`(≥1) or `subtypes`(≥2)
 
-+ `Normalization insensitive` due to the use of  the individual `gene rank matrix`
++ `Insensitive normalization` due to the use of  the individual `gene rank matrix`
 
 + More ensemble and repeatable modeling process
 
@@ -51,20 +51,20 @@ Lots of surprising features in **GSClassifier** as follows:
 
 + New useful functions as supplements
 
-**ATTENTION!** In the future, there might be third-party contributors in `GSClassifier` platform, with some useful models for specific usages. If you use models provided by these people, **you had better know more details as possible**, including **designs, data sources, destinations, training scripts and limitations** of models, expecially those from studies under peer-review.
+**ATTENTION!** In the future, there might be third-party contributors in `GSClassifier` platform, with some useful models for specific usages. If you use models provided by these people, **you had better know more details as possible**, including **designs, data sources, destinations, training scripts, and limitations** of models, especially those from studies under peer review.
 
 ## License {-}
 
 + **GSClassifier** is released under the Apache-2.0 license. See [LICENSE](https://github.com/huangwb8/GSClassifier/blob/master/license.txt) for details.
 
 + The technical documentation, as a whole, is licensed under a [Creative Commons Attribution-
-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). The code contained in this book is simultaneously available under the [MIT license](https://opensource.org/licenses/MIT); this means that you are free to use it in your own packages, as long as you cite the source.
+NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). The code contained in this book is simultaneously available under the [MIT license](https://opensource.org/licenses/MIT); this means that you are free to use it in your packages, as long as you cite the source.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
 ## Installation {-}
 
-`RStudio` is one of the best Integrated Development Environments (IDE) in R programming. If you're struggling in R-GUI, it is recommanded to turn to [RStudio (Posit)](https://www.rstudio.com/).
+**RStudio/Posit** is one of the best Integrated Development Environments (IDE) in R programming. If you're struggling in R-GUI, it is recommended to turn to [RStudio/Posit](https://www.rstudio.com/).
 
 For installation of **GSClassifier**, please run these commands in an R environment: 
 
@@ -121,17 +121,17 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 
 ## TODO {-}
 
-+ More medical fields included, such as in Pan-cancer uitility
++ More medical fields included, such as in the pan-cancer utility
 
 + Advanced methods (such as artificial intelligence) for enhanced robustness
 
-+ Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledges
++ Unsupervised learning for de-novo classification based on intrinsic frames of omics instead of human knowledge
 
 + Multi-omics exploration and support
 
 + More friendly characteristics for developers and contributors
 
-+ Web application for newbies of R programing
++ Web application for newbies to R programming
 
 ## Other Projects {-}
 

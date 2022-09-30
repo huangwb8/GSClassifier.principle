@@ -121,21 +121,21 @@ The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
 ### Data Processing
 
-For each dataset, RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype Vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(batch-effect).
+For each dataset, the RNA expression matrix would be normalized internally (**Raw Matrix**) so that the expression data of the samples in the dataset were comparable and suitable for subtype identification. As demonstrated in Figure \@ref(fig:flowchart), the **Subtype Vector** is identified based on independent cohorts instead of a merged matrix with batch effect control technologies. More details about batch effect control are discussed in \@ref(batch-effect).
 
-There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs) used, the biological problems or ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four sutbypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidences or motivations are lacked for chasing such a complex model.
+There is no standard method to figure out subtype vectors. It depends on the Gene Expression Profiles (GEPs), the biological significance, or the ideas of researchers. For **Pan-immune Activation and Dysfunction (PAD)** subtypes, the GEPs, **Pan-Immune Activation Module (PIAM)** and **Pan-Immune Dysfunction Genes (PIDG)**, are biologically associated and suitable for calling four subtypes (PIAM^high^PIDG^high^, PIAM^high^PIDG^low^, PIAM^low^PIDG^high^, and PIAM^low^PIDG^low^).<!--这里描述有待改进--> Theoretically, we can also use a category strategy like low/medium/high, but more evidence or motivations are lacking for chasing such a complex model.
 
 With subtype vectors and raw matrices, **Top Scoring Pairs (TSP)**, the core data format for model training and application in GSClassifier, would be calculated for the following process. The details of TSP normalization are summarized in \@ref(topicTSP).
 
 ### Model Establishment and Validation
 
-The TSP matrix would be devided into training cohort and internal validation cohort. In PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **SubSet** (70% of the training cohort in PAD project) would be further selected randomly to build a **SubModel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function) [@RN345]. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)).
+The TSP matrix would be divided into the training cohort and the internal validation cohort. In the PAD project, the rate of samples (training vs. test) is **7:3**. Next, each **SubSet** (70% of the training cohort) would be further selected randomly to build a **SubModel** via cross-validation Extreme Gradient Boosting algorithm (**xgboost::xgb.cv** function) [@RN345]. The number of submodels is suggested over 20 (more details in \@ref(topicSubmodel)).
 
-The internal validation cohort and external validation cohort (if any) would be used to test the performace of the trained model. By the way, **the data of both internal and external validation cohort would not be used during model training** so as to avoid over-fitting.
+The internal validation cohort and external validation cohort (if any) would be used to test the performance of the trained model. By the way, **the data of both internal and external validation cohorts would not be used during model training** to avoid over-fitting.
 
 ### Model Application
 
-In PAD project, **Model for individual**, the ensemble of submodels, is called "PAD for individual" (**PADi**). Supposed raw RNA expression of a sample was given. As showed in \@ref(fig:flowchart) and \@ref(fig:tsp), **GSClassifier** would turn raw RNA expression into a TSP vector, which would be as a input to **Model for individual**. Then, **GSClassifier** would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest **Model for individual** (**PADi**, etc) as personalized model.
+In the PAD project, **Model for individual**, the ensemble of submodels, is called "PAD for individual" (**PADi**). Supposed raw RNA expression of a sample was given. As shown in \@ref(fig:flowchart) and \@ref(fig:tsp), **GSClassifier** would turn raw RNA expression into a TSP vector, which would be as an input to **Model for individual**. Then, **GSClassifier** would output the possibility matrix and the subtype for this sample. No extra data (RNA expression of others, follow-up data, etc) would be needed but RNA expression of the patient for subtype identification, so we suggest **Model for individual** (**PADi**, etc) as personalized model.
 
 ## Top scoring pairs {#topicTSP}
 
@@ -143,7 +143,7 @@ In PAD project, **Model for individual**, the ensemble of submodels, is called "
 
 Genes expression of an individual is normalized during the model training and the subtype identification via **Top Scoring Pairs** (**TSP**, also called **Relative Expression Orderings** (**REOs**)) algorithm, which was previously described by Geman et al [@RN267]. **TSP** normalization for an individual depends on its transcript data, implying that subtype calling would not be perturbed by data from other individuals or other extra information like follow-up data. **TSP** had been used in cancer research and effectively predicts cancer progression and ICIs response [@RN265; @RN266; @RN261].
 
-As show in Figure \@ref(fig:tsp), The TSP data in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
+As shown in Figure \@ref(fig:tsp), The TSP data in GSClassifier consists of three parts: **binned expression**, **pair difference**, and **set difference**. In this section, we would conduct some experiments to demonstrate the potential of TSP normalization for development of cross-dataset/platform GEP-based models.
 
 \begin{figure}
 
@@ -240,17 +240,17 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 \begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
-This is an intersting dataset with features as following:
+This is an interesting dataset with features as follows:
 
--   **Distinguished gene sets**: The expression profile between **Gene 1-3** and **Gene 4-6** is obviously different arross samples. Thus, these gene sets might represent different biology meaning.
+- **Distinguished gene sets**: The expression profile between **Gene 1-3** and **Gene 4-6** is different across samples. Thus, these gene sets might represent different biological significance.
 
--   **Stable gene**: The expression level and rank of **Gene 7** seemed to be similar across samples. Thus, **Gene 7** might not be a robust marker for subtype modeling. Thus, it could help us to understand how filtering of **GSClassifier** works.
+- **Stable gene**: The expression level and rank of **Gene 7** seemed to be similar across samples. Thus, **Gene 7** might not be a robust marker for subtype modeling. Thus, it could help us to understand how the filtering of **GSClassifier** works.
 
--   **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
+- **Expression heterogeneity & rank homogeneity**: Take **Sample1** and **Sample3** as examples. The expression of **Gene 1-6** in **Sample3** seemed to be higher than those of **Sample1**. However, the expression of **Gene 1-3** is higher than **Gene 4-6** in both **Sample1** and **Sample3**, indicating similar bioprocess in these samples exists so that they should be classified as the same subtype.
 
 ### Binned expression
 
-First, we binned genes with diffrent quantile intervals so that the distribution of rank information could be more consistent across samples.
+First, we binned genes with different quantile intervals so that the distribution of rank information could be more consistent across samples.
 
 Take **Sample4** as an example:
 
@@ -312,9 +312,9 @@ print(expr_binned)
 # Gene7       1       1       1       1       1       1
 ```
 
-In this simulated dataset, **Gene7** is a gene whose expression is always the lowest across all samples. In other words, the rank of **Gene7** is stable or invariable across samples so that it's not robust for identification of differentail subtypes.
+In this simulated dataset, **Gene7** is a gene whose expression is always the lowest across all samples. In other words, the rank of **Gene7** is stable or invariable across samples so it's not robust for the identification of differential subtypes.
 
-Except binned expression, we also calculated pair difference later. Due to the number of gene pair is $C_{2 \atop n}$, the removement of genes like **Gene7** before modeling could really reduce the complexibility and save computing resources. In all, genes with low rank difference should be dropped out in some extent in **GSClassifier**.
+Except for binned expression, we also calculated pair difference later. Because the number of gene pairs is $C_{2 \atop n}$, the exclusion of genes like **Gene7** before modeling could reduce the complexity and save computing resources. In all, genes with low-rank differences should be dropped out to some extent in **GSClassifier**.
 
 First, We use **base::rank** to return the sample ranks of the values in a vector:
 
@@ -358,7 +358,7 @@ print(testRes)
 # -2.666667 -2.500000 -4.333333  3.166667  2.500000  3.833333  0.000000
 ```
 
-**Gene7** is the one with the lowest absolute value (0) of rank diffrence. By the way, **Gene 1-3** have the same direction (\<0), so do **Gene 4-6** (\>0), which indicates the nature of clustering based on these two gene sets.
+**Gene7** is the one with the lowest absolute value (0) of rank diffrence. By the way, **Gene 1-3** have the same direction (\<0), and so does **Gene 4-6** (\>0), which indicates the nature of clustering based on these two gene sets.
 
 In practice, we use **ptail** to select differential genes based on rank diffrences. **Smaller ptail is, less gene kept**. Here, we just set **ptail=0.4**:
 
@@ -389,7 +389,7 @@ Hence, **Gene7** was filtered and excluded in the following analysis. By the way
 
 ### Pair difference
 
-In GSClassifier, we use a ensemble function **featureSelection** to select data for pair difference scoring.
+In GSClassifier, we use an ensemble function **featureSelection** to select data for pair difference scoring.
 
 
 ```r
@@ -419,7 +419,7 @@ print(gene_bigRank)
 # [1] "Gene1" "Gene2" "Gene3" "Gene4" "Gene5" "Gene6"
 ```
 
-In GSClassifier, we use function **makeGenePairs** to calculate s
+In GSClassifier, we use function **makeGenePairs** to calculate pair differences:
 
 
 ```r
@@ -445,11 +445,11 @@ print(gene_bigRank_pairs)
 # Gene5:Gene6       0       1       1       0       1       0
 ```
 
-Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the difference of gene pair scoring between **Sample 1-3** and **Sample 4-6** is obivous, revealing the robustness of pair difference for subtype identification.
+Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Expression_{Gene4} = 0.51-0.21 = 0.3 > 0$, so the pair score is 1. If the difference is less than or equal to 0, the pair score is 0. In addition, the scoring differences of gene pairs between **Sample 1-3** and **Sample 4-6** are obvious, revealing the robustness of pair difference for subtype identification.
 
 ### Set difference
 
-In **GSClassifier**, **Set difference** is defined as a weight average of gene-geneset rank difference.
+In **GSClassifier**, **set difference** is defined as a weight average of gene-geneset rank difference.
 
 
 ```r
@@ -524,9 +524,9 @@ print(resMat)
 # s1s2       1       1       1       0       0       0
 ```
 
-We have known that the subtype of **Sample 1-3** differs from that of **Sample 4-6**, which revealed the robustness of set difference for subtype indentification.
+We have known that the subtype of **Sample 1-3** differs from that of **Sample 4-6**, which revealed the robustness of set differences for subtype identification.
 
-Based on the structure of TSP in Figure \@ref(fig:tsp), TSP matrix of the simulated dataset should be :
+Based on the structure of TSP in Figure \@ref(fig:tsp), the TSP matrix of the simulated dataset should be :
 
 
 ```r

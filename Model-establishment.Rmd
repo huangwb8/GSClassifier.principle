@@ -389,7 +389,7 @@ knitr::include_graphics(rep("./fig/model-no-02.png", 1))
 
 ## Parameters for PADi training {#padiPara}
 
-Here're some key parameters about how the latest PADi was trained.
+Here're some key parameters about how the latest PADi (PAD.train_v20220916) was trained.
 
 ```{r eval=FALSE}
 # Build 100 models

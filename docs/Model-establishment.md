@@ -429,7 +429,7 @@ In the latest version of **PADi**, we trained 100 **SubModel**s for subtype call
 
 ## Parameters for PADi training {#padiPara}
 
-Here're some key parameters about how the latest PADi was trained.
+Here're some key parameters about how the latest PADi (PAD.train_v20220916) was trained.
 
 
 ```r

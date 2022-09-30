@@ -421,7 +421,7 @@ head(res_padi)
 
 ## PanCancer immune subtypes
 
-`GSClassifier` could also call the `PanCancer immune subtypes` of Gibbs'.
+`GSClassifier` could also call the `PanCancer immune subtypes` of Gibbs' [@RN315].
 
 First, see data available in current `GSClassifier`:
 
@@ -485,13 +485,13 @@ Check the result:
 ```r
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 9.977439e-04 0.561300665 8.999669e-06
-# 2 PB-16-003        4            4 2.217522e-07 0.018167170 9.214463e-05
-# 3 PB-16-004        3            3 4.604511e-06 0.001126488 3.054354e-01
+# 1 PB-16-002        2            2 6.299313e-04 0.561300665 1.142533e-05
+# 2 PB-16-003        4            4 2.980566e-07 0.018167170 1.766023e-04
+# 3 PB-16-004        3            3 8.586486e-06 0.001126488 3.211626e-01
 #              4           5           6
-# 1 0.2264581472 0.010949500 0.007155943
-# 2 0.4238017648 0.002510745 0.002331842
-# 3 0.0002464288 0.005643848 0.007631700
+# 1 0.1754801348 0.006115407 0.004148575
+# 2 0.3647226840 0.002709578 0.002669812
+# 3 0.0001703749 0.008878804 0.010563443
 ```
 
 

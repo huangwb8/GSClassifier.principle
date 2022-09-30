@@ -522,7 +522,7 @@ res_padi &lt;- parCallEnsemble(
 </div>
 <div id="pancancer-immune-subtypes" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> PanCancer immune subtypes</h2>
-<p><code>GSClassifier</code> could also call the <code>PanCancer immune subtypes</code> of Gibbs’.</p>
+<p><code>GSClassifier</code> could also call the <code>PanCancer immune subtypes</code> of Gibbs’ <span class="citation">[<a href="references.html#ref-RN315" role="doc-biblioref">2</a>]</span>.</p>
 <p>First, see data available in current <code>GSClassifier</code>:</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="quick-start.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GSClassifier_Data</span>()</span>
 <span id="cb55-2"><a href="quick-start.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available data:</span></span>
@@ -562,13 +562,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="quick-start.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb59-2"><a href="quick-start.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb59-3"><a href="quick-start.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 5.560977e-04 0.561300665 1.060849e-05</span></span>
-<span id="cb59-4"><a href="quick-start.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 4.253160e-07 0.018167170 1.618962e-04</span></span>
-<span id="cb59-5"><a href="quick-start.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 2.151589e-06 0.001126488 2.813405e-01</span></span>
-<span id="cb59-6"><a href="quick-start.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             4           5           6</span></span>
-<span id="cb59-7"><a href="quick-start.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.193576597 0.009215117 0.003203834</span></span>
-<span id="cb59-8"><a href="quick-start.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.521127284 0.002194726 0.002374100</span></span>
-<span id="cb59-9"><a href="quick-start.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.000214093 0.007858477 0.005313885</span></span></code></pre></div>
+<span id="cb59-3"><a href="quick-start.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 2.355584e-03 0.561300665 5.383651e-06</span></span>
+<span id="cb59-4"><a href="quick-start.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 3.547607e-07 0.018167170 1.544256e-04</span></span>
+<span id="cb59-5"><a href="quick-start.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 4.872781e-06 0.001126488 2.904528e-01</span></span>
+<span id="cb59-6"><a href="quick-start.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
+<span id="cb59-7"><a href="quick-start.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.2872834802 0.009215117 0.003811775</span></span>
+<span id="cb59-8"><a href="quick-start.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.2880681455 0.002455097 0.001422522</span></span>
+<span id="cb59-9"><a href="quick-start.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0001678691 0.007653435 0.008210321</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="quick-start.html#cb60-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb60-2"><a href="quick-start.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

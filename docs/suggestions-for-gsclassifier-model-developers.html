@@ -165,9 +165,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="discussion.html#discussion" id="toc-discussion"><span class="toc-section-number">2</span> Discussion</a>
 <ul>
 <li><a href="discussion.html#packages-1" id="toc-packages-1"><span class="toc-section-number">2.1</span> Packages</a></li>
-<li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.2</span> Missing value imputation (MVI)</a></li>
-<li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.3</span> Batch effect</a></li>
-<li><a href="discussion.html#subtype-number" id="toc-subtype-number"><span class="toc-section-number">2.4</span> Subtype number</a></li>
+<li><a href="discussion.html#subtype-vector" id="toc-subtype-vector"><span class="toc-section-number">2.2</span> Subtype Vector</a></li>
+<li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.3</span> Missing value imputation (MVI)</a></li>
+<li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.4</span> Batch effect</a></li>
+<li><a href="discussion.html#subtype-number" id="toc-subtype-number"><span class="toc-section-number">2.5</span> Subtype number</a></li>
 </ul></li>
 <li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
 <ul>
@@ -247,38 +248,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>With <code>GSClassifier</code> package, it could be easy for users to build a model only with certain gene sets and transcriptomics data. If you are interested in sharing your model, <code>GSClassifier</code> also provides a simple methodology for this vision. In this section, let’s see how to achieve it!</p></li>
 </ul>
 <p>First, load the package</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GSClassifier)</span>
-<span id="cb85-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading required package: luckyBase</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GSClassifier)</span>
+<span id="cb92-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading required package: luckyBase</span></span></code></pre></div>
 </div>
 <div id="available-models" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Available models</h2>
 <p>With <code>GSClassifier_Data()</code>, all models supported in the current <code>GSClassifier</code> package would be shown.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GSClassifier_Data</span>()</span>
-<span id="cb86-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available data:</span></span>
-<span id="cb86-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage example:</span></span>
-<span id="cb86-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype.rds </span></span>
-<span id="cb86-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20200110.rds </span></span>
-<span id="cb86-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20220916.rds </span></span>
-<span id="cb86-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;PAD.train_20200110.rds&quot;, package = &quot;GSClassifier&quot;)) </span></span>
-<span id="cb86-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb86-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;ImmuneSubtype.rds&quot;, package = &quot;GSClassifier&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GSClassifier_Data</span>()</span>
+<span id="cb93-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available data:</span></span>
+<span id="cb93-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage example:</span></span>
+<span id="cb93-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype.rds </span></span>
+<span id="cb93-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20200110.rds </span></span>
+<span id="cb93-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20220916.rds </span></span>
+<span id="cb93-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;PAD.train_20200110.rds&quot;, package = &quot;GSClassifier&quot;)) </span></span>
+<span id="cb93-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;ImmuneSubtype.rds&quot;, package = &quot;GSClassifier&quot;))</span></span></code></pre></div>
 <p>For more details of <code>GSClassifier_Data()</code>, just:</p>
 <pre><code>?GSClassifier_Data()</code></pre>
 <p>Set <code>model=F</code>, all <code>.rds</code> data would be showed:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GSClassifier_Data</span>(<span class="at">model =</span> F)</span>
-<span id="cb88-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available data:</span></span>
-<span id="cb88-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage example:</span></span>
-<span id="cb88-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   general-gene-annotation.rds </span></span>
-<span id="cb88-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype.rds </span></span>
-<span id="cb88-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20200110.rds </span></span>
-<span id="cb88-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20220916.rds </span></span>
-<span id="cb88-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   testData.rds </span></span>
-<span id="cb88-9"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;PAD.train_20200110.rds&quot;, package = &quot;GSClassifier&quot;)) </span></span>
-<span id="cb88-10"><a href="suggestions-for-gsclassifier-model-developers.html#cb88-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;ImmuneSubtype.rds&quot;, package = &quot;GSClassifier&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GSClassifier_Data</span>(<span class="at">model =</span> F)</span>
+<span id="cb95-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available data:</span></span>
+<span id="cb95-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage example:</span></span>
+<span id="cb95-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   general-gene-annotation.rds </span></span>
+<span id="cb95-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype.rds </span></span>
+<span id="cb95-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20200110.rds </span></span>
+<span id="cb95-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD.train_20220916.rds </span></span>
+<span id="cb95-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   testData.rds </span></span>
+<span id="cb95-9"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   PAD &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;PAD.train_20200110.rds&quot;, package = &quot;GSClassifier&quot;)) </span></span>
+<span id="cb95-10"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   ImmuneSubtype &lt;- readRDS(system.file(&quot;extdata&quot;, &quot;ImmuneSubtype.rds&quot;, package = &quot;GSClassifier&quot;))</span></span></code></pre></div>
 </div>
 <div id="components-of-a-gsclassifier-model" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Components of a GSClassifier model</h2>
 <p>Currently, a GSClassifier model and related product environments are designed as a <code>list</code> object. Let’s take <code>PAD.train_20210110</code>(also called <code>PADi</code>) as an example.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb89-1" aria-hidden="true" tabindex="-1"></a>PADi <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb96-1" aria-hidden="true" tabindex="-1"></a>PADi <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>)) </span></code></pre></div>
 <p>This picture shows the components of <code>PADi</code>:</p>
 <div class="figure" style="text-align: center"><span id="fig:GSClassifierModel"></span>
 <img src="fig/GSClassifier-model.jpg" alt="Details of a GSClassifier model" width="90%" />
@@ -351,39 +352,39 @@ HWB_PAD_v20211201.rds</code></pre>
 <div id="gene-annotation" class="section level2" number="5.6">
 <h2><span class="header-section-number">5.6</span> Gene Annotation</h2>
 <p>For convenience, we provided a general gene annotation dataset for different genomics:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb92-1" aria-hidden="true" tabindex="-1"></a>gga <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;general-gene-annotation.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
-<span id="cb92-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gga)</span>
-<span id="cb92-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;hg38&quot; &quot;hg19&quot; &quot;mm10&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb99-1" aria-hidden="true" tabindex="-1"></a>gga <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;general-gene-annotation.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
+<span id="cb99-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gga)</span>
+<span id="cb99-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;hg38&quot; &quot;hg19&quot; &quot;mm10&quot;</span></span></code></pre></div>
 <p>I believe they’re enough for routine medicine studies.</p>
 <p>Here, take a look at <code>hg38</code>:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-1" aria-hidden="true" tabindex="-1"></a>hg38 <span class="ot">&lt;-</span> gga<span class="sc">$</span>hg38</span>
-<span id="cb93-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hg38)</span>
-<span id="cb93-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="co">#           ENSEMBL       SYMBOL  ENTREZID</span></span>
-<span id="cb93-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 ENSG00000223972      DDX11L1 100287102</span></span>
-<span id="cb93-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 ENSG00000227232       WASH7P      &lt;NA&gt;</span></span>
-<span id="cb93-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 ENSG00000278267    MIR6859-1 102466751</span></span>
-<span id="cb93-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 ENSG00000243485 RP11-34P13.3      &lt;NA&gt;</span></span>
-<span id="cb93-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 ENSG00000284332    MIR1302-2 100302278</span></span>
-<span id="cb93-9"><a href="suggestions-for-gsclassifier-model-developers.html#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 ENSG00000237613      FAM138A    645520</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-1" aria-hidden="true" tabindex="-1"></a>hg38 <span class="ot">&lt;-</span> gga<span class="sc">$</span>hg38</span>
+<span id="cb100-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hg38)</span>
+<span id="cb100-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co">#           ENSEMBL       SYMBOL  ENTREZID</span></span>
+<span id="cb100-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 ENSG00000223972      DDX11L1 100287102</span></span>
+<span id="cb100-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 ENSG00000227232       WASH7P      &lt;NA&gt;</span></span>
+<span id="cb100-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 ENSG00000278267    MIR6859-1 102466751</span></span>
+<span id="cb100-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 ENSG00000243485 RP11-34P13.3      &lt;NA&gt;</span></span>
+<span id="cb100-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 ENSG00000284332    MIR1302-2 100302278</span></span>
+<span id="cb100-9"><a href="suggestions-for-gsclassifier-model-developers.html#cb100-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 ENSG00000237613      FAM138A    645520</span></span></code></pre></div>
 <p>With this kind of data, it’s simple to customize your own gene annotation (take <code>PADi</code> as examples):</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb94-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb94-2" aria-hidden="true" tabindex="-1"></a>tGene <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">unlist</span>(PADi<span class="sc">$</span>geneSet))</span>
-<span id="cb94-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb94-3" aria-hidden="true" tabindex="-1"></a>geneAnnotation <span class="ot">&lt;-</span> hg38[hg38<span class="sc">$</span>ENSEMBL <span class="sc">%in%</span> tGene, ]</span>
-<span id="cb94-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(geneAnnotation)</span>
-<span id="cb94-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 32  3</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb101-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb101-2" aria-hidden="true" tabindex="-1"></a>tGene <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">unlist</span>(PADi<span class="sc">$</span>geneSet))</span>
+<span id="cb101-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb101-3" aria-hidden="true" tabindex="-1"></a>geneAnnotation <span class="ot">&lt;-</span> hg38[hg38<span class="sc">$</span>ENSEMBL <span class="sc">%in%</span> tGene, ]</span>
+<span id="cb101-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(geneAnnotation)</span>
+<span id="cb101-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 32  3</span></span></code></pre></div>
 <p>Have a check:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(geneAnnotation)</span>
-<span id="cb95-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              ENSEMBL SYMBOL ENTREZID</span></span>
-<span id="cb95-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 353  ENSG00000171608 PIK3CD     5293</span></span>
-<span id="cb95-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1169 ENSG00000134686   PHC2     1912</span></span>
-<span id="cb95-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2892 ENSG00000134247 PTGFRN     5738</span></span>
-<span id="cb95-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3855 ENSG00000117090 SLAMF1     6504</span></span>
-<span id="cb95-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3858 ENSG00000117091   CD48      962</span></span>
-<span id="cb95-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 4043 ENSG00000198821  CD247      919</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(geneAnnotation)</span>
+<span id="cb102-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="co">#              ENSEMBL SYMBOL ENTREZID</span></span>
+<span id="cb102-3"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 353  ENSG00000171608 PIK3CD     5293</span></span>
+<span id="cb102-4"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1169 ENSG00000134686   PHC2     1912</span></span>
+<span id="cb102-5"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2892 ENSG00000134247 PTGFRN     5738</span></span>
+<span id="cb102-6"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3855 ENSG00000117090 SLAMF1     6504</span></span>
+<span id="cb102-7"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3858 ENSG00000117091   CD48      962</span></span>
+<span id="cb102-8"><a href="suggestions-for-gsclassifier-model-developers.html#cb102-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 4043 ENSG00000198821  CD247      919</span></span></code></pre></div>
 <p>This <code>geneAnnotation</code> could be the <code>model[['geneAnnotation']]</code>.</p>
 <p>Also, we use a function called <code>convert</code> to do gene ID convertion.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb96-1" aria-hidden="true" tabindex="-1"></a>luckyBase<span class="sc">::</span><span class="fu">convert</span>(<span class="fu">c</span>(<span class="st">&#39;GAPDH&#39;</span>,<span class="st">&#39;TP53&#39;</span>), <span class="st">&#39;SYMBOL&#39;</span>, <span class="st">&#39;ENSEMBL&#39;</span>, hg38)</span>
-<span id="cb96-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;ENSG00000111640&quot; &quot;ENSG00000141510&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="suggestions-for-gsclassifier-model-developers.html#cb103-1" aria-hidden="true" tabindex="-1"></a>luckyBase<span class="sc">::</span><span class="fu">convert</span>(<span class="fu">c</span>(<span class="st">&#39;GAPDH&#39;</span>,<span class="st">&#39;TP53&#39;</span>), <span class="st">&#39;SYMBOL&#39;</span>, <span class="st">&#39;ENSEMBL&#39;</span>, hg38)</span>
+<span id="cb103-2"><a href="suggestions-for-gsclassifier-model-developers.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;ENSG00000111640&quot; &quot;ENSG00000141510&quot;</span></span></code></pre></div>
 <p>Note: the <code>luckyBase</code> package integrates lots of useful tiny functions, you could explore it sometimes.</p>
 
 <!--  -->

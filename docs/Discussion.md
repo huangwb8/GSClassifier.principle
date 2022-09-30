@@ -106,6 +106,127 @@ Here is the environment of R programming:
 # [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
 ```
 
+## Subtype Vector
+
+In the PAD project, the **Subtype Vector** were identified based on independent cohorts under unsupervised hierarchical clustering, instead of an merged expression matrix after batch-effect control of the **sva::ComBat** function. 
+
+Here were some considerations:
+
+1. **Batch control would damage the raw rank differences**
+
+Here we just showed how could this happen.
+
+
+```r
+# Data
+testData <- readRDS(
+  system.file("extdata", 
+              "testData.rds", 
+              package = "GSClassifier")
+  )
+expr_pad <- testData$PanSTAD_expr_part
+
+# Missing value imputation
+expr_pad <- na_fill(expr_pad, 
+                    method = 'quantile', 
+                    seed = 698,
+                    verbose = F)
+
+# PADi
+padi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier")) 
+```
+
+The raw rank differences were as follows:
+
+
+```r
+# Time-consuming
+rank_pad <- GSClassifier:::trainDataProc_X(
+  expr_pad, 
+  geneSet = padi$geneSet,
+  breakVec=c(0, 0.25, 0.5, 0.75, 1.0)
+)
+print(rank_pad$dat$Xbin[1:5,1:5])
+#            ENSG00000122122 ENSG00000117091 ENSG00000163219 ENSG00000136167
+# GSM2235556               3               2               1               4
+# GSM2235557               3               3               1               4
+# GSM2235558               3               2               1               4
+# GSM2235559               3               4               1               4
+# GSM2235560               3               3               1               4
+#            ENSG00000005844
+# GSM2235556               3
+# GSM2235557               2
+# GSM2235558               3
+# GSM2235559               3
+# GSM2235560               3
+```
+
+Here, the expression matrix after removing batch effect were calculated:
+
+
+```r
+# Cleaned and normalized data for sva::Combat
+expr_pad2 <- apply(expr_pad, 2, scale)
+rownames(expr_pad2) <- rownames(expr_pad)
+
+# BatchQC data
+library(sva)
+batch <- testData$PanSTAD_phenotype_part$Dataset
+expr_pad2_rmbat <- ComBat(
+  dat=expr_pad2,
+  batch=batch, 
+  mod=NULL)
+```
+
+The rank differences after batch-effect control were as follows:
+
+
+```r
+# Time-consuming
+rank_pad_rmbat <- GSClassifier:::trainDataProc_X(
+  expr_pad2_rmbat, 
+  geneSet = padi$geneSet,
+  breakVec=c(0, 0.25, 0.5, 0.75, 1.0)
+)
+```
+
+The comparison demonstrated that the adjustment for batch effects would change the rank differences:
+
+
+```r
+mean(rank_pad_rmbat$dat$Xbin == rank_pad$dat$Xbin)
+# [1] 0.7788832
+```
+The rank differences, the base of TSP normalization, were critical for model training and subtype identification, so it's not recommended to adjust for batch effects using **sva::ComBat** before model training in GSClassifier.
+
+2. **Batch control would lead to an unbalanced subtype vectors**.
+
+Here, a heatmap were used to show the self-clustering of the training cohort based on **PIAM** and **PIDG**:
+
+
+```r
+res <- PAD(
+  expr = expr_pad2_rmbat,
+  cluster.method = "ward.D2",
+  subtype = "PAD.train_20220916",
+  verbose = T
+)
+```
+
+![](Discussion_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+
+Look at the percentage of PAD subtypes:
+
+
+```r
+table(res$Data$`PAD subtype`)/ncol(expr_pad2_rmbat)
+# 
+#      PAD-I     PAD-II    PAD-III     PAD-IV 
+# 0.05169938 0.25801819 0.63140258 0.05887985
+```
+This results demonstrated the unbalanced self-clustering of PAD subtypes based on the expression matrix after **sva::ComBat**, which would damage the performance of trained models.
+
+
 ## Missing value imputation (MVI)
 
 <!--
@@ -262,7 +383,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 Because missing values might damage the integrity of biological information, we explored **how much the number of missing values in one sample impacts subtype identification via PADi**. The steps are as follows: (i) we used the "quantile" algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportions of genes as zero expression; (iii) we calculated the relative multi-ROC [@pROC] (masked data vs. MVI data). In **GSClassifier**, we developed a function called **mv_tolerance** to complete the task.
 

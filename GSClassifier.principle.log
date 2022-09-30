@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  30 SEP 2022 15:33
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2019.12.15)  30 SEP 2022 18:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1229,76 +1229,83 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [33]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[34]
+[34] [35] [36] [37]
+File: Discussion_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pd
+f)
+<use Discussion_files/figure-latex/unnamed-chunk-8-1.pdf>
+
+Underfull \vbox (badness 2005) has occurred while \output is active []
+
+[38]
 File: ./fig/mvi-01.png Graphic file (type bmp)
 <./fig/mvi-01.png>
-[35] [36]
+[39] [40]
 File: Discussion_files/figure-latex/mvi02-1.pdf Graphic file (type pdf)
 <use Discussion_files/figure-latex/mvi02-1.pdf>
-[37] [38]
+[41] [42]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[39]
-File: Discussion_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pd
-f)
-<use Discussion_files/figure-latex/unnamed-chunk-5-1.pdf>
-[40] [41]
+[43]
+File: Discussion_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type p
+df)
+<use Discussion_files/figure-latex/unnamed-chunk-12-1.pdf>
+[44] [45]
 File: Discussion_files/figure-latex/mvi03-1.pdf Graphic file (type pdf)
 <use Discussion_files/figure-latex/mvi03-1.pdf>
-[42]
+[46]
 File: ./fig/bactch-effect-01.png Graphic file (type bmp)
 <./fig/bactch-effect-01.png>
-[43]
+[47]
 File: ./fig/bactch-effect-02.png Graphic file (type bmp)
 <./fig/bactch-effect-02.png>
-[44] [45] [46]
+[48] [49] [50]
 Chapter 3.
-[47
+[51
 
 ]
 File: ./fig/Flowchart-PAD.png Graphic file (type bmp)
 <./fig/Flowchart-PAD.png>
-[48] [49]
+[52] [53]
 Missing character: There is no ≥ in font [lmroman12-regular]:mapping=tex-text;!
-[50] [51]
+[54] [55]
 File: Quick-start_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type p
 df)
 <use Quick-start_files/figure-latex/unnamed-chunk-6-1.pdf>
-[52] [53]
+[56] [57]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1473.
-[54] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65]
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1600.
+[58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[66]
+[70]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[67]
+[71]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[68]
+[72]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[69] [70]
+[73] [74]
 Chapter 4.
-[71
+[75
 
-] [72] [73] [74]
+] [76] [77] [78]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[75] [76] [77]
+[79] [80] [81]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[78]
-Underfull \hbox (badness 10000) in paragraph at lines 2198--2199
+[82]
+Underfull \hbox (badness 10000) in paragraph at lines 2325--2326
 []\TU/lmr/m/n/12 Although an [][][][][][][][][][][][] (hyperparameter tuning) w
 as provided
  []
 
-[79] [80]
+[83] [84]
 Underfull \vbox (badness 6110) has occurred while \output is active []
 
-[81] [82] [83]
+[85] [86] [87]
 File: ./fig/model-no-01.png Graphic file (type bmp)
 <./fig/model-no-01.png>
 File: ./fig/model-no-02.png Graphic file (type bmp)
@@ -1306,36 +1313,36 @@ File: ./fig/model-no-02.png Graphic file (type bmp)
 
 Underfull \vbox (badness 2951) has occurred while \output is active []
 
-[84] [85] [86]
+[88] [89] [90]
 Chapter 5.
-[87
+[91
 
-] [88]
+] [92]
 File: ./fig/GSClassifier-model.jpg Graphic file (type bmp)
 <./fig/GSClassifier-model.jpg>
-[89] [90] [91] [92] [93] [94]
+[93] [94] [95] [96] [97] [98]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[95
+[99
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[96]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2708.
-[97]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2708.
+[100]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2835.
+[101]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2835.
 (./GSClassifier.principle.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2708.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2708.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2835.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 2835.
  ) 
 Here is how much of TeX's memory you used:
- 30446 strings out of 492922
- 545119 string characters out of 6130480
- 926704 words of memory out of 5000000
- 34176 multiletter control sequences out of 15000+600000
+ 30462 strings out of 492922
+ 545456 string characters out of 6130480
+ 926863 words of memory out of 5000000
+ 34190 multiletter control sequences out of 15000+600000
  538726 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,6n,115p,1320b,1765s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on GSClassifier.principle.pdf (97 pages).
+Output written on GSClassifier.principle.pdf (101 pages).

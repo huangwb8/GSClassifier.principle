@@ -1019,6 +1019,133 @@ Here is the environment of R programming:
 # [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
 \end{lstlisting}
 
+\hypertarget{subtype-vector}{%
+\section{Subtype Vector}\label{subtype-vector}}
+
+In the PAD project, the \textbf{Subtype Vector} were identified based on independent cohorts under unsupervised hierarchical clustering, instead of an merged expression matrix after batch-effect control of the \textbf{sva::ComBat} function.
+
+Here were some considerations:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Batch control would damage the raw rank differences}
+\end{enumerate}
+
+Here we just showed how could this happen.
+
+\begin{lstlisting}[language=R]
+# Data
+testData <- readRDS(
+  system.file("extdata", 
+              "testData.rds", 
+              package = "GSClassifier")
+  )
+expr_pad <- testData$PanSTAD_expr_part
+
+# Missing value imputation
+expr_pad <- na_fill(expr_pad, 
+                    method = 'quantile', 
+                    seed = 698,
+                    verbose = F)
+
+# PADi
+padi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier")) 
+\end{lstlisting}
+
+The raw rank differences were as follows:
+
+\begin{lstlisting}[language=R]
+# Time-consuming
+rank_pad <- GSClassifier:::trainDataProc_X(
+  expr_pad, 
+  geneSet = padi$geneSet,
+  breakVec=c(0, 0.25, 0.5, 0.75, 1.0)
+)
+print(rank_pad$dat$Xbin[1:5,1:5])
+#            ENSG00000122122 ENSG00000117091 ENSG00000163219 ENSG00000136167
+# GSM2235556               3               2               1               4
+# GSM2235557               3               3               1               4
+# GSM2235558               3               2               1               4
+# GSM2235559               3               4               1               4
+# GSM2235560               3               3               1               4
+#            ENSG00000005844
+# GSM2235556               3
+# GSM2235557               2
+# GSM2235558               3
+# GSM2235559               3
+# GSM2235560               3
+\end{lstlisting}
+
+Here, the expression matrix after removing batch effect were calculated:
+
+\begin{lstlisting}[language=R]
+# Cleaned and normalized data for sva::Combat
+expr_pad2 <- apply(expr_pad, 2, scale)
+rownames(expr_pad2) <- rownames(expr_pad)
+
+# BatchQC data
+library(sva)
+batch <- testData$PanSTAD_phenotype_part$Dataset
+expr_pad2_rmbat <- ComBat(
+  dat=expr_pad2,
+  batch=batch, 
+  mod=NULL)
+\end{lstlisting}
+
+The rank differences after batch-effect control were as follows:
+
+\begin{lstlisting}[language=R]
+# Time-consuming
+rank_pad_rmbat <- GSClassifier:::trainDataProc_X(
+  expr_pad2_rmbat, 
+  geneSet = padi$geneSet,
+  breakVec=c(0, 0.25, 0.5, 0.75, 1.0)
+)
+\end{lstlisting}
+
+The comparison demonstrated that the adjustment for batch effects would change the rank differences:
+
+\begin{lstlisting}[language=R]
+mean(rank_pad_rmbat$dat$Xbin == rank_pad$dat$Xbin)
+# [1] 0.7788832
+\end{lstlisting}
+
+The rank differences, the base of TSP normalization, were critical for model training and subtype identification, so it's not recommended to adjust for batch effects using \textbf{sva::ComBat} before model training in GSClassifier.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Batch control would lead to an unbalanced subtype vectors}.
+\end{enumerate}
+
+Here, a heatmap were used to show the self-clustering of the training cohort based on \textbf{PIAM} and \textbf{PIDG}:
+
+\begin{lstlisting}[language=R]
+res <- PAD(
+  expr = expr_pad2_rmbat,
+  cluster.method = "ward.D2",
+  subtype = "PAD.train_20220916",
+  verbose = T
+)
+\end{lstlisting}
+
+\includegraphics{Discussion_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Look at the percentage of PAD subtypes:
+
+\begin{lstlisting}[language=R]
+table(res$Data$`PAD subtype`)/ncol(expr_pad2_rmbat)
+# 
+#      PAD-I     PAD-II    PAD-III     PAD-IV 
+# 0.05169938 0.25801819 0.63140258 0.05887985
+\end{lstlisting}
+
+This results demonstrated the unbalanced self-clustering of PAD subtypes based on the expression matrix after \textbf{sva::ComBat}, which would damage the performance of trained models.
+
 \hypertarget{missing-value-imputation-mvi}{%
 \section{Missing value imputation (MVI)}\label{missing-value-imputation-mvi}}
 
@@ -1151,7 +1278,7 @@ Look at the new matrix via heatmap, where the clustering result is not significa
 Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 \end{lstlisting}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 Because missing values might damage the integrity of biological information, we explored \textbf{how much the number of missing values in one sample impacts subtype identification via PADi}. The steps are as follows: (i) we used the ``quantile'' algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportions of genes as zero expression; (iii) we calculated the relative multi-ROC {[}\protect\hyperlink{ref-pROC}{15}{]} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
 
@@ -1785,13 +1912,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 8.739412e-04 0.561300665 8.528023e-06
-# 2 PB-16-003        4            4 1.909563e-07 0.018167170 1.500414e-04
-# 3 PB-16-004        3            3 2.681044e-06 0.001126488 2.895652e-01
+# 1 PB-16-002        2            2 1.007564e-03 0.561300665 3.837404e-06
+# 2 PB-16-003        4            4 6.869898e-07 0.018167170 1.354489e-04
+# 3 PB-16-004        3            3 1.441154e-05 0.001126488 1.948445e-01
 #              4           5           6
-# 1 0.2757180035 0.011658502 0.002491799
-# 2 0.5593340993 0.002282911 0.001309570
-# 3 0.0002545732 0.007653435 0.006777492
+# 1 0.1316769049 0.006611313 0.004667357
+# 2 0.3614951521 0.002095707 0.002977557
+# 3 0.0002116173 0.007653435 0.007229299
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:

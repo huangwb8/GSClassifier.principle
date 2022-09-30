@@ -53,6 +53,32 @@ names(testData)
 
 ## PAD
 
+### The work flow of PAD exploration
+
+The basic process of PAD exploration was summarized in Figure \@ref(fig:flpad)
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{./fig/Flowchart-PAD} 
+
+}
+
+\caption{The process of PAD subtypes establishment}(\#fig:flpad)
+\end{figure}
+
++ With WGCNA method and TIMER datasets, Pan-Immune Activation Module (PIAM) was identified as a GEP representing co-infiltration of immune cells in the tumor microenvironment. Functional analysis such as GSEA was done for the exploration of PIAM functions.
+
++ With feature selection based on Boruta algorithm, missing value control (without missing value in over 80% of GC datasets we used), we retained 101 genes and named as “PIAM-hub”.
+
++ Pan-Immune Dysfunction Genes (PIDG) were explored based on “PIAM-hub” via a strategy similar to the computational framework of the Tumor Immune Dysfunction and Exclusion (TIDE) database [20]. Finally, 13 PIDGs were selected for downstream analysis as they were further validated in 2 or more external GC cohorts. 
+
++ To further reduce PIAM-hub for downstream modeling, genes with Mean of Correlation with Eigengene (MCE) ≥0.8 were selected and termed as “PIAM-top” subset (n=19).
+
++ “PIAM-top” and PIDG, two curated tiny GEPs, were applied to establish Pan-immune Activation and Dysfunction (PAD) subtypes (PAD-I, PIAMhighPIDGhigh; PAD-II, PIAMhighPIDGlow; PAD-III, PIAMlowPIDGhigh; and PAD-IV, PIAMlowPIDGlow) in independent GC cohorts.
+
++ Molecular alteration and patient survival across PAD subtypes were analyzed to figure out its biological and clinical impact. Also, a GSClassifier model called “PAD for individual” (PADi) was established for personalized subtype identification for immune checkpoint inhibitors response prediction in GC (More details in Online Section/PDF).
+
+
 ### Preparation of the test data
 
 Load phenotype data:
@@ -485,13 +511,13 @@ Check the result:
 ```r
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.201977e-03 0.561300665 7.722591e-06
-# 2 PB-16-003        4            4 3.865409e-07 0.018167170 1.611360e-04
-# 3 PB-16-004        3            3 5.132416e-06 0.001126488 2.040241e-01
+# 1 PB-16-002        2            2 8.739412e-04 0.561300665 8.528023e-06
+# 2 PB-16-003        4            4 1.909563e-07 0.018167170 1.500414e-04
+# 3 PB-16-004        3            3 2.681044e-06 0.001126488 2.895652e-01
 #              4           5           6
-# 1 0.2287567332 0.006611313 0.007155943
-# 2 0.5243493021 0.001982530 0.001759832
-# 3 0.0001839146 0.006606377 0.009214447
+# 1 0.2757180035 0.011658502 0.002491799
+# 2 0.5593340993 0.002282911 0.001309570
+# 3 0.0002545732 0.007653435 0.006777492
 ```
 
 

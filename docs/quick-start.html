@@ -176,9 +176,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="quick-start.html#data" id="toc-data"><span class="toc-section-number">3.3</span> Data</a></li>
 <li><a href="quick-start.html#pad" id="toc-pad"><span class="toc-section-number">3.4</span> PAD</a>
 <ul>
-<li><a href="quick-start.html#preparation-of-the-test-data" id="toc-preparation-of-the-test-data"><span class="toc-section-number">3.4.1</span> Preparation of the test data</a></li>
-<li><a href="quick-start.html#unsupervised-clustering" id="toc-unsupervised-clustering"><span class="toc-section-number">3.4.2</span> Unsupervised clustering</a></li>
-<li><a href="quick-start.html#of-note" id="toc-of-note"><span class="toc-section-number">3.4.3</span> Of note</a></li>
+<li><a href="quick-start.html#the-work-flow-of-pad-exploration" id="toc-the-work-flow-of-pad-exploration"><span class="toc-section-number">3.4.1</span> The work flow of PAD exploration</a></li>
+<li><a href="quick-start.html#preparation-of-the-test-data" id="toc-preparation-of-the-test-data"><span class="toc-section-number">3.4.2</span> Preparation of the test data</a></li>
+<li><a href="quick-start.html#unsupervised-clustering" id="toc-unsupervised-clustering"><span class="toc-section-number">3.4.3</span> Unsupervised clustering</a></li>
+<li><a href="quick-start.html#of-note" id="toc-of-note"><span class="toc-section-number">3.4.4</span> Of note</a></li>
 </ul></li>
 <li><a href="quick-start.html#padi" id="toc-padi"><span class="toc-section-number">3.5</span> PADi</a>
 <ul>
@@ -275,8 +276,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="pad" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> PAD</h2>
-<div id="preparation-of-the-test-data" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Preparation of the test data</h3>
+<div id="the-work-flow-of-pad-exploration" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> The work flow of PAD exploration</h3>
+<p>The basic process of PAD exploration was summarized in Figure <a href="quick-start.html#fig:flpad">3.1</a></p>
+<div class="figure" style="text-align: center"><span id="fig:flpad"></span>
+<img src="fig/Flowchart-PAD.png" alt="The process of PAD subtypes establishment" width="90%" />
+<p class="caption">
+Figure 3.1: The process of PAD subtypes establishment
+</p>
+</div>
+<ul>
+<li><p>With WGCNA method and TIMER datasets, Pan-Immune Activation Module (PIAM) was identified as a GEP representing co-infiltration of immune cells in the tumor microenvironment. Functional analysis such as GSEA was done for the exploration of PIAM functions.</p></li>
+<li><p>With feature selection based on Boruta algorithm, missing value control (without missing value in over 80% of GC datasets we used), we retained 101 genes and named as “PIAM-hub”.</p></li>
+<li><p>Pan-Immune Dysfunction Genes (PIDG) were explored based on “PIAM-hub” via a strategy similar to the computational framework of the Tumor Immune Dysfunction and Exclusion (TIDE) database [20]. Finally, 13 PIDGs were selected for downstream analysis as they were further validated in 2 or more external GC cohorts.</p></li>
+<li><p>To further reduce PIAM-hub for downstream modeling, genes with Mean of Correlation with Eigengene (MCE) ≥0.8 were selected and termed as “PIAM-top” subset (n=19).</p></li>
+<li><p>“PIAM-top” and PIDG, two curated tiny GEPs, were applied to establish Pan-immune Activation and Dysfunction (PAD) subtypes (PAD-I, PIAMhighPIDGhigh; PAD-II, PIAMhighPIDGlow; PAD-III, PIAMlowPIDGhigh; and PAD-IV, PIAMlowPIDGlow) in independent GC cohorts.</p></li>
+<li><p>Molecular alteration and patient survival across PAD subtypes were analyzed to figure out its biological and clinical impact. Also, a GSClassifier model called “PAD for individual” (PADi) was established for personalized subtype identification for immune checkpoint inhibitors response prediction in GC (More details in Online Section/PDF).</p></li>
+</ul>
+</div>
+<div id="preparation-of-the-test-data" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Preparation of the test data</h3>
 <p>Load phenotype data:</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="quick-start.html#cb32-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_phenotype_part</span>
 <span id="cb32-2"><a href="quick-start.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(design<span class="sc">$</span>Dataset)</span>
@@ -304,8 +323,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-16"><a href="quick-start.html#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ENSG00000005844   6.523530   6.129181   7.331588   5.547059   5.867118</span></span>
 <span id="cb33-17"><a href="quick-start.html#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ENSG00000123338   6.699790   6.935390   7.050288   6.536710   6.200269</span></span></code></pre></div>
 </div>
-<div id="unsupervised-clustering" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Unsupervised clustering</h3>
+<div id="unsupervised-clustering" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Unsupervised clustering</h3>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="quick-start.html#cb34-1" aria-hidden="true" tabindex="-1"></a>res_pad <span class="ot">&lt;-</span> <span class="fu">PAD</span>(</span>
 <span id="cb34-2"><a href="quick-start.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> expr,</span>
 <span id="cb34-3"><a href="quick-start.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster.method =</span> <span class="st">&quot;ward.D2&quot;</span>,</span>
@@ -320,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 # Gene match: 100%. 
 # Done!</code></pre>
 </div>
-<div id="of-note" class="section level3" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> Of note</h3>
+<div id="of-note" class="section level3" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Of note</h3>
 <ul>
 <li><p>It’s strongly recommended that the gene type of <code>expr</code> should be always the same, such as ENSEMBL genes (ENSG00000111640 for GAPDH, for example).</p></li>
 <li><p><code>PAD</code> function is only for datasets with lots of samples for its classification depends on population-based unsupervised clustering. <code>PAD</code> is population-dependent and non-personalized.</p></li>
@@ -562,13 +581,13 @@ res_padi &lt;- parCallEnsemble(
 <p>Check the result:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="quick-start.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_pis)</span>
 <span id="cb59-2"><a href="quick-start.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   SampleIDs BestCall BestCall_Max            1           2            3</span></span>
-<span id="cb59-3"><a href="quick-start.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 1.136198e-03 0.561300665 1.114968e-05</span></span>
-<span id="cb59-4"><a href="quick-start.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 6.261559e-07 0.018167170 6.067288e-05</span></span>
-<span id="cb59-5"><a href="quick-start.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 3.970684e-06 0.001126488 3.094811e-01</span></span>
-<span id="cb59-6"><a href="quick-start.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             4           5           6</span></span>
-<span id="cb59-7"><a href="quick-start.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.250004470 0.009215117 0.006368788</span></span>
-<span id="cb59-8"><a href="quick-start.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.423785776 0.002194726 0.002270643</span></span>
-<span id="cb59-9"><a href="quick-start.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.000163415 0.005643848 0.007284309</span></span></code></pre></div>
+<span id="cb59-3"><a href="quick-start.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 PB-16-002        2            2 7.024834e-04 0.561300665 4.650267e-06</span></span>
+<span id="cb59-4"><a href="quick-start.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 PB-16-003        4            4 6.600246e-07 0.018167170 1.677736e-04</span></span>
+<span id="cb59-5"><a href="quick-start.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 PB-16-004        3            3 4.434882e-06 0.001126488 2.490904e-01</span></span>
+<span id="cb59-6"><a href="quick-start.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#              4           5           6</span></span>
+<span id="cb59-7"><a href="quick-start.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 0.3171446472 0.009215117 0.002500323</span></span>
+<span id="cb59-8"><a href="quick-start.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 0.5359434187 0.002049010 0.001899991</span></span>
+<span id="cb59-9"><a href="quick-start.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 0.0001472232 0.006895948 0.006951177</span></span></code></pre></div>
 <p>Also, you can try to use <code>luckyModel</code>:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="quick-start.html#cb60-1" aria-hidden="true" tabindex="-1"></a>pci <span class="ot">&lt;-</span> <span class="fu">lucky_model</span>(</span>
 <span id="cb60-2"><a href="quick-start.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">&quot;GSClassifier&quot;</span>,</span>

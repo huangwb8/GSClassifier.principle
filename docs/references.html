@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>References | The Principle of R Package GSClassifier</title>
   <meta name="description" content="The Principle of GSClassifier" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="References | The Principle of R Package GSClassifier" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="The Principle of GSClassifier" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-30" />
+<meta name="date" content="2023-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="suggestions-for-gsclassifier-model-developers.html"/>
 
-<script src="libs/header-attrs-2.14/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -116,6 +117,33 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -134,91 +162,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">GSClassifier</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#welcome" id="toc-welcome">Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li><a href="index.html#about" id="toc-about">💦About</a></li>
-<li><a href="index.html#license" id="toc-license">💿License</a></li>
-<li><a href="index.html#installation" id="toc-installation">👍Installation</a></li>
-<li><a href="index.html#mirror" id="toc-mirror">👀<span>Mirror</span></a></li>
-<li><a href="index.html#change-log" id="toc-change-log">📚Change log</a></li>
-<li><a href="index.html#todo" id="toc-todo">📆TODO</a></li>
-<li><a href="index.html#other-projects" id="toc-other-projects">🌴Other Projects</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>💦About</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>💿License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>👍Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#mirror"><i class="fa fa-check"></i>👀Mirror</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#change-log"><i class="fa fa-check"></i>📚Change log</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo"><i class="fa fa-check"></i>📆TODO</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-projects"><i class="fa fa-check"></i>🌴Other Projects</a></li>
 </ul></li>
-<li><a href="the-principle-of-gsclassifier.html#the-principle-of-gsclassifier" id="toc-the-principle-of-gsclassifier"><span class="toc-section-number">1</span> The Principle of GSClassifier</a>
+<li class="chapter" data-level="1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html"><i class="fa fa-check"></i><b>1</b> The Principle of GSClassifier</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.1</span> Packages</a></li>
-<li><a href="the-principle-of-gsclassifier.html#flowchart" id="toc-flowchart"><span class="toc-section-number">1.2</span> Flowchart</a>
+<li class="chapter" data-level="1.1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#packages"><i class="fa fa-check"></i><b>1.1</b> Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#flowchart"><i class="fa fa-check"></i><b>1.2</b> Flowchart</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#data-processing" id="toc-data-processing"><span class="toc-section-number">1.2.1</span> Data Processing</a></li>
-<li><a href="the-principle-of-gsclassifier.html#model-establishment-and-validation" id="toc-model-establishment-and-validation"><span class="toc-section-number">1.2.2</span> Model Establishment and Validation</a></li>
-<li><a href="the-principle-of-gsclassifier.html#model-application" id="toc-model-application"><span class="toc-section-number">1.2.3</span> Model Application</a></li>
+<li class="chapter" data-level="1.2.1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#data-processing"><i class="fa fa-check"></i><b>1.2.1</b> Data Processing</a></li>
+<li class="chapter" data-level="1.2.2" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#model-establishment-and-validation"><i class="fa fa-check"></i><b>1.2.2</b> Model Establishment and Validation</a></li>
+<li class="chapter" data-level="1.2.3" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#model-application"><i class="fa fa-check"></i><b>1.2.3</b> Model Application</a></li>
 </ul></li>
-<li><a href="the-principle-of-gsclassifier.html#topicTSP" id="toc-topicTSP"><span class="toc-section-number">1.3</span> Top scoring pairs</a>
+<li class="chapter" data-level="1.3" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#topicTSP"><i class="fa fa-check"></i><b>1.3</b> Top scoring pairs</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#tsp-intro" id="toc-tsp-intro"><span class="toc-section-number">1.3.1</span> Introduction</a></li>
-<li><a href="the-principle-of-gsclassifier.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.3.2</span> Simulated Dataset</a></li>
-<li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.3.3</span> Binned expression</a></li>
-<li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.3.4</span> Pair difference</a></li>
-<li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.3.5</span> Set difference</a></li>
+<li class="chapter" data-level="1.3.1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#tsp-intro"><i class="fa fa-check"></i><b>1.3.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.3.2" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#simulated-dataset"><i class="fa fa-check"></i><b>1.3.2</b> Simulated Dataset</a></li>
+<li class="chapter" data-level="1.3.3" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#binned-expression"><i class="fa fa-check"></i><b>1.3.3</b> Binned expression</a></li>
+<li class="chapter" data-level="1.3.4" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#pair-difference"><i class="fa fa-check"></i><b>1.3.4</b> Pair difference</a></li>
+<li class="chapter" data-level="1.3.5" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#set-difference"><i class="fa fa-check"></i><b>1.3.5</b> Set difference</a></li>
 </ul></li>
 </ul></li>
-<li><a href="discussion.html#discussion" id="toc-discussion"><span class="toc-section-number">2</span> Discussion</a>
+<li class="chapter" data-level="2" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>2</b> Discussion</a>
 <ul>
-<li><a href="discussion.html#packages-1" id="toc-packages-1"><span class="toc-section-number">2.1</span> Packages</a></li>
-<li><a href="discussion.html#subtype-vector" id="toc-subtype-vector"><span class="toc-section-number">2.2</span> Subtype Vector</a></li>
-<li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.3</span> Missing value imputation (MVI)</a></li>
-<li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.4</span> Batch effect</a></li>
-<li><a href="discussion.html#subtype-number" id="toc-subtype-number"><span class="toc-section-number">2.5</span> Subtype number</a></li>
+<li class="chapter" data-level="2.1" data-path="discussion.html"><a href="discussion.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a></li>
+<li class="chapter" data-level="2.2" data-path="discussion.html"><a href="discussion.html#subtype-vector"><i class="fa fa-check"></i><b>2.2</b> Subtype Vector</a></li>
+<li class="chapter" data-level="2.3" data-path="discussion.html"><a href="discussion.html#missing-value-imputation-mvi"><i class="fa fa-check"></i><b>2.3</b> Missing value imputation (MVI)</a></li>
+<li class="chapter" data-level="2.4" data-path="discussion.html"><a href="discussion.html#batch-effect"><i class="fa fa-check"></i><b>2.4</b> Batch effect</a></li>
+<li class="chapter" data-level="2.5" data-path="discussion.html"><a href="discussion.html#subtype-number"><i class="fa fa-check"></i><b>2.5</b> Subtype number</a></li>
 </ul></li>
-<li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
+<li class="chapter" data-level="3" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i><b>3</b> Quick start</a>
 <ul>
-<li><a href="quick-start.html#about-1" id="toc-about-1"><span class="toc-section-number">3.1</span> About</a></li>
-<li><a href="quick-start.html#package" id="toc-package"><span class="toc-section-number">3.2</span> Package</a></li>
-<li><a href="quick-start.html#data" id="toc-data"><span class="toc-section-number">3.3</span> Data</a></li>
-<li><a href="quick-start.html#pad" id="toc-pad"><span class="toc-section-number">3.4</span> PAD</a>
+<li class="chapter" data-level="3.1" data-path="quick-start.html"><a href="quick-start.html#about-1"><i class="fa fa-check"></i><b>3.1</b> About</a></li>
+<li class="chapter" data-level="3.2" data-path="quick-start.html"><a href="quick-start.html#package"><i class="fa fa-check"></i><b>3.2</b> Package</a></li>
+<li class="chapter" data-level="3.3" data-path="quick-start.html"><a href="quick-start.html#data"><i class="fa fa-check"></i><b>3.3</b> Data</a></li>
+<li class="chapter" data-level="3.4" data-path="quick-start.html"><a href="quick-start.html#pad"><i class="fa fa-check"></i><b>3.4</b> PAD</a>
 <ul>
-<li><a href="quick-start.html#the-work-flow-of-pad-exploration" id="toc-the-work-flow-of-pad-exploration"><span class="toc-section-number">3.4.1</span> The work flow of PAD exploration</a></li>
-<li><a href="quick-start.html#preparation-of-the-test-data" id="toc-preparation-of-the-test-data"><span class="toc-section-number">3.4.2</span> Preparation of the test data</a></li>
-<li><a href="quick-start.html#unsupervised-clustering" id="toc-unsupervised-clustering"><span class="toc-section-number">3.4.3</span> Unsupervised clustering</a></li>
-<li><a href="quick-start.html#of-note" id="toc-of-note"><span class="toc-section-number">3.4.4</span> Of note</a></li>
+<li class="chapter" data-level="3.4.1" data-path="quick-start.html"><a href="quick-start.html#the-work-flow-of-pad-exploration"><i class="fa fa-check"></i><b>3.4.1</b> The work flow of PAD exploration</a></li>
+<li class="chapter" data-level="3.4.2" data-path="quick-start.html"><a href="quick-start.html#preparation-of-the-test-data"><i class="fa fa-check"></i><b>3.4.2</b> Preparation of the test data</a></li>
+<li class="chapter" data-level="3.4.3" data-path="quick-start.html"><a href="quick-start.html#unsupervised-clustering"><i class="fa fa-check"></i><b>3.4.3</b> Unsupervised clustering</a></li>
+<li class="chapter" data-level="3.4.4" data-path="quick-start.html"><a href="quick-start.html#of-note"><i class="fa fa-check"></i><b>3.4.4</b> Of note</a></li>
 </ul></li>
-<li><a href="quick-start.html#padi" id="toc-padi"><span class="toc-section-number">3.5</span> PADi</a>
+<li class="chapter" data-level="3.5" data-path="quick-start.html"><a href="quick-start.html#padi"><i class="fa fa-check"></i><b>3.5</b> PADi</a>
 <ul>
-<li><a href="quick-start.html#preparation-of-the-test-data-1" id="toc-preparation-of-the-test-data-1"><span class="toc-section-number">3.5.1</span> Preparation of the test data</a></li>
-<li><a href="quick-start.html#use-a-specific-function-called-padi" id="toc-use-a-specific-function-called-padi"><span class="toc-section-number">3.5.2</span> Use a specific function called <code>PADi</code></a></li>
-<li><a href="quick-start.html#use-the-callensemble-function" id="toc-use-the-callensemble-function"><span class="toc-section-number">3.5.3</span> Use the <code>callEnsemble</code> function</a></li>
-<li><a href="quick-start.html#parallel-strategy-for-padi" id="toc-parallel-strategy-for-padi"><span class="toc-section-number">3.5.4</span> Parallel strategy for PADi</a></li>
-<li><a href="quick-start.html#single-sample-subtype-calling" id="toc-single-sample-subtype-calling"><span class="toc-section-number">3.5.5</span> Single sample subtype calling</a></li>
-<li><a href="quick-start.html#of-note-1" id="toc-of-note-1"><span class="toc-section-number">3.5.6</span> Of note</a></li>
+<li class="chapter" data-level="3.5.1" data-path="quick-start.html"><a href="quick-start.html#preparation-of-the-test-data-1"><i class="fa fa-check"></i><b>3.5.1</b> Preparation of the test data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="quick-start.html"><a href="quick-start.html#use-a-specific-function-called-padi"><i class="fa fa-check"></i><b>3.5.2</b> Use a specific function called <code>PADi</code></a></li>
+<li class="chapter" data-level="3.5.3" data-path="quick-start.html"><a href="quick-start.html#use-the-callensemble-function"><i class="fa fa-check"></i><b>3.5.3</b> Use the <code>callEnsemble</code> function</a></li>
+<li class="chapter" data-level="3.5.4" data-path="quick-start.html"><a href="quick-start.html#parallel-strategy-for-padi"><i class="fa fa-check"></i><b>3.5.4</b> Parallel strategy for PADi</a></li>
+<li class="chapter" data-level="3.5.5" data-path="quick-start.html"><a href="quick-start.html#single-sample-subtype-calling"><i class="fa fa-check"></i><b>3.5.5</b> Single sample subtype calling</a></li>
+<li class="chapter" data-level="3.5.6" data-path="quick-start.html"><a href="quick-start.html#of-note-1"><i class="fa fa-check"></i><b>3.5.6</b> Of note</a></li>
 </ul></li>
-<li><a href="quick-start.html#use-external-models-from-luckymodel-package" id="toc-use-external-models-from-luckymodel-package"><span class="toc-section-number">3.6</span> Use external models from luckyModel package</a></li>
-<li><a href="quick-start.html#pancancer-immune-subtypes" id="toc-pancancer-immune-subtypes"><span class="toc-section-number">3.7</span> PanCancer immune subtypes</a></li>
+<li class="chapter" data-level="3.6" data-path="quick-start.html"><a href="quick-start.html#use-external-models-from-luckymodel-package"><i class="fa fa-check"></i><b>3.6</b> Use external models from luckyModel package</a></li>
+<li class="chapter" data-level="3.7" data-path="quick-start.html"><a href="quick-start.html#pancancer-immune-subtypes"><i class="fa fa-check"></i><b>3.7</b> PanCancer immune subtypes</a></li>
 </ul></li>
-<li><a href="model-establishment-via-gsclassifier.html#model-establishment-via-gsclassifier" id="toc-model-establishment-via-gsclassifier"><span class="toc-section-number">4</span> Model establishment via GSClassifier</a>
+<li class="chapter" data-level="4" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html"><i class="fa fa-check"></i><b>4</b> Model establishment via GSClassifier</a>
 <ul>
-<li><a href="model-establishment-via-gsclassifier.html#about-2" id="toc-about-2"><span class="toc-section-number">4.1</span> About</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#data-preparation" id="toc-data-preparation"><span class="toc-section-number">4.2</span> Data preparation</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#fitting-models" id="toc-fitting-models"><span class="toc-section-number">4.3</span> Fitting models</a>
+<li class="chapter" data-level="4.1" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#about-2"><i class="fa fa-check"></i><b>4.1</b> About</a></li>
+<li class="chapter" data-level="4.2" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#data-preparation"><i class="fa fa-check"></i><b>4.2</b> Data preparation</a></li>
+<li class="chapter" data-level="4.3" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#fitting-models"><i class="fa fa-check"></i><b>4.3</b> Fitting models</a>
 <ul>
-<li><a href="model-establishment-via-gsclassifier.html#gsclassifier-model-training" id="toc-gsclassifier-model-training"><span class="toc-section-number">4.3.1</span> GSClassifier model training</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#scaller-for-the-best-call" id="toc-scaller-for-the-best-call"><span class="toc-section-number">4.3.2</span> Scaller for the best call</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#assemble-your-model" id="toc-assemble-your-model"><span class="toc-section-number">4.3.3</span> Assemble your model</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#of-note-2" id="toc-of-note-2"><span class="toc-section-number">4.3.4</span> Of note</a></li>
+<li class="chapter" data-level="4.3.1" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#gsclassifier-model-training"><i class="fa fa-check"></i><b>4.3.1</b> GSClassifier model training</a></li>
+<li class="chapter" data-level="4.3.2" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#scaller-for-the-best-call"><i class="fa fa-check"></i><b>4.3.2</b> Scaller for the best call</a></li>
+<li class="chapter" data-level="4.3.3" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#assemble-your-model"><i class="fa fa-check"></i><b>4.3.3</b> Assemble your model</a></li>
+<li class="chapter" data-level="4.3.4" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#of-note-2"><i class="fa fa-check"></i><b>4.3.4</b> Of note</a></li>
 </ul></li>
-<li><a href="model-establishment-via-gsclassifier.html#calling-subtypes" id="toc-calling-subtypes"><span class="toc-section-number">4.4</span> Calling subtypes</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#topicSubmodel" id="toc-topicSubmodel"><span class="toc-section-number">4.5</span> Number of SubModel</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#padiPara" id="toc-padiPara"><span class="toc-section-number">4.6</span> Parameters for PADi training</a></li>
+<li class="chapter" data-level="4.4" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#calling-subtypes"><i class="fa fa-check"></i><b>4.4</b> Calling subtypes</a></li>
+<li class="chapter" data-level="4.5" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#topicSubmodel"><i class="fa fa-check"></i><b>4.5</b> Number of SubModel</a></li>
+<li class="chapter" data-level="4.6" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#padiPara"><i class="fa fa-check"></i><b>4.6</b> Parameters for PADi training</a></li>
 </ul></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#suggestions-for-gsclassifier-model-developers" id="toc-suggestions-for-gsclassifier-model-developers"><span class="toc-section-number">5</span> Suggestions for GSClassifier model developers</a>
+<li class="chapter" data-level="5" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html"><i class="fa fa-check"></i><b>5</b> Suggestions for GSClassifier model developers</a>
 <ul>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#about-3" id="toc-about-3"><span class="toc-section-number">5.1</span> About</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#available-models" id="toc-available-models"><span class="toc-section-number">5.2</span> Available models</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#components-of-a-gsclassifier-model" id="toc-components-of-a-gsclassifier-model"><span class="toc-section-number">5.3</span> Components of a GSClassifier model</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#submit-models-to-luckymodel-package" id="toc-submit-models-to-luckymodel-package"><span class="toc-section-number">5.4</span> Submit models to luckyModel package</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#repeatablility-of-models" id="toc-repeatablility-of-models"><span class="toc-section-number">5.5</span> Repeatablility of models</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#gene-annotation" id="toc-gene-annotation"><span class="toc-section-number">5.6</span> Gene Annotation</a></li>
+<li class="chapter" data-level="5.1" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#about-3"><i class="fa fa-check"></i><b>5.1</b> About</a></li>
+<li class="chapter" data-level="5.2" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#available-models"><i class="fa fa-check"></i><b>5.2</b> Available models</a></li>
+<li class="chapter" data-level="5.3" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#components-of-a-gsclassifier-model"><i class="fa fa-check"></i><b>5.3</b> Components of a GSClassifier model</a></li>
+<li class="chapter" data-level="5.4" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#submit-models-to-luckymodel-package"><i class="fa fa-check"></i><b>5.4</b> Submit models to luckyModel package</a></li>
+<li class="chapter" data-level="5.5" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#repeatablility-of-models"><i class="fa fa-check"></i><b>5.5</b> Repeatablility of models</a></li>
+<li class="chapter" data-level="5.6" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#gene-annotation"><i class="fa fa-check"></i><b>5.6</b> Gene Annotation</a></li>
 </ul></li>
-<li><a href="references.html#references" id="toc-references">References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://blognas.hwb0307.com/" target="blank">Welcome to My Blog!</a></li>
 
@@ -239,89 +267,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="references" class="section level1 unnumbered hasAnchor">
+<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
 <div id="refs" class="references csl-bib-body">
-<div id="ref-RN160" class="csl-entry">
+<div class="csl-entry">
 1. Thorsson V, Gibbs DL, Brown SD, et al. <a href="https://doi.org/10.1016/j.immuni.2018.03.023">The immune landscape of cancer</a>. Immunity 2018; 48:812–830 e14
 </div>
-<div id="ref-RN315" class="csl-entry">
+<div class="csl-entry">
 2. Gibbs DL. Robust classification of immune subtypes in cancer. 2020;
 </div>
-<div id="ref-RN345" class="csl-entry">
+<div class="csl-entry">
 3. Chen T, He T, Benesty M, et al. Xgboost: Extreme gradient boosting. 2015; 1:1–4
 </div>
-<div id="ref-RN267" class="csl-entry">
+<div class="csl-entry">
 4. Geman D, d’Avignon C, Naiman DQ, et al. <a href="https://doi.org/10.2202/1544-6115.1071">Classifying gene expression profiles from pairwise mRNA comparisons</a>. Stat Appl Genet Mol Biol 2004; 3:Article19
 </div>
-<div id="ref-RN265" class="csl-entry">
+<div class="csl-entry">
 5. Zhao H, Logothetis CJ, Gorlov IP. <a href="https://doi.org/10.1038/pcan.2010.9">Usefulness of the top-scoring pairs of genes for prediction of prostate cancer progression</a>. Prostate Cancer Prostatic Dis 2010; 13:252–9
 </div>
-<div id="ref-RN266" class="csl-entry">
+<div class="csl-entry">
 6. Youssef YM, White NM, Grigull J, et al. <a href="https://doi.org/10.1016/j.eururo.2011.01.004">Accurate molecular classification of kidney cancer subtypes using microRNA signature</a>. Eur Urol 2011; 59:721–30
 </div>
-<div id="ref-RN261" class="csl-entry">
+<div class="csl-entry">
 7. Auslander N, Zhang G, Lee JS, et al. <a href="https://doi.org/10.1038/s41591-018-0157-9">Robust prediction of response to immune checkpoint blockade therapy in metastatic melanoma</a>. Nat Med 2018; 24:1545–1549
 </div>
-<div id="ref-RN387" class="csl-entry">
+<div class="csl-entry">
 8. Troyanskaya O, Cantor M, Sherlock G, et al. <a href="https://doi.org/10.1093/bioinformatics/17.6.520">Missing value estimation methods for DNA microarrays</a>. Bioinformatics 2001; 17:520–5
 </div>
-<div id="ref-RN389" class="csl-entry">
+<div class="csl-entry">
 9. Arbeitman MN, Furlong EE, Imam F, et al. <a href="https://doi.org/10.1126/science.1072152">Gene expression during the life cycle of drosophila melanogaster</a>. Science 2002; 297:2270–5
 </div>
-<div id="ref-RN382" class="csl-entry">
+<div class="csl-entry">
 10. Zhu X, Wang J, Sun B, et al. <a href="https://doi.org/10.1186/s12859-021-04109-4">An efficient ensemble method for missing value imputation in microarray gene expression data</a>. BMC Bioinformatics 2021; 22:188
 </div>
-<div id="ref-RN392" class="csl-entry">
+<div class="csl-entry">
 11. Lin W-C, Tsai C-F. Missing value imputation: A review and analysis of the literature (2006–2017). 2020; 53:1487–1509
 </div>
-<div id="ref-RN386" class="csl-entry">
+<div class="csl-entry">
 12. Hasan MK, Alam MA, Roy S, et al. Missing value imputation affects the performance of machine learning: A review and analysis of the literature (2010–2021). Informatics in Medicine Unlocked 2021; 27:100799
 </div>
-<div id="ref-RN384" class="csl-entry">
+<div class="csl-entry">
 13. Wang A, Yang J, An N. Regularized sparse modelling for microarray missing value estimation. 2021; 9:16899–16913
 </div>
-<div id="ref-xgboost" class="csl-entry">
+<div class="csl-entry">
 14. Chen T, He T, Benesty M, et al. <a href="https://CRAN.R-project.org/package=xgboost">Xgboost: Extreme gradient boosting</a>. 2022;
 </div>
-<div id="ref-pROC" class="csl-entry">
+<div class="csl-entry">
 15. Robin X, Turck N, Hainard A, et al. pROC: An open-source package for r and s+ to analyze and compare ROC curves. BMC Bioinformatics 2011; 12:77
 </div>
-<div id="ref-RN369" class="csl-entry">
+<div class="csl-entry">
 16. Zhu S, Kong W, Zhu J, et al. <a href="https://doi.org/10.1093/bib/bbac344">The genetic algorithm-aided three-stage ensemble learning method identified a robust survival risk score in patients with glioma</a>. Brief Bioinform 2022;
 </div>
-<div id="ref-RN367" class="csl-entry">
+<div class="csl-entry">
 17. Tong M, Zheng W, Li H, et al. <a href="https://doi.org/10.1038/oncsis.2016.51">Multi-omics landscapes of colorectal cancer subtypes discriminated by an individualized prognostic signature for 5-fluorouracil-based chemotherapy</a>. Oncogenesis 2016; 5:e242
 </div>
-<div id="ref-RN368" class="csl-entry">
+<div class="csl-entry">
 18. Qi L, Li Y, Qin Y, et al. <a href="https://doi.org/10.1038/bjc.2016.370">An individualised signature for predicting response with concordant survival benefit for lung adenocarcinoma patients receiving platinum-based chemotherapy</a>. Br J Cancer 2016; 115:1513–1519
 </div>
-<div id="ref-RN364" class="csl-entry">
+<div class="csl-entry">
 19. Huang H, Zou Y, Zhang H, et al. <a href="https://doi.org/10.1016/j.trsl.2020.02.004">A qualitative transcriptional prognostic signature for patients with stage i-II pancreatic ductal adenocarcinoma</a>. Transl Res 2020; 219:30–44
 </div>
-<div id="ref-RN363" class="csl-entry">
+<div class="csl-entry">
 20. Zheng H, Song K, Fu Y, et al. <a href="https://doi.org/10.1093/bib/bbz174">An absolute human stemness index associated with oncogenic dedifferentiation</a>. Brief Bioinform 2021; 22:2151–2160
 </div>
-<div id="ref-RN362" class="csl-entry">
+<div class="csl-entry">
 21. Kong W, He L, Zhu J, et al. <a href="https://doi.org/10.1038/s41375-022-01662-6">An immunity and pyroptosis gene-pair signature predicts overall survival in acute myeloid leukemia</a>. Leukemia 2022;
 </div>
-<div id="ref-RN366" class="csl-entry">
+<div class="csl-entry">
 22. Liu K, Geng Y, Wang L, et al. <a href="https://doi.org/10.1002/1878-0261.13279">Systematic exploration of the underlying mechanism of gemcitabine resistance in pancreatic adenocarcinoma</a>. Mol Oncol 2022; 16:3034–3051
 </div>
-<div id="ref-RN365" class="csl-entry">
+<div class="csl-entry">
 23. Zheng H, Xie J, Song K, et al. <a href="https://doi.org/10.1186/s13287-022-02803-5">StemSC: A cross-dataset human stemness index for single-cell samples</a>. Stem Cell Res Ther 2022; 13:115
 </div>
-<div id="ref-RN421" class="csl-entry">
+<div class="csl-entry">
 24. Monti S, Tamayo P, Mesirov J, et al. Consensus clustering: A resampling-based method for class discovery and visualization of gene expression microarray data. 2003; 52:91–118
 </div>
-<div id="ref-RN422" class="csl-entry">
+<div class="csl-entry">
 25. Wilkerson MD, Hayes DN. ConsensusClusterPlus: A class discovery tool with confidence assessments and item tracking. 2010; 26:1572–1573
 </div>
-<div id="ref-RN423" class="csl-entry">
+<div class="csl-entry">
 26. Hayes DN, Monti S, Parmigiani G, et al. Gene expression profiling reveals reproducible human lung adenocarcinoma subtypes in multiple independent patient cohorts. 2006; 24:5079–5090
 </div>
-<div id="ref-RN424" class="csl-entry">
+<div class="csl-entry">
 27. Verhaak RG, Hoadley KA, Purdom E, et al. Integrated genomic analysis identifies clinically relevant subtypes of glioblastoma characterized by abnormalities in PDGFRA, IDH1, EGFR, and NF1. 2010; 17:98–110
 </div>
 </div>
@@ -336,7 +364,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -355,6 +382,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -375,6 +403,10 @@ gitbook.start({
 "text": null
 },
 "download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
@@ -388,7 +420,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

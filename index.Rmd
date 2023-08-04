@@ -99,6 +99,12 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 
 ## `r if(knitr::is_html_output()) emo::ji("books")`Change log {-}
 
++ Version 0.1.27
+
+  + Enhaned `geneMatch` function
+  
+  + Repair some bugs
+
 + Version 0.1.9
 
   + Optimize function verbose

@@ -44,66 +44,70 @@ Here is the environment of R programming:
 
 
 ```
-# R version 4.0.3 (2020-10-10)
+# R version 4.2.2 (2022-10-31 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 18363)
+# Running under: Windows 10 x64 (build 19042)
 # 
 # Matrix products: default
 # 
 # locale:
-# [1] LC_COLLATE=Chinese (Simplified)_China.936 
-# [2] LC_CTYPE=Chinese (Simplified)_China.936   
-# [3] LC_MONETARY=Chinese (Simplified)_China.936
-# [4] LC_NUMERIC=C                              
-# [5] LC_TIME=Chinese (Simplified)_China.936    
+# [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
+# [2] LC_CTYPE=Chinese (Simplified)_China.utf8   
+# [3] LC_MONETARY=Chinese (Simplified)_China.utf8
+# [4] LC_NUMERIC=C                               
+# [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
-# [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
+# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
+# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
+# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
-#   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
-#  [10] clue_0.3-57          rstudioapi_0.13      ggpubr_0.4.0        
-#  [13] listenv_0.8.0        remotes_2.4.2        prodlim_2019.11.13  
-#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
-#  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
-#  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
-#  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
-#  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
-#  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
-#  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
-#  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.4.1         
-#  [46] nlme_3.1-149         iterators_1.0.14     timeDate_3043.102   
-#  [49] xfun_0.33            gower_1.0.0          stringr_1.4.0       
-#  [52] globals_0.15.1       ps_1.4.0             testthat_3.1.0      
-#  [55] lifecycle_1.0.1      devtools_2.4.3       rstatix_0.7.0       
-#  [58] future_1.26.1        MASS_7.3-53          scales_1.2.0        
-#  [61] ipred_0.9-12         parallel_4.0.3       RColorBrewer_1.1-3  
-#  [64] yaml_2.3.5           memoise_2.0.1        stringi_1.7.6       
-#  [67] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
-#  [70] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
-#  [73] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
-#  [76] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
-#  [79] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
-#  [82] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
-#  [85] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
-#  [88] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
-#  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
-#  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
-#  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
+#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
+#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
+#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
+#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
+#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
+#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
+#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
+#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
+#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
+#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
+#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
+#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
+#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
+#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
+#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
+#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
+#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
+#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
+#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
+#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
+#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
+#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
+#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
+#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
+#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
+#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
+#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
+#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
+#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
+#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
+#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
+#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
+# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
+# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
+# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
+# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
+# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
+# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
+# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
+# [121] sessioninfo_1.2.2
 ```
 
 ## Flowchart
@@ -173,7 +177,7 @@ rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
 # Missing value imputation (MVI)
 expr <- na_fill(expr0, method = "quantile", seed = 447)
-#  Missing value imputation with quantile algorithm!
+# 2023-08-04 23:19:14 | Missing value imputation with quantile algorithm!
 
 # Subtype information
 # It depends on the application scenarios of GEPs

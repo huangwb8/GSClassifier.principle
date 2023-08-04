@@ -44,66 +44,70 @@ Here is the environment of R programming:
 
 
 ```
-# R version 4.0.3 (2020-10-10)
+# R version 4.2.2 (2022-10-31 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 18363)
+# Running under: Windows 10 x64 (build 19042)
 # 
 # Matrix products: default
 # 
 # locale:
-# [1] LC_COLLATE=Chinese (Simplified)_China.936 
-# [2] LC_CTYPE=Chinese (Simplified)_China.936   
-# [3] LC_MONETARY=Chinese (Simplified)_China.936
-# [4] LC_NUMERIC=C                              
-# [5] LC_TIME=Chinese (Simplified)_China.936    
+# [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
+# [2] LC_CTYPE=Chinese (Simplified)_China.utf8   
+# [3] LC_MONETARY=Chinese (Simplified)_China.utf8
+# [4] LC_NUMERIC=C                               
+# [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
-# [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
+# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
+# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
+# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
-#   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
-#  [10] clue_0.3-57          rstudioapi_0.13      ggpubr_0.4.0        
-#  [13] listenv_0.8.0        remotes_2.4.2        prodlim_2019.11.13  
-#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
-#  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
-#  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
-#  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
-#  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
-#  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
-#  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
-#  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.4.1         
-#  [46] nlme_3.1-149         iterators_1.0.14     timeDate_3043.102   
-#  [49] xfun_0.33            gower_1.0.0          stringr_1.4.0       
-#  [52] globals_0.15.1       ps_1.4.0             testthat_3.1.0      
-#  [55] lifecycle_1.0.1      devtools_2.4.3       rstatix_0.7.0       
-#  [58] future_1.26.1        MASS_7.3-53          scales_1.2.0        
-#  [61] ipred_0.9-12         parallel_4.0.3       RColorBrewer_1.1-3  
-#  [64] yaml_2.3.5           memoise_2.0.1        stringi_1.7.6       
-#  [67] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
-#  [70] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
-#  [73] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
-#  [76] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
-#  [79] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
-#  [82] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
-#  [85] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
-#  [88] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
-#  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
-#  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
-#  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
+#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
+#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
+#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
+#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
+#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
+#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
+#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
+#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
+#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
+#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
+#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
+#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
+#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
+#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
+#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
+#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
+#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
+#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
+#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
+#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
+#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
+#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
+#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
+#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
+#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
+#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
+#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
+#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
+#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
+#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
+#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
+#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
+# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
+# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
+# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
+# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
+# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
+# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
+# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
+# [121] sessioninfo_1.2.2
 ```
 
 ## Subtype Vector
@@ -168,15 +172,103 @@ Here, the expression matrix after removing batch effect were calculated:
 # Cleaned and normalized data for sva::Combat
 expr_pad2 <- apply(expr_pad, 2, scale)
 rownames(expr_pad2) <- rownames(expr_pad)
+```
 
+Remove batch effects:
+
+
+```r
 # BatchQC data
 library(sva)
+# Loading required package: mgcv
+# Loading required package: nlme
+# This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.
+# Loading required package: genefilter
+# 
+# Attaching package: 'genefilter'
+# The following object is masked from 'package:ComplexHeatmap':
+# 
+#     dist2
+# Loading required package: BiocParallel
 batch <- testData$PanSTAD_phenotype_part$Dataset
 expr_pad2_rmbat <- ComBat(
   dat=expr_pad2,
   batch=batch, 
   mod=NULL)
+# Found14batches
+# Adjusting for0covariate(s) or covariate level(s)
+# Standardizing Data across genes
+# Fitting L/S model and finding priors
+# Finding parametric adjustments
+# Adjusting the Data
 ```
+
+Look at the alteration of batch effects in GC datasets:
+
+
+```r
+
+# Compare
+df1 <- reshape2::melt(expr_pad2)
+df2 <- reshape2::melt(expr_pad2_rmbat)
+df3 <- rbind(
+  cbind(df1, type = 'After scale_before Combat'),
+  cbind(df2, type = 'After scale_after Combat')
+)
+df3$type <- factor(df3$type, levels = c('After scale_before Combat', 'After scale_after Combat'))
+df3$dataset <- convert(df3$Var2,'ID','Dataset', testData$PanSTAD_phenotype_part)
+dataset <- unique(df3$dataset)
+dataset_color <- mycolor[c(1,4,5,6,7,10,21,22,23,24,25,54,56,60)]
+
+# ggplot: Combat似乎有一点点效果
+if(T){
+  
+  size=6
+  
+  p <- ggplot(df3,aes(x=Var2,y=value,fill=dataset,color=dataset)) + 
+    geom_boxplot(outlier.size = -0.3, size = 0.02) + 
+    scale_fill_manual(
+      breaks = dataset,
+      values = dataset_color,
+      labels = dataset
+    ) + 
+    scale_color_manual(
+      breaks = dataset,
+      values = dataset_color,
+      labels = dataset
+    ) + 
+    guides(color = "none",
+           fill = guide_legend(override.aes = list(size=1))) + 
+    facet_wrap(. ~ type, 
+               nrow = length(unique(df3$type)),
+               scales = 'free') +
+    labs(x = 'Samples in External cohorts of GC',
+         y = 'Gene expression',
+         fill = NULL) +
+    # coord_flip() + 
+    theme_bw() +
+    theme(
+      axis.text.x = element_blank(),
+      axis.text.y = element_text(size = size/15*12,colour = "black",face = "bold"),
+      axis.title.x = element_text(size = size*1.5,colour = "black",face = "bold"),
+      axis.title.y = element_text(size = size*1.5,colour = "black",face = "bold"),
+      legend.text = element_text(size = size/15*25,colour = "black",face = "bold"),
+      legend.title = element_text(size = size/15*25,colour = "black",face = "bold"),
+      legend.position='right',
+      strip.background = element_rect(fill="white",size = 2),
+      strip.text.x = element_text(size = size*1.5,colour = "black",face = "bold", margin = margin(t = 0.5, r = 0, b = 0.5, l = 0, unit = "cm")),
+      panel.border = element_rect(colour = "black",size=2),
+      # panel.grid = element_blank(),
+      # panel.border=element_rect(fill='transparent',color='transparent'),
+      # axis.ticks = element_line(colour = "black",size = 2.5,linetype = 1,lineend = 'square'),
+      axis.ticks = element_blank()
+      # axis.line = element_line(colour = "black",size = 2.5,linetype = 1,lineend = 'square')
+    ) 
+  print(p)
+}
+```
+
+![](Discussion_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 The rank differences after batch-effect control were as follows:
 
@@ -213,7 +305,7 @@ res <- PAD(
 )
 ```
 
-![](Discussion_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+![](Discussion_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 Look at the percentage of PAD subtypes:
 
@@ -279,7 +371,7 @@ As shown in Figure \@ref(fig:mvi02), the percentage of all samples in gastric ca
 
 ```r
 # ggplot
-ggplot(data = expr_pad_na_df, 
+p1 <- ggplot(data = expr_pad_na_df, 
        aes(x = sample, y = prob)) + 
   geom_bar(stat = 'identity', color = mycolor[3]) + 
   scale_y_continuous(labels=scales::percent) + 
@@ -292,6 +384,7 @@ ggplot(data = expr_pad_na_df,
     axis.title = element_text(size = 15),
     axis.text = element_text(size = 12)
   )
+print(p1)
 ```
 
 \begin{figure}
@@ -383,7 +476,7 @@ Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 
 
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 Because missing values might damage the integrity of biological information, we explored **how much the number of missing values in one sample impacts subtype identification via PADi**. The steps are as follows: (i) we used the "quantile" algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportions of genes as zero expression; (iii) we calculated the relative multi-ROC [@pROC] (masked data vs. MVI data). In **GSClassifier**, we developed a function called **mv_tolerance** to complete the task.
 
@@ -445,7 +538,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 
 ```r
 # Plot
-ggplot(mvt_auc_df, aes(x,y)) +
+p2 <- ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
   stat_smooth(formula = y ~ x,method = 'glm') +
@@ -455,6 +548,7 @@ ggplot(mvt_auc_df, aes(x,y)) +
     axis.title = element_text(size = 15),
     axis.text = element_text(size = 12)
   )
+print(p2)
 ```
 
 \begin{figure}

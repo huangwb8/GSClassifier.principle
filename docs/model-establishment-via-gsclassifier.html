@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Model establishment via GSClassifier | The Principle of R Package GSClassifier</title>
   <meta name="description" content="The Principle of GSClassifier" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Model establishment via GSClassifier | The Principle of R Package GSClassifier" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="The Principle of GSClassifier" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2022-09-30" />
+<meta name="date" content="2023-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="quick-start.html"/>
 <link rel="next" href="suggestions-for-gsclassifier-model-developers.html"/>
-<script src="libs/header-attrs-2.14/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -116,6 +117,33 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -134,91 +162,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">GSClassifier</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#welcome" id="toc-welcome">Welcome</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
 <ul>
-<li><a href="index.html#about" id="toc-about">💦About</a></li>
-<li><a href="index.html#license" id="toc-license">💿License</a></li>
-<li><a href="index.html#installation" id="toc-installation">👍Installation</a></li>
-<li><a href="index.html#mirror" id="toc-mirror">👀<span>Mirror</span></a></li>
-<li><a href="index.html#change-log" id="toc-change-log">📚Change log</a></li>
-<li><a href="index.html#todo" id="toc-todo">📆TODO</a></li>
-<li><a href="index.html#other-projects" id="toc-other-projects">🌴Other Projects</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>💦About</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>💿License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>👍Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#mirror"><i class="fa fa-check"></i>👀Mirror</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#change-log"><i class="fa fa-check"></i>📚Change log</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#todo"><i class="fa fa-check"></i>📆TODO</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-projects"><i class="fa fa-check"></i>🌴Other Projects</a></li>
 </ul></li>
-<li><a href="the-principle-of-gsclassifier.html#the-principle-of-gsclassifier" id="toc-the-principle-of-gsclassifier"><span class="toc-section-number">1</span> The Principle of GSClassifier</a>
+<li class="chapter" data-level="1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html"><i class="fa fa-check"></i><b>1</b> The Principle of GSClassifier</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#packages" id="toc-packages"><span class="toc-section-number">1.1</span> Packages</a></li>
-<li><a href="the-principle-of-gsclassifier.html#flowchart" id="toc-flowchart"><span class="toc-section-number">1.2</span> Flowchart</a>
+<li class="chapter" data-level="1.1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#packages"><i class="fa fa-check"></i><b>1.1</b> Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#flowchart"><i class="fa fa-check"></i><b>1.2</b> Flowchart</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#data-processing" id="toc-data-processing"><span class="toc-section-number">1.2.1</span> Data Processing</a></li>
-<li><a href="the-principle-of-gsclassifier.html#model-establishment-and-validation" id="toc-model-establishment-and-validation"><span class="toc-section-number">1.2.2</span> Model Establishment and Validation</a></li>
-<li><a href="the-principle-of-gsclassifier.html#model-application" id="toc-model-application"><span class="toc-section-number">1.2.3</span> Model Application</a></li>
+<li class="chapter" data-level="1.2.1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#data-processing"><i class="fa fa-check"></i><b>1.2.1</b> Data Processing</a></li>
+<li class="chapter" data-level="1.2.2" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#model-establishment-and-validation"><i class="fa fa-check"></i><b>1.2.2</b> Model Establishment and Validation</a></li>
+<li class="chapter" data-level="1.2.3" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#model-application"><i class="fa fa-check"></i><b>1.2.3</b> Model Application</a></li>
 </ul></li>
-<li><a href="the-principle-of-gsclassifier.html#topicTSP" id="toc-topicTSP"><span class="toc-section-number">1.3</span> Top scoring pairs</a>
+<li class="chapter" data-level="1.3" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#topicTSP"><i class="fa fa-check"></i><b>1.3</b> Top scoring pairs</a>
 <ul>
-<li><a href="the-principle-of-gsclassifier.html#tsp-intro" id="toc-tsp-intro"><span class="toc-section-number">1.3.1</span> Introduction</a></li>
-<li><a href="the-principle-of-gsclassifier.html#simulated-dataset" id="toc-simulated-dataset"><span class="toc-section-number">1.3.2</span> Simulated Dataset</a></li>
-<li><a href="the-principle-of-gsclassifier.html#binned-expression" id="toc-binned-expression"><span class="toc-section-number">1.3.3</span> Binned expression</a></li>
-<li><a href="the-principle-of-gsclassifier.html#pair-difference" id="toc-pair-difference"><span class="toc-section-number">1.3.4</span> Pair difference</a></li>
-<li><a href="the-principle-of-gsclassifier.html#set-difference" id="toc-set-difference"><span class="toc-section-number">1.3.5</span> Set difference</a></li>
+<li class="chapter" data-level="1.3.1" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#tsp-intro"><i class="fa fa-check"></i><b>1.3.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.3.2" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#simulated-dataset"><i class="fa fa-check"></i><b>1.3.2</b> Simulated Dataset</a></li>
+<li class="chapter" data-level="1.3.3" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#binned-expression"><i class="fa fa-check"></i><b>1.3.3</b> Binned expression</a></li>
+<li class="chapter" data-level="1.3.4" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#pair-difference"><i class="fa fa-check"></i><b>1.3.4</b> Pair difference</a></li>
+<li class="chapter" data-level="1.3.5" data-path="the-principle-of-gsclassifier.html"><a href="the-principle-of-gsclassifier.html#set-difference"><i class="fa fa-check"></i><b>1.3.5</b> Set difference</a></li>
 </ul></li>
 </ul></li>
-<li><a href="discussion.html#discussion" id="toc-discussion"><span class="toc-section-number">2</span> Discussion</a>
+<li class="chapter" data-level="2" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>2</b> Discussion</a>
 <ul>
-<li><a href="discussion.html#packages-1" id="toc-packages-1"><span class="toc-section-number">2.1</span> Packages</a></li>
-<li><a href="discussion.html#subtype-vector" id="toc-subtype-vector"><span class="toc-section-number">2.2</span> Subtype Vector</a></li>
-<li><a href="discussion.html#missing-value-imputation-mvi" id="toc-missing-value-imputation-mvi"><span class="toc-section-number">2.3</span> Missing value imputation (MVI)</a></li>
-<li><a href="discussion.html#batch-effect" id="toc-batch-effect"><span class="toc-section-number">2.4</span> Batch effect</a></li>
-<li><a href="discussion.html#subtype-number" id="toc-subtype-number"><span class="toc-section-number">2.5</span> Subtype number</a></li>
+<li class="chapter" data-level="2.1" data-path="discussion.html"><a href="discussion.html#packages-1"><i class="fa fa-check"></i><b>2.1</b> Packages</a></li>
+<li class="chapter" data-level="2.2" data-path="discussion.html"><a href="discussion.html#subtype-vector"><i class="fa fa-check"></i><b>2.2</b> Subtype Vector</a></li>
+<li class="chapter" data-level="2.3" data-path="discussion.html"><a href="discussion.html#missing-value-imputation-mvi"><i class="fa fa-check"></i><b>2.3</b> Missing value imputation (MVI)</a></li>
+<li class="chapter" data-level="2.4" data-path="discussion.html"><a href="discussion.html#batch-effect"><i class="fa fa-check"></i><b>2.4</b> Batch effect</a></li>
+<li class="chapter" data-level="2.5" data-path="discussion.html"><a href="discussion.html#subtype-number"><i class="fa fa-check"></i><b>2.5</b> Subtype number</a></li>
 </ul></li>
-<li><a href="quick-start.html#quick-start" id="toc-quick-start"><span class="toc-section-number">3</span> Quick start</a>
+<li class="chapter" data-level="3" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i><b>3</b> Quick start</a>
 <ul>
-<li><a href="quick-start.html#about-1" id="toc-about-1"><span class="toc-section-number">3.1</span> About</a></li>
-<li><a href="quick-start.html#package" id="toc-package"><span class="toc-section-number">3.2</span> Package</a></li>
-<li><a href="quick-start.html#data" id="toc-data"><span class="toc-section-number">3.3</span> Data</a></li>
-<li><a href="quick-start.html#pad" id="toc-pad"><span class="toc-section-number">3.4</span> PAD</a>
+<li class="chapter" data-level="3.1" data-path="quick-start.html"><a href="quick-start.html#about-1"><i class="fa fa-check"></i><b>3.1</b> About</a></li>
+<li class="chapter" data-level="3.2" data-path="quick-start.html"><a href="quick-start.html#package"><i class="fa fa-check"></i><b>3.2</b> Package</a></li>
+<li class="chapter" data-level="3.3" data-path="quick-start.html"><a href="quick-start.html#data"><i class="fa fa-check"></i><b>3.3</b> Data</a></li>
+<li class="chapter" data-level="3.4" data-path="quick-start.html"><a href="quick-start.html#pad"><i class="fa fa-check"></i><b>3.4</b> PAD</a>
 <ul>
-<li><a href="quick-start.html#the-work-flow-of-pad-exploration" id="toc-the-work-flow-of-pad-exploration"><span class="toc-section-number">3.4.1</span> The work flow of PAD exploration</a></li>
-<li><a href="quick-start.html#preparation-of-the-test-data" id="toc-preparation-of-the-test-data"><span class="toc-section-number">3.4.2</span> Preparation of the test data</a></li>
-<li><a href="quick-start.html#unsupervised-clustering" id="toc-unsupervised-clustering"><span class="toc-section-number">3.4.3</span> Unsupervised clustering</a></li>
-<li><a href="quick-start.html#of-note" id="toc-of-note"><span class="toc-section-number">3.4.4</span> Of note</a></li>
+<li class="chapter" data-level="3.4.1" data-path="quick-start.html"><a href="quick-start.html#the-work-flow-of-pad-exploration"><i class="fa fa-check"></i><b>3.4.1</b> The work flow of PAD exploration</a></li>
+<li class="chapter" data-level="3.4.2" data-path="quick-start.html"><a href="quick-start.html#preparation-of-the-test-data"><i class="fa fa-check"></i><b>3.4.2</b> Preparation of the test data</a></li>
+<li class="chapter" data-level="3.4.3" data-path="quick-start.html"><a href="quick-start.html#unsupervised-clustering"><i class="fa fa-check"></i><b>3.4.3</b> Unsupervised clustering</a></li>
+<li class="chapter" data-level="3.4.4" data-path="quick-start.html"><a href="quick-start.html#of-note"><i class="fa fa-check"></i><b>3.4.4</b> Of note</a></li>
 </ul></li>
-<li><a href="quick-start.html#padi" id="toc-padi"><span class="toc-section-number">3.5</span> PADi</a>
+<li class="chapter" data-level="3.5" data-path="quick-start.html"><a href="quick-start.html#padi"><i class="fa fa-check"></i><b>3.5</b> PADi</a>
 <ul>
-<li><a href="quick-start.html#preparation-of-the-test-data-1" id="toc-preparation-of-the-test-data-1"><span class="toc-section-number">3.5.1</span> Preparation of the test data</a></li>
-<li><a href="quick-start.html#use-a-specific-function-called-padi" id="toc-use-a-specific-function-called-padi"><span class="toc-section-number">3.5.2</span> Use a specific function called <code>PADi</code></a></li>
-<li><a href="quick-start.html#use-the-callensemble-function" id="toc-use-the-callensemble-function"><span class="toc-section-number">3.5.3</span> Use the <code>callEnsemble</code> function</a></li>
-<li><a href="quick-start.html#parallel-strategy-for-padi" id="toc-parallel-strategy-for-padi"><span class="toc-section-number">3.5.4</span> Parallel strategy for PADi</a></li>
-<li><a href="quick-start.html#single-sample-subtype-calling" id="toc-single-sample-subtype-calling"><span class="toc-section-number">3.5.5</span> Single sample subtype calling</a></li>
-<li><a href="quick-start.html#of-note-1" id="toc-of-note-1"><span class="toc-section-number">3.5.6</span> Of note</a></li>
+<li class="chapter" data-level="3.5.1" data-path="quick-start.html"><a href="quick-start.html#preparation-of-the-test-data-1"><i class="fa fa-check"></i><b>3.5.1</b> Preparation of the test data</a></li>
+<li class="chapter" data-level="3.5.2" data-path="quick-start.html"><a href="quick-start.html#use-a-specific-function-called-padi"><i class="fa fa-check"></i><b>3.5.2</b> Use a specific function called <code>PADi</code></a></li>
+<li class="chapter" data-level="3.5.3" data-path="quick-start.html"><a href="quick-start.html#use-the-callensemble-function"><i class="fa fa-check"></i><b>3.5.3</b> Use the <code>callEnsemble</code> function</a></li>
+<li class="chapter" data-level="3.5.4" data-path="quick-start.html"><a href="quick-start.html#parallel-strategy-for-padi"><i class="fa fa-check"></i><b>3.5.4</b> Parallel strategy for PADi</a></li>
+<li class="chapter" data-level="3.5.5" data-path="quick-start.html"><a href="quick-start.html#single-sample-subtype-calling"><i class="fa fa-check"></i><b>3.5.5</b> Single sample subtype calling</a></li>
+<li class="chapter" data-level="3.5.6" data-path="quick-start.html"><a href="quick-start.html#of-note-1"><i class="fa fa-check"></i><b>3.5.6</b> Of note</a></li>
 </ul></li>
-<li><a href="quick-start.html#use-external-models-from-luckymodel-package" id="toc-use-external-models-from-luckymodel-package"><span class="toc-section-number">3.6</span> Use external models from luckyModel package</a></li>
-<li><a href="quick-start.html#pancancer-immune-subtypes" id="toc-pancancer-immune-subtypes"><span class="toc-section-number">3.7</span> PanCancer immune subtypes</a></li>
+<li class="chapter" data-level="3.6" data-path="quick-start.html"><a href="quick-start.html#use-external-models-from-luckymodel-package"><i class="fa fa-check"></i><b>3.6</b> Use external models from luckyModel package</a></li>
+<li class="chapter" data-level="3.7" data-path="quick-start.html"><a href="quick-start.html#pancancer-immune-subtypes"><i class="fa fa-check"></i><b>3.7</b> PanCancer immune subtypes</a></li>
 </ul></li>
-<li><a href="model-establishment-via-gsclassifier.html#model-establishment-via-gsclassifier" id="toc-model-establishment-via-gsclassifier"><span class="toc-section-number">4</span> Model establishment via GSClassifier</a>
+<li class="chapter" data-level="4" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html"><i class="fa fa-check"></i><b>4</b> Model establishment via GSClassifier</a>
 <ul>
-<li><a href="model-establishment-via-gsclassifier.html#about-2" id="toc-about-2"><span class="toc-section-number">4.1</span> About</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#data-preparation" id="toc-data-preparation"><span class="toc-section-number">4.2</span> Data preparation</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#fitting-models" id="toc-fitting-models"><span class="toc-section-number">4.3</span> Fitting models</a>
+<li class="chapter" data-level="4.1" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#about-2"><i class="fa fa-check"></i><b>4.1</b> About</a></li>
+<li class="chapter" data-level="4.2" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#data-preparation"><i class="fa fa-check"></i><b>4.2</b> Data preparation</a></li>
+<li class="chapter" data-level="4.3" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#fitting-models"><i class="fa fa-check"></i><b>4.3</b> Fitting models</a>
 <ul>
-<li><a href="model-establishment-via-gsclassifier.html#gsclassifier-model-training" id="toc-gsclassifier-model-training"><span class="toc-section-number">4.3.1</span> GSClassifier model training</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#scaller-for-the-best-call" id="toc-scaller-for-the-best-call"><span class="toc-section-number">4.3.2</span> Scaller for the best call</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#assemble-your-model" id="toc-assemble-your-model"><span class="toc-section-number">4.3.3</span> Assemble your model</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#of-note-2" id="toc-of-note-2"><span class="toc-section-number">4.3.4</span> Of note</a></li>
+<li class="chapter" data-level="4.3.1" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#gsclassifier-model-training"><i class="fa fa-check"></i><b>4.3.1</b> GSClassifier model training</a></li>
+<li class="chapter" data-level="4.3.2" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#scaller-for-the-best-call"><i class="fa fa-check"></i><b>4.3.2</b> Scaller for the best call</a></li>
+<li class="chapter" data-level="4.3.3" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#assemble-your-model"><i class="fa fa-check"></i><b>4.3.3</b> Assemble your model</a></li>
+<li class="chapter" data-level="4.3.4" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#of-note-2"><i class="fa fa-check"></i><b>4.3.4</b> Of note</a></li>
 </ul></li>
-<li><a href="model-establishment-via-gsclassifier.html#calling-subtypes" id="toc-calling-subtypes"><span class="toc-section-number">4.4</span> Calling subtypes</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#topicSubmodel" id="toc-topicSubmodel"><span class="toc-section-number">4.5</span> Number of SubModel</a></li>
-<li><a href="model-establishment-via-gsclassifier.html#padiPara" id="toc-padiPara"><span class="toc-section-number">4.6</span> Parameters for PADi training</a></li>
+<li class="chapter" data-level="4.4" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#calling-subtypes"><i class="fa fa-check"></i><b>4.4</b> Calling subtypes</a></li>
+<li class="chapter" data-level="4.5" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#topicSubmodel"><i class="fa fa-check"></i><b>4.5</b> Number of SubModel</a></li>
+<li class="chapter" data-level="4.6" data-path="model-establishment-via-gsclassifier.html"><a href="model-establishment-via-gsclassifier.html#padiPara"><i class="fa fa-check"></i><b>4.6</b> Parameters for PADi training</a></li>
 </ul></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#suggestions-for-gsclassifier-model-developers" id="toc-suggestions-for-gsclassifier-model-developers"><span class="toc-section-number">5</span> Suggestions for GSClassifier model developers</a>
+<li class="chapter" data-level="5" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html"><i class="fa fa-check"></i><b>5</b> Suggestions for GSClassifier model developers</a>
 <ul>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#about-3" id="toc-about-3"><span class="toc-section-number">5.1</span> About</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#available-models" id="toc-available-models"><span class="toc-section-number">5.2</span> Available models</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#components-of-a-gsclassifier-model" id="toc-components-of-a-gsclassifier-model"><span class="toc-section-number">5.3</span> Components of a GSClassifier model</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#submit-models-to-luckymodel-package" id="toc-submit-models-to-luckymodel-package"><span class="toc-section-number">5.4</span> Submit models to luckyModel package</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#repeatablility-of-models" id="toc-repeatablility-of-models"><span class="toc-section-number">5.5</span> Repeatablility of models</a></li>
-<li><a href="suggestions-for-gsclassifier-model-developers.html#gene-annotation" id="toc-gene-annotation"><span class="toc-section-number">5.6</span> Gene Annotation</a></li>
+<li class="chapter" data-level="5.1" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#about-3"><i class="fa fa-check"></i><b>5.1</b> About</a></li>
+<li class="chapter" data-level="5.2" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#available-models"><i class="fa fa-check"></i><b>5.2</b> Available models</a></li>
+<li class="chapter" data-level="5.3" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#components-of-a-gsclassifier-model"><i class="fa fa-check"></i><b>5.3</b> Components of a GSClassifier model</a></li>
+<li class="chapter" data-level="5.4" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#submit-models-to-luckymodel-package"><i class="fa fa-check"></i><b>5.4</b> Submit models to luckyModel package</a></li>
+<li class="chapter" data-level="5.5" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#repeatablility-of-models"><i class="fa fa-check"></i><b>5.5</b> Repeatablility of models</a></li>
+<li class="chapter" data-level="5.6" data-path="suggestions-for-gsclassifier-model-developers.html"><a href="suggestions-for-gsclassifier-model-developers.html#gene-annotation"><i class="fa fa-check"></i><b>5.6</b> Gene Annotation</a></li>
 </ul></li>
-<li><a href="references.html#references" id="toc-references">References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://blognas.hwb0307.com/" target="blank">Welcome to My Blog!</a></li>
 
@@ -239,154 +267,154 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-establishment-via-gsclassifier" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Model establishment via GSClassifier</h1>
-<div id="about-2" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> About</h2>
+<div id="model-establishment-via-gsclassifier" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Model establishment via GSClassifier<a href="model-establishment-via-gsclassifier.html#model-establishment-via-gsclassifier" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="about-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> About<a href="model-establishment-via-gsclassifier.html#about-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sometimes, researchers might have their gene signatures and know how many subtypes they want to call before (based on some knowledge). Gratifyingly, comprehensive functions were also provided in <code>GSClassifier</code>. In this section, we would show how to build a <code>GSClassifier</code> model like <code>PADi</code>.</p>
 </div>
-<div id="data-preparation" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Data preparation</h2>
+<div id="data-preparation" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Data preparation<a href="model-establishment-via-gsclassifier.html#data-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Load packages:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="model-establishment-via-gsclassifier.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GSClassifier)</span>
-<span id="cb72-2"><a href="model-establishment-via-gsclassifier.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
-<span id="cb72-3"><a href="model-establishment-via-gsclassifier.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="model-establishment-via-gsclassifier.html#cb74-1" tabindex="-1"></a><span class="fu">library</span>(GSClassifier)</span>
+<span id="cb74-2"><a href="model-establishment-via-gsclassifier.html#cb74-2" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb74-3"><a href="model-establishment-via-gsclassifier.html#cb74-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>Load data:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="model-establishment-via-gsclassifier.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The test data is only for the demonstration of the modeling</span></span>
-<span id="cb73-2"><a href="model-establishment-via-gsclassifier.html#cb73-2" aria-hidden="true" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
-<span id="cb73-3"><a href="model-establishment-via-gsclassifier.html#cb73-3" aria-hidden="true" tabindex="-1"></a>expr <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part</span>
-<span id="cb73-4"><a href="model-establishment-via-gsclassifier.html#cb73-4" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_phenotype_part</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="model-establishment-via-gsclassifier.html#cb75-1" tabindex="-1"></a><span class="co"># The test data is only for the demonstration of the modeling</span></span>
+<span id="cb75-2"><a href="model-establishment-via-gsclassifier.html#cb75-2" tabindex="-1"></a>testData <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;testData.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
+<span id="cb75-3"><a href="model-establishment-via-gsclassifier.html#cb75-3" tabindex="-1"></a>expr <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_expr_part</span>
+<span id="cb75-4"><a href="model-establishment-via-gsclassifier.html#cb75-4" tabindex="-1"></a>design <span class="ot">&lt;-</span> testData<span class="sc">$</span>PanSTAD_phenotype_part</span></code></pre></div>
 <p>Select training and testing cohorts across different platforms and <code>PAD subtypes</code> from <code>PAD</code> function:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="model-establishment-via-gsclassifier.html#cb74-1" aria-hidden="true" tabindex="-1"></a>modelInfo <span class="ot">&lt;-</span> <span class="fu">modelData</span>(</span>
-<span id="cb74-2"><a href="model-establishment-via-gsclassifier.html#cb74-2" aria-hidden="true" tabindex="-1"></a>    design,</span>
-<span id="cb74-3"><a href="model-establishment-via-gsclassifier.html#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">id.col =</span> <span class="st">&quot;ID&quot;</span>,</span>
-<span id="cb74-4"><a href="model-establishment-via-gsclassifier.html#cb74-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;platform&quot;</span>, <span class="st">&quot;PAD_subtype&quot;</span>),</span>
-<span id="cb74-5"><a href="model-establishment-via-gsclassifier.html#cb74-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Prop =</span> <span class="fl">0.7</span>,</span>
-<span id="cb74-6"><a href="model-establishment-via-gsclassifier.html#cb74-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">145</span></span>
-<span id="cb74-7"><a href="model-establishment-via-gsclassifier.html#cb74-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="model-establishment-via-gsclassifier.html#cb76-1" tabindex="-1"></a>modelInfo <span class="ot">&lt;-</span> <span class="fu">modelData</span>(</span>
+<span id="cb76-2"><a href="model-establishment-via-gsclassifier.html#cb76-2" tabindex="-1"></a>    design,</span>
+<span id="cb76-3"><a href="model-establishment-via-gsclassifier.html#cb76-3" tabindex="-1"></a>    <span class="at">id.col =</span> <span class="st">&quot;ID&quot;</span>,</span>
+<span id="cb76-4"><a href="model-establishment-via-gsclassifier.html#cb76-4" tabindex="-1"></a>    <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;platform&quot;</span>, <span class="st">&quot;PAD_subtype&quot;</span>),</span>
+<span id="cb76-5"><a href="model-establishment-via-gsclassifier.html#cb76-5" tabindex="-1"></a>    <span class="at">Prop =</span> <span class="fl">0.7</span>,</span>
+<span id="cb76-6"><a href="model-establishment-via-gsclassifier.html#cb76-6" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">145</span></span>
+<span id="cb76-7"><a href="model-establishment-via-gsclassifier.html#cb76-7" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Check the result <code>modelInfo</code>:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="model-establishment-via-gsclassifier.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(modelInfo)</span>
-<span id="cb75-2"><a href="model-establishment-via-gsclassifier.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Repeat&quot; &quot;Data&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="model-establishment-via-gsclassifier.html#cb77-1" tabindex="-1"></a><span class="fu">names</span>(modelInfo)</span>
+<span id="cb77-2"><a href="model-establishment-via-gsclassifier.html#cb77-2" tabindex="-1"></a><span class="co"># [1] &quot;Repeat&quot; &quot;Data&quot;</span></span></code></pre></div>
 <p>Explore the training cohort:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="model-establishment-via-gsclassifier.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train)</span>
-<span id="cb76-2"><a href="model-establishment-via-gsclassifier.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform</span></span>
-<span id="cb76-3"><a href="model-establishment-via-gsclassifier.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb76-4"><a href="model-establishment-via-gsclassifier.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb76-5"><a href="model-establishment-via-gsclassifier.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM1606503 GSM1606503 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb76-6"><a href="model-establishment-via-gsclassifier.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb76-7"><a href="model-establishment-via-gsclassifier.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb76-8"><a href="model-establishment-via-gsclassifier.html#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-establishment-via-gsclassifier.html#cb78-1" tabindex="-1"></a><span class="fu">head</span>(modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train)</span>
+<span id="cb78-2"><a href="model-establishment-via-gsclassifier.html#cb78-2" tabindex="-1"></a><span class="co">#                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform</span></span>
+<span id="cb78-3"><a href="model-establishment-via-gsclassifier.html#cb78-3" tabindex="-1"></a><span class="co"># GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-4"><a href="model-establishment-via-gsclassifier.html#cb78-4" tabindex="-1"></a><span class="co"># GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-5"><a href="model-establishment-via-gsclassifier.html#cb78-5" tabindex="-1"></a><span class="co"># GSM1606503 GSM1606503 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-6"><a href="model-establishment-via-gsclassifier.html#cb78-6" tabindex="-1"></a><span class="co"># GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-7"><a href="model-establishment-via-gsclassifier.html#cb78-7" tabindex="-1"></a><span class="co"># GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-8"><a href="model-establishment-via-gsclassifier.html#cb78-8" tabindex="-1"></a><span class="co"># GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550</span></span></code></pre></div>
 <p>Explore the internal validation cohort:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="model-establishment-via-gsclassifier.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid)</span>
-<span id="cb77-2"><a href="model-establishment-via-gsclassifier.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform</span></span>
-<span id="cb77-3"><a href="model-establishment-via-gsclassifier.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947</span></span>
-<span id="cb77-4"><a href="model-establishment-via-gsclassifier.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947</span></span>
-<span id="cb77-5"><a href="model-establishment-via-gsclassifier.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM2235562 GSM2235562 GSE84437      PAD-IV          low          low  GPL6947</span></span>
-<span id="cb77-6"><a href="model-establishment-via-gsclassifier.html#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM2235563 GSM2235563 GSE84437      PAD-IV          low          low  GPL6947</span></span>
-<span id="cb77-7"><a href="model-establishment-via-gsclassifier.html#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM2235564 GSM2235564 GSE84437      PAD-IV          low          low  GPL6947</span></span>
-<span id="cb77-8"><a href="model-establishment-via-gsclassifier.html#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="co"># GSM2235567 GSM2235567 GSE84437      PAD-IV          low          low  GPL6947</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="model-establishment-via-gsclassifier.html#cb79-1" tabindex="-1"></a><span class="fu">head</span>(modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid)</span>
+<span id="cb79-2"><a href="model-establishment-via-gsclassifier.html#cb79-2" tabindex="-1"></a><span class="co">#                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform</span></span>
+<span id="cb79-3"><a href="model-establishment-via-gsclassifier.html#cb79-3" tabindex="-1"></a><span class="co"># GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947</span></span>
+<span id="cb79-4"><a href="model-establishment-via-gsclassifier.html#cb79-4" tabindex="-1"></a><span class="co"># GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947</span></span>
+<span id="cb79-5"><a href="model-establishment-via-gsclassifier.html#cb79-5" tabindex="-1"></a><span class="co"># GSM2235562 GSM2235562 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-6"><a href="model-establishment-via-gsclassifier.html#cb79-6" tabindex="-1"></a><span class="co"># GSM2235563 GSM2235563 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-7"><a href="model-establishment-via-gsclassifier.html#cb79-7" tabindex="-1"></a><span class="co"># GSM2235564 GSM2235564 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-8"><a href="model-establishment-via-gsclassifier.html#cb79-8" tabindex="-1"></a><span class="co"># GSM2235567 GSM2235567 GSE84437      PAD-IV          low          low  GPL6947</span></span></code></pre></div>
 <p>Get training data <code>Xs</code> and <code>Ys</code>:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-establishment-via-gsclassifier.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Training data</span></span>
-<span id="cb78-2"><a href="model-establishment-via-gsclassifier.html#cb78-2" aria-hidden="true" tabindex="-1"></a>Xs <span class="ot">&lt;-</span> expr[,modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train<span class="sc">$</span>ID]</span>
-<span id="cb78-3"><a href="model-establishment-via-gsclassifier.html#cb78-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train</span>
-<span id="cb78-4"><a href="model-establishment-via-gsclassifier.html#cb78-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">colnames</span>(Xs),]</span>
-<span id="cb78-5"><a href="model-establishment-via-gsclassifier.html#cb78-5" aria-hidden="true" tabindex="-1"></a>Ys <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-I&#39;</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-II&#39;</span>,<span class="dv">2</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-III&#39;</span>,<span class="dv">3</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-IV&#39;</span>,<span class="dv">4</span>,<span class="cn">NA</span>)))); <span class="fu">table</span>(Ys)<span class="sc">/</span><span class="fu">length</span>(Ys)</span>
-<span id="cb78-6"><a href="model-establishment-via-gsclassifier.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ys</span></span>
-<span id="cb78-7"><a href="model-establishment-via-gsclassifier.html#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         1         2         3         4 </span></span>
-<span id="cb78-8"><a href="model-establishment-via-gsclassifier.html#cb78-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.1010169 0.2474576 0.1694915 0.4820339</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-establishment-via-gsclassifier.html#cb80-1" tabindex="-1"></a><span class="co"># Training data</span></span>
+<span id="cb80-2"><a href="model-establishment-via-gsclassifier.html#cb80-2" tabindex="-1"></a>Xs <span class="ot">&lt;-</span> expr[,modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train<span class="sc">$</span>ID]</span>
+<span id="cb80-3"><a href="model-establishment-via-gsclassifier.html#cb80-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train</span>
+<span id="cb80-4"><a href="model-establishment-via-gsclassifier.html#cb80-4" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">colnames</span>(Xs),]</span>
+<span id="cb80-5"><a href="model-establishment-via-gsclassifier.html#cb80-5" tabindex="-1"></a>Ys <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-I&#39;</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-II&#39;</span>,<span class="dv">2</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-III&#39;</span>,<span class="dv">3</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-IV&#39;</span>,<span class="dv">4</span>,<span class="cn">NA</span>)))); <span class="fu">table</span>(Ys)<span class="sc">/</span><span class="fu">length</span>(Ys)</span>
+<span id="cb80-6"><a href="model-establishment-via-gsclassifier.html#cb80-6" tabindex="-1"></a><span class="co"># Ys</span></span>
+<span id="cb80-7"><a href="model-establishment-via-gsclassifier.html#cb80-7" tabindex="-1"></a><span class="co">#         1         2         3         4 </span></span>
+<span id="cb80-8"><a href="model-establishment-via-gsclassifier.html#cb80-8" tabindex="-1"></a><span class="co"># 0.1010169 0.2474576 0.1694915 0.4820339</span></span></code></pre></div>
 <p>Get the number of subtype:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="model-establishment-via-gsclassifier.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No. of subtypes</span></span>
-<span id="cb79-2"><a href="model-establishment-via-gsclassifier.html#cb79-2" aria-hidden="true" tabindex="-1"></a>nSubtype <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(Ys))</span>
-<span id="cb79-3"><a href="model-establishment-via-gsclassifier.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nSubtype)</span>
-<span id="cb79-4"><a href="model-establishment-via-gsclassifier.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="model-establishment-via-gsclassifier.html#cb81-1" tabindex="-1"></a><span class="co"># No. of subtypes</span></span>
+<span id="cb81-2"><a href="model-establishment-via-gsclassifier.html#cb81-2" tabindex="-1"></a>nSubtype <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(Ys))</span>
+<span id="cb81-3"><a href="model-establishment-via-gsclassifier.html#cb81-3" tabindex="-1"></a><span class="fu">print</span>(nSubtype)</span>
+<span id="cb81-4"><a href="model-establishment-via-gsclassifier.html#cb81-4" tabindex="-1"></a><span class="co"># [1] 4</span></span></code></pre></div>
 <p>Also, you can take a look at the validation data:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-establishment-via-gsclassifier.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Validating data</span></span>
-<span id="cb80-2"><a href="model-establishment-via-gsclassifier.html#cb80-2" aria-hidden="true" tabindex="-1"></a>Xs_valid <span class="ot">&lt;-</span> expr[,modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid<span class="sc">$</span>ID]</span>
-<span id="cb80-3"><a href="model-establishment-via-gsclassifier.html#cb80-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid</span>
-<span id="cb80-4"><a href="model-establishment-via-gsclassifier.html#cb80-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">colnames</span>(Xs_valid),]</span>
-<span id="cb80-5"><a href="model-establishment-via-gsclassifier.html#cb80-5" aria-hidden="true" tabindex="-1"></a>Ys_valid <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-I&#39;</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-II&#39;</span>,<span class="dv">2</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-III&#39;</span>,<span class="dv">3</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-IV&#39;</span>,<span class="dv">4</span>,<span class="cn">NA</span>))))</span>
-<span id="cb80-6"><a href="model-establishment-via-gsclassifier.html#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Ys_valid)<span class="sc">/</span><span class="fu">length</span>(Ys_valid)</span>
-<span id="cb80-7"><a href="model-establishment-via-gsclassifier.html#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ys_valid</span></span>
-<span id="cb80-8"><a href="model-establishment-via-gsclassifier.html#cb80-8" aria-hidden="true" tabindex="-1"></a><span class="co">#          1          2          3          4 </span></span>
-<span id="cb80-9"><a href="model-establishment-via-gsclassifier.html#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.09609121 0.24592834 0.16612378 0.49185668</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="model-establishment-via-gsclassifier.html#cb82-1" tabindex="-1"></a><span class="co"># Validating data</span></span>
+<span id="cb82-2"><a href="model-establishment-via-gsclassifier.html#cb82-2" tabindex="-1"></a>Xs_valid <span class="ot">&lt;-</span> expr[,modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid<span class="sc">$</span>ID]</span>
+<span id="cb82-3"><a href="model-establishment-via-gsclassifier.html#cb82-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid</span>
+<span id="cb82-4"><a href="model-establishment-via-gsclassifier.html#cb82-4" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">colnames</span>(Xs_valid),]</span>
+<span id="cb82-5"><a href="model-establishment-via-gsclassifier.html#cb82-5" tabindex="-1"></a>Ys_valid <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-I&#39;</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-II&#39;</span>,<span class="dv">2</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-III&#39;</span>,<span class="dv">3</span>,<span class="fu">ifelse</span>(y<span class="sc">$</span>PAD_subtype <span class="sc">==</span> <span class="st">&#39;PAD-IV&#39;</span>,<span class="dv">4</span>,<span class="cn">NA</span>))))</span>
+<span id="cb82-6"><a href="model-establishment-via-gsclassifier.html#cb82-6" tabindex="-1"></a><span class="fu">table</span>(Ys_valid)<span class="sc">/</span><span class="fu">length</span>(Ys_valid)</span>
+<span id="cb82-7"><a href="model-establishment-via-gsclassifier.html#cb82-7" tabindex="-1"></a><span class="co"># Ys_valid</span></span>
+<span id="cb82-8"><a href="model-establishment-via-gsclassifier.html#cb82-8" tabindex="-1"></a><span class="co">#          1          2          3          4 </span></span>
+<span id="cb82-9"><a href="model-establishment-via-gsclassifier.html#cb82-9" tabindex="-1"></a><span class="co"># 0.09609121 0.24592834 0.16612378 0.49185668</span></span></code></pre></div>
 <p>Note: When you convert your phenotype into numeric, <strong>You CANNOT USE A ZERO VALUE</strong>, which is not supported by the xGboost.</p>
 <p>Other parameteres for modeling:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="model-establishment-via-gsclassifier.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build 20 models</span></span>
-<span id="cb81-2"><a href="model-establishment-via-gsclassifier.html#cb81-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">20</span> </span>
-<span id="cb81-3"><a href="model-establishment-via-gsclassifier.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-4"><a href="model-establishment-via-gsclassifier.html#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In every model, 70% samples in the training cohort would be selected. </span></span>
-<span id="cb81-5"><a href="model-establishment-via-gsclassifier.html#cb81-5" aria-hidden="true" tabindex="-1"></a>sampSize<span class="ot">=</span><span class="fl">0.7</span></span>
-<span id="cb81-6"><a href="model-establishment-via-gsclassifier.html#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-7"><a href="model-establishment-via-gsclassifier.html#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Seed for sampling</span></span>
-<span id="cb81-8"><a href="model-establishment-via-gsclassifier.html#cb81-8" aria-hidden="true" tabindex="-1"></a>sampSeed <span class="ot">=</span> <span class="dv">2020</span></span>
-<span id="cb81-9"><a href="model-establishment-via-gsclassifier.html#cb81-9" aria-hidden="true" tabindex="-1"></a>na.fill.seed <span class="ot">=</span> <span class="dv">2022</span></span>
-<span id="cb81-10"><a href="model-establishment-via-gsclassifier.html#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-11"><a href="model-establishment-via-gsclassifier.html#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co"># A vector for approximate gene rank estimation</span></span>
-<span id="cb81-12"><a href="model-establishment-via-gsclassifier.html#cb81-12" aria-hidden="true" tabindex="-1"></a>breakVec<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
-<span id="cb81-13"><a href="model-establishment-via-gsclassifier.html#cb81-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb81-14"><a href="model-establishment-via-gsclassifier.html#cb81-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 80% most variable gene &amp; gene-pairs for modeling</span></span>
-<span id="cb81-15"><a href="model-establishment-via-gsclassifier.html#cb81-15" aria-hidden="true" tabindex="-1"></a>ptail<span class="ot">=</span><span class="fl">0.8</span><span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb81-16"><a href="model-establishment-via-gsclassifier.html#cb81-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-17"><a href="model-establishment-via-gsclassifier.html#cb81-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatical selection of parameters for xGboost</span></span>
-<span id="cb81-18"><a href="model-establishment-via-gsclassifier.html#cb81-18" aria-hidden="true" tabindex="-1"></a>auto <span class="ot">=</span> F</span>
-<span id="cb81-19"><a href="model-establishment-via-gsclassifier.html#cb81-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-20"><a href="model-establishment-via-gsclassifier.html#cb81-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span>auto){</span>
-<span id="cb81-21"><a href="model-establishment-via-gsclassifier.html#cb81-21" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb81-22"><a href="model-establishment-via-gsclassifier.html#cb81-22" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Self-defined params. Fast.</span></span>
-<span id="cb81-23"><a href="model-establishment-via-gsclassifier.html#cb81-23" aria-hidden="true" tabindex="-1"></a>      params <span class="ot">=</span> <span class="fu">list</span>(<span class="at">max_depth =</span> <span class="dv">10</span>,</span>
-<span id="cb81-24"><a href="model-establishment-via-gsclassifier.html#cb81-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">eta =</span> <span class="fl">0.5</span>,</span>
-<span id="cb81-25"><a href="model-establishment-via-gsclassifier.html#cb81-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nrounds =</span> <span class="dv">100</span>,</span>
-<span id="cb81-26"><a href="model-establishment-via-gsclassifier.html#cb81-26" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nthread =</span> <span class="dv">10</span>,</span>
-<span id="cb81-27"><a href="model-establishment-via-gsclassifier.html#cb81-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nfold=</span><span class="dv">5</span>)</span>
-<span id="cb81-28"><a href="model-establishment-via-gsclassifier.html#cb81-28" aria-hidden="true" tabindex="-1"></a>      caret.seed <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb81-29"><a href="model-establishment-via-gsclassifier.html#cb81-29" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb81-30"><a href="model-establishment-via-gsclassifier.html#cb81-30" aria-hidden="true" tabindex="-1"></a>      <span class="co"># No. of CPU for parallel computing. The optimized value depends on your CPU and RAM</span></span>
-<span id="cb81-31"><a href="model-establishment-via-gsclassifier.html#cb81-31" aria-hidden="true" tabindex="-1"></a>      numCores <span class="ot">=</span> <span class="dv">4</span></span>
-<span id="cb81-32"><a href="model-establishment-via-gsclassifier.html#cb81-32" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb81-33"><a href="model-establishment-via-gsclassifier.html#cb81-33" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb81-34"><a href="model-establishment-via-gsclassifier.html#cb81-34" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb81-35"><a href="model-establishment-via-gsclassifier.html#cb81-35" aria-hidden="true" tabindex="-1"></a>      <span class="co"># caret::train strategy by GSClassifier:::cvFitOneModel2. Time consuming</span></span>
-<span id="cb81-36"><a href="model-establishment-via-gsclassifier.html#cb81-36" aria-hidden="true" tabindex="-1"></a>      params <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb81-37"><a href="model-establishment-via-gsclassifier.html#cb81-37" aria-hidden="true" tabindex="-1"></a>      caret.seed <span class="ot">=</span> <span class="dv">105</span></span>
-<span id="cb81-38"><a href="model-establishment-via-gsclassifier.html#cb81-38" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb81-39"><a href="model-establishment-via-gsclassifier.html#cb81-39" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Self-defined. For this exmaple training grid, there are 2×1×1×3×2×1×2=24 grids. Make sure that you have a computer with a powerfull CPU.</span></span>
-<span id="cb81-40"><a href="model-establishment-via-gsclassifier.html#cb81-40" aria-hidden="true" tabindex="-1"></a>      grid <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb81-41"><a href="model-establishment-via-gsclassifier.html#cb81-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">nrounds =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>),</span>
-<span id="cb81-42"><a href="model-establishment-via-gsclassifier.html#cb81-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">colsample_bytree =</span> <span class="dv">1</span>,</span>
-<span id="cb81-43"><a href="model-establishment-via-gsclassifier.html#cb81-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">min_child_weight =</span> <span class="dv">1</span>,</span>
-<span id="cb81-44"><a href="model-establishment-via-gsclassifier.html#cb81-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">eta =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>),</span>
-<span id="cb81-45"><a href="model-establishment-via-gsclassifier.html#cb81-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">gamma =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>),</span>
-<span id="cb81-46"><a href="model-establishment-via-gsclassifier.html#cb81-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">subsample =</span> <span class="fl">0.7</span>,</span>
-<span id="cb81-47"><a href="model-establishment-via-gsclassifier.html#cb81-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">max_depth =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">8</span>)</span>
-<span id="cb81-48"><a href="model-establishment-via-gsclassifier.html#cb81-48" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb81-49"><a href="model-establishment-via-gsclassifier.html#cb81-49" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb81-50"><a href="model-establishment-via-gsclassifier.html#cb81-50" aria-hidden="true" tabindex="-1"></a>      <span class="co"># If you don&#39;t know how to set, just use the same number of your subtypes</span></span>
-<span id="cb81-51"><a href="model-establishment-via-gsclassifier.html#cb81-51" aria-hidden="true" tabindex="-1"></a>      numCores <span class="ot">=</span> <span class="dv">4</span> </span>
-<span id="cb81-52"><a href="model-establishment-via-gsclassifier.html#cb81-52" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="model-establishment-via-gsclassifier.html#cb83-1" tabindex="-1"></a><span class="co"># Build 20 models</span></span>
+<span id="cb83-2"><a href="model-establishment-via-gsclassifier.html#cb83-2" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">20</span> </span>
+<span id="cb83-3"><a href="model-establishment-via-gsclassifier.html#cb83-3" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="model-establishment-via-gsclassifier.html#cb83-4" tabindex="-1"></a><span class="co"># In every model, 70% samples in the training cohort would be selected. </span></span>
+<span id="cb83-5"><a href="model-establishment-via-gsclassifier.html#cb83-5" tabindex="-1"></a>sampSize<span class="ot">=</span><span class="fl">0.7</span></span>
+<span id="cb83-6"><a href="model-establishment-via-gsclassifier.html#cb83-6" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="model-establishment-via-gsclassifier.html#cb83-7" tabindex="-1"></a><span class="co"># Seed for sampling</span></span>
+<span id="cb83-8"><a href="model-establishment-via-gsclassifier.html#cb83-8" tabindex="-1"></a>sampSeed <span class="ot">=</span> <span class="dv">2020</span></span>
+<span id="cb83-9"><a href="model-establishment-via-gsclassifier.html#cb83-9" tabindex="-1"></a>na.fill.seed <span class="ot">=</span> <span class="dv">2022</span></span>
+<span id="cb83-10"><a href="model-establishment-via-gsclassifier.html#cb83-10" tabindex="-1"></a></span>
+<span id="cb83-11"><a href="model-establishment-via-gsclassifier.html#cb83-11" tabindex="-1"></a><span class="co"># A vector for approximate gene rank estimation</span></span>
+<span id="cb83-12"><a href="model-establishment-via-gsclassifier.html#cb83-12" tabindex="-1"></a>breakVec<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb83-13"><a href="model-establishment-via-gsclassifier.html#cb83-13" tabindex="-1"></a>  </span>
+<span id="cb83-14"><a href="model-establishment-via-gsclassifier.html#cb83-14" tabindex="-1"></a><span class="co"># Use 80% most variable gene &amp; gene-pairs for modeling</span></span>
+<span id="cb83-15"><a href="model-establishment-via-gsclassifier.html#cb83-15" tabindex="-1"></a>ptail<span class="ot">=</span><span class="fl">0.8</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb83-16"><a href="model-establishment-via-gsclassifier.html#cb83-16" tabindex="-1"></a></span>
+<span id="cb83-17"><a href="model-establishment-via-gsclassifier.html#cb83-17" tabindex="-1"></a><span class="co"># Automatical selection of parameters for xGboost</span></span>
+<span id="cb83-18"><a href="model-establishment-via-gsclassifier.html#cb83-18" tabindex="-1"></a>auto <span class="ot">=</span> F</span>
+<span id="cb83-19"><a href="model-establishment-via-gsclassifier.html#cb83-19" tabindex="-1"></a></span>
+<span id="cb83-20"><a href="model-establishment-via-gsclassifier.html#cb83-20" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span>auto){</span>
+<span id="cb83-21"><a href="model-establishment-via-gsclassifier.html#cb83-21" tabindex="-1"></a>      </span>
+<span id="cb83-22"><a href="model-establishment-via-gsclassifier.html#cb83-22" tabindex="-1"></a>      <span class="co"># Self-defined params. Fast.</span></span>
+<span id="cb83-23"><a href="model-establishment-via-gsclassifier.html#cb83-23" tabindex="-1"></a>      params <span class="ot">=</span> <span class="fu">list</span>(<span class="at">max_depth =</span> <span class="dv">10</span>,</span>
+<span id="cb83-24"><a href="model-establishment-via-gsclassifier.html#cb83-24" tabindex="-1"></a>                    <span class="at">eta =</span> <span class="fl">0.5</span>,</span>
+<span id="cb83-25"><a href="model-establishment-via-gsclassifier.html#cb83-25" tabindex="-1"></a>                    <span class="at">nrounds =</span> <span class="dv">100</span>,</span>
+<span id="cb83-26"><a href="model-establishment-via-gsclassifier.html#cb83-26" tabindex="-1"></a>                    <span class="at">nthread =</span> <span class="dv">10</span>,</span>
+<span id="cb83-27"><a href="model-establishment-via-gsclassifier.html#cb83-27" tabindex="-1"></a>                    <span class="at">nfold=</span><span class="dv">5</span>)</span>
+<span id="cb83-28"><a href="model-establishment-via-gsclassifier.html#cb83-28" tabindex="-1"></a>      caret.seed <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb83-29"><a href="model-establishment-via-gsclassifier.html#cb83-29" tabindex="-1"></a>      </span>
+<span id="cb83-30"><a href="model-establishment-via-gsclassifier.html#cb83-30" tabindex="-1"></a>      <span class="co"># No. of CPU for parallel computing. The optimized value depends on your CPU and RAM</span></span>
+<span id="cb83-31"><a href="model-establishment-via-gsclassifier.html#cb83-31" tabindex="-1"></a>      numCores <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb83-32"><a href="model-establishment-via-gsclassifier.html#cb83-32" tabindex="-1"></a>      </span>
+<span id="cb83-33"><a href="model-establishment-via-gsclassifier.html#cb83-33" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb83-34"><a href="model-establishment-via-gsclassifier.html#cb83-34" tabindex="-1"></a>      </span>
+<span id="cb83-35"><a href="model-establishment-via-gsclassifier.html#cb83-35" tabindex="-1"></a>      <span class="co"># caret::train strategy by GSClassifier:::cvFitOneModel2. Time consuming</span></span>
+<span id="cb83-36"><a href="model-establishment-via-gsclassifier.html#cb83-36" tabindex="-1"></a>      params <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb83-37"><a href="model-establishment-via-gsclassifier.html#cb83-37" tabindex="-1"></a>      caret.seed <span class="ot">=</span> <span class="dv">105</span></span>
+<span id="cb83-38"><a href="model-establishment-via-gsclassifier.html#cb83-38" tabindex="-1"></a>      </span>
+<span id="cb83-39"><a href="model-establishment-via-gsclassifier.html#cb83-39" tabindex="-1"></a>      <span class="co"># Self-defined. For this exmaple training grid, there are 2×1×1×3×2×1×2=24 grids. Make sure that you have a computer with a powerfull CPU.</span></span>
+<span id="cb83-40"><a href="model-establishment-via-gsclassifier.html#cb83-40" tabindex="-1"></a>      grid <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb83-41"><a href="model-establishment-via-gsclassifier.html#cb83-41" tabindex="-1"></a>        <span class="at">nrounds =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>),</span>
+<span id="cb83-42"><a href="model-establishment-via-gsclassifier.html#cb83-42" tabindex="-1"></a>        <span class="at">colsample_bytree =</span> <span class="dv">1</span>,</span>
+<span id="cb83-43"><a href="model-establishment-via-gsclassifier.html#cb83-43" tabindex="-1"></a>        <span class="at">min_child_weight =</span> <span class="dv">1</span>,</span>
+<span id="cb83-44"><a href="model-establishment-via-gsclassifier.html#cb83-44" tabindex="-1"></a>        <span class="at">eta =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>),</span>
+<span id="cb83-45"><a href="model-establishment-via-gsclassifier.html#cb83-45" tabindex="-1"></a>        <span class="at">gamma =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>),</span>
+<span id="cb83-46"><a href="model-establishment-via-gsclassifier.html#cb83-46" tabindex="-1"></a>        <span class="at">subsample =</span> <span class="fl">0.7</span>,</span>
+<span id="cb83-47"><a href="model-establishment-via-gsclassifier.html#cb83-47" tabindex="-1"></a>        <span class="at">max_depth =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">8</span>)</span>
+<span id="cb83-48"><a href="model-establishment-via-gsclassifier.html#cb83-48" tabindex="-1"></a>      )</span>
+<span id="cb83-49"><a href="model-establishment-via-gsclassifier.html#cb83-49" tabindex="-1"></a>      </span>
+<span id="cb83-50"><a href="model-establishment-via-gsclassifier.html#cb83-50" tabindex="-1"></a>      <span class="co"># If you don&#39;t know how to set, just use the same number of your subtypes</span></span>
+<span id="cb83-51"><a href="model-establishment-via-gsclassifier.html#cb83-51" tabindex="-1"></a>      numCores <span class="ot">=</span> <span class="dv">4</span> </span>
+<span id="cb83-52"><a href="model-establishment-via-gsclassifier.html#cb83-52" tabindex="-1"></a>    }</span></code></pre></div>
 <p>Finaly, you have to provide your gene sets as a <code>list</code> object:</p>
 <pre><code>geneSet = &lt;Your gene sets&gt;
 </code></pre>
 <p>Let’s take <code>PAD</code> as an example:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="model-establishment-via-gsclassifier.html#cb83-1" aria-hidden="true" tabindex="-1"></a>PAD <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
-<span id="cb83-2"><a href="model-establishment-via-gsclassifier.html#cb83-2" aria-hidden="true" tabindex="-1"></a>geneSet <span class="ot">&lt;-</span> PAD<span class="sc">$</span>geneSet</span>
-<span id="cb83-3"><a href="model-establishment-via-gsclassifier.html#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geneSet)</span>
-<span id="cb83-4"><a href="model-establishment-via-gsclassifier.html#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co"># $PIAM</span></span>
-<span id="cb83-5"><a href="model-establishment-via-gsclassifier.html#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  [1] &quot;ENSG00000122122&quot; &quot;ENSG00000117091&quot; &quot;ENSG00000163219&quot; &quot;ENSG00000136167&quot;</span></span>
-<span id="cb83-6"><a href="model-establishment-via-gsclassifier.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  [5] &quot;ENSG00000005844&quot; &quot;ENSG00000123338&quot; &quot;ENSG00000102879&quot; &quot;ENSG00000010671&quot;</span></span>
-<span id="cb83-7"><a href="model-establishment-via-gsclassifier.html#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  [9] &quot;ENSG00000185862&quot; &quot;ENSG00000104814&quot; &quot;ENSG00000134516&quot; &quot;ENSG00000100055&quot;</span></span>
-<span id="cb83-8"><a href="model-establishment-via-gsclassifier.html#cb83-8" aria-hidden="true" tabindex="-1"></a><span class="co"># [13] &quot;ENSG00000082074&quot; &quot;ENSG00000113263&quot; &quot;ENSG00000153283&quot; &quot;ENSG00000198821&quot;</span></span>
-<span id="cb83-9"><a href="model-establishment-via-gsclassifier.html#cb83-9" aria-hidden="true" tabindex="-1"></a><span class="co"># [17] &quot;ENSG00000185811&quot; &quot;ENSG00000117090&quot; &quot;ENSG00000171608&quot;</span></span>
-<span id="cb83-10"><a href="model-establishment-via-gsclassifier.html#cb83-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb83-11"><a href="model-establishment-via-gsclassifier.html#cb83-11" aria-hidden="true" tabindex="-1"></a><span class="co"># $PIDG</span></span>
-<span id="cb83-12"><a href="model-establishment-via-gsclassifier.html#cb83-12" aria-hidden="true" tabindex="-1"></a><span class="co">#  [1] &quot;ENSG00000116667&quot; &quot;ENSG00000107771&quot; &quot;ENSG00000196782&quot; &quot;ENSG00000271447&quot;</span></span>
-<span id="cb83-13"><a href="model-establishment-via-gsclassifier.html#cb83-13" aria-hidden="true" tabindex="-1"></a><span class="co">#  [5] &quot;ENSG00000173517&quot; &quot;ENSG00000134686&quot; &quot;ENSG00000100614&quot; &quot;ENSG00000134247&quot;</span></span>
-<span id="cb83-14"><a href="model-establishment-via-gsclassifier.html#cb83-14" aria-hidden="true" tabindex="-1"></a><span class="co">#  [9] &quot;ENSG00000109686&quot; &quot;ENSG00000197321&quot; &quot;ENSG00000179981&quot; &quot;ENSG00000187189&quot;</span></span>
-<span id="cb83-15"><a href="model-establishment-via-gsclassifier.html#cb83-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [13] &quot;ENSG00000140836&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="model-establishment-via-gsclassifier.html#cb85-1" tabindex="-1"></a>PAD <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
+<span id="cb85-2"><a href="model-establishment-via-gsclassifier.html#cb85-2" tabindex="-1"></a>geneSet <span class="ot">&lt;-</span> PAD<span class="sc">$</span>geneSet</span>
+<span id="cb85-3"><a href="model-establishment-via-gsclassifier.html#cb85-3" tabindex="-1"></a><span class="fu">print</span>(geneSet)</span>
+<span id="cb85-4"><a href="model-establishment-via-gsclassifier.html#cb85-4" tabindex="-1"></a><span class="co"># $PIAM</span></span>
+<span id="cb85-5"><a href="model-establishment-via-gsclassifier.html#cb85-5" tabindex="-1"></a><span class="co">#  [1] &quot;ENSG00000122122&quot; &quot;ENSG00000117091&quot; &quot;ENSG00000163219&quot; &quot;ENSG00000136167&quot;</span></span>
+<span id="cb85-6"><a href="model-establishment-via-gsclassifier.html#cb85-6" tabindex="-1"></a><span class="co">#  [5] &quot;ENSG00000005844&quot; &quot;ENSG00000123338&quot; &quot;ENSG00000102879&quot; &quot;ENSG00000010671&quot;</span></span>
+<span id="cb85-7"><a href="model-establishment-via-gsclassifier.html#cb85-7" tabindex="-1"></a><span class="co">#  [9] &quot;ENSG00000185862&quot; &quot;ENSG00000104814&quot; &quot;ENSG00000134516&quot; &quot;ENSG00000100055&quot;</span></span>
+<span id="cb85-8"><a href="model-establishment-via-gsclassifier.html#cb85-8" tabindex="-1"></a><span class="co"># [13] &quot;ENSG00000082074&quot; &quot;ENSG00000113263&quot; &quot;ENSG00000153283&quot; &quot;ENSG00000198821&quot;</span></span>
+<span id="cb85-9"><a href="model-establishment-via-gsclassifier.html#cb85-9" tabindex="-1"></a><span class="co"># [17] &quot;ENSG00000185811&quot; &quot;ENSG00000117090&quot; &quot;ENSG00000171608&quot;</span></span>
+<span id="cb85-10"><a href="model-establishment-via-gsclassifier.html#cb85-10" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb85-11"><a href="model-establishment-via-gsclassifier.html#cb85-11" tabindex="-1"></a><span class="co"># $PIDG</span></span>
+<span id="cb85-12"><a href="model-establishment-via-gsclassifier.html#cb85-12" tabindex="-1"></a><span class="co">#  [1] &quot;ENSG00000116667&quot; &quot;ENSG00000107771&quot; &quot;ENSG00000196782&quot; &quot;ENSG00000271447&quot;</span></span>
+<span id="cb85-13"><a href="model-establishment-via-gsclassifier.html#cb85-13" tabindex="-1"></a><span class="co">#  [5] &quot;ENSG00000173517&quot; &quot;ENSG00000134686&quot; &quot;ENSG00000100614&quot; &quot;ENSG00000134247&quot;</span></span>
+<span id="cb85-14"><a href="model-establishment-via-gsclassifier.html#cb85-14" tabindex="-1"></a><span class="co">#  [9] &quot;ENSG00000109686&quot; &quot;ENSG00000197321&quot; &quot;ENSG00000179981&quot; &quot;ENSG00000187189&quot;</span></span>
+<span id="cb85-15"><a href="model-establishment-via-gsclassifier.html#cb85-15" tabindex="-1"></a><span class="co"># [13] &quot;ENSG00000140836&quot;</span></span></code></pre></div>
 </div>
-<div id="fitting-models" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Fitting models</h2>
-<div id="gsclassifier-model-training" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> GSClassifier model training</h3>
+<div id="fitting-models" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Fitting models<a href="model-establishment-via-gsclassifier.html#fitting-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="gsclassifier-model-training" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> GSClassifier model training<a href="model-establishment-via-gsclassifier.html#gsclassifier-model-training" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Just fit the model like:</p>
 <pre><code>if(!auto){
   
@@ -444,8 +472,8 @@ mymusic() </code></pre>
 <pre><code>saveRDS(res,&#39;&lt;your path&gt;/train_ens.rds&#39;)</code></pre>
 <p>Although an <code>auto-parameter strategy</code> (hyperparameter tuning) was provided in<code>GSClassifier</code>, it’s unknown whether this method could significantly improve your model performance. You can just try. It’s not a prior recommendation. Generally, setting <code>auto=F</code> in this script could be more cost-effective. Empirically, the speed of <code>caret::train</code> depends on the single-core performance of the CPU instead of the core number.</p>
 </div>
-<div id="scaller-for-the-best-call" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Scaller for the best call</h3>
+<div id="scaller-for-the-best-call" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Scaller for the best call<a href="model-establishment-via-gsclassifier.html#scaller-for-the-best-call" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we model the <code>scaller</code> for the training cohort, which would be used for <code>BestCall</code> based on the <code>probability matrix</code> in <code>callEnsemble</code> series. Here, <code>scaller=NULL</code> would cause an <code>NA</code> value of <code>BestCall</code> col. It’s not a big deal, because the <code>probability matrix</code> is the information we need.</p>
 <pre><code># Time-consuming modeling
 resTrain &lt;- parCallEnsemble(X = Xs,
@@ -496,8 +524,8 @@ scaller.train &lt;- list(
       Model = bst
     )</code></pre>
 </div>
-<div id="assemble-your-model" class="section level3" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Assemble your model</h3>
+<div id="assemble-your-model" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Assemble your model<a href="model-establishment-via-gsclassifier.html#assemble-your-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For more information of <code>geneAnnotation</code>, you could see the <a href="https://huangwb8.github.io/GSClassifier.principle/suggestions-for-gsclassifier-model-developers.html#gene-annotation">Suggestions for GSClassifier model developers: Gene Annotation</a> section for assistance.</p>
 <p>Here we give an example:</p>
 <pre><code>l.train &lt;- list()
@@ -517,17 +545,17 @@ l.train[[&#39;geneSet&#39;]] &lt;- geneSet</code></pre>
 <pre><code>saveRDS(l.train,&#39;&lt;Your path&gt;/train.rds&#39;)</code></pre>
 <p>About model constributions, you can go <code>Advanced development</code> in <a href="https://github.com/huangwb8/GSClassifier/wiki/Advanced-development">here</a> or <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/wiki/huangwb8/GSClassifier/Advanced-development.html">here</a> for more information.</p>
 </div>
-<div id="of-note-2" class="section level3" number="4.3.4">
-<h3><span class="header-section-number">4.3.4</span> Of note</h3>
+<div id="of-note-2" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Of note<a href="model-establishment-via-gsclassifier.html#of-note-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can take a look at the <code>PAD.train_20220916</code> model (<code>PADi</code>). You have to make your model frame similar to the <code>PAD.train_20220916</code> model.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="model-establishment-via-gsclassifier.html#cb89-1" aria-hidden="true" tabindex="-1"></a>l.train <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
-<span id="cb89-2"><a href="model-establishment-via-gsclassifier.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(l.train)</span>
-<span id="cb89-3"><a href="model-establishment-via-gsclassifier.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;ens&quot;            &quot;scaller&quot;        &quot;geneAnnotation&quot; &quot;geneSet&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="model-establishment-via-gsclassifier.html#cb91-1" tabindex="-1"></a>l.train <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;PAD.train_20220916.rds&quot;</span>, <span class="at">package =</span> <span class="st">&quot;GSClassifier&quot;</span>))</span>
+<span id="cb91-2"><a href="model-establishment-via-gsclassifier.html#cb91-2" tabindex="-1"></a><span class="fu">names</span>(l.train)</span>
+<span id="cb91-3"><a href="model-establishment-via-gsclassifier.html#cb91-3" tabindex="-1"></a><span class="co"># [1] &quot;ens&quot;            &quot;scaller&quot;        &quot;geneAnnotation&quot; &quot;geneSet&quot;</span></span></code></pre></div>
 <p>The time of <code>GSClassifier</code> modeling depends on the number of individual models (controlled by <code>n</code>)/called subtypes/gene signatures, automatic parameter selection, and your CPU capacity.</p>
 </div>
 </div>
-<div id="calling-subtypes" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Calling subtypes</h2>
+<div id="calling-subtypes" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Calling subtypes<a href="model-establishment-via-gsclassifier.html#calling-subtypes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Supposed that you had got a <code>GSClassifier</code> model, next you want to use it for personalized subtype calling.</p>
 <p>Just:</p>
 <pre><code># Load your model
@@ -541,55 +569,56 @@ res_i = callEnsemble(
   geneSet = l$geneSet,
   scaller = l$scaller$Model,
   geneid = &lt;ID type of your training data&gt;,
+  matchmode = &#39;fix&#39;,
   subtype = NULL,
   verbose = T
 )
 </code></pre>
 <p>The usage of <code>parCallEnsemble</code> (for a huge amount of samples) is similar. Empirically, <code>parCallEnsemble</code> can not perform better than <code>callEnsemble</code> in a small cohort for the process of xgboost would take advantage of multiple CPU cores.</p>
 </div>
-<div id="topicSubmodel" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Number of SubModel</h2>
+<div id="topicSubmodel" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Number of SubModel<a href="model-establishment-via-gsclassifier.html#topicSubmodel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the latest version of <strong>PADi</strong>, we trained 100 <strong>SubModel</strong>s for subtype calling. We also trained some models with different training cohorts (200 models, Figure <a href="model-establishment-via-gsclassifier.html#fig:mn01">4.1</a>) or with different numbers (20, 50, 100, 200, 500 and 1000 for the same training cohort, Figure <a href="model-establishment-via-gsclassifier.html#fig:mn02">4.2</a>) of sub-models. Our results showed that <strong>the performance of these models is similar in the “Kim2018” cohort</strong>.</p>
-<div class="figure" style="text-align: center"><span id="fig:mn01"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mn01"></span>
 <img src="fig/model-no-01.png" alt="Performance of PADi models in “Kim2018” cohort with 200 different training seeds. Each row is the data of a seed. Each column is a sample from the “Kim2018” cohort." width="90%" />
 <p class="caption">
 Figure 4.1: Performance of PADi models in “Kim2018” cohort with 200 different training seeds. Each row is the data of a seed. Each column is a sample from the “Kim2018” cohort.
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:mn02"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mn02"></span>
 <img src="fig/model-no-02.png" alt="Performance of PADi models in “Kim2018” cohort with different numbers of SubModel. The x-axis is the number of SubModels, and the y-axis is the AUC of ROC analysis for ICI response prediction." width="50%" />
 <p class="caption">
 Figure 4.2: Performance of PADi models in “Kim2018” cohort with different numbers of SubModel. The x-axis is the number of SubModels, and the y-axis is the AUC of ROC analysis for ICI response prediction.
 </p>
 </div>
 </div>
-<div id="padiPara" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Parameters for PADi training</h2>
+<div id="padiPara" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Parameters for PADi training<a href="model-establishment-via-gsclassifier.html#padiPara" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here’re some key parameters about how the latest PADi (PAD.train_v20220916) was trained.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="model-establishment-via-gsclassifier.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build 100 models</span></span>
-<span id="cb91-2"><a href="model-establishment-via-gsclassifier.html#cb91-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb91-3"><a href="model-establishment-via-gsclassifier.html#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-4"><a href="model-establishment-via-gsclassifier.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In every model, 70% samples in the training cohort would be selected.</span></span>
-<span id="cb91-5"><a href="model-establishment-via-gsclassifier.html#cb91-5" aria-hidden="true" tabindex="-1"></a>sampSize <span class="ot">=</span> <span class="fl">0.7</span></span>
-<span id="cb91-6"><a href="model-establishment-via-gsclassifier.html#cb91-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-7"><a href="model-establishment-via-gsclassifier.html#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Seed for sampling</span></span>
-<span id="cb91-8"><a href="model-establishment-via-gsclassifier.html#cb91-8" aria-hidden="true" tabindex="-1"></a>sampSeed <span class="ot">=</span> <span class="dv">2020</span></span>
-<span id="cb91-9"><a href="model-establishment-via-gsclassifier.html#cb91-9" aria-hidden="true" tabindex="-1"></a>na.fill.seed <span class="ot">=</span> <span class="dv">443</span></span>
-<span id="cb91-10"><a href="model-establishment-via-gsclassifier.html#cb91-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-11"><a href="model-establishment-via-gsclassifier.html#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="co"># A vector for gene rank estimation</span></span>
-<span id="cb91-12"><a href="model-establishment-via-gsclassifier.html#cb91-12" aria-hidden="true" tabindex="-1"></a>breakVec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
-<span id="cb91-13"><a href="model-establishment-via-gsclassifier.html#cb91-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-14"><a href="model-establishment-via-gsclassifier.html#cb91-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 80% most variable gene &amp; gene-pairs for modeling</span></span>
-<span id="cb91-15"><a href="model-establishment-via-gsclassifier.html#cb91-15" aria-hidden="true" tabindex="-1"></a>ptail <span class="ot">=</span> <span class="fl">0.8</span><span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb91-16"><a href="model-establishment-via-gsclassifier.html#cb91-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-17"><a href="model-establishment-via-gsclassifier.html#cb91-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatical selection of parameters for xGboost</span></span>
-<span id="cb91-18"><a href="model-establishment-via-gsclassifier.html#cb91-18" aria-hidden="true" tabindex="-1"></a><span class="co"># self-defined params. Fast.</span></span>
-<span id="cb91-19"><a href="model-establishment-via-gsclassifier.html#cb91-19" aria-hidden="true" tabindex="-1"></a>params <span class="ot">=</span> <span class="fu">list</span>(<span class="at">max_depth =</span> <span class="dv">10</span>,</span>
-<span id="cb91-20"><a href="model-establishment-via-gsclassifier.html#cb91-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">eta =</span> <span class="fl">0.5</span>,</span>
-<span id="cb91-21"><a href="model-establishment-via-gsclassifier.html#cb91-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">nrounds =</span> <span class="dv">100</span>,</span>
-<span id="cb91-22"><a href="model-establishment-via-gsclassifier.html#cb91-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">nthread =</span> <span class="dv">10</span>,</span>
-<span id="cb91-23"><a href="model-establishment-via-gsclassifier.html#cb91-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">nfold=</span><span class="dv">5</span>)</span>
-<span id="cb91-24"><a href="model-establishment-via-gsclassifier.html#cb91-24" aria-hidden="true" tabindex="-1"></a>caret.seed <span class="ot">=</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="model-establishment-via-gsclassifier.html#cb93-1" tabindex="-1"></a><span class="co"># Build 100 models</span></span>
+<span id="cb93-2"><a href="model-establishment-via-gsclassifier.html#cb93-2" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb93-3"><a href="model-establishment-via-gsclassifier.html#cb93-3" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="model-establishment-via-gsclassifier.html#cb93-4" tabindex="-1"></a><span class="co"># In every model, 70% samples in the training cohort would be selected.</span></span>
+<span id="cb93-5"><a href="model-establishment-via-gsclassifier.html#cb93-5" tabindex="-1"></a>sampSize <span class="ot">=</span> <span class="fl">0.7</span></span>
+<span id="cb93-6"><a href="model-establishment-via-gsclassifier.html#cb93-6" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="model-establishment-via-gsclassifier.html#cb93-7" tabindex="-1"></a><span class="co"># Seed for sampling</span></span>
+<span id="cb93-8"><a href="model-establishment-via-gsclassifier.html#cb93-8" tabindex="-1"></a>sampSeed <span class="ot">=</span> <span class="dv">2020</span></span>
+<span id="cb93-9"><a href="model-establishment-via-gsclassifier.html#cb93-9" tabindex="-1"></a>na.fill.seed <span class="ot">=</span> <span class="dv">443</span></span>
+<span id="cb93-10"><a href="model-establishment-via-gsclassifier.html#cb93-10" tabindex="-1"></a></span>
+<span id="cb93-11"><a href="model-establishment-via-gsclassifier.html#cb93-11" tabindex="-1"></a><span class="co"># A vector for gene rank estimation</span></span>
+<span id="cb93-12"><a href="model-establishment-via-gsclassifier.html#cb93-12" tabindex="-1"></a>breakVec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>)</span>
+<span id="cb93-13"><a href="model-establishment-via-gsclassifier.html#cb93-13" tabindex="-1"></a></span>
+<span id="cb93-14"><a href="model-establishment-via-gsclassifier.html#cb93-14" tabindex="-1"></a><span class="co"># Use 80% most variable gene &amp; gene-pairs for modeling</span></span>
+<span id="cb93-15"><a href="model-establishment-via-gsclassifier.html#cb93-15" tabindex="-1"></a>ptail <span class="ot">=</span> <span class="fl">0.8</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb93-16"><a href="model-establishment-via-gsclassifier.html#cb93-16" tabindex="-1"></a></span>
+<span id="cb93-17"><a href="model-establishment-via-gsclassifier.html#cb93-17" tabindex="-1"></a><span class="co"># Automatical selection of parameters for xGboost</span></span>
+<span id="cb93-18"><a href="model-establishment-via-gsclassifier.html#cb93-18" tabindex="-1"></a><span class="co"># self-defined params. Fast.</span></span>
+<span id="cb93-19"><a href="model-establishment-via-gsclassifier.html#cb93-19" tabindex="-1"></a>params <span class="ot">=</span> <span class="fu">list</span>(<span class="at">max_depth =</span> <span class="dv">10</span>,</span>
+<span id="cb93-20"><a href="model-establishment-via-gsclassifier.html#cb93-20" tabindex="-1"></a>              <span class="at">eta =</span> <span class="fl">0.5</span>,</span>
+<span id="cb93-21"><a href="model-establishment-via-gsclassifier.html#cb93-21" tabindex="-1"></a>              <span class="at">nrounds =</span> <span class="dv">100</span>,</span>
+<span id="cb93-22"><a href="model-establishment-via-gsclassifier.html#cb93-22" tabindex="-1"></a>              <span class="at">nthread =</span> <span class="dv">10</span>,</span>
+<span id="cb93-23"><a href="model-establishment-via-gsclassifier.html#cb93-23" tabindex="-1"></a>              <span class="at">nfold=</span><span class="dv">5</span>)</span>
+<span id="cb93-24"><a href="model-establishment-via-gsclassifier.html#cb93-24" tabindex="-1"></a>caret.seed <span class="ot">=</span> <span class="cn">NULL</span></span></code></pre></div>
 <p>Enjoy <strong>GSClassifier</strong>!</p>
 
 </div>
@@ -604,7 +633,6 @@ Figure 4.2: Performance of PADi models in “Kim2018” cohort with different nu
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -623,6 +651,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -643,6 +672,10 @@ gitbook.start({
 "text": null
 },
 "download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
@@ -656,7 +689,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -214,6 +214,7 @@ res_padi <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "ensembl",
+    matchmode = 'fix',
     subtype = "PAD.train_20220916",
     verbose = F
   )
@@ -251,6 +252,7 @@ res_padi <- parCallEnsemble(
   geneSet = NULL,
   scaller = NULL,
   geneids = 'ensembl',
+  matchmode = 'fix',
   subtype = 'PAD.train_20220916',
   verbose = T,
   numCores = 4)
@@ -313,6 +315,7 @@ res_padi <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "ensembl",
+    matchmode = 'fix',
     subtype = "PAD.train_20220916",
     verbose = F
   )
@@ -365,6 +368,7 @@ list_model(project='GSClassifier')
 # Available models in GSClassifier:
 #   *Gibbs_PanCancerImmuneSubtype_v20190731
 #   *HWB_PAD_v20200110
+#   *HWB_PAD_v20220916
 ```
 Here, `HWB_PAD_v20200110` is a standard name of `PADi`. They are the same. 
 
@@ -410,6 +414,7 @@ res_padi <- callEnsemble(
   geneSet = model$geneSet,
   scaller = model$scaller$Model,
   geneid = "ensembl",
+  matchmode = 'fix',
   subtype = NULL,
   verbose = F
 )
@@ -426,6 +431,7 @@ res_padi <- callEnsemble(
   geneSet = NULL,
   scaller = NULL,
   geneid = "ensembl",
+  matchmode = 'fix',
   subtype = model, 
   verbose = F
 )
@@ -500,6 +506,7 @@ res_pis <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "symbol",
+    matchmode = 'free',
     subtype = "ImmuneSubtype",
     verbose = F
   )
@@ -511,13 +518,13 @@ Check the result:
 ```r
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.007564e-03 0.561300665 3.837404e-06
-# 2 PB-16-003        4            4 6.869898e-07 0.018167170 1.354489e-04
-# 3 PB-16-004        3            3 1.441154e-05 0.001126488 1.948445e-01
+# 1 PB-16-002        2            2 1.693409e-03 0.561300665 6.038118e-06
+# 2 PB-16-003        4            4 5.415394e-07 0.018167170 1.090021e-04
+# 3 PB-16-004        3            3 3.600861e-06 0.001126488 2.180974e-01
 #              4           5           6
-# 1 0.1316769049 0.006611313 0.004667357
-# 2 0.3614951521 0.002095707 0.002977557
-# 3 0.0002116173 0.007653435 0.007229299
+# 1 0.2842663527 0.006611313 0.005062298
+# 2 0.3544297069 0.002884648 0.001734889
+# 3 0.0002087706 0.007044669 0.012420599
 ```
 
 
@@ -546,6 +553,7 @@ res_pis <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "symbol",
+    matchmode = 'free',
     subtype = pci,
     verbose = F
   )

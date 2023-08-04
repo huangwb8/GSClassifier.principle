@@ -367,6 +367,7 @@ res_i = callEnsemble(
   geneSet = l$geneSet,
   scaller = l$scaller$Model,
   geneid = <ID type of your training data>,
+  matchmode = 'fix',
   subtype = NULL,
   verbose = T
 )

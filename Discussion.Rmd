@@ -94,7 +94,11 @@ Here, the expression matrix after removing batch effect were calculated:
 # Cleaned and normalized data for sva::Combat
 expr_pad2 <- apply(expr_pad, 2, scale)
 rownames(expr_pad2) <- rownames(expr_pad)
+```
 
+Remove batch effects:
+
+```{r}
 # BatchQC data
 library(sva)
 batch <- testData$PanSTAD_phenotype_part$Dataset
@@ -102,6 +106,71 @@ expr_pad2_rmbat <- ComBat(
   dat=expr_pad2,
   batch=batch, 
   mod=NULL)
+```
+
+Look at the alteration of batch effects in GC datasets:
+
+```{r}
+
+# Compare
+df1 <- reshape2::melt(expr_pad2)
+df2 <- reshape2::melt(expr_pad2_rmbat)
+df3 <- rbind(
+  cbind(df1, type = 'After scale_before Combat'),
+  cbind(df2, type = 'After scale_after Combat')
+)
+df3$type <- factor(df3$type, levels = c('After scale_before Combat', 'After scale_after Combat'))
+df3$dataset <- convert(df3$Var2,'ID','Dataset', testData$PanSTAD_phenotype_part)
+dataset <- unique(df3$dataset)
+dataset_color <- mycolor[c(1,4,5,6,7,10,21,22,23,24,25,54,56,60)]
+
+# ggplot: Combat似乎有一点点效果
+if(T){
+  
+  size=6
+  
+  p <- ggplot(df3,aes(x=Var2,y=value,fill=dataset,color=dataset)) + 
+    geom_boxplot(outlier.size = -0.3, size = 0.02) + 
+    scale_fill_manual(
+      breaks = dataset,
+      values = dataset_color,
+      labels = dataset
+    ) + 
+    scale_color_manual(
+      breaks = dataset,
+      values = dataset_color,
+      labels = dataset
+    ) + 
+    guides(color = "none",
+           fill = guide_legend(override.aes = list(size=1))) + 
+    facet_wrap(. ~ type, 
+               nrow = length(unique(df3$type)),
+               scales = 'free') +
+    labs(x = 'Samples in External cohorts of GC',
+         y = 'Gene expression',
+         fill = NULL) +
+    # coord_flip() + 
+    theme_bw() +
+    theme(
+      axis.text.x = element_blank(),
+      axis.text.y = element_text(size = size/15*12,colour = "black",face = "bold"),
+      axis.title.x = element_text(size = size*1.5,colour = "black",face = "bold"),
+      axis.title.y = element_text(size = size*1.5,colour = "black",face = "bold"),
+      legend.text = element_text(size = size/15*25,colour = "black",face = "bold"),
+      legend.title = element_text(size = size/15*25,colour = "black",face = "bold"),
+      legend.position='right',
+      strip.background = element_rect(fill="white",size = 2),
+      strip.text.x = element_text(size = size*1.5,colour = "black",face = "bold", margin = margin(t = 0.5, r = 0, b = 0.5, l = 0, unit = "cm")),
+      panel.border = element_rect(colour = "black",size=2),
+      # panel.grid = element_blank(),
+      # panel.border=element_rect(fill='transparent',color='transparent'),
+      # axis.ticks = element_line(colour = "black",size = 2.5,linetype = 1,lineend = 'square'),
+      axis.ticks = element_blank()
+      # axis.line = element_line(colour = "black",size = 2.5,linetype = 1,lineend = 'square')
+    ) 
+  print(p)
+}
+
 ```
 
 The rank differences after batch-effect control were as follows:
@@ -188,7 +257,7 @@ As shown in Figure \@ref(fig:mvi02), the percentage of all samples in gastric ca
 
 ```{r mvi02, fig.cap='The distribution of missing value across gastric cancer samples.', out.width='80%', fig.asp=.75, fig.align='center'}
 # ggplot
-ggplot(data = expr_pad_na_df, 
+p1 <- ggplot(data = expr_pad_na_df, 
        aes(x = sample, y = prob)) + 
   geom_bar(stat = 'identity', color = mycolor[3]) + 
   scale_y_continuous(labels=scales::percent) + 
@@ -201,6 +270,7 @@ ggplot(data = expr_pad_na_df,
     axis.title = element_text(size = 15),
     axis.text = element_text(size = 12)
   )
+print(p1)
 ```
 
 Second, we did conduct some MVI strategies to deal with data before model training in **GSClassifier**. Due to the low missing rate of our experimental data, we just **set missing values as zero** during model training and subtype identification in the early version of PADi (**PAD.train.v20200110**). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
@@ -318,7 +388,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 
 ```{r mvi03, fig.cap='The association between the number of missing value and subtype identification performance.', out.width='60%', fig.asp=.75, fig.align='center'}
 # Plot
-ggplot(mvt_auc_df, aes(x,y)) +
+p2 <- ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
   stat_smooth(formula = y ~ x,method = 'glm') +
@@ -328,6 +398,7 @@ ggplot(mvt_auc_df, aes(x,y)) +
     axis.title = element_text(size = 15),
     axis.text = element_text(size = 12)
   )
+print(p2)
 ```
 
 As shown in Figure \@ref(fig:mvi03), there is a linear negative correlation between the number of missing values (missing rate ranges from 6.25% to 37.5%) and the subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no missing value in PIAM/PIDG of the 'Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via **PADi**. Nonetheless, we still used the **zero strategy** during subtype identification of **PADi** if any missing values exist, because randomization might make the result unstable, which is not suitable for clinical decision.

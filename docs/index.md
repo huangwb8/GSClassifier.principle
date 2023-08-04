@@ -1,7 +1,7 @@
 --- 
 title: "The Principle of R Package GSClassifier"
 author: "Weibin Huang"
-date: "2022-09-30"
+date: "2023-08-04"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -98,6 +98,12 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 ```
 
 ## Change log {-}
+
++ Version 0.1.27
+
+  + Enhaned `geneMatch` function
+  
+  + Repair some bugs
 
 + Version 0.1.9
 

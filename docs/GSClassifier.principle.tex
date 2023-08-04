@@ -7,7 +7,6 @@
   12pt,
 ]{book}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{setspace}
 \usepackage{iftex}
 \ifPDFTeX
@@ -15,9 +14,13 @@
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -158,7 +161,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={The Principle of R Package GSClassifier},
   pdfauthor={Weibin Huang},
@@ -171,7 +174,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2022-09-30}
+\date{2023-08-04}
 
 \begin{document}
 \maketitle
@@ -270,6 +273,15 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 \addcontentsline{toc}{section}{Change log}
 
 \begin{itemize}
+\item
+  Version 0.1.27
+
+  \begin{itemize}
+  \item
+    Enhaned \passthrough{\lstinline!geneMatch!} function
+  \item
+    Repair some bugs
+  \end{itemize}
 \item
   Version 0.1.9
 
@@ -374,66 +386,70 @@ for(i in packages_needed){p_load(char=i)}
 Here is the environment of R programming:
 
 \begin{lstlisting}
-# R version 4.0.3 (2020-10-10)
+# R version 4.2.2 (2022-10-31 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 18363)
+# Running under: Windows 10 x64 (build 19042)
 # 
 # Matrix products: default
 # 
 # locale:
-# [1] LC_COLLATE=Chinese (Simplified)_China.936 
-# [2] LC_CTYPE=Chinese (Simplified)_China.936   
-# [3] LC_MONETARY=Chinese (Simplified)_China.936
-# [4] LC_NUMERIC=C                              
-# [5] LC_TIME=Chinese (Simplified)_China.936    
+# [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
+# [2] LC_CTYPE=Chinese (Simplified)_China.utf8   
+# [3] LC_MONETARY=Chinese (Simplified)_China.utf8
+# [4] LC_NUMERIC=C                               
+# [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
-# [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
+# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
+# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
+# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
-#   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
-#  [10] clue_0.3-57          rstudioapi_0.13      ggpubr_0.4.0        
-#  [13] listenv_0.8.0        remotes_2.4.2        prodlim_2019.11.13  
-#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
-#  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
-#  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
-#  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
-#  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
-#  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
-#  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
-#  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.4.1         
-#  [46] nlme_3.1-149         iterators_1.0.14     timeDate_3043.102   
-#  [49] xfun_0.33            gower_1.0.0          stringr_1.4.0       
-#  [52] globals_0.15.1       ps_1.4.0             testthat_3.1.0      
-#  [55] lifecycle_1.0.1      devtools_2.4.3       rstatix_0.7.0       
-#  [58] future_1.26.1        MASS_7.3-53          scales_1.2.0        
-#  [61] ipred_0.9-12         parallel_4.0.3       RColorBrewer_1.1-3  
-#  [64] yaml_2.3.5           memoise_2.0.1        stringi_1.7.6       
-#  [67] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
-#  [70] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
-#  [73] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
-#  [76] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
-#  [79] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
-#  [82] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
-#  [85] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
-#  [88] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
-#  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
-#  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
-#  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
+#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
+#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
+#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
+#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
+#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
+#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
+#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
+#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
+#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
+#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
+#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
+#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
+#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
+#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
+#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
+#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
+#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
+#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
+#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
+#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
+#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
+#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
+#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
+#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
+#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
+#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
+#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
+#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
+#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
+#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
+#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
+#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
+# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
+# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
+# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
+# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
+# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
+# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
+# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
+# [121] sessioninfo_1.2.2
 \end{lstlisting}
 
 \hypertarget{flowchart}{%
@@ -509,7 +525,7 @@ rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
 # Missing value imputation (MVI)
 expr <- na_fill(expr0, method = "quantile", seed = 447)
-#  Missing value imputation with quantile algorithm!
+# 2023-08-04 23:19:14 | Missing value imputation with quantile algorithm!
 
 # Subtype information
 # It depends on the application scenarios of GEPs
@@ -957,66 +973,70 @@ for(i in packages_needed){p_load(char=i)}
 Here is the environment of R programming:
 
 \begin{lstlisting}
-# R version 4.0.3 (2020-10-10)
+# R version 4.2.2 (2022-10-31 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 18363)
+# Running under: Windows 10 x64 (build 19042)
 # 
 # Matrix products: default
 # 
 # locale:
-# [1] LC_COLLATE=Chinese (Simplified)_China.936 
-# [2] LC_CTYPE=Chinese (Simplified)_China.936   
-# [3] LC_MONETARY=Chinese (Simplified)_China.936
-# [4] LC_NUMERIC=C                              
-# [5] LC_TIME=Chinese (Simplified)_China.936    
+# [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
+# [2] LC_CTYPE=Chinese (Simplified)_China.utf8   
+# [3] LC_MONETARY=Chinese (Simplified)_China.utf8
+# [4] LC_NUMERIC=C                               
+# [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.3.6        reshape2_1.4.4       tidyr_1.2.0         
-# [4] rpart_4.1.16         GSClassifier_0.1.25  luckyBase_0.1.0     
-# [7] ComplexHeatmap_2.4.3 readxl_1.4.0         pacman_0.5.1        
+# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
+# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
+# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.0-3     ggsignif_0.6.3       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         rprojroot_2.0.3     
-#   [7] circlize_0.4.15      GlobalOptions_0.1.2  fs_1.5.2            
-#  [10] clue_0.3-57          rstudioapi_0.13      ggpubr_0.4.0        
-#  [13] listenv_0.8.0        remotes_2.4.2        prodlim_2019.11.13  
-#  [16] fansi_1.0.3          lubridate_1.8.0      codetools_0.2-18    
-#  [19] splines_4.0.3        doParallel_1.0.17    cachem_1.0.6        
-#  [22] knitr_1.30           pkgload_1.2.4        jsonlite_1.8.0      
-#  [25] pROC_1.18.0          caret_6.0-92         broom_1.0.0         
-#  [28] cluster_2.1.3        png_0.1-7            compiler_4.0.3      
-#  [31] backports_1.4.1      assertthat_0.2.1     Matrix_1.4-1        
-#  [34] fastmap_1.1.0        cli_3.3.0            htmltools_0.5.2     
-#  [37] prettyunits_1.1.1    tools_4.0.3          gtable_0.3.0        
-#  [40] glue_1.6.2           dplyr_1.0.9          Rcpp_1.0.8.3        
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.4.1         
-#  [46] nlme_3.1-149         iterators_1.0.14     timeDate_3043.102   
-#  [49] xfun_0.33            gower_1.0.0          stringr_1.4.0       
-#  [52] globals_0.15.1       ps_1.4.0             testthat_3.1.0      
-#  [55] lifecycle_1.0.1      devtools_2.4.3       rstatix_0.7.0       
-#  [58] future_1.26.1        MASS_7.3-53          scales_1.2.0        
-#  [61] ipred_0.9-12         parallel_4.0.3       RColorBrewer_1.1-3  
-#  [64] yaml_2.3.5           memoise_2.0.1        stringi_1.7.6       
-#  [67] desc_1.4.1           randomForest_4.6-14  foreach_1.5.2       
-#  [70] hardhat_1.1.0        pkgbuild_1.3.1       lava_1.6.10         
-#  [73] shape_1.4.6          tuneR_1.4.0          rlang_1.0.2         
-#  [76] pkgconfig_2.0.3      evaluate_0.15        lattice_0.20-41     
-#  [79] purrr_0.3.4          recipes_0.2.0        processx_3.7.0      
-#  [82] tidyselect_1.1.2     parallelly_1.32.0    plyr_1.8.7          
-#  [85] magrittr_2.0.3       bookdown_0.21        R6_2.5.1            
-#  [88] generics_0.1.2       DBI_1.1.3            pillar_1.7.0        
-#  [91] withr_2.5.0          survival_3.3-1       abind_1.4-5         
-#  [94] nnet_7.3-17          tibble_3.1.7         future.apply_1.9.0  
-#  [97] crayon_1.5.1         car_3.1-0            xgboost_1.6.0.1     
-# [100] utf8_1.2.2           rmarkdown_2.14       GetoptLong_1.0.5    
-# [103] usethis_2.1.3        data.table_1.14.2    callr_3.7.0         
-# [106] ModelMetrics_1.2.2.2 digest_0.6.29        stats4_4.0.3        
-# [109] signal_0.7-7         munsell_0.5.0        sessioninfo_1.2.2
+#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
+#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
+#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
+#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
+#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
+#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
+#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
+#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
+#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
+#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
+#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
+#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
+#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
+#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
+#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
+#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
+#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
+#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
+#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
+#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
+#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
+#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
+#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
+#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
+#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
+#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
+#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
+#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
+#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
+#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
+#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
+#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
+#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
+# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
+# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
+# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
+# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
+# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
+# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
+# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
+# [121] sessioninfo_1.2.2
 \end{lstlisting}
 
 \hypertarget{subtype-vector}{%
@@ -1084,15 +1104,101 @@ Here, the expression matrix after removing batch effect were calculated:
 # Cleaned and normalized data for sva::Combat
 expr_pad2 <- apply(expr_pad, 2, scale)
 rownames(expr_pad2) <- rownames(expr_pad)
+\end{lstlisting}
 
+Remove batch effects:
+
+\begin{lstlisting}[language=R]
 # BatchQC data
 library(sva)
+# Loading required package: mgcv
+# Loading required package: nlme
+# This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.
+# Loading required package: genefilter
+# 
+# Attaching package: 'genefilter'
+# The following object is masked from 'package:ComplexHeatmap':
+# 
+#     dist2
+# Loading required package: BiocParallel
 batch <- testData$PanSTAD_phenotype_part$Dataset
 expr_pad2_rmbat <- ComBat(
   dat=expr_pad2,
   batch=batch, 
   mod=NULL)
+# Found14batches
+# Adjusting for0covariate(s) or covariate level(s)
+# Standardizing Data across genes
+# Fitting L/S model and finding priors
+# Finding parametric adjustments
+# Adjusting the Data
 \end{lstlisting}
+
+Look at the alteration of batch effects in GC datasets:
+
+\begin{lstlisting}[language=R]
+
+# Compare
+df1 <- reshape2::melt(expr_pad2)
+df2 <- reshape2::melt(expr_pad2_rmbat)
+df3 <- rbind(
+  cbind(df1, type = 'After scale_before Combat'),
+  cbind(df2, type = 'After scale_after Combat')
+)
+df3$type <- factor(df3$type, levels = c('After scale_before Combat', 'After scale_after Combat'))
+df3$dataset <- convert(df3$Var2,'ID','Dataset', testData$PanSTAD_phenotype_part)
+dataset <- unique(df3$dataset)
+dataset_color <- mycolor[c(1,4,5,6,7,10,21,22,23,24,25,54,56,60)]
+
+# ggplot: Combat似乎有一点点效果
+if(T){
+  
+  size=6
+  
+  p <- ggplot(df3,aes(x=Var2,y=value,fill=dataset,color=dataset)) + 
+    geom_boxplot(outlier.size = -0.3, size = 0.02) + 
+    scale_fill_manual(
+      breaks = dataset,
+      values = dataset_color,
+      labels = dataset
+    ) + 
+    scale_color_manual(
+      breaks = dataset,
+      values = dataset_color,
+      labels = dataset
+    ) + 
+    guides(color = "none",
+           fill = guide_legend(override.aes = list(size=1))) + 
+    facet_wrap(. ~ type, 
+               nrow = length(unique(df3$type)),
+               scales = 'free') +
+    labs(x = 'Samples in External cohorts of GC',
+         y = 'Gene expression',
+         fill = NULL) +
+    # coord_flip() + 
+    theme_bw() +
+    theme(
+      axis.text.x = element_blank(),
+      axis.text.y = element_text(size = size/15*12,colour = "black",face = "bold"),
+      axis.title.x = element_text(size = size*1.5,colour = "black",face = "bold"),
+      axis.title.y = element_text(size = size*1.5,colour = "black",face = "bold"),
+      legend.text = element_text(size = size/15*25,colour = "black",face = "bold"),
+      legend.title = element_text(size = size/15*25,colour = "black",face = "bold"),
+      legend.position='right',
+      strip.background = element_rect(fill="white",size = 2),
+      strip.text.x = element_text(size = size*1.5,colour = "black",face = "bold", margin = margin(t = 0.5, r = 0, b = 0.5, l = 0, unit = "cm")),
+      panel.border = element_rect(colour = "black",size=2),
+      # panel.grid = element_blank(),
+      # panel.border=element_rect(fill='transparent',color='transparent'),
+      # axis.ticks = element_line(colour = "black",size = 2.5,linetype = 1,lineend = 'square'),
+      axis.ticks = element_blank()
+      # axis.line = element_line(colour = "black",size = 2.5,linetype = 1,lineend = 'square')
+    ) 
+  print(p)
+}
+\end{lstlisting}
+
+\includegraphics{Discussion_files/figure-latex/unnamed-chunk-7-1.pdf}
 
 The rank differences after batch-effect control were as follows:
 
@@ -1133,7 +1239,7 @@ res <- PAD(
 )
 \end{lstlisting}
 
-\includegraphics{Discussion_files/figure-latex/unnamed-chunk-8-1.pdf}
+\includegraphics{Discussion_files/figure-latex/unnamed-chunk-10-1.pdf}
 
 Look at the percentage of PAD subtypes:
 
@@ -1185,7 +1291,7 @@ As shown in Figure \ref{fig:mvi02}, the percentage of all samples in gastric can
 
 \begin{lstlisting}[language=R]
 # ggplot
-ggplot(data = expr_pad_na_df, 
+p1 <- ggplot(data = expr_pad_na_df, 
        aes(x = sample, y = prob)) + 
   geom_bar(stat = 'identity', color = mycolor[3]) + 
   scale_y_continuous(labels=scales::percent) + 
@@ -1198,6 +1304,7 @@ ggplot(data = expr_pad_na_df,
     axis.title = element_text(size = 15),
     axis.text = element_text(size = 12)
   )
+print(p1)
 \end{lstlisting}
 
 \begin{figure}
@@ -1278,7 +1385,7 @@ Look at the new matrix via heatmap, where the clustering result is not significa
 Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 \end{lstlisting}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Discussion_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 Because missing values might damage the integrity of biological information, we explored \textbf{how much the number of missing values in one sample impacts subtype identification via PADi}. The steps are as follows: (i) we used the ``quantile'' algorithm to do MVI in the internal validation cohort of gastric cancer; (ii) we randomly masked different proportions of genes as zero expression; (iii) we calculated the relative multi-ROC {[}\protect\hyperlink{ref-pROC}{15}{]} (masked data vs.~MVI data). In \textbf{GSClassifier}, we developed a function called \textbf{mv\_tolerance} to complete the task.
 
@@ -1351,7 +1458,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 
 \begin{lstlisting}[language=R]
 # Plot
-ggplot(mvt_auc_df, aes(x,y)) +
+p2 <- ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
   scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) + 
   stat_smooth(formula = y ~ x,method = 'glm') +
@@ -1361,6 +1468,7 @@ ggplot(mvt_auc_df, aes(x,y)) +
     axis.title = element_text(size = 15),
     axis.text = element_text(size = 12)
   )
+print(p2)
 \end{lstlisting}
 
 \begin{figure}
@@ -1421,7 +1529,7 @@ Nevertheless, there're several suggestions we can follow for best practice. Firs
 \item
   Although with bright prospects in Pan-disease analysis, \href{https://github.com/huangwb8/GSClassifier}{GSClassifier} was primarily developed for clinic-friendly immune subtypes of gastric cancer (GC). Currently, only \passthrough{\lstinline!PAD!} subtypes and \passthrough{\lstinline!PADi!} for GC were supported. We would try to support more cancer types in the future as possible. More details in \href{https://github.com/huangwb8/GSClassifier/wiki/Plans-in-the-future}{Plans in the future} section.
 \item
-  Gibbs' \passthrough{\lstinline!PanCancer immune subtypes!} based on five gene signatures (485 genes) could also be called in \passthrough{\lstinline!GSClassifier!}, with a pre-trained model from the \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier} package. If you use their jobs, please cite \href{https://github.com/huangwb8/GSClassifier/wiki/Introduction\#Reference}{these papers}.
+  Gibbs\textquotesingle{} \passthrough{\lstinline!PanCancer immune subtypes!} based on five gene signatures (485 genes) could also be called in \passthrough{\lstinline!GSClassifier!}, with a pre-trained model from the \href{https://github.com/CRI-iAtlas/ImmuneSubtypeClassifier}{ImmuneSubtypeClassifier} package. If you use their jobs, please cite \href{https://github.com/huangwb8/GSClassifier/wiki/Introduction\#Reference}{these papers}.
 \item
   Particularly, all normal tissues should be eliminated before subtype identificaiton for cancer research.
 \end{itemize}
@@ -1630,6 +1738,7 @@ res_padi <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "ensembl",
+    matchmode = 'fix',
     subtype = "PAD.train_20220916",
     verbose = F
   )
@@ -1669,6 +1778,7 @@ res_padi <- parCallEnsemble(
   geneSet = NULL,
   scaller = NULL,
   geneids = 'ensembl',
+  matchmode = 'fix',
   subtype = 'PAD.train_20220916',
   verbose = T,
   numCores = 4)
@@ -1724,6 +1834,7 @@ res_padi <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "ensembl",
+    matchmode = 'fix',
     subtype = "PAD.train_20220916",
     verbose = F
   )
@@ -1775,6 +1886,7 @@ list_model(project='GSClassifier')
 # Available models in GSClassifier:
 #   *Gibbs_PanCancerImmuneSubtype_v20190731
 #   *HWB_PAD_v20200110
+#   *HWB_PAD_v20220916
 \end{lstlisting}
 
 Here, \passthrough{\lstinline!HWB\_PAD\_v20200110!} is a standard name of \passthrough{\lstinline!PADi!}. They are the same.
@@ -1818,6 +1930,7 @@ res_padi <- callEnsemble(
   geneSet = model$geneSet,
   scaller = model$scaller$Model,
   geneid = "ensembl",
+  matchmode = 'fix',
   subtype = NULL,
   verbose = F
 )
@@ -1833,6 +1946,7 @@ res_padi <- callEnsemble(
   geneSet = NULL,
   scaller = NULL,
   geneid = "ensembl",
+  matchmode = 'fix',
   subtype = model, 
   verbose = F
 )
@@ -1902,6 +2016,7 @@ res_pis <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "symbol",
+    matchmode = 'free',
     subtype = "ImmuneSubtype",
     verbose = F
   )
@@ -1912,13 +2027,13 @@ Check the result:
 \begin{lstlisting}[language=R]
 head(res_pis)
 #   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.007564e-03 0.561300665 3.837404e-06
-# 2 PB-16-003        4            4 6.869898e-07 0.018167170 1.354489e-04
-# 3 PB-16-004        3            3 1.441154e-05 0.001126488 1.948445e-01
+# 1 PB-16-002        2            2 1.693409e-03 0.561300665 6.038118e-06
+# 2 PB-16-003        4            4 5.415394e-07 0.018167170 1.090021e-04
+# 3 PB-16-004        3            3 3.600861e-06 0.001126488 2.180974e-01
 #              4           5           6
-# 1 0.1316769049 0.006611313 0.004667357
-# 2 0.3614951521 0.002095707 0.002977557
-# 3 0.0002116173 0.007653435 0.007229299
+# 1 0.2842663527 0.006611313 0.005062298
+# 2 0.3544297069 0.002884648 0.001734889
+# 3 0.0002087706 0.007044669 0.012420599
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -1942,6 +2057,7 @@ res_pis <- callEnsemble(
     geneSet = NULL,
     scaller = NULL,
     geneid = "symbol",
+    matchmode = 'free',
     subtype = pci,
     verbose = F
   )
@@ -2443,6 +2559,7 @@ res_i = callEnsemble(
   geneSet = l$geneSet,
   scaller = l$scaller$Model,
   geneid = <ID type of your training data>,
+  matchmode = 'fix',
   subtype = NULL,
   verbose = T
 )

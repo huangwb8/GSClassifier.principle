@@ -7,7 +7,7 @@ Leave some introductions
 ## Packages
 
 
-```r
+``` r
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -19,6 +19,7 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 # Install the "GSClassifier" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
+# 
 
 # Install the "pacman" package
 if (!requireNamespace("pacman", quietly = TRUE)){
@@ -44,11 +45,12 @@ Here is the environment of R programming:
 
 
 ```
-# R version 4.2.2 (2022-10-31 ucrt)
+# R version 4.3.1 (2023-06-16 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 19042)
+# Running under: Windows 11 x64 (build 26100)
 # 
 # Matrix products: default
+# 
 # 
 # locale:
 # [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
@@ -57,57 +59,69 @@ Here is the environment of R programming:
 # [4] LC_NUMERIC=C                               
 # [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
+# time zone: Asia/Shanghai
+# tzcode source: internal
+# 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
-# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
-# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
+#  [1] ggplot2_3.5.0         reshape2_1.4.4        tidyr_1.3.1          
+#  [4] rpart_4.1.19          GSClassifier_0.4.0    xgboost_2.0.3.1      
+#  [7] luckyBase_0.2.0       ComplexHeatmap_2.18.0 readxl_1.4.3         
+# [10] pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
-#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
-#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
-#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
-#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
-#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
-#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
-#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
-#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
-#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
-#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
-#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
-#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
-#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
-#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
-#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
-#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
-#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
-#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
-#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
-#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
-#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
-#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
-#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
-#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
-#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
-#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
-#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
-#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
-#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
-#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
-# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
-# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
-# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
-# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
-# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
-# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
-# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
-# [121] sessioninfo_1.2.2
+#   [1] splines_4.3.1           later_1.3.2             bitops_1.0-7           
+#   [4] tibble_3.2.1            cellranger_1.1.0        hardhat_1.3.1          
+#   [7] preprocessCore_1.64.0   pROC_1.18.5             lifecycle_1.0.4        
+#  [10] rstatix_0.7.2           fastcluster_1.2.6       doParallel_1.0.17      
+#  [13] globals_0.16.3          lattice_0.21-8          MASS_7.3-60            
+#  [16] backports_1.4.1         magrittr_2.0.3          Hmisc_5.1-2            
+#  [19] rmarkdown_2.26          yaml_2.3.8              remotes_2.4.2.1        
+#  [22] httpuv_1.6.14           sessioninfo_1.2.2       pkgbuild_1.4.3         
+#  [25] DBI_1.2.2               RColorBrewer_1.1-3      lubridate_1.9.3        
+#  [28] abind_1.4-5             pkgload_1.3.4           zlibbioc_1.48.0        
+#  [31] purrr_1.0.2             BiocGenerics_0.48.1     RCurl_1.98-1.16        
+#  [34] nnet_7.3-19             ipred_0.9-14            circlize_0.4.16        
+#  [37] lava_1.8.0              GenomeInfoDbData_1.2.11 IRanges_2.36.0         
+#  [40] S4Vectors_0.40.2        listenv_0.9.1           parallelly_1.37.1      
+#  [43] codetools_0.2-19        tidyselect_1.2.1        shape_1.4.6.1          
+#  [46] matrixStats_1.2.0       stats4_4.3.1            dynamicTreeCut_1.63-1  
+#  [49] base64enc_0.1-3         jsonlite_1.8.8          caret_6.0-94           
+#  [52] GetoptLong_1.0.5        ellipsis_0.3.2          Formula_1.2-5          
+#  [55] survival_3.5-5          iterators_1.0.14        signal_1.8-0           
+#  [58] foreach_1.5.2           tools_4.3.1             Rcpp_1.0.12            
+#  [61] glue_1.7.0              prodlim_2023.08.28      gridExtra_2.3          
+#  [64] xfun_0.52               usethis_2.2.3           GenomeInfoDb_1.38.7    
+#  [67] dplyr_1.1.4             withr_3.0.0             fastmap_1.1.1          
+#  [70] fansi_1.0.6             digest_0.6.34           timechange_0.3.0       
+#  [73] R6_2.5.1                mime_0.12               colorspace_2.1-0       
+#  [76] GO.db_3.18.0            RSQLite_2.3.5           utf8_1.2.4             
+#  [79] generics_0.1.3          tuneR_1.4.6             data.table_1.15.2      
+#  [82] recipes_1.0.10          class_7.3-22            httr_1.4.7             
+#  [85] htmlwidgets_1.6.4       ModelMetrics_1.2.2.2    pkgconfig_2.0.3        
+#  [88] gtable_0.3.4            timeDate_4032.109       blob_1.2.4             
+#  [91] impute_1.76.0           XVector_0.42.0          htmltools_0.5.7        
+#  [94] carData_3.0-5           profvis_0.3.8           bookdown_0.43          
+#  [97] clue_0.3-65             scales_1.3.0            Biobase_2.62.0         
+# [100] png_0.1-8               gower_1.0.1             knitr_1.50             
+# [103] rstudioapi_0.15.0       rjson_0.2.21            checkmate_2.3.1        
+# [106] nlme_3.1-162            cachem_1.0.8            GlobalOptions_0.1.2    
+# [109] stringr_1.5.1           parallel_4.3.1          miniUI_0.1.1.1         
+# [112] foreign_0.8-84          AnnotationDbi_1.64.1    pillar_1.9.0           
+# [115] vctrs_0.6.5             urlchecker_1.0.1        promises_1.2.1         
+# [118] randomForest_4.7-1.1    ggpubr_0.6.0            car_3.1-2              
+# [121] xtable_1.8-4            cluster_2.1.4           htmlTable_2.4.2        
+# [124] evaluate_0.23           tinytex_0.49            cli_3.6.2              
+# [127] compiler_4.3.1          rlang_1.1.3             crayon_1.5.2           
+# [130] future.apply_1.11.1     ggsignif_0.6.4          plyr_1.8.9             
+# [133] fs_1.6.3                stringi_1.8.3           WGCNA_1.72-5           
+# [136] munsell_0.5.0           Biostrings_2.70.2       devtools_2.4.5         
+# [139] Matrix_1.6-5            bit64_4.0.5             future_1.33.1          
+# [142] KEGGREST_1.42.0         shiny_1.8.0             broom_1.0.5            
+# [145] memoise_2.0.1           bit_4.0.5
 ```
 
 ## Flowchart
@@ -120,7 +134,7 @@ The flowchart of **GSClassifier** is showed in Figure \@ref(fig:flowchart).
 
 }
 
-\caption{The flow chart of GSClassifier}(\#fig:flowchart)
+\caption{The flow chart of GSClassifier}\label{fig:flowchart}
 \end{figure}
 
 ### Data Processing
@@ -155,7 +169,7 @@ As shown in Figure \@ref(fig:tsp), The TSP data in GSClassifier consists of thre
 
 }
 
-\caption{The components of TSP (2 gene sets)}(\#fig:tsp)
+\caption{The components of TSP (2 gene sets)}\label{fig:tsp}
 \end{figure}
 
 ### Simulated Dataset
@@ -163,7 +177,7 @@ As shown in Figure \@ref(fig:tsp), The TSP data in GSClassifier consists of thre
 We simulated a dataset to demonstrate TSP normalization in GSClassifier:
 
 
-```r
+``` r
 # Geneset
 geneSet <- list(
   Set1 = paste('Gene',1:3,sep = ''),
@@ -177,7 +191,7 @@ rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
 # Missing value imputation (MVI)
 expr <- na_fill(expr0, method = "quantile", seed = 447)
-# 2023-08-04 23:19:14 | Missing value imputation with quantile algorithm!
+# 2025-05-24 20:35:28 | Missing value imputation with quantile algorithm!
 
 # Subtype information
 # It depends on the application scenarios of GEPs
@@ -227,7 +241,7 @@ print(expr)
 Look at the matrix via heatmap:
 
 
-```r
+``` r
 Heatmap(t(scale(t(expr0))), name = "Z-score", column_title = "Before MVI")
 ```
 
@@ -236,7 +250,7 @@ Heatmap(t(scale(t(expr0))), name = "Z-score", column_title = "Before MVI")
 \begin{center}\includegraphics[width=0.6\linewidth]{Flowchart_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 
-```r
+``` r
 Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 ```
 
@@ -259,7 +273,7 @@ First, we binned genes with different quantile intervals so that the distributio
 Take **Sample4** as an example:
 
 
-```r
+``` r
 # Data of Sample4
 x <- expr[,4]
 
@@ -299,7 +313,7 @@ For example, **0.110** is the minimun of the raw expression vector, so its binne
 Generally, we calculate binned expression via function **breakBin** of **GSClassifier**:
 
 
-```r
+``` r
 expr_binned <- apply(
   expr, 2, 
   GSClassifier:::breakBin,
@@ -323,7 +337,7 @@ Except for binned expression, we also calculated pair difference later. Because 
 First, We use **base::rank** to return the sample ranks of the values in a vector:
 
 
-```r
+``` r
 expr_binned_rank <- apply(
   expr_binned, 2, 
   function(x)rank(x, na.last = TRUE)
@@ -342,7 +356,7 @@ print(expr_binned_rank)
 Then, get weighted average rank difference of each gene based on specified subtype distribution (**Ybin**):
 
 
-```r
+``` r
 testRes <- sapply(
   1:nrow(expr_binned_rank), 
   function(gi){
@@ -367,7 +381,7 @@ print(testRes)
 In practice, we use **ptail** to select differential genes based on rank diffrences. **Smaller ptail is, less gene kept**. Here, we just set **ptail=0.4**:
 
 
-```r
+``` r
 # ptail is a numeber ranging (0,0.5].
 ptail = 0.4
 
@@ -396,7 +410,7 @@ Hence, **Gene7** was filtered and excluded in the following analysis. By the way
 In GSClassifier, we use an ensemble function **featureSelection** to select data for pair difference scoring.
 
 
-```r
+``` r
 expr_feat <- featureSelection(expr, Ybin,
                               testRes = testRes,
                               ptail = 0.4)
@@ -426,7 +440,7 @@ print(gene_bigRank)
 In GSClassifier, we use function **makeGenePairs** to calculate pair differences:
 
 
-```r
+``` r
 gene_bigRank_pairs <- GSClassifier:::makeGenePairs(
   gene_bigRank, 
   expr[gene_bigRank,])
@@ -456,7 +470,7 @@ Take **Gene1:Gene4** of **Sample1** as an example. $Expression_{Gene1} - Express
 In **GSClassifier**, **set difference** is defined as a weight average of gene-geneset rank difference.
 
 
-```r
+``` r
 # No. of gene sets
 nGS = 2
 
@@ -516,7 +530,7 @@ print(resMat)
 In **GSClassifier**, we established **makeSetData** to evaluate set difference across samples:
 
 
-```r
+``` r
 # Gene set difference across samples
 geneset_interaction <- GSClassifier:::makeSetData(expr_sub, geneSet)
 
@@ -533,7 +547,7 @@ We have known that the subtype of **Sample 1-3** differs from that of **Sample 4
 Based on the structure of TSP in Figure \@ref(fig:tsp), the TSP matrix of the simulated dataset should be :
 
 
-```r
+``` r
 # TSP matrix
 tsp <- rbind(
   
@@ -579,7 +593,7 @@ print(tsp)
 Have a look at the distribution:
 
 
-```r
+``` r
 # Data
 tsp_df <- reshape2::melt(tsp)
 

@@ -174,7 +174,7 @@
 
 \title{The Principle of R Package GSClassifier}
 \author{Weibin Huang}
-\date{2023-08-04}
+\date{2025-05-24}
 
 \begin{document}
 \maketitle
@@ -274,6 +274,17 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 
 \begin{itemize}
 \item
+  Version v0.4.0
+
+  \begin{itemize}
+  \item
+    Update to prove this project is still ALIVE!
+  \item
+    More powerful to support the coming CCS package!
+  \item
+    Update PADi model to v20250523. Please go to \href{https://github.com/huangwb8/luckyModel}{luckyModel} for details!
+  \end{itemize}
+\item
   Version 0.1.27
 
   \begin{itemize}
@@ -362,6 +373,7 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 # Install the "GSClassifier" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
+# 
 
 # Install the "pacman" package
 if (!requireNamespace("pacman", quietly = TRUE)){
@@ -386,11 +398,12 @@ for(i in packages_needed){p_load(char=i)}
 Here is the environment of R programming:
 
 \begin{lstlisting}
-# R version 4.2.2 (2022-10-31 ucrt)
+# R version 4.3.1 (2023-06-16 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 19042)
+# Running under: Windows 11 x64 (build 26100)
 # 
 # Matrix products: default
+# 
 # 
 # locale:
 # [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
@@ -399,57 +412,69 @@ Here is the environment of R programming:
 # [4] LC_NUMERIC=C                               
 # [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
+# time zone: Asia/Shanghai
+# tzcode source: internal
+# 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
-# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
-# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
+#  [1] ggplot2_3.5.0         reshape2_1.4.4        tidyr_1.3.1          
+#  [4] rpart_4.1.19          GSClassifier_0.4.0    xgboost_2.0.3.1      
+#  [7] luckyBase_0.2.0       ComplexHeatmap_2.18.0 readxl_1.4.3         
+# [10] pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
-#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
-#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
-#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
-#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
-#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
-#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
-#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
-#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
-#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
-#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
-#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
-#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
-#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
-#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
-#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
-#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
-#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
-#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
-#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
-#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
-#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
-#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
-#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
-#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
-#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
-#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
-#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
-#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
-#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
-#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
-# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
-# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
-# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
-# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
-# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
-# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
-# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
-# [121] sessioninfo_1.2.2
+#   [1] splines_4.3.1           later_1.3.2             bitops_1.0-7           
+#   [4] tibble_3.2.1            cellranger_1.1.0        hardhat_1.3.1          
+#   [7] preprocessCore_1.64.0   pROC_1.18.5             lifecycle_1.0.4        
+#  [10] rstatix_0.7.2           fastcluster_1.2.6       doParallel_1.0.17      
+#  [13] globals_0.16.3          lattice_0.21-8          MASS_7.3-60            
+#  [16] backports_1.4.1         magrittr_2.0.3          Hmisc_5.1-2            
+#  [19] rmarkdown_2.26          yaml_2.3.8              remotes_2.4.2.1        
+#  [22] httpuv_1.6.14           sessioninfo_1.2.2       pkgbuild_1.4.3         
+#  [25] DBI_1.2.2               RColorBrewer_1.1-3      lubridate_1.9.3        
+#  [28] abind_1.4-5             pkgload_1.3.4           zlibbioc_1.48.0        
+#  [31] purrr_1.0.2             BiocGenerics_0.48.1     RCurl_1.98-1.16        
+#  [34] nnet_7.3-19             ipred_0.9-14            circlize_0.4.16        
+#  [37] lava_1.8.0              GenomeInfoDbData_1.2.11 IRanges_2.36.0         
+#  [40] S4Vectors_0.40.2        listenv_0.9.1           parallelly_1.37.1      
+#  [43] codetools_0.2-19        tidyselect_1.2.1        shape_1.4.6.1          
+#  [46] matrixStats_1.2.0       stats4_4.3.1            dynamicTreeCut_1.63-1  
+#  [49] base64enc_0.1-3         jsonlite_1.8.8          caret_6.0-94           
+#  [52] GetoptLong_1.0.5        ellipsis_0.3.2          Formula_1.2-5          
+#  [55] survival_3.5-5          iterators_1.0.14        signal_1.8-0           
+#  [58] foreach_1.5.2           tools_4.3.1             Rcpp_1.0.12            
+#  [61] glue_1.7.0              prodlim_2023.08.28      gridExtra_2.3          
+#  [64] xfun_0.52               usethis_2.2.3           GenomeInfoDb_1.38.7    
+#  [67] dplyr_1.1.4             withr_3.0.0             fastmap_1.1.1          
+#  [70] fansi_1.0.6             digest_0.6.34           timechange_0.3.0       
+#  [73] R6_2.5.1                mime_0.12               colorspace_2.1-0       
+#  [76] GO.db_3.18.0            RSQLite_2.3.5           utf8_1.2.4             
+#  [79] generics_0.1.3          tuneR_1.4.6             data.table_1.15.2      
+#  [82] recipes_1.0.10          class_7.3-22            httr_1.4.7             
+#  [85] htmlwidgets_1.6.4       ModelMetrics_1.2.2.2    pkgconfig_2.0.3        
+#  [88] gtable_0.3.4            timeDate_4032.109       blob_1.2.4             
+#  [91] impute_1.76.0           XVector_0.42.0          htmltools_0.5.7        
+#  [94] carData_3.0-5           profvis_0.3.8           bookdown_0.43          
+#  [97] clue_0.3-65             scales_1.3.0            Biobase_2.62.0         
+# [100] png_0.1-8               gower_1.0.1             knitr_1.50             
+# [103] rstudioapi_0.15.0       rjson_0.2.21            checkmate_2.3.1        
+# [106] nlme_3.1-162            cachem_1.0.8            GlobalOptions_0.1.2    
+# [109] stringr_1.5.1           parallel_4.3.1          miniUI_0.1.1.1         
+# [112] foreign_0.8-84          AnnotationDbi_1.64.1    pillar_1.9.0           
+# [115] vctrs_0.6.5             urlchecker_1.0.1        promises_1.2.1         
+# [118] randomForest_4.7-1.1    ggpubr_0.6.0            car_3.1-2              
+# [121] xtable_1.8-4            cluster_2.1.4           htmlTable_2.4.2        
+# [124] evaluate_0.23           tinytex_0.49            cli_3.6.2              
+# [127] compiler_4.3.1          rlang_1.1.3             crayon_1.5.2           
+# [130] future.apply_1.11.1     ggsignif_0.6.4          plyr_1.8.9             
+# [133] fs_1.6.3                stringi_1.8.3           WGCNA_1.72-5           
+# [136] munsell_0.5.0           Biostrings_2.70.2       devtools_2.4.5         
+# [139] Matrix_1.6-5            bit64_4.0.5             future_1.33.1          
+# [142] KEGGREST_1.42.0         shiny_1.8.0             broom_1.0.5            
+# [145] memoise_2.0.1           bit_4.0.5
 \end{lstlisting}
 
 \hypertarget{flowchart}{%
@@ -525,7 +550,7 @@ rownames(expr0) <- as.character(as.matrix(x[,1])); rm(x)
 
 # Missing value imputation (MVI)
 expr <- na_fill(expr0, method = "quantile", seed = 447)
-# 2023-08-04 23:19:14 | Missing value imputation with quantile algorithm!
+# 2025-05-24 20:33:50 | Missing value imputation with quantile algorithm!
 
 # Subtype information
 # It depends on the application scenarios of GEPs
@@ -949,6 +974,7 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 # Install the "**GSClassifier**" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
+# 
 
 # Install the "pacman" package
 if (!requireNamespace("pacman", quietly = TRUE)){
@@ -973,11 +999,12 @@ for(i in packages_needed){p_load(char=i)}
 Here is the environment of R programming:
 
 \begin{lstlisting}
-# R version 4.2.2 (2022-10-31 ucrt)
+# R version 4.3.1 (2023-06-16 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 19042)
+# Running under: Windows 11 x64 (build 26100)
 # 
 # Matrix products: default
+# 
 # 
 # locale:
 # [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
@@ -986,57 +1013,69 @@ Here is the environment of R programming:
 # [4] LC_NUMERIC=C                               
 # [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
+# time zone: Asia/Shanghai
+# tzcode source: internal
+# 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
-# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
-# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
+#  [1] ggplot2_3.5.0         reshape2_1.4.4        tidyr_1.3.1          
+#  [4] rpart_4.1.19          GSClassifier_0.4.0    xgboost_2.0.3.1      
+#  [7] luckyBase_0.2.0       ComplexHeatmap_2.18.0 readxl_1.4.3         
+# [10] pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
-#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
-#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
-#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
-#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
-#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
-#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
-#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
-#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
-#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
-#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
-#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
-#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
-#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
-#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
-#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
-#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
-#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
-#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
-#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
-#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
-#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
-#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
-#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
-#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
-#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
-#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
-#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
-#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
-#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
-#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
-# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
-# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
-# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
-# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
-# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
-# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
-# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
-# [121] sessioninfo_1.2.2
+#   [1] splines_4.3.1           later_1.3.2             bitops_1.0-7           
+#   [4] tibble_3.2.1            cellranger_1.1.0        hardhat_1.3.1          
+#   [7] preprocessCore_1.64.0   pROC_1.18.5             lifecycle_1.0.4        
+#  [10] rstatix_0.7.2           fastcluster_1.2.6       doParallel_1.0.17      
+#  [13] globals_0.16.3          lattice_0.21-8          MASS_7.3-60            
+#  [16] backports_1.4.1         magrittr_2.0.3          Hmisc_5.1-2            
+#  [19] rmarkdown_2.26          yaml_2.3.8              remotes_2.4.2.1        
+#  [22] httpuv_1.6.14           sessioninfo_1.2.2       pkgbuild_1.4.3         
+#  [25] DBI_1.2.2               RColorBrewer_1.1-3      lubridate_1.9.3        
+#  [28] abind_1.4-5             pkgload_1.3.4           zlibbioc_1.48.0        
+#  [31] purrr_1.0.2             BiocGenerics_0.48.1     RCurl_1.98-1.16        
+#  [34] nnet_7.3-19             ipred_0.9-14            circlize_0.4.16        
+#  [37] lava_1.8.0              GenomeInfoDbData_1.2.11 IRanges_2.36.0         
+#  [40] S4Vectors_0.40.2        listenv_0.9.1           parallelly_1.37.1      
+#  [43] codetools_0.2-19        tidyselect_1.2.1        shape_1.4.6.1          
+#  [46] matrixStats_1.2.0       stats4_4.3.1            dynamicTreeCut_1.63-1  
+#  [49] base64enc_0.1-3         jsonlite_1.8.8          caret_6.0-94           
+#  [52] GetoptLong_1.0.5        ellipsis_0.3.2          Formula_1.2-5          
+#  [55] survival_3.5-5          iterators_1.0.14        signal_1.8-0           
+#  [58] foreach_1.5.2           tools_4.3.1             Rcpp_1.0.12            
+#  [61] glue_1.7.0              prodlim_2023.08.28      gridExtra_2.3          
+#  [64] xfun_0.52               usethis_2.2.3           GenomeInfoDb_1.38.7    
+#  [67] dplyr_1.1.4             withr_3.0.0             fastmap_1.1.1          
+#  [70] fansi_1.0.6             digest_0.6.34           timechange_0.3.0       
+#  [73] R6_2.5.1                mime_0.12               colorspace_2.1-0       
+#  [76] GO.db_3.18.0            RSQLite_2.3.5           utf8_1.2.4             
+#  [79] generics_0.1.3          tuneR_1.4.6             data.table_1.15.2      
+#  [82] recipes_1.0.10          class_7.3-22            httr_1.4.7             
+#  [85] htmlwidgets_1.6.4       ModelMetrics_1.2.2.2    pkgconfig_2.0.3        
+#  [88] gtable_0.3.4            timeDate_4032.109       blob_1.2.4             
+#  [91] impute_1.76.0           XVector_0.42.0          htmltools_0.5.7        
+#  [94] carData_3.0-5           profvis_0.3.8           bookdown_0.43          
+#  [97] clue_0.3-65             scales_1.3.0            Biobase_2.62.0         
+# [100] png_0.1-8               gower_1.0.1             knitr_1.50             
+# [103] rstudioapi_0.15.0       rjson_0.2.21            checkmate_2.3.1        
+# [106] nlme_3.1-162            cachem_1.0.8            GlobalOptions_0.1.2    
+# [109] stringr_1.5.1           parallel_4.3.1          miniUI_0.1.1.1         
+# [112] foreign_0.8-84          AnnotationDbi_1.64.1    pillar_1.9.0           
+# [115] vctrs_0.6.5             urlchecker_1.0.1        promises_1.2.1         
+# [118] randomForest_4.7-1.1    ggpubr_0.6.0            car_3.1-2              
+# [121] xtable_1.8-4            cluster_2.1.4           htmlTable_2.4.2        
+# [124] evaluate_0.23           tinytex_0.49            cli_3.6.2              
+# [127] compiler_4.3.1          rlang_1.1.3             crayon_1.5.2           
+# [130] future.apply_1.11.1     ggsignif_0.6.4          plyr_1.8.9             
+# [133] fs_1.6.3                stringi_1.8.3           WGCNA_1.72-5           
+# [136] munsell_0.5.0           Biostrings_2.70.2       devtools_2.4.5         
+# [139] Matrix_1.6-5            bit64_4.0.5             future_1.33.1          
+# [142] KEGGREST_1.42.0         shiny_1.8.0             broom_1.0.5            
+# [145] memoise_2.0.1           bit_4.0.5
 \end{lstlisting}
 
 \hypertarget{subtype-vector}{%
@@ -1113,7 +1152,7 @@ Remove batch effects:
 library(sva)
 # Loading required package: mgcv
 # Loading required package: nlme
-# This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.
+# This is mgcv 1.8-42. For overview type 'help("mgcv-package")'.
 # Loading required package: genefilter
 # 
 # Attaching package: 'genefilter'
@@ -1549,10 +1588,12 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 # Install the "GSClassifier" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
+# 
 
 # Load needed packages
 library(GSClassifier)
 # Loading required package: luckyBase
+# Loading required package: xgboost
 \end{lstlisting}
 
 \hypertarget{data}{%
@@ -1717,10 +1758,10 @@ Check the result:
 
 \begin{lstlisting}[language=R]
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max           1          2          3         4
-# 1 PB-16-002        4            4 0.023372779 0.02631794 0.04864784 0.3336484
-# 2 PB-16-003        4            4 0.007271698 0.08650742 0.01974812 0.9530730
-# 3 PB-16-004        4            4 0.011559768 0.02922151 0.09018894 0.8649045
+#   SampleIDs BestCall BestCall_Max         1          2          3           4
+# 1 PB-16-002        1            1 0.3336484 0.04864784 0.02631794 0.023372779
+# 2 PB-16-003        1            1 0.9530730 0.01974812 0.08650742 0.007271698
+# 3 PB-16-004        1            1 0.8649045 0.09018894 0.02922151 0.011559768
 \end{lstlisting}
 
 Actually, \passthrough{\lstinline!PADi!} is exactly based on a general function called \passthrough{\lstinline!callEnsemble!}.
@@ -1748,10 +1789,10 @@ Check the result:
 
 \begin{lstlisting}[language=R]
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max          1          2          3         4
-# 1 PB-16-002        4            4 0.01338872 0.01624520 0.03965218 0.8052567
-# 2 PB-16-003        4            4 0.04709511 0.08833681 0.03879361 0.6244038
-# 3 PB-16-004        4            4 0.01389035 0.03638009 0.05852707 0.6980438
+#   SampleIDs BestCall BestCall_Max         1          2          3          4
+# 1 PB-16-002        1            1 0.4447489 0.02889393 0.05163625 0.01895758
+# 2 PB-16-003        1            1 0.2335970 0.06371512 0.09905094 0.05834890
+# 3 PB-16-004        1            1 0.3430612 0.04437369 0.05468434 0.02506850
 \end{lstlisting}
 
 \hypertarget{parallel-strategy-for-padi}{%
@@ -1820,8 +1861,8 @@ check the result:
 
 \begin{lstlisting}[language=R]
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max          1          2          3         4
-# 1    target        4            4 0.02337278 0.02631794 0.04864784 0.3336484
+#   SampleIDs BestCall BestCall_Max         1          2          3          4
+# 1    target        1            1 0.3336484 0.04864784 0.02631794 0.02337278
 \end{lstlisting}
 
 Similarly, there is alternative choice:
@@ -1844,8 +1885,8 @@ Check the result:
 
 \begin{lstlisting}[language=R]
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max          1         2          3         4
-# 1    target        4            4 0.01338872 0.0162452 0.03965218 0.8052567
+#   SampleIDs BestCall BestCall_Max         1          2          3          4
+# 1    target        1            1 0.4447489 0.02889393 0.05163625 0.01895758
 \end{lstlisting}
 
 \hypertarget{of-note-1}{%
@@ -1885,8 +1926,9 @@ Check available models in the project:
 list_model(project='GSClassifier')
 # Available models in GSClassifier:
 #   *Gibbs_PanCancerImmuneSubtype_v20190731
-#   *HWB_PAD_v20200110
+#   *hwb_PAD_v20200110
 #   *HWB_PAD_v20220916
+#   *HWB_PAD_v20250523
 \end{lstlisting}
 
 Here, \passthrough{\lstinline!HWB\_PAD\_v20200110!} is a standard name of \passthrough{\lstinline!PADi!}. They are the same.
@@ -1958,10 +2000,10 @@ Finally, check the result:
 
 \begin{lstlisting}[language=R]
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max           1          2          3         4
-# 1 PB-16-002        4            4 0.023372779 0.02631794 0.04864784 0.3336484
-# 2 PB-16-003        4            4 0.007271698 0.08650742 0.01974812 0.9530730
-# 3 PB-16-004        4            4 0.011559768 0.02922151 0.09018894 0.8649045
+#   SampleIDs BestCall BestCall_Max         1          2          3           4
+# 1 PB-16-002        1            1 0.3336484 0.04864784 0.02631794 0.023372779
+# 2 PB-16-003        1            1 0.9530730 0.01974812 0.08650742 0.007271698
+# 3 PB-16-004        1            1 0.8649045 0.09018894 0.02922151 0.011559768
 \end{lstlisting}
 
 \hypertarget{pancancer-immune-subtypes}{%
@@ -1985,25 +2027,27 @@ GSClassifier_Data()
 Let's use our test data to do this:
 
 \begin{lstlisting}[language=R]
-X <- testData$Kim2018_3
-symbol <- convert(rownames(X))
-rownames(X) <- symbol
-X <- X[!is.na(symbol),]
+X0 <- testData$Kim2018_3
+# From 2025 on, luckyBase use a new common.annot. This changes some ID relationship of genes in PanCan Immune Subtype. Actually, we do not recommend to use SYMBOL ID. Here is just to show how to use an extra model.
+symbol <- convert(rownames(X0))
+index <- !is.na(symbol) & !duplicated(symbol)
+X <- X0[index,]
+rownames(X) <- convert(rownames(X))
 dim(X)
-# [1] 19118     3
+# [1] 19052     3
 \end{lstlisting}
 
 Have a check
 
 \begin{lstlisting}[language=R]
 head(X)
-#                 PB-16-002   PB-16-003   PB-16-004
-# A1BG           0.07075272 -2.08976724 -1.43569557
-# A1CF          -1.49631022 -0.23917056  0.94827471
-# A2M           -0.77315329  0.52163146  0.91264015
-# A2ML1         -0.28860715 -0.45964255 -0.38401295
-# RP11-118B22.6 -0.25034243  0.06863867  0.14429081
-# A3GALT2        0.08215945 -0.05966481  0.04937924
+#           PB-16-002   PB-16-003   PB-16-004
+# A1BG     0.07075272 -2.08976724 -1.43569557
+# A1CF    -1.49631022 -0.23917056  0.94827471
+# A2M     -0.77315329  0.52163146  0.91264015
+# A2ML1   -0.28860715 -0.45964255 -0.38401295
+# A2MP1   -0.25034243  0.06863867  0.14429081
+# A3GALT2  0.08215945 -0.05966481  0.04937924
 \end{lstlisting}
 
 PanCan Immune Subtype callings:
@@ -2026,14 +2070,14 @@ Check the result:
 
 \begin{lstlisting}[language=R]
 head(res_pis)
-#   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.693409e-03 0.561300665 6.038118e-06
-# 2 PB-16-003        4            4 5.415394e-07 0.018167170 1.090021e-04
-# 3 PB-16-004        3            3 3.600861e-06 0.001126488 2.180974e-01
-#              4           5           6
-# 1 0.2842663527 0.006611313 0.005062298
-# 2 0.3544297069 0.002884648 0.001734889
-# 3 0.0002087706 0.007044669 0.012420599
+#   SampleIDs BestCall BestCall_Max            1           2           3
+# 1 PB-16-002        2            2 0.0028578215 0.131585777 0.062534529
+# 2 PB-16-003        3            2 0.0006562615 0.008694755 0.001328542
+# 3 PB-16-004        3            5 0.0006795794 0.000847259 0.008243635
+#             4           5           6
+# 1 0.022659006 0.012291177 0.003258177
+# 2 0.001383034 0.003203803 0.002830536
+# 3 0.003241640 0.012970748 0.001960470
 \end{lstlisting}
 
 Also, you can try to use \passthrough{\lstinline!luckyModel!}:
@@ -2227,12 +2271,12 @@ Explore the training cohort:
 \begin{lstlisting}[language=R]
 head(modelInfo$Data$Train)
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
-# GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550
+# GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550
+# GSM1606553 GSM1606553 GSE65801       PAD-I         high         high GPL14550
 # GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550
 # GSM1606503 GSM1606503 GSE65801       PAD-I         high         high GPL14550
-# GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550
-# GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550
-# GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550
+# GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550
+# GSM1606551 GSM1606551 GSE65801       PAD-I         high         high GPL14550
 \end{lstlisting}
 
 Explore the internal validation cohort:
@@ -2240,12 +2284,12 @@ Explore the internal validation cohort:
 \begin{lstlisting}[language=R]
 head(modelInfo$Data$Valid)
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
-# GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947
-# GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947
-# GSM2235562 GSM2235562 GSE84437      PAD-IV          low          low  GPL6947
-# GSM2235563 GSM2235563 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235559 GSM2235559 GSE84437      PAD-II         high          low  GPL6947
 # GSM2235564 GSM2235564 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235566 GSM2235566 GSE84437      PAD-IV          low          low  GPL6947
 # GSM2235567 GSM2235567 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235568 GSM2235568 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235571 GSM2235571 GSE84437      PAD-IV          low          low  GPL6947
 \end{lstlisting}
 
 Get training data \passthrough{\lstinline!Xs!} and \passthrough{\lstinline!Ys!}:
@@ -2642,6 +2686,8 @@ First, load the package
 \begin{lstlisting}[language=R]
 library(GSClassifier)
 # Loading required package: luckyBase
+# Loading required package: xgboost
+# 
 \end{lstlisting}
 
 \hypertarget{available-models}{%

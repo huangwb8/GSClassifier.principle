@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 
 
@@ -374,10 +379,12 @@ GSClassifier_Data()
 Let's use our test data to do this:
 
 ```{r}
-X <- testData$Kim2018_3
-symbol <- convert(rownames(X))
-rownames(X) <- symbol
-X <- X[!is.na(symbol),]
+X0 <- testData$Kim2018_3
+# From 2025 on, luckyBase use a new common.annot. This changes some ID relationship of genes in PanCan Immune Subtype. Actually, we do not recommend to use SYMBOL ID. Here is just to show how to use an extra model.
+symbol <- convert(rownames(X0))
+index <- !is.na(symbol) & !duplicated(symbol)
+X <- X0[index,]
+rownames(X) <- convert(rownames(X))
 dim(X)
 ```
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.2.28)  4 AUG 2023 23:23
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2024.3.11)  24 MAY 2025 20:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -906,64 +906,75 @@ Chapter 1.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[12]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[13]
 File: ./fig/flowchart.png Graphic file (type bmp)
 <./fig/flowchart.png>
 
-Underfull \vbox (badness 6110) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[12]
-Underfull \hbox (badness 1424) in paragraph at lines 474--475
+[14] [15]
+Underfull \hbox (badness 1424) in paragraph at lines 499--500
 \TU/lmr/bx/n/12 Activation Module (PIAM) \TU/lmr/m/n/12 and \TU/lmr/bx/n/12 Pan
 -Immune Dysfunction Genes (PIDG)\TU/lmr/m/n/12 ,
  []
 
-[13] [14]
+[16]
 File: ./fig/TSP.png Graphic file (type bmp)
 <./fig/TSP.png>
-
-Underfull \vbox (badness 2781) has occurred while \output is active []
-
-[15] [16]
+[17]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[17]
+[18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[19]
 File: Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-4-1.pdf>
-[18]
 File: Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf
 )
 <use Flowchart_files/figure-latex/unnamed-chunk-5-1.pdf>
-[19]
+
+Underfull \vbox (badness 7221) has occurred while \output is active []
+
+[20] [21]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[20]
+[22]
 
 Package amsmath Warning: Foreign command \atop;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 665.
+(amsmath)                 on input line 690.
 
-[21] [22] [23] [24] [25] [26]
+[23] [24] [25] [26] [27] [28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[27] [28]
+[29] [30]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[29]
+[31]
 File: Flowchart_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type pd
 f)
 <use Flowchart_files/figure-latex/unnamed-chunk-16-1.pdf>
-[30]
+[32]
 Chapter 2.
-[31
+[33
 
-] [32]
+] [34]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[33]
+[35]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[34] [35] [36] [37]
+[36]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[37] [38] [39] [40] [41]
 Missing character: There is no 似 (U+4F3C) in font [lmmono12-regular]:!
 Missing character: There is no 乎 (U+4E4E) in font [lmmono12-regular]:!
 Missing character: There is no 有 (U+6709) in font [lmmono12-regular]:!
@@ -975,121 +986,124 @@ Missing character: There is no 果 (U+679C) in font [lmmono12-regular]:!
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[38]
+[42]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[39]
+[43]
 File: Discussion_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pd
 f)
 <use Discussion_files/figure-latex/unnamed-chunk-7-1.pdf>
-[40]
+[44]
 File: Discussion_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type p
 df)
 <use Discussion_files/figure-latex/unnamed-chunk-10-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[41] [42]
+[45] [46]
 File: ./fig/mvi-01.png Graphic file (type bmp)
 <./fig/mvi-01.png>
-[43] [44]
+[47] [48]
 File: Discussion_files/figure-latex/mvi02-1.pdf Graphic file (type pdf)
 <use Discussion_files/figure-latex/mvi02-1.pdf>
-[45] [46]
+[49] [50]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[47]
+[51]
 File: Discussion_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type p
 df)
 <use Discussion_files/figure-latex/unnamed-chunk-14-1.pdf>
-[48] [49]
+[52] [53]
 File: Discussion_files/figure-latex/mvi03-1.pdf Graphic file (type pdf)
 <use Discussion_files/figure-latex/mvi03-1.pdf>
-[50]
+[54]
 File: ./fig/bactch-effect-01.png Graphic file (type bmp)
 <./fig/bactch-effect-01.png>
-[51] [52]
+[55] [56]
 File: ./fig/bactch-effect-02.png Graphic file (type bmp)
 <./fig/bactch-effect-02.png>
-[53] [54]
+[57] [58]
 Chapter 3.
-[55
+[59
 
 ]
 File: ./fig/Flowchart-PAD.png Graphic file (type bmp)
 <./fig/Flowchart-PAD.png>
-[56] [57]
+[60] [61]
 Missing character: There is no ≥ (U+2265) in font [lmroman12-regular]:mapping=t
 ex-text;!
-[58] [59]
+[62] [63]
 File: Quick-start_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type p
 df)
 <use Quick-start_files/figure-latex/unnamed-chunk-6-1.pdf>
-[60] [61]
+[64] [65]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1708.
-[62] [63] [64] [65] [66] [67] [68]
-Underfull \vbox (badness 4582) has occurred while \output is active []
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1749.
 
-[69] [70] [71] [72] [73]
+Underfull \vbox (badness 1533) has occurred while \output is active []
+
+[66] [67] [68] [69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[74]
+[70] [71] [72] [73] [74] [75] [76] [77]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[75]
+[78]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[76]
+[79]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[77] [78]
+[80]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[81] [82]
 Chapter 4.
-[79
+[83
 
-] [80] [81] [82]
+] [84] [85] [86]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[83] [84] [85]
+[87] [88] [89]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[86]
-Underfull \hbox (badness 10000) in paragraph at lines 2441--2442
+[90]
+Underfull \hbox (badness 10000) in paragraph at lines 2485--2486
 []\TU/lmr/m/n/12 Although an [][][][][][][][][][][][] (hyperparameter tuning) w
 as provided
  []
 
-[87] [88]
+[91] [92]
 Underfull \vbox (badness 6110) has occurred while \output is active []
 
-[89] [90] [91]
+[93] [94] [95]
 File: ./fig/model-no-01.png Graphic file (type bmp)
 <./fig/model-no-01.png>
 File: ./fig/model-no-02.png Graphic file (type bmp)
 <./fig/model-no-02.png>
-[92] [93] [94]
+[96] [97] [98]
 Chapter 5.
-[95
+[99
 
-] [96]
+] [100]
 File: ./fig/GSClassifier-model.jpg Graphic file (type bmp)
 <./fig/GSClassifier-model.jpg>
-[97] [98] [99] [100] [101] [102]
+[101] [102] [103] [104] [105] [106]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[103
+[107
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[104] [105] (./GSClassifier.principle.aux) ) 
+[108] [109] (./GSClassifier.principle.aux) ) 
 Here is how much of TeX's memory you used:
- 22006 strings out of 478126
- 396366 string characters out of 5853227
- 1127109 words of memory out of 5000000
- 42305 multiletter control sequences out of 15000+600000
+ 22008 strings out of 478126
+ 396379 string characters out of 5853227
+ 1119698 words of memory out of 5000000
+ 42307 multiletter control sequences out of 15000+600000
  475704 words of font info for 81 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  86i,6n,121p,1320b,1791s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on GSClassifier.principle.pdf (105 pages).
+Output written on GSClassifier.principle.pdf (109 pages).

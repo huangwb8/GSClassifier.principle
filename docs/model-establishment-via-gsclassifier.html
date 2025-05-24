@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Model establishment via GSClassifier | The Principle of R Package GSClassifier</title>
   <meta name="description" content="The Principle of GSClassifier" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Model establishment via GSClassifier | The Principle of R Package GSClassifier" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Weibin Huang" />
 
 
-<meta name="date" content="2023-08-04" />
+<meta name="date" content="2025-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -298,21 +298,21 @@ div.csl-indent {
 <p>Explore the training cohort:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="model-establishment-via-gsclassifier.html#cb78-1" tabindex="-1"></a><span class="fu">head</span>(modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train)</span>
 <span id="cb78-2"><a href="model-establishment-via-gsclassifier.html#cb78-2" tabindex="-1"></a><span class="co">#                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform</span></span>
-<span id="cb78-3"><a href="model-establishment-via-gsclassifier.html#cb78-3" tabindex="-1"></a><span class="co"># GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb78-4"><a href="model-establishment-via-gsclassifier.html#cb78-4" tabindex="-1"></a><span class="co"># GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb78-5"><a href="model-establishment-via-gsclassifier.html#cb78-5" tabindex="-1"></a><span class="co"># GSM1606503 GSM1606503 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb78-6"><a href="model-establishment-via-gsclassifier.html#cb78-6" tabindex="-1"></a><span class="co"># GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb78-7"><a href="model-establishment-via-gsclassifier.html#cb78-7" tabindex="-1"></a><span class="co"># GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550</span></span>
-<span id="cb78-8"><a href="model-establishment-via-gsclassifier.html#cb78-8" tabindex="-1"></a><span class="co"># GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550</span></span></code></pre></div>
+<span id="cb78-3"><a href="model-establishment-via-gsclassifier.html#cb78-3" tabindex="-1"></a><span class="co"># GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-4"><a href="model-establishment-via-gsclassifier.html#cb78-4" tabindex="-1"></a><span class="co"># GSM1606553 GSM1606553 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-5"><a href="model-establishment-via-gsclassifier.html#cb78-5" tabindex="-1"></a><span class="co"># GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-6"><a href="model-establishment-via-gsclassifier.html#cb78-6" tabindex="-1"></a><span class="co"># GSM1606503 GSM1606503 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-7"><a href="model-establishment-via-gsclassifier.html#cb78-7" tabindex="-1"></a><span class="co"># GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550</span></span>
+<span id="cb78-8"><a href="model-establishment-via-gsclassifier.html#cb78-8" tabindex="-1"></a><span class="co"># GSM1606551 GSM1606551 GSE65801       PAD-I         high         high GPL14550</span></span></code></pre></div>
 <p>Explore the internal validation cohort:</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="model-establishment-via-gsclassifier.html#cb79-1" tabindex="-1"></a><span class="fu">head</span>(modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Valid)</span>
 <span id="cb79-2"><a href="model-establishment-via-gsclassifier.html#cb79-2" tabindex="-1"></a><span class="co">#                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform</span></span>
-<span id="cb79-3"><a href="model-establishment-via-gsclassifier.html#cb79-3" tabindex="-1"></a><span class="co"># GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947</span></span>
-<span id="cb79-4"><a href="model-establishment-via-gsclassifier.html#cb79-4" tabindex="-1"></a><span class="co"># GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947</span></span>
-<span id="cb79-5"><a href="model-establishment-via-gsclassifier.html#cb79-5" tabindex="-1"></a><span class="co"># GSM2235562 GSM2235562 GSE84437      PAD-IV          low          low  GPL6947</span></span>
-<span id="cb79-6"><a href="model-establishment-via-gsclassifier.html#cb79-6" tabindex="-1"></a><span class="co"># GSM2235563 GSM2235563 GSE84437      PAD-IV          low          low  GPL6947</span></span>
-<span id="cb79-7"><a href="model-establishment-via-gsclassifier.html#cb79-7" tabindex="-1"></a><span class="co"># GSM2235564 GSM2235564 GSE84437      PAD-IV          low          low  GPL6947</span></span>
-<span id="cb79-8"><a href="model-establishment-via-gsclassifier.html#cb79-8" tabindex="-1"></a><span class="co"># GSM2235567 GSM2235567 GSE84437      PAD-IV          low          low  GPL6947</span></span></code></pre></div>
+<span id="cb79-3"><a href="model-establishment-via-gsclassifier.html#cb79-3" tabindex="-1"></a><span class="co"># GSM2235559 GSM2235559 GSE84437      PAD-II         high          low  GPL6947</span></span>
+<span id="cb79-4"><a href="model-establishment-via-gsclassifier.html#cb79-4" tabindex="-1"></a><span class="co"># GSM2235564 GSM2235564 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-5"><a href="model-establishment-via-gsclassifier.html#cb79-5" tabindex="-1"></a><span class="co"># GSM2235566 GSM2235566 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-6"><a href="model-establishment-via-gsclassifier.html#cb79-6" tabindex="-1"></a><span class="co"># GSM2235567 GSM2235567 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-7"><a href="model-establishment-via-gsclassifier.html#cb79-7" tabindex="-1"></a><span class="co"># GSM2235568 GSM2235568 GSE84437      PAD-IV          low          low  GPL6947</span></span>
+<span id="cb79-8"><a href="model-establishment-via-gsclassifier.html#cb79-8" tabindex="-1"></a><span class="co"># GSM2235571 GSM2235571 GSE84437      PAD-IV          low          low  GPL6947</span></span></code></pre></div>
 <p>Get training data <code>Xs</code> and <code>Ys</code>:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="model-establishment-via-gsclassifier.html#cb80-1" tabindex="-1"></a><span class="co"># Training data</span></span>
 <span id="cb80-2"><a href="model-establishment-via-gsclassifier.html#cb80-2" tabindex="-1"></a>Xs <span class="ot">&lt;-</span> expr[,modelInfo<span class="sc">$</span>Data<span class="sc">$</span>Train<span class="sc">$</span>ID]</span>
@@ -643,42 +643,42 @@ Figure 4.2: Performance of PADi models in “Kim2018” cohort with different nu
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["GSClassifier.principle.pdf", "GSClassifier.principle.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

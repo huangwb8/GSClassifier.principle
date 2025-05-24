@@ -15,7 +15,7 @@ Sometimes, researchers might have their gene signatures and know how many subtyp
 Load packages: 
 
 
-```r
+``` r
 library(GSClassifier)
 library(plyr)
 library(dplyr)
@@ -24,7 +24,7 @@ library(dplyr)
 Load data: 
 
 
-```r
+``` r
 # The test data is only for the demonstration of the modeling
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
 expr <- testData$PanSTAD_expr_part
@@ -34,7 +34,7 @@ design <- testData$PanSTAD_phenotype_part
 Select training and testing cohorts across different platforms and `PAD subtypes` from `PAD` function:
 
 
-```r
+``` r
 modelInfo <- modelData(
     design,
     id.col = "ID",
@@ -47,7 +47,7 @@ modelInfo <- modelData(
 Check the result `modelInfo`: 
 
 
-```r
+``` r
 names(modelInfo)
 # [1] "Repeat" "Data"
 ```
@@ -55,35 +55,35 @@ names(modelInfo)
 Explore the training cohort:
 
 
-```r
+``` r
 head(modelInfo$Data$Train)
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
-# GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550
+# GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550
+# GSM1606553 GSM1606553 GSE65801       PAD-I         high         high GPL14550
 # GSM1606517 GSM1606517 GSE65801       PAD-I         high         high GPL14550
 # GSM1606503 GSM1606503 GSE65801       PAD-I         high         high GPL14550
-# GSM1606525 GSM1606525 GSE65801       PAD-I         high         high GPL14550
-# GSM1606511 GSM1606511 GSE65801       PAD-I         high         high GPL14550
-# GSM1606527 GSM1606527 GSE65801       PAD-I         high         high GPL14550
+# GSM1606509 GSM1606509 GSE65801       PAD-I         high         high GPL14550
+# GSM1606551 GSM1606551 GSE65801       PAD-I         high         high GPL14550
 ```
 
 Explore the internal validation cohort:
 
 
-```r
+``` r
 head(modelInfo$Data$Valid)
 #                    ID  Dataset PAD_subtype PIAM_subtype PIDG_subtype platform
-# GSM2235558 GSM2235558 GSE84437       PAD-I         high         high  GPL6947
-# GSM2235561 GSM2235561 GSE84437      PAD-II         high          low  GPL6947
-# GSM2235562 GSM2235562 GSE84437      PAD-IV          low          low  GPL6947
-# GSM2235563 GSM2235563 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235559 GSM2235559 GSE84437      PAD-II         high          low  GPL6947
 # GSM2235564 GSM2235564 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235566 GSM2235566 GSE84437      PAD-IV          low          low  GPL6947
 # GSM2235567 GSM2235567 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235568 GSM2235568 GSE84437      PAD-IV          low          low  GPL6947
+# GSM2235571 GSM2235571 GSE84437      PAD-IV          low          low  GPL6947
 ```
 
 Get training data `Xs` and `Ys`: 
 
 
-```r
+``` r
 # Training data
 Xs <- expr[,modelInfo$Data$Train$ID]
 y <- modelInfo$Data$Train
@@ -97,7 +97,7 @@ Ys <- ifelse(y$PAD_subtype == 'PAD-I',1,ifelse(y$PAD_subtype == 'PAD-II',2,ifels
 Get the number of subtype:
 
 
-```r
+``` r
 # No. of subtypes
 nSubtype <- length(unique(Ys))
 print(nSubtype)
@@ -107,7 +107,7 @@ print(nSubtype)
 Also, you can take a look at the validation data:
 
 
-```r
+``` r
 # Validating data
 Xs_valid <- expr[,modelInfo$Data$Valid$ID]
 y <- modelInfo$Data$Valid
@@ -124,7 +124,7 @@ Note: When you convert your phenotype into numeric, **You CANNOT USE A ZERO VALU
 Other parameteres for modeling:
 
 
-```r
+``` r
 # Build 20 models
 n=20 
 
@@ -190,7 +190,7 @@ geneSet = <Your gene sets>
 Let's take `PAD` as an example:
 
 
-```r
+``` r
 PAD <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier"))
 geneSet <- PAD$geneSet
 print(geneSet)
@@ -370,7 +370,7 @@ About model constributions, you can go `Advanced development` in  [here](https:/
 You can take a look at the `PAD.train_20220916` model (`PADi`). You have to make your model frame similar to the `PAD.train_20220916` model.
 
 
-```r
+``` r
 l.train <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier"))
 names(l.train)
 # [1] "ens"            "scaller"        "geneAnnotation" "geneSet"
@@ -416,7 +416,7 @@ In the latest version of **PADi**, we trained 100 **SubModel**s for subtype call
 
 }
 
-\caption{Performance of PADi models in “Kim2018” cohort with 200 different training seeds. Each row is the data of a seed. Each column is a sample from the “Kim2018” cohort.}(\#fig:mn01)
+\caption{Performance of PADi models in “Kim2018” cohort with 200 different training seeds. Each row is the data of a seed. Each column is a sample from the “Kim2018” cohort.}\label{fig:mn01}
 \end{figure}
 
 \begin{figure}
@@ -425,7 +425,7 @@ In the latest version of **PADi**, we trained 100 **SubModel**s for subtype call
 
 }
 
-\caption{Performance of PADi models in “Kim2018” cohort with different numbers of SubModel. The x-axis is the number of SubModels, and the y-axis is the AUC of ROC analysis for ICI response prediction.}(\#fig:mn02)
+\caption{Performance of PADi models in “Kim2018” cohort with different numbers of SubModel. The x-axis is the number of SubModels, and the y-axis is the AUC of ROC analysis for ICI response prediction.}\label{fig:mn02}
 \end{figure}
 
 ## Parameters for PADi training {#padiPara}
@@ -433,7 +433,7 @@ In the latest version of **PADi**, we trained 100 **SubModel**s for subtype call
 Here're some key parameters about how the latest PADi (PAD.train_v20220916) was trained.
 
 
-```r
+``` r
 # Build 100 models
 n = 100
 

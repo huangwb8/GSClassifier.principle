@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 
 
@@ -15,7 +20,7 @@
 ## Package
 
 
-```r
+``` r
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -27,10 +32,12 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 # Install the "GSClassifier" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
+# 
 
 # Load needed packages
 library(GSClassifier)
 # Loading required package: luckyBase
+# Loading required package: xgboost
 ```
 
 ## Data
@@ -38,7 +45,7 @@ library(GSClassifier)
 To lower the learning cost of `GSClassifier`, we provide some test data: 
 
 
-```r
+``` r
 testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifier"))
 ```
 
@@ -46,7 +53,7 @@ testData <- readRDS(system.file("extdata", "testData.rds", package = "GSClassifi
 Explore the `testData`:
 
 
-```r
+``` r
 names(testData)
 # [1] "Kim2018_3"              "PanSTAD_phenotype_part" "PanSTAD_expr_part"
 ```
@@ -63,7 +70,7 @@ The basic process of PAD exploration was summarized in Figure \@ref(fig:flpad)
 
 }
 
-\caption{The process of PAD subtypes establishment}(\#fig:flpad)
+\caption{The process of PAD subtypes establishment}\label{fig:flpad}
 \end{figure}
 
 + With WGCNA method and TIMER datasets, Pan-Immune Activation Module (PIAM) was identified as a GEP representing co-infiltration of immune cells in the tumor microenvironment. Functional analysis such as GSEA was done for the exploration of PIAM functions.
@@ -84,7 +91,7 @@ The basic process of PAD exploration was summarized in Figure \@ref(fig:flpad)
 Load phenotype data:
 
 
-```r
+``` r
 design <- testData$PanSTAD_phenotype_part
 table(design$Dataset)
 # 
@@ -97,7 +104,7 @@ table(design$Dataset)
 Load target sample IDs in `GSE54129` cohort:
 
 
-```r
+``` r
 target_ID <- design$ID[design$Dataset %in% 'GSE54129']
 expr <- testData$PanSTAD_expr_part[,target_ID]
 head(expr[,1:10])
@@ -121,7 +128,7 @@ head(expr[,1:10])
 ### Unsupervised clustering
 
 
-```r
+``` r
 res_pad <- PAD(
   expr = expr,
   cluster.method = "ward.D2",
@@ -165,7 +172,7 @@ In this section, we would show how to use `PADi` function series: `PADi`, `callE
 ### Preparation of the test data
 
 
-```r
+``` r
 X <- testData$Kim2018_3
 head(X)
 #                   PB-16-002   PB-16-003   PB-16-004
@@ -182,19 +189,19 @@ head(X)
 Very simple, just:
 
 
-```r
+``` r
 res_padi <- PADi(X = X, verbose = F)
 ```
 
 Check the result:
 
 
-```r
+``` r
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max           1          2          3         4
-# 1 PB-16-002        4            4 0.023372779 0.02631794 0.04864784 0.3336484
-# 2 PB-16-003        4            4 0.007271698 0.08650742 0.01974812 0.9530730
-# 3 PB-16-004        4            4 0.011559768 0.02922151 0.09018894 0.8649045
+#   SampleIDs BestCall BestCall_Max         1          2          3           4
+# 1 PB-16-002        1            1 0.3336484 0.04864784 0.02631794 0.023372779
+# 2 PB-16-003        1            1 0.9530730 0.01974812 0.08650742 0.007271698
+# 3 PB-16-004        1            1 0.8649045 0.09018894 0.02922151 0.011559768
 ```
 
 
@@ -206,7 +213,7 @@ Actually, `PADi` is exactly based on a general function called `callEnsemble`.
 Also simple, just:
 
 
-```r
+``` r
 res_padi <- callEnsemble(
     X = X,
     ens = NULL,
@@ -223,12 +230,12 @@ res_padi <- callEnsemble(
 Check the result:
 
 
-```r
+``` r
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max          1          2          3         4
-# 1 PB-16-002        4            4 0.01338872 0.01624520 0.03965218 0.8052567
-# 2 PB-16-003        4            4 0.04709511 0.08833681 0.03879361 0.6244038
-# 3 PB-16-004        4            4 0.01389035 0.03638009 0.05852707 0.6980438
+#   SampleIDs BestCall BestCall_Max         1          2          3          4
+# 1 PB-16-002        1            1 0.4447489 0.02889393 0.05163625 0.01895758
+# 2 PB-16-003        1            1 0.2335970 0.06371512 0.09905094 0.05834890
+# 3 PB-16-004        1            1 0.3430612 0.04437369 0.05468434 0.02506850
 ```
 
 
@@ -266,7 +273,7 @@ In clinical practice, the single sample subtype calling might be one of the most
 Supposed that there is a GC patient, its information should be:
 
 
-```r
+``` r
 X_ind <- X[,1]; names(X_ind) <- rownames(X)
 head(X_ind)
 # ENSG00000121410 ENSG00000148584 ENSG00000175899 ENSG00000166535 ENSG00000256069 
@@ -278,7 +285,7 @@ head(X_ind)
 Or it can also be another format:
 
 
-```r
+``` r
 X_ind <- as.matrix(X[,1]); rownames(X_ind) <- rownames(X)
 head(X_ind)
 #                        [,1]
@@ -298,16 +305,16 @@ Similar to multiples sample calling, just:
 check the result:
 
 
-```r
+``` r
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max          1          2          3         4
-# 1    target        4            4 0.02337278 0.02631794 0.04864784 0.3336484
+#   SampleIDs BestCall BestCall_Max         1          2          3          4
+# 1    target        1            1 0.3336484 0.04864784 0.02631794 0.02337278
 ```
 
 Similarly, there is alternative choice:
 
 
-```r
+``` r
 res_padi <- callEnsemble(
     X = X_ind,
     ens = NULL,
@@ -324,10 +331,10 @@ res_padi <- callEnsemble(
 Check the result:
 
 
-```r
+``` r
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max          1         2          3         4
-# 1    target        4            4 0.01338872 0.0162452 0.03965218 0.8052567
+#   SampleIDs BestCall BestCall_Max         1          2          3          4
+# 1    target        1            1 0.4447489 0.02889393 0.05163625 0.01895758
 ```
 
 
@@ -345,7 +352,7 @@ In the future, there might be lots of models available as a resource of `GSClass
 First, install and load `luckyModel`:
 
 
-```r
+``` r
 # Install luckyModel
 if (!requireNamespace("luckyModel", quietly = TRUE))
     devtools::install_github("huangwb8/luckyModel")
@@ -355,7 +362,7 @@ library(luckyModel)
 Check projects supported in current `luckyModel`:
 
 
-```r
+``` r
 list_project()
 # [1] "GSClassifier"
 ```
@@ -363,19 +370,20 @@ list_project()
 Check available models in the project:
 
 
-```r
+``` r
 list_model(project='GSClassifier')
 # Available models in GSClassifier:
 #   *Gibbs_PanCancerImmuneSubtype_v20190731
-#   *HWB_PAD_v20200110
+#   *hwb_PAD_v20200110
 #   *HWB_PAD_v20220916
+#   *HWB_PAD_v20250523
 ```
 Here, `HWB_PAD_v20200110` is a standard name of `PADi`. They are the same. 
 
 Taking `PADi` as an example, we here show how to use an external model from `luckyModel`. First, load a model:
 
 
-```r
+``` r
 model <- lucky_model(project = 'GSClassifier',
                      developer='HWB',
                      model = 'PAD',
@@ -385,7 +393,7 @@ model <- lucky_model(project = 'GSClassifier',
 Then, check the gene id type:
 
 
-```r
+``` r
 model$geneSet
 # $PIAM
 #  [1] "ENSG00000122122" "ENSG00000117091" "ENSG00000163219" "ENSG00000136167"
@@ -406,7 +414,7 @@ The model should use `ensembl` as the value of `geneid` parameter in `callEnsemb
 Next, you can use the model like:
 
 
-```r
+``` r
 res_padi <- callEnsemble(
   X = X,
   ens = model$ens$Model,
@@ -423,7 +431,7 @@ res_padi <- callEnsemble(
 Or just:
 
 
-```r
+``` r
 res_padi <- callEnsemble(
   X,
   ens = NULL,
@@ -442,12 +450,12 @@ They are exactly the same.
 Finally, check the result:
 
 
-```r
+``` r
 head(res_padi)
-#   SampleIDs BestCall BestCall_Max           1          2          3         4
-# 1 PB-16-002        4            4 0.023372779 0.02631794 0.04864784 0.3336484
-# 2 PB-16-003        4            4 0.007271698 0.08650742 0.01974812 0.9530730
-# 3 PB-16-004        4            4 0.011559768 0.02922151 0.09018894 0.8649045
+#   SampleIDs BestCall BestCall_Max         1          2          3           4
+# 1 PB-16-002        1            1 0.3336484 0.04864784 0.02631794 0.023372779
+# 2 PB-16-003        1            1 0.9530730 0.01974812 0.08650742 0.007271698
+# 3 PB-16-004        1            1 0.8649045 0.09018894 0.02922151 0.011559768
 ```
 
 
@@ -458,7 +466,7 @@ head(res_padi)
 First, see data available in current `GSClassifier`:
 
 
-```r
+``` r
 GSClassifier_Data()
 # Available data:
 # Usage example:
@@ -472,33 +480,35 @@ GSClassifier_Data()
 Let's use our test data to do this:
 
 
-```r
-X <- testData$Kim2018_3
-symbol <- convert(rownames(X))
-rownames(X) <- symbol
-X <- X[!is.na(symbol),]
+``` r
+X0 <- testData$Kim2018_3
+# From 2025 on, luckyBase use a new common.annot. This changes some ID relationship of genes in PanCan Immune Subtype. Actually, we do not recommend to use SYMBOL ID. Here is just to show how to use an extra model.
+symbol <- convert(rownames(X0))
+index <- !is.na(symbol) & !duplicated(symbol)
+X <- X0[index,]
+rownames(X) <- convert(rownames(X))
 dim(X)
-# [1] 19118     3
+# [1] 19052     3
 ```
 
 Have a check
 
 
-```r
+``` r
 head(X)
-#                 PB-16-002   PB-16-003   PB-16-004
-# A1BG           0.07075272 -2.08976724 -1.43569557
-# A1CF          -1.49631022 -0.23917056  0.94827471
-# A2M           -0.77315329  0.52163146  0.91264015
-# A2ML1         -0.28860715 -0.45964255 -0.38401295
-# RP11-118B22.6 -0.25034243  0.06863867  0.14429081
-# A3GALT2        0.08215945 -0.05966481  0.04937924
+#           PB-16-002   PB-16-003   PB-16-004
+# A1BG     0.07075272 -2.08976724 -1.43569557
+# A1CF    -1.49631022 -0.23917056  0.94827471
+# A2M     -0.77315329  0.52163146  0.91264015
+# A2ML1   -0.28860715 -0.45964255 -0.38401295
+# A2MP1   -0.25034243  0.06863867  0.14429081
+# A3GALT2  0.08215945 -0.05966481  0.04937924
 ```
 
 PanCan Immune Subtype callings: 
 
 
-```r
+``` r
 res_pis <- callEnsemble(
     X = X,
     ens = NULL,
@@ -515,23 +525,23 @@ res_pis <- callEnsemble(
 Check the result:
 
 
-```r
+``` r
 head(res_pis)
-#   SampleIDs BestCall BestCall_Max            1           2            3
-# 1 PB-16-002        2            2 1.693409e-03 0.561300665 6.038118e-06
-# 2 PB-16-003        4            4 5.415394e-07 0.018167170 1.090021e-04
-# 3 PB-16-004        3            3 3.600861e-06 0.001126488 2.180974e-01
-#              4           5           6
-# 1 0.2842663527 0.006611313 0.005062298
-# 2 0.3544297069 0.002884648 0.001734889
-# 3 0.0002087706 0.007044669 0.012420599
+#   SampleIDs BestCall BestCall_Max            1           2           3
+# 1 PB-16-002        2            2 0.0028578215 0.131585777 0.062534529
+# 2 PB-16-003        3            2 0.0006562615 0.008694755 0.001328542
+# 3 PB-16-004        3            5 0.0006795794 0.000847259 0.008243635
+#             4           5           6
+# 1 0.022659006 0.012291177 0.003258177
+# 2 0.001383034 0.003203803 0.002830536
+# 3 0.003241640 0.012970748 0.001960470
 ```
 
 
 Also, you can try to use `luckyModel`:
 
 
-```r
+``` r
 pci <- lucky_model(
   project = "GSClassifier",
   model = "PanCancerImmuneSubtype",
@@ -545,7 +555,7 @@ PanCan Immune Subtype callings:
 
 
 
-```r
+``` r
 res_pis <- callEnsemble(
     X = X,
     ens = NULL,
@@ -563,7 +573,7 @@ res_pis <- callEnsemble(
 Finally, we take a look at the `PanCancer immune subtypes` model:
 
 
-```r
+``` r
 ImmuneSubtype <- readRDS(system.file("extdata", "ImmuneSubtype.rds", package = "GSClassifier"))
 names(ImmuneSubtype)
 # [1] "ens"            "scaller"        "geneAnnotation" "geneSet"
@@ -572,7 +582,7 @@ names(ImmuneSubtype)
 Its gene annotation:
 
 
-```r
+``` r
 head(ImmuneSubtype$geneAnnotation)
 #      SYMBOL ENTREZID         ENSEMBL
 # 235  ACTL6A       86 ENSG00000136518
@@ -586,7 +596,7 @@ head(ImmuneSubtype$geneAnnotation)
 Its gene sets:
 
 
-```r
+``` r
 ImmuneSubtype$geneSet
 # $LIexpression_score
 #  [1] "CCL5"  "CD19"  "CD37"  "CD3D"  "CD3E"  "CD3G"  "CD3Z"  "CD79A" "CD79B"

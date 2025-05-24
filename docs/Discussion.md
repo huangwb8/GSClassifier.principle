@@ -7,7 +7,7 @@ In this section, we would discuss some key topics about **GSClassifier**, includ
 ## Packages
 
 
-```r
+``` r
 # Install "devtools" package
 if (!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
@@ -19,6 +19,7 @@ if (!requireNamespace("luckyBase", quietly = TRUE))
 # Install the "**GSClassifier**" package
 if (!requireNamespace("GSClassifier", quietly = TRUE))
   devtools::install_github("huangwb8/GSClassifier")
+# 
 
 # Install the "pacman" package
 if (!requireNamespace("pacman", quietly = TRUE)){
@@ -44,11 +45,12 @@ Here is the environment of R programming:
 
 
 ```
-# R version 4.2.2 (2022-10-31 ucrt)
+# R version 4.3.1 (2023-06-16 ucrt)
 # Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 19042)
+# Running under: Windows 11 x64 (build 26100)
 # 
 # Matrix products: default
+# 
 # 
 # locale:
 # [1] LC_COLLATE=Chinese (Simplified)_China.utf8 
@@ -57,57 +59,69 @@ Here is the environment of R programming:
 # [4] LC_NUMERIC=C                               
 # [5] LC_TIME=Chinese (Simplified)_China.utf8    
 # 
+# time zone: Asia/Shanghai
+# tzcode source: internal
+# 
 # attached base packages:
 # [1] grid      stats     graphics  grDevices utils     datasets  methods  
 # [8] base     
 # 
 # other attached packages:
-# [1] ggplot2_3.4.1         reshape2_1.4.4        tidyr_1.3.0          
-# [4] rpart_4.1.19          GSClassifier_0.1.27   luckyBase_0.1.4      
-# [7] ComplexHeatmap_2.14.0 readxl_1.4.2          pacman_0.5.1         
+#  [1] ggplot2_3.5.0         reshape2_1.4.4        tidyr_1.3.1          
+#  [4] rpart_4.1.19          GSClassifier_0.4.0    xgboost_2.0.3.1      
+#  [7] luckyBase_0.2.0       ComplexHeatmap_2.18.0 readxl_1.4.3         
+# [10] pacman_0.5.1         
 # 
 # loaded via a namespace (and not attached):
-#   [1] colorspace_2.1-0     ggsignif_0.6.4       rjson_0.2.21        
-#   [4] ellipsis_0.3.2       class_7.3-20         circlize_0.4.15     
-#   [7] GlobalOptions_0.1.2  fs_1.6.1             clue_0.3-64         
-#  [10] rstudioapi_0.14      listenv_0.9.0        ggpubr_0.6.0        
-#  [13] remotes_2.4.2        lubridate_1.9.2      prodlim_2019.11.13  
-#  [16] fansi_1.0.4          codetools_0.2-18     splines_4.2.2       
-#  [19] doParallel_1.0.17    cachem_1.0.7         knitr_1.42          
-#  [22] pkgload_1.3.2        jsonlite_1.8.4       pROC_1.18.0         
-#  [25] caret_6.0-93         broom_1.0.3          cluster_2.1.4       
-#  [28] png_0.1-8            shiny_1.7.4          compiler_4.2.2      
-#  [31] backports_1.4.1      Matrix_1.5-1         fastmap_1.1.1       
-#  [34] cli_3.6.0            later_1.3.0          htmltools_0.5.4     
-#  [37] prettyunits_1.1.1    tools_4.2.2          gtable_0.3.1        
-#  [40] glue_1.6.2           dplyr_1.1.0          Rcpp_1.0.10         
-#  [43] carData_3.0-5        cellranger_1.1.0     vctrs_0.5.2         
-#  [46] nlme_3.1-160         iterators_1.0.14     timeDate_4022.108   
-#  [49] xfun_0.39            gower_1.0.1          stringr_1.5.0       
-#  [52] globals_0.16.2       ps_1.7.2             timechange_0.2.0    
-#  [55] mime_0.12            miniUI_0.1.1.1       lifecycle_1.0.3     
-#  [58] devtools_2.4.5       rstatix_0.7.2        future_1.31.0       
-#  [61] MASS_7.3-58.1        scales_1.2.1         ipred_0.9-13        
-#  [64] promises_1.2.0.1     parallel_4.2.2       RColorBrewer_1.1-3  
-#  [67] yaml_2.3.7           memoise_2.0.1        stringi_1.7.12      
-#  [70] S4Vectors_0.36.2     randomForest_4.7-1.1 foreach_1.5.2       
-#  [73] BiocGenerics_0.44.0  hardhat_1.2.0        pkgbuild_1.4.0      
-#  [76] lava_1.7.2.1         shape_1.4.6          tuneR_1.4.2         
-#  [79] rlang_1.0.6          pkgconfig_2.0.3      matrixStats_0.63.0  
-#  [82] evaluate_0.20        lattice_0.20-45      purrr_1.0.1         
-#  [85] recipes_1.0.5        htmlwidgets_1.6.1    processx_3.8.0      
-#  [88] tidyselect_1.2.0     parallelly_1.34.0    plyr_1.8.8          
-#  [91] magrittr_2.0.3       bookdown_0.34        R6_2.5.1            
-#  [94] IRanges_2.32.0       generics_0.1.3       profvis_0.3.7       
-#  [97] withr_2.5.0          pillar_1.8.1         survival_3.4-0      
-# [100] abind_1.4-5          nnet_7.3-18          future.apply_1.10.0 
-# [103] tibble_3.1.8         crayon_1.5.2         car_3.1-1           
-# [106] xgboost_1.7.3.1      utf8_1.2.3           rmarkdown_2.20      
-# [109] urlchecker_1.0.1     GetoptLong_1.0.5     usethis_2.1.6       
-# [112] data.table_1.14.8    callr_3.7.3          ModelMetrics_1.2.2.2
-# [115] digest_0.6.31        xtable_1.8-4         httpuv_1.6.9        
-# [118] signal_0.7-7         stats4_4.2.2         munsell_0.5.0       
-# [121] sessioninfo_1.2.2
+#   [1] splines_4.3.1           later_1.3.2             bitops_1.0-7           
+#   [4] tibble_3.2.1            cellranger_1.1.0        hardhat_1.3.1          
+#   [7] preprocessCore_1.64.0   pROC_1.18.5             lifecycle_1.0.4        
+#  [10] rstatix_0.7.2           fastcluster_1.2.6       doParallel_1.0.17      
+#  [13] globals_0.16.3          lattice_0.21-8          MASS_7.3-60            
+#  [16] backports_1.4.1         magrittr_2.0.3          Hmisc_5.1-2            
+#  [19] rmarkdown_2.26          yaml_2.3.8              remotes_2.4.2.1        
+#  [22] httpuv_1.6.14           sessioninfo_1.2.2       pkgbuild_1.4.3         
+#  [25] DBI_1.2.2               RColorBrewer_1.1-3      lubridate_1.9.3        
+#  [28] abind_1.4-5             pkgload_1.3.4           zlibbioc_1.48.0        
+#  [31] purrr_1.0.2             BiocGenerics_0.48.1     RCurl_1.98-1.16        
+#  [34] nnet_7.3-19             ipred_0.9-14            circlize_0.4.16        
+#  [37] lava_1.8.0              GenomeInfoDbData_1.2.11 IRanges_2.36.0         
+#  [40] S4Vectors_0.40.2        listenv_0.9.1           parallelly_1.37.1      
+#  [43] codetools_0.2-19        tidyselect_1.2.1        shape_1.4.6.1          
+#  [46] matrixStats_1.2.0       stats4_4.3.1            dynamicTreeCut_1.63-1  
+#  [49] base64enc_0.1-3         jsonlite_1.8.8          caret_6.0-94           
+#  [52] GetoptLong_1.0.5        ellipsis_0.3.2          Formula_1.2-5          
+#  [55] survival_3.5-5          iterators_1.0.14        signal_1.8-0           
+#  [58] foreach_1.5.2           tools_4.3.1             Rcpp_1.0.12            
+#  [61] glue_1.7.0              prodlim_2023.08.28      gridExtra_2.3          
+#  [64] xfun_0.52               usethis_2.2.3           GenomeInfoDb_1.38.7    
+#  [67] dplyr_1.1.4             withr_3.0.0             fastmap_1.1.1          
+#  [70] fansi_1.0.6             digest_0.6.34           timechange_0.3.0       
+#  [73] R6_2.5.1                mime_0.12               colorspace_2.1-0       
+#  [76] GO.db_3.18.0            RSQLite_2.3.5           utf8_1.2.4             
+#  [79] generics_0.1.3          tuneR_1.4.6             data.table_1.15.2      
+#  [82] recipes_1.0.10          class_7.3-22            httr_1.4.7             
+#  [85] htmlwidgets_1.6.4       ModelMetrics_1.2.2.2    pkgconfig_2.0.3        
+#  [88] gtable_0.3.4            timeDate_4032.109       blob_1.2.4             
+#  [91] impute_1.76.0           XVector_0.42.0          htmltools_0.5.7        
+#  [94] carData_3.0-5           profvis_0.3.8           bookdown_0.43          
+#  [97] clue_0.3-65             scales_1.3.0            Biobase_2.62.0         
+# [100] png_0.1-8               gower_1.0.1             knitr_1.50             
+# [103] rstudioapi_0.15.0       rjson_0.2.21            checkmate_2.3.1        
+# [106] nlme_3.1-162            cachem_1.0.8            GlobalOptions_0.1.2    
+# [109] stringr_1.5.1           parallel_4.3.1          miniUI_0.1.1.1         
+# [112] foreign_0.8-84          AnnotationDbi_1.64.1    pillar_1.9.0           
+# [115] vctrs_0.6.5             urlchecker_1.0.1        promises_1.2.1         
+# [118] randomForest_4.7-1.1    ggpubr_0.6.0            car_3.1-2              
+# [121] xtable_1.8-4            cluster_2.1.4           htmlTable_2.4.2        
+# [124] evaluate_0.23           tinytex_0.49            cli_3.6.2              
+# [127] compiler_4.3.1          rlang_1.1.3             crayon_1.5.2           
+# [130] future.apply_1.11.1     ggsignif_0.6.4          plyr_1.8.9             
+# [133] fs_1.6.3                stringi_1.8.3           WGCNA_1.72-5           
+# [136] munsell_0.5.0           Biostrings_2.70.2       devtools_2.4.5         
+# [139] Matrix_1.6-5            bit64_4.0.5             future_1.33.1          
+# [142] KEGGREST_1.42.0         shiny_1.8.0             broom_1.0.5            
+# [145] memoise_2.0.1           bit_4.0.5
 ```
 
 ## Subtype Vector
@@ -121,7 +135,7 @@ Here were some considerations:
 Here we just showed how could this happen.
 
 
-```r
+``` r
 # Data
 testData <- readRDS(
   system.file("extdata", 
@@ -143,7 +157,7 @@ padi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSCl
 The raw rank differences were as follows:
 
 
-```r
+``` r
 # Time-consuming
 rank_pad <- GSClassifier:::trainDataProc_X(
   expr_pad, 
@@ -168,7 +182,7 @@ print(rank_pad$dat$Xbin[1:5,1:5])
 Here, the expression matrix after removing batch effect were calculated:
 
 
-```r
+``` r
 # Cleaned and normalized data for sva::Combat
 expr_pad2 <- apply(expr_pad, 2, scale)
 rownames(expr_pad2) <- rownames(expr_pad)
@@ -177,12 +191,12 @@ rownames(expr_pad2) <- rownames(expr_pad)
 Remove batch effects:
 
 
-```r
+``` r
 # BatchQC data
 library(sva)
 # Loading required package: mgcv
 # Loading required package: nlme
-# This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.
+# This is mgcv 1.8-42. For overview type 'help("mgcv-package")'.
 # Loading required package: genefilter
 # 
 # Attaching package: 'genefilter'
@@ -206,7 +220,7 @@ expr_pad2_rmbat <- ComBat(
 Look at the alteration of batch effects in GC datasets:
 
 
-```r
+``` r
 
 # Compare
 df1 <- reshape2::melt(expr_pad2)
@@ -273,7 +287,7 @@ if(T){
 The rank differences after batch-effect control were as follows:
 
 
-```r
+``` r
 # Time-consuming
 rank_pad_rmbat <- GSClassifier:::trainDataProc_X(
   expr_pad2_rmbat, 
@@ -285,7 +299,7 @@ rank_pad_rmbat <- GSClassifier:::trainDataProc_X(
 The comparison demonstrated that the adjustment for batch effects would change the rank differences:
 
 
-```r
+``` r
 mean(rank_pad_rmbat$dat$Xbin == rank_pad$dat$Xbin)
 # [1] 0.7788832
 ```
@@ -296,7 +310,7 @@ The rank differences, the base of TSP normalization, were critical for model tra
 Here, a heatmap were used to show the self-clustering of the training cohort based on **PIAM** and **PIDG**:
 
 
-```r
+``` r
 res <- PAD(
   expr = expr_pad2_rmbat,
   cluster.method = "ward.D2",
@@ -310,7 +324,7 @@ res <- PAD(
 Look at the percentage of PAD subtypes:
 
 
-```r
+``` r
 table(res$Data$`PAD subtype`)/ncol(expr_pad2_rmbat)
 # 
 #      PAD-I     PAD-II    PAD-III     PAD-IV 
@@ -341,13 +355,13 @@ Due to reasons like weak signal, contamination of microarray surfaces, inappropr
 
 }
 
-\caption{Missing value imputation methods reviewed by Hasan et al.}(\#fig:mvi01)
+\caption{Missing value imputation methods reviewed by Hasan et al.}\label{fig:mvi01}
 \end{figure}
 
 In **PAD** project, several strategies were applied to reduce the impact of missing values as possible. First, both **PIAM** and **PIDG** in **PAD** project were curated GEPs that were not missing in over 80% of gastric cancer datasets. Here we showed the actual distribution of missing values across samples in gastric cancer datasets we used.
 
 
-```r
+``` r
 # Data
 testData <- readRDS(
   system.file("extdata", 
@@ -369,7 +383,7 @@ expr_pad_na_df <- data.frame(
 As shown in Figure \@ref(fig:mvi02), the percentage of all samples in gastric cancer datasets we used is lower than 8%.
 
 
-```r
+``` r
 # ggplot
 p1 <- ggplot(data = expr_pad_na_df, 
        aes(x = sample, y = prob)) + 
@@ -393,7 +407,7 @@ print(p1)
 
 }
 
-\caption{The distribution of missing value across gastric cancer samples.}(\#fig:mvi02)
+\caption{The distribution of missing value across gastric cancer samples.}\label{fig:mvi02}
 \end{figure}
 
 Second, we did conduct some MVI strategies to deal with data before model training in **GSClassifier**. Due to the low missing rate of our experimental data, we just **set missing values as zero** during model training and subtype identification in the early version of PADi (**PAD.train.v20200110**). The model seemed to be robust in both the internal cohort and external cohorts, and greatly predicted the response to immune checkpoint inhibitors (ICIs) in advanced gastric cancer.
@@ -410,7 +424,7 @@ Add a flowchart for quantile algorithm
 Here, we demonstrated the principle of **quantile** algorithm in the simulated dataset:
 
 
-```r
+``` r
 # Simulated data
 x <- read_xlsx('./data/simulated-data.xlsx', sheet = 'RNA')
 expr0 <- as.matrix(x[,-1])
@@ -470,7 +484,7 @@ print(expr)
 Look at the new matrix via heatmap, where the clustering result is not  significantly disturbed after MVI:
 
 
-```r
+``` r
 Heatmap(t(scale(t(expr))), name = "Z-score", column_title = "After MVI")
 ```
 
@@ -483,7 +497,7 @@ Because missing values might damage the integrity of biological information, we 
 (i) Load the internal validation cohort:
 
 
-```r
+``` r
 # Internal validation cohort
 testData <- readRDS(
   system.file("extdata", "testData.rds", package = "GSClassifier")
@@ -503,7 +517,7 @@ expr_pad_innervalid <- expr_pad[,validInform$ID]
 (ii) Missing value tolerance analysis:
 
 
-```r
+``` r
 # Time-consuming
 mvt <- mv_tolerance(
   X = expr_pad_innervalid,
@@ -520,7 +534,7 @@ mvt <- mv_tolerance(
 (iii) multi-ROC analysis:
 
 
-```r
+``` r
 # Data
 mvt_auc <- mvt$multiAUC
 mvt_auc_df <- data.frame()
@@ -536,7 +550,7 @@ for(i in 1:length(mvt_auc)){ # i=1
 ```
 
 
-```r
+``` r
 # Plot
 p2 <- ggplot(mvt_auc_df, aes(x,y)) +
   geom_point() +
@@ -557,7 +571,7 @@ print(p2)
 
 }
 
-\caption{The association between the number of missing value and subtype identification performance.}(\#fig:mvi03)
+\caption{The association between the number of missing value and subtype identification performance.}\label{fig:mvi03}
 \end{figure}
 
 As shown in Figure \@ref(fig:mvi03), there is a linear negative correlation between the number of missing values (missing rate ranges from 6.25% to 37.5%) and the subtype identification performance of **PADi** model. One of the reasons might be that PIAM/PIDG were small GEPs, so little gene loss might significantly impact the performance of **PADi**. By the way, there is no missing value in PIAM/PIDG of the 'Kim2018' cohort, an external validation cohort for ICIs therapy response prediction via **PADi**. Nonetheless, we still used the **zero strategy** during subtype identification of **PADi** if any missing values exist, because randomization might make the result unstable, which is not suitable for clinical decision.
@@ -591,7 +605,7 @@ Batch effect control & gene number
 
 }
 
-\caption{Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.}(\#fig:be01)
+\caption{Batch effects across gastric cancer cohorts. All gene pairs were used because subtype vectors were not specified. Top: Raw expression of all genes across samples. Middle: Raw expression of PIAM and PIDG across samples. Bottom: TSP of PIAM and PIDG across samples.}\label{fig:be01}
 \end{figure}
 
 To confirm the association between **gene counts** in modeling and batch effect control via **TSP** normalization, we selected random genes with counts ranging from 4 to 80 for TSP matrix establishment. As shown in Figure \@ref(fig:be02), **TSP** normalization works greatly in different gene counts for batch effect control compared with the raw expression matrix.
@@ -602,7 +616,7 @@ To confirm the association between **gene counts** in modeling and batch effect 
 
 }
 
-\caption{Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.}(\#fig:be02)
+\caption{Batch effects of random genes across gastric cancer cohorts.  All gene pairs were used because subtype vectors were not specified. Gene counts 4, 8, 20, 40, and 80 were detected. Data of set difference were not available because only one gene set were applied.}\label{fig:be02}
 \end{figure}
 
 

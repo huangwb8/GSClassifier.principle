@@ -14,9 +14,11 @@
 First, load the package
 
 
-```r
+``` r
 library(GSClassifier)
 # Loading required package: luckyBase
+# Loading required package: xgboost
+# 
 ```
 
 ## Available models
@@ -24,7 +26,7 @@ library(GSClassifier)
 With `GSClassifier_Data()`, all models supported in the current `GSClassifier` package would be shown.
 
 
-```r
+``` r
 GSClassifier_Data()
 # Available data:
 # Usage example:
@@ -44,7 +46,7 @@ For more details of `GSClassifier_Data()`, just:
 Set `model=F`, all `.rds` data would be showed:
 
 
-```r
+``` r
 GSClassifier_Data(model = F)
 # Available data:
 # Usage example:
@@ -64,7 +66,7 @@ GSClassifier_Data(model = F)
 Currently, a GSClassifier model and related product environments are designed as a `list` object. Let's take `PAD.train_20210110`(also called `PADi`) as an example.
 
 
-```r
+``` r
 PADi <- readRDS(system.file("extdata", "PAD.train_20220916.rds", package = "GSClassifier")) 
 ```
 
@@ -77,7 +79,7 @@ This picture shows the components of `PADi`:
 
 }
 
-\caption{Details of a GSClassifier model}(\#fig:GSClassifierModel)
+\caption{Details of a GSClassifier model}\label{fig:GSClassifierModel}
 \end{figure}
 
 As shown, a typical `GSClassifier` model is consist of four parts (with different colors in the picture):
@@ -157,7 +159,7 @@ Welcome your contributions!
 For convenience, we provided a general gene annotation dataset for different genomics:
 
 
-```r
+``` r
 gga <- readRDS(system.file("extdata", "general-gene-annotation.rds", package = "GSClassifier"))
 names(gga)
 # [1] "hg38" "hg19" "mm10"
@@ -168,7 +170,7 @@ I believe they're enough for routine medicine studies.
 Here, take a look at `hg38`:
 
 
-```r
+``` r
 hg38 <- gga$hg38
 head(hg38)
 #           ENSEMBL       SYMBOL  ENTREZID
@@ -183,7 +185,7 @@ head(hg38)
 With this kind of data, it's simple to customize your own gene annotation (take `PADi` as examples):
 
 
-```r
+``` r
 
 tGene <- as.character(unlist(PADi$geneSet))
 geneAnnotation <- hg38[hg38$ENSEMBL %in% tGene, ]
@@ -194,7 +196,7 @@ dim(geneAnnotation)
 Have a check:
 
 
-```r
+``` r
 head(geneAnnotation)
 #              ENSEMBL SYMBOL ENTREZID
 # 353  ENSG00000171608 PIK3CD     5293
@@ -210,7 +212,7 @@ This `geneAnnotation` could be the `model[['geneAnnotation']]`.
 Also, we use a function called `convert` to do gene ID convertion.
 
 
-```r
+``` r
 luckyBase::convert(c('GAPDH','TP53'), 'SYMBOL', 'ENSEMBL', hg38)
 # [1] "ENSG00000111640" "ENSG00000141510"
 ```

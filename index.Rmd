@@ -2,20 +2,23 @@
 title: "The Principle of R Package GSClassifier"
 author: "Weibin Huang"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+# output: pdf_document
 documentclass: book
-bibliography: [book.bib, packages.bib]
-csl: briefings-in-bioinformatics.csl
+bibliography:
+- book.bib
+- packages.bib
+csl: "briefings-in-bioinformatics.csl"
 link-citations: yes
 geometry:
-  - top=1in
-  - left=1in
-  - right=1in
-  - bottom=1in
+- top=1in
+- left=1in
+- right=1in
+- bottom=1in
 fontsize: 12pt
 linestretch: 1.5
-linkcolor: "blue"
-description: "The Principle of GSClassifier"
+linkcolor: blue
+description: The Principle of GSClassifier
+site: bookdown::bookdown_site
 ---
 
 # Welcome {-}
@@ -98,6 +101,14 @@ install.packages("https://gitee.com/huangwb8/GSClassifier/repository/archive/Pri
 ```
 
 ## `r if(knitr::is_html_output()) emo::ji("books")`Change log {-}
+
++ Version v0.4.0
+
+  + Update to prove this project is still ALIVE!
+
+  + More powerful to support the coming CCS package!
+  
+  + Update PADi model to v20250523. Please go to [luckyModel](https://github.com/huangwb8/luckyModel) for details!
 
 + Version 0.1.27
 
